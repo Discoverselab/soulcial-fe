@@ -1,0 +1,36 @@
+.prohibit {
+    background-color: #dfdfce !important;
+}
+
+input {
+    caret-color: #F3B228;
+}
+
+textarea {
+    caret-color: #F3B228;
+}
+
+.shapset_but {
+    button {
+        width: 100% !important;
+    }
+}
+
+.cudset_but {
+    button {
+        width: 100% !important;
+    }
+}
+// .van-toast{
+//     width: 60% !important;
+// }
+p,
+span,
+div,
+h1 {
+    -webkit-font-feature-settings: 'kern' 1, 'calt' 0, 'liga' 0, 'ccmp' 0;
+}
+
+.red{
+    color: red!important;
+}

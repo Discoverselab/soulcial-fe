@@ -1,0 +1,253 @@
+.welcome {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 90px 24px 50px 24px;
+    position: relative;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+    .wallet {
+        width: 245px;
+        height: 50px;
+        background: url('../../assets/twitter/bg_address.png') no-repeat center;
+        background-size: 100% 100%;
+        margin-bottom: 60px;
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 50px;
+        letter-spacing: 0em;
+        text-align: center;
+      }
+    .title {
+        font-family: 'DINCond-Bold';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 70px;
+        text-transform: uppercase;
+        color: #000000;
+        text-align: center;
+        width: 245px;
+    }
+
+    .title_infor {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 150%;
+        width: 172px;
+        color: #000000;
+        text-align: center;
+        margin: 90px 0 20px 0;
+    }
+
+    .userportrait {
+        margin-top: 50px;
+
+        .userportrait {
+            object-fit: cover;
+            display: block;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 24px auto;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        .humphry {
+            font-family: 'DINCond-Bold';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            color: #000;
+            text-align: center;
+            position: relative;
+            z-index: 9;
+        }
+
+        .con_lin {
+            display: block;
+            width: 150px;
+            height: 16px;
+            position: relative;
+            top: -20px;
+            margin: 0 auto;
+        }
+    }
+
+    .cudset_but {
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 99;
+
+        button {
+            &:active {
+                opacity: 0.8;
+            }
+
+            &.disabled {
+                background-color: #F1F1E7;
+                color: #c4c4be;
+                border: 2px solid #c4c4be;
+            }
+
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 26px;
+            gap: 10px;
+            width: 342px;
+            height: 40px;
+            background: #FFFFFF;
+            border: 2px solid #000000;
+            border-radius: 45px;
+            font-family: 'Inter';
+            font-style: normal;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .skip {
+            color: #000;
+            text-align: center;
+            font-size: 12px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 20px;
+
+            span {
+                color: #F3B228;
+            }
+        }
+    }
+
+    .link_img {
+        position: absolute;
+        display: block;
+
+        &.link_img1 {
+            width: 93px;
+            top: 179px;
+            left: 0;
+        }
+
+        &.link_img2 {
+            width: 108px;
+            bottom: 54px;
+            right: 0;
+        }
+
+        &.link_img3 {
+            width: 390px;
+            bottom: 0px;
+            left: 0;
+        }
+
+
+    }
+
+    .hide {
+        visibility: hidden;
+    }
+
+    .invite_code {
+        display: flex;
+        width: 100%;
+        height: 72px;
+        padding: 8px 26px;
+        flex-shrink: 0;
+        border-radius: 45px;
+        border: 2px solid #000;
+        background: #FFF;
+
+    }
+
+    input::placeholder {
+        color: #000;
+        font-family: DINCond-Bold;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 100%;
+        line-height: inherit;
+        /* 继承行高，确保垂直居中 */
+        letter-spacing: -0.64px;
+        text-transform: uppercase;
+        text-align: center;
+        opacity: 0.1;
+    }
+
+    input[type="text"] {
+        color: #000;
+        font-family: DINCond-Bold;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 100%;
+        /* 32px */
+        text-align: center;
+        letter-spacing: -0.64px;
+    }
+
+    .my_soul {
+        position: absolute;
+        bottom: 80px;
+        padding: 0px 24px;
+        transform: translateX(-50%);
+        left: 50%;
+        width: 100%;
+    }
+
+    .van-dialog {
+        width: 342px;
+        padding: 40px 20px;
+        box-sizing: border-box;
+        background-color: #F5F5ED !important;
+
+        .van-dialog__content {
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: center;
+        }
+
+        .van-dialog__footer {
+            margin-top: 30px;
+            padding: 0 24px 0 24px;
+
+            button {
+                border-radius: 45px !important;
+                border: 2px solid #000 !important;
+                background: #fff !important;
+
+                .van-button__text {
+                    color: #000;
+                    text-align: center;
+                    font-size: 18px;
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .fee_dint {
+        color: #333;
+        font-size: 16px;
+        font-family: "Inter";
+        font-weight: 600;
+        font-style: normal;
+        margin-bottom: 20px;
+    }
+}

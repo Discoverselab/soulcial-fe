@@ -1,0 +1,161 @@
+* {
+    box-sizing: border-box;
+}
+
+.share_pick {
+    padding: 20px 24px 0 24px;
+
+    .back {
+        display: block;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+
+    .navigate {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        top: 0px;
+        z-index: 9;
+        margin-bottom: 18px;
+
+        .label {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav_name {
+            display: flex;
+            align-items: center;
+
+            .userportrait {
+                display: block;
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+
+            .name {
+                text-transform: uppercase;
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                color: #000;
+            }
+
+            .label {
+                display: block;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
+    .income {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        padding: 0 16px;
+    }
+    .decoration {
+        text-align: center;
+        .layout{
+            .market1 {
+                width: 80px;
+                height: 80px;
+            }
+            .market2 {
+                width: 60px;
+                height: 60px;
+                position: relative;
+                left: -17px;
+            }
+        }
+       
+    }
+    .content {
+        margin-top: 24px;
+        background-color: #fff;
+        border: 2px solid #dfdfce;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-family: Inter;
+        font-size: 14px;
+        // font-weight: 600;
+        word-wrap: break-word;
+        span {
+            font: inherit;
+        }
+    }
+    .condition {
+        font-family: Inter;
+        margin-top: 24px;
+        font-size: 12px;
+        font-weight: 500;
+        opacity: 0.5;
+        padding: 0 16px;
+    }
+    .operate {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        justify-content: space-between;
+        text-transform: uppercase;
+        width: 163px;
+        border-radius: 45px;
+        border: 2px solid #000;
+        height: 40px;
+        font-family: Inter;
+        font-weight: 700;
+        line-height: 24px;
+        background-color: #fff;
+        padding: 8px 16px 8px 16px;
+        img {
+            width: 20px;
+            height: 20px;
+        }
+        .twitter_btn {
+            // font-size: 14px;
+        }
+        .Contact_btn {
+            // font-size: 14px;
+        }
+    }
+    .link {
+        margin-top: 24px;
+        width: 100%;
+        height: 40px;
+        padding: 8px 16px 8px 16px;
+        border-radius: 45px;
+        font-family: Inter;
+        font-weight: 700;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 2px solid #000;
+        cursor: pointer;
+        .link_content{
+            // font-size: 14px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .copy-button2 {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

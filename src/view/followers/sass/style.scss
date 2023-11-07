@@ -1,0 +1,218 @@
+.followers {
+    padding-bottom: 120px;
+
+    .navigate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        padding: 20px 24px 0 24px;
+        top: 0px;
+        background-color: #f5f5ed;
+        z-index: 9;
+
+        .back {
+            display: block;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .nav_name {
+            display: flex;
+            align-items: center;
+
+            .name {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 900;
+                font-size: 20px;
+                text-transform: uppercase;
+                color: #000;
+            }
+        }
+
+
+    }
+
+    .van-tab__text {
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: center;
+        opacity: 0.5;
+        color: #000;
+    }
+
+    .van-tab--active {
+        & .van-tab__text {
+            opacity: 1;
+        }
+    }
+
+
+    .followers_cont {
+        // margin-top: 50px;
+        padding: 0 24px;
+
+        .followersList {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #DFDFCE;
+            margin-bottom: 16px;
+
+            .list_left {
+                display: flex;
+                align-items: center;
+
+                .portrait {
+                    width: 46px;
+                    height: 46px;
+                    border: 1px solid #000;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                    margin-right: 16px;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                }
+
+
+                .name_address {
+                    .name {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 26px;
+                        width: 140px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        // margin-bottom: 5px;
+                         
+                    }
+
+                    .address {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 12px;
+                        color: #62625f;
+                    }
+                }
+            }
+
+            .connect_btn {
+                width: 105px;
+                height: 28px;
+                padding: 2px 11px 2px 11px;
+                border-radius: 100px;
+            }
+
+            .con_btn {
+                display: flex;
+                padding: 2px 12px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 100px;
+                border: none;
+                background-color: #F3B228;
+                color: #000;
+                font-family: Inter;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+
+                img {
+                    width: 14px;
+                    height: 14px;
+                    margin-right: 2px;
+                }
+            }
+
+            .Follows {
+                &:active {
+                    opacity: 0.7;
+                }
+
+                &.noFollows {
+                    background-color: #000;
+                    color: #FFF;
+                }
+
+                cursor: pointer;
+                background: #FFFFFF;
+                border: 2px solid #000000;
+                border-radius: 100px;
+                padding: 5px 16px;
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                color: #000000;
+            }
+        }
+    }
+    .Save {
+        margin-top: 10%;
+
+        img {
+            display: block;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 32px auto;
+        }
+
+        .SaveText {
+            color: #000;
+            text-align: center;
+            font-family: DINCond-Bold;
+            font-size: 40px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    }
+
+    .introduce {
+        .cancelConnect {
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+            margin-bottom: 52px;
+            /* 24px */
+        }
+
+        .setBut {
+            button {
+                width: 294px;
+                padding: 8px 26px;
+                border-radius: 45px;
+                border: 2px solid #000;
+                background: #FFF;
+                color: #000;
+                text-align: center;
+                font-family: Inter;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                /* 133.333% */
+                text-transform: uppercase;
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+dist.zip
+frontend_production
+frontend_production.zip
+frontend_development
+frontend_development.zip

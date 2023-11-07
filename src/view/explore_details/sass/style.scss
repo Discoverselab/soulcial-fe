@@ -1,0 +1,752 @@
+.explore_details {
+    padding-bottom: 120px;
+
+    .hand {
+        cursor: pointer;
+    }
+    .navigate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        padding: 20px 24px 0 24px;
+        top: 0px;
+        background-color: #f5f5ed;
+        z-index: 9;
+
+        .back {
+            display: block;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .label {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav_name {
+            display: flex;
+            align-items: center;
+
+            .portrait {
+                width: 40px;
+                height: 40px;
+                padding: 2px;
+                border-radius: 50%;
+                margin-right: 12px;
+
+                .userportrait {
+                    object-fit: cover;
+                    display: block;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    border: 2px solid #000;
+                }
+            }
+
+            .name {
+                max-width: 270px;
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                color: #000;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .label {
+                display: block;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
+    .details_cont {
+        padding: 0 24px;
+        margin-top: 28px;
+
+        .Nft_details {
+            .box {
+                position: relative;
+                width: 272px;
+                // height: 365px;
+                perspective: 1000px;
+                transition: transform 0.5s;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.flippedShow {
+                    height: 340px;
+                }
+
+                &.flipped {
+                    align-items: baseline;
+
+                    .img_icon1 {
+                        transform: rotateY(180deg) !important;
+                        visibility: hidden !important;
+                    }
+
+                    .img_icon2 {
+                        transform: rotateY(360deg) !important;
+                        visibility: visible !important;
+                    }
+                }
+
+                .img_icon {
+                    // 元素背对时默认不可见
+                    backface-visibility: hidden;
+                    // 元素在3D空间中呈现
+                    // transform-style: preserve-3d;
+                    // 两秒完成动画
+                    transition-duration: 0.5s;
+                    // width: 100%;
+                    // height: 100%;
+                    background-color: #f5f5ed;
+
+                    &.img_icon1 {
+                        transform: rotateY(0deg);
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    &.img_icon2 {
+                        transform: rotateY(180deg);
+                        visibility: hidden;
+                        position: absolute;
+                        z-index: -1;
+                        padding-top: 20px;
+                    }
+
+                    img {
+                        max-width: 272px;
+                        max-height: 362px;
+                        display: inline-block;
+                    }
+
+                    .match {
+                        position: absolute;
+                        right: -25px;
+                        top: 10px;
+                        text-align: right;
+                        transition: 0.5s ease-in-out;
+
+                        .center {
+                            font-family: "DINCond-Bold";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 50px;
+                        }
+
+                        .name {
+                            font-family: "DINCond-Bold";
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 24px;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+
+            .bottom_infor {
+                position: relative;
+                width: 350px;
+                height: 144px;
+                margin: -40px auto 0 auto;
+                background-size: 100% 100%;
+
+                .svgName {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .grade_price {
+                    position: absolute;
+                    top: 20px;
+                    left: 0;
+
+                    .grade {
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            display: block;
+                            height: auto;
+                            margin-right: 6px;
+                            object-fit: cover;
+
+                            &.level1 {
+                                width: 22px;
+                            }
+
+                            &.level2 {
+                                width: 20px;
+                            }
+
+                            &.level3 {
+                                width: 20px;
+                            }
+
+                            &.level4 {
+                                width: 20px;
+                            }
+
+                            &.level5 {
+                                width: 22px;
+                            }
+                        }
+
+                        .grade_name {
+                            font-family: "DINCond-Bold";
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 24px;
+                            text-transform: uppercase;
+                            color: #000000;
+                        }
+
+                        .Personality_name {
+                            margin-left: 12px;
+                            font-family: "DINCond-Bold";
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 24px;
+                            text-transform: uppercase;
+                            color: #000000;
+                        }
+                    }
+
+                    .price {
+                        font-family: "DINCond-Bold";
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 54px;
+                        text-transform: uppercase;
+                    }
+                }
+
+                .turn {
+                    position: absolute;
+                    right: 5px;
+                    top: 20px;
+                    cursor: pointer;
+
+                    img {
+                        display: block;
+                        width: 24px;
+                        height: auto;
+                    }
+                }
+
+                .love {
+                    display: flex;
+                    align-items: center;
+                    position: absolute;
+                    right: 5px;
+                    bottom: 10px;
+                    font-family: "DINCond-Bold";
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 28px;
+                    text-transform: uppercase;
+
+                    img {
+                        display: block;
+                        width: 21px;
+                        margin-right: 6px;
+                        margin-top: 3px;
+                    }
+                }
+            }
+        }
+
+        // label
+        .label_cont {
+            position: relative;
+            top: -20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .label_left {
+                display: flex;
+                align-items: center;
+
+                .label {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 14px;
+
+                    &.label1 {
+                        width: 82px;
+                        height: 24.5px;
+                        background-image: url("../../assets/label1.png");
+                        background-size: 100% 100%;
+                    }
+
+                    &.label2 {
+                        width: 75px;
+                        height: 24px;
+                        background-image: url("../../assets/label2.png");
+                        background-size: 100% 100%;
+                    }
+
+                    &.label3 {
+                        width: 80px;
+                        height: 24px;
+                        background-image: url("../../assets/label3.png");
+                        background-size: 100% 100%;
+                    }
+                }
+            }
+        }
+
+        .more {
+            margin-top: 40px;
+
+            .pikesTitle {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #dfdfce;
+
+                .title_left {
+                    display: flex;
+                    width: 100px;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: #000;
+                    font-family: "Inter";
+                    font-style: normal;
+                    .pump {
+                        font-size: 24px;
+                        font-weight: 700;
+                    }
+                }
+
+                .title_right {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 5px 8px 5px 8px;
+                        height: 25px;
+                        background-color: #5cd685;
+                        border-radius: 28px;
+                        border: 2px solid #000;
+                        cursor: pointer;
+                        img {
+                            width: 12px;
+                            height: 12px;
+                            margin-right: 4px;
+                        }
+    
+                        .invite_earn {
+                            font-family: Inter;
+                            font-size: 12px;
+                            font-weight: 700;
+                        }
+                }
+
+                .point_out {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .van-collapse {
+                &::after {
+                    content: none !important;
+                }
+
+                &.collapse_er {
+                    .van-cell {
+                        border: none !important;
+                        padding: 0 !important;
+
+                        i {
+                            display: none;
+                        }
+                    }
+                }
+
+                .van-cell {
+                    background-color: rgba(0, 0, 0, 0) !important;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 0 10px 0 !important;
+                    border-bottom: 2px solid #dfdfce;
+                }
+
+                .van-collapse-item__content {
+                    background-color: rgba(0, 0, 0, 0) !important;
+                    padding: 0 !important;
+                }
+
+                .van-icon {
+                    font-weight: bold;
+                    color: #000;
+                    font-size: 16px;
+                }
+            }
+
+            .chid {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                color: #000;
+            }
+
+            .MoreDetail {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                color: #000;
+                margin-right: 5px;
+            }
+
+            .more_list_cont {
+                padding: 30px 0 18px 0;
+                // border-bottom: 2px solid #DFDFCE;
+
+                .more_list {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 12px;
+
+                    &.more_list_picks {
+                        margin-bottom: 20px;
+                    }
+
+                    &.more_list_history {
+                        // margin-bottom: 20px;
+                        padding-bottom: 20px;
+                        border-bottom: 2px solid #dfdfce;
+                    }
+
+                    .type_cont {
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            display: block;
+                            margin-right: 24px;
+                            width: 16px;
+                            // transform: scale(0.5);
+                            /* scaling */
+                        }
+
+                        .positioning {
+                            width: 16px;
+                            height: 16px;
+                            margin-right: 24px;
+                        }
+                    }
+
+                    .key {
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #62625f;
+                    }
+
+                    .value {
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 16px;
+                        color: #000;
+                    }
+
+                    .hisname {
+                        font-family: "Inter";
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 12px;
+                        margin-top: 5px;
+
+                        &.hisname_right {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+        }
+
+        .author {
+            margin: 20px 0 44px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+
+            &.authorPicks {
+                margin-bottom: 20px;
+            }
+
+            .author_list {
+                border: 2px solid #dfdfce;
+                padding: 20px 15px 24px 15px;
+                cursor: pointer;
+                &.listPicks {
+                    height: 162px;
+                    box-sizing: border-box;
+                    position: relative;
+
+                    .pick {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        button {
+                            border-radius: 45px;
+                            border: 2px solid #000;
+                            background: #fff;
+                            color: #000;
+                            font-family: "Inter";
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 600;
+                            padding: 8px 26px;
+
+                            &:active {
+                                opacity: 0.6;
+                            }
+
+                            &.disabledBUtton {
+                                border: 2px solid #000;
+                                opacity: 0.2;
+                                background: #dfdfce;
+                            }
+                        }
+                    }
+
+                    .number {
+                        position: absolute;
+                        border-radius: 6px;
+                        background: #dfdfce;
+                        padding: 4px 8px;
+                        color: #62625f;
+                        text-align: center;
+                        font-family: "Inter";
+                        font-size: 10px;
+                        font-style: normal;
+                        font-weight: 500;
+                        bottom: 20px;
+                        left: 16px;
+                    }
+                }
+
+                .portrait {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+
+                    .portrait1 {
+                        object-fit: cover;
+                        display: block;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        border: 1px solid #000;
+
+                        img {
+                            max-width: 36px;
+                            max-height: 36px;
+                            // height: 36px;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .chat_link {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                .Created {
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 10px;
+                    color: #000000;
+                    margin-bottom: 5px;
+                }
+
+                .name {
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #000000;
+                    word-break: break-all;
+                }
+            }
+        }
+
+        .picksTime {
+            border-radius: 10px;
+            background: #dfdfce;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            text-align: center;
+            line-height: 22px;
+            color: #000;
+            font-family: "Inter";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            padding: 11px 0;
+        }
+
+        .set_but {
+            box-sizing: border-box;
+            margin-bottom: 56px;
+            cursor: pointer;
+
+            button {
+                &:active {
+                    opacity: 0.8;
+                }
+
+                &.cancel {
+                    border: 2px solid #e03131 !important;
+                    background: #ffd8d8 !important;
+                    color: #e03131 !important;
+                }
+
+                &.disabled {
+                    background-color: #f1f1e7;
+                    color: #c4c4be;
+                    border: 2px solid #c4c4be;
+                }
+
+                cursor: pointer;
+                display: block;
+                width: 100%;
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px 26px;
+                gap: 10px;
+                // width: 342px;
+                height: 40px;
+                background: #ffffff;
+                border: 2px solid #000000;
+                border-radius: 45px;
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                color: #000;
+            }
+        }
+    }
+
+    .van-dialog {
+        background-color: #f5f5ed;
+        padding: 60px 24px 40px 24px;
+
+        .introduce {
+            p {
+                padding-bottom: 12px;
+                border-bottom: 1px solid #dfdfce;
+                color: #000;
+                font-family: "Inter";
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 600;
+                margin-bottom: 28px;
+
+                &.cancelPick {
+                    color: #000;
+                    text-align: center;
+                    font-family: "Inter";
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    border: none;
+                    margin-bottom: 29px;
+                    padding: 0;
+                }
+            }
+
+            .canserImg {
+                display: block;
+                width: 160px;
+                height: 160px;
+                margin: 0 auto;
+            }
+
+            .setBut {
+                margin-top: 8px;
+
+                button {
+                    display: block;
+                    width: 100%;
+                    padding: 8px 26px;
+                    border-radius: 45px;
+                    border: 2px solid #000;
+                    background: #fff;
+                    color: #000;
+                    text-align: center;
+                    font-family: "Inter";
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    text-transform: uppercase;
+
+                    &:active {
+                        opacity: 0.8;
+                    }
+
+                    &.cancel {
+                        margin-bottom: 20px;
+                        border: 2px solid #e03131;
+                        background: #ffd8d8;
+                        color: #e03131;
+                    }
+                }
+            }
+        }
+
+        .van-dialog__confirm {
+            border-radius: 45px;
+            border: 2px solid #000;
+            background: #fff;
+
+            span {
+                color: #000;
+                text-align: center;
+                font-family: "Inter";
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

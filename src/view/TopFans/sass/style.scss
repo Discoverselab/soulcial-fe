@@ -1,0 +1,178 @@
+.followers {
+    padding-bottom: 120px;
+
+    .navigate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        padding: 20px 24px 0 24px;
+        top: 0px;
+        background-color: #f5f5ed;
+        z-index: 9;
+
+        .back {
+            display: block;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .nav_name {
+            display: flex;
+            align-items: center;
+
+            .name {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 900;
+                font-size: 20px;
+                text-transform: uppercase;
+                color: #000;
+            }
+        }
+
+        .sift {
+            display: block;
+            width: 16.25px;
+            height: 16.88px;
+        }
+    }
+
+    .followers_cont {
+        // margin-top: 50px;
+        padding: 0 24px;
+
+        .followersList {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #DFDFCE;
+            margin-bottom: 16px;
+
+            .list_left {
+                display: flex;
+                align-items: center;
+
+                .fan {
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+
+                .rank {
+                    width: 56px;
+                    font-weight: 600;
+                    font-size: 16px;
+
+                    span {
+                        border-radius: 50%;
+                        color: #000;
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 12px;
+                        padding: 1px 5px;
+                        background-color:#999;
+                        &.rank1 {
+                            background-color: #A4BFB8;
+                        }
+
+                        &.rank2 {
+                            background-color: #F2B328;
+                        }
+
+                        &.rank3 {
+                            background-color: #FE84B9;
+                        }
+                    }
+                }
+
+                img {
+                    display: block;
+                    width: 46px;
+                    height: 46px;
+                    margin-right: 16px;
+                }
+
+                .name_address {
+                    .name {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #000;
+                        // margin-bottom: 5px;
+                    }
+
+                    .address {
+                        // font-family: 'Inter';
+                        // font-style: normal;
+                        // font-weight: 500;
+                        // font-size: 12px;
+                        // color: #62625f;
+                        display: flex;
+                        align-items: center;
+                        color: #000;
+                        font-family: 'Inter';
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 600;
+                        margin-top:6px;
+                        img {
+                            display: block;
+                            width: 14px;
+                            height: 14px;
+                            margin-right:4px !important;
+                        }
+
+
+                    }
+                }
+            }
+
+            .Follows {
+                &:active {
+                    opacity: 0.7;
+                }
+
+                &.noFollows {
+                    background-color: #000;
+                    color: #FFF;
+                }
+
+                cursor: pointer;
+                background: #FFFFFF;
+                border: 2px solid #000000;
+                border-radius: 100px;
+                padding: 5px 16px;
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                color: #000000;
+            }
+        }
+    }
+
+    .Save {
+        margin-top: 10%;
+
+        img {
+            display: block;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 32px auto;
+        }
+
+        .SaveText {
+            color: #000;
+            text-align: center;
+            font-family: DINCond-Bold;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    }
+}

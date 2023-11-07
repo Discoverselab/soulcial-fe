@@ -1,0 +1,157 @@
+<template>
+  <div class="Congratulations">
+    <div class="navigate">
+      <img
+        @click="$router.go(-1)"
+        class="back"
+        src="../../assets/back.png"
+        alt=""
+      />
+      <div class="nav_name">
+        <p class="name"></p>
+      </div>
+      <span></span>
+    </div>
+    <div class="success">
+      <p class="success_title">Congratulations!</p>
+      <p class="success_infor" style="margin-bottom:20px;">
+        According to <span @click="linkOpen(1,hiess.rewardBlockHeight)">{{ 'BNB Chain' }}  Block #{{ hiess.rewardBlockHeight}}</span> <br> with Hash <span @click="linkOpen(2,hiess.rewardBlockHash)">{{ substring(hiess.rewardBlockHash) }}</span>, <br> Slot #{{hiess.rewardIndex}} {{hiess.userName}} is the winner!
+      </p>
+      <p class="success_infor">Congratulations! You earned {{ hiess.rewardPirce }} {{ $network }}</p>
+    </div>
+    <div class="details_cont">
+      <div class="Nft_details">
+        <!-- NFT -->
+        <div class="box">
+          <div class="img_icon">
+            <img :src="NFTDetail.pictureUrl" alt="" />
+          </div>
+        </div>
+        <div class="bottom_infor" v-if="NFTDetail.pictureUrl">
+          <svg-icon
+            :style="{
+              color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
+            }"
+            className="svgName"
+            iconClass="Vector1"
+          ></svg-icon>
+          <div class="grade_price">
+            <div class="grade">
+              <img src="../../assets/level1.png" alt="" />
+              <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
+              <p class="Personality_name">
+                {{ NFTDetail.soul }}
+              </p>
+            </div>
+            <p class="price">
+              {{ NFTDetail.price || 0 }} {{ $network }}
+            </p>
+          </div>
+          <div class="love">
+            #{{ NFTDetail.realTokenId }}
+          </div>
+        </div>
+        <!-- User label -->
+        <div class="label_cont">
+          <div class="label_left">
+            <div class="label label1">{{ getNFTMood[NFTDetail.mood] }}</div>
+            <!-- <div class="label label2">{{ Weather[NFTDetail.weather] }}</div> -->
+            <div class="label label3">{{ NFTColor[NFTDetail.color] }}</div>
+          </div>
+        </div>
+      </div>
+            <!-- The author has something. -->
+      <div class="author">
+        <div class="author_list" @click="LinkOwner(1)">
+          <div class="portrait">
+            <img class="portrait1" :src="NFTDetail.mintUserAvatar" alt="" />
+            <img class="chat_link" src="../../assets/chat.png" alt="" />
+          </div>
+          <p class="Created">Launched By</p>
+          <p class="name">{{NFTDetail.isMineMint==1?'You':NFTDetail.mintUserName }}</p>
+        </div>
+        <div class="author_list" @click="LinkOwner(2)">
+          <div class="portrait">
+            <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt="" />
+            <img class="chat_link" src="../../assets/chat.png" alt="" />
+          </div>
+          <p class="Created">Owned By</p>
+          <p class="name">{{ NFTDetail.isMineOwner==1?'You':NFTDetail.ownerUserName }} </p>
+        </div>
+      </div>
+      <!-- Selected picture -->
+      <!-- operation -->
+      <div class="shapset_but">
+        <!-- <button  @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">List for {{formatNumber(hiess.pfpTokenDetailVo.nextListPrice)}} {{ $network }}</button> -->
+        <button @click="$router.push('/earn?type=1')">Check Earnings</button>
+        <!-- <button class="prohibit">SHARE</button> -->
+      </div>
+      <p class="lations">If you  do not receive earnings, please wait for the transcation processing, which can take a few minutes.</p>
+    </div>
+  </div>
+</template>
+<script>
+import watch from "./src/watch";
+import methods from "./src/methods";
+import { linkOpen } from "@/libs/common.js"
+import AOS from "aos";
+import {
+  getNFTLevel,
+  getNFTPersonality,
+  NFTColor,
+  getNFTMood,
+  Weather,
+} from "../../libs/target";
+export default {
+  name: "",
+  data() {
+    return {
+      hiess:{
+        pfpTokenDetailVo:{}
+      },
+      NFTPickInfo:{},
+      NFTDetail: {},
+      getNFTLevel: getNFTLevel,
+      getNFTPersonality: getNFTPersonality,
+      NFTColor: NFTColor,
+      getNFTMood: getNFTMood,
+      Weather: Weather,
+    };
+  },
+  watch: watch,
+  methods: methods,
+  computed: {
+    linkOpen() {
+      return (type, has) => linkOpen(type, has);
+    },
+  },
+  components: {},
+  async created() {
+    let me = this;
+    await me.getData();
+    me.getNFTPickInfo()
+  },
+  mounted: async function () {
+    console.log("this：", this);
+    console.log("$route：", this.$route);
+    AOS.init({
+      offset: 200,
+      duration: 200, //duration
+      easing: "ease-in-sine",
+      delay: 100,
+    });
+    console.log(this.$loginData);
+    window.addEventListener("scroll", this.scrollToTop);
+  },
+  beforeRouteLeave(to, form, next) {
+    // Leave the route to remove the scrolling event
+    window.removeEventListener("scroll", this.scrollToTop);
+    next();
+  },
+  destroyed() {},
+};
+</script>
+
+<style lang="scss">
+@import "./sass/style.scss";
+</style>
