@@ -74,7 +74,7 @@ export const addChain_Params = {
     iconUrls: [""],
 };
 
-const clearInfo = () => {
+export const clearInfo = () => {
     // 清除登录信息
     loginData.out();
     window.localStorage.removeItem("loginInfo");
