@@ -66,7 +66,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, ABIAddress, marketAddress } from "../libs/common.js";
+import { nftAddress, onParticle, marketAddress } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -215,6 +215,9 @@ export default {
           me.jcHash(hash);
         })
         .on("error", function (error) {
+          if (me.$loginData.loginType == 1) {
+            onParticle(me.getApproved)
+          }
           me.overlayshow = false;
           me.$toast(error);
           console.error("Error: ", error);
