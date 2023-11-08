@@ -291,7 +291,7 @@ export default {
   },
   getNFTPickInfo() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -342,7 +342,7 @@ export default {
   // },
   getData() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -353,7 +353,11 @@ export default {
           this.values.push(item.art);
           this.values.push(item.wisdom);
           this.values.push(item.energy);
-          this.values.push(item.extroversion);
+          this.values.push(item.extroversion);        
+          const isSame = this.NFTDetail.mintUserAddress.toLocaleUpperCase() === this.$loginData.Auth_Token.toLocaleUpperCase() || this.NFTDetail.ownerAddress.toLocaleUpperCase() === this.$loginData.Auth_Token.toLocaleUpperCase()
+          if(isSame){
+            this.isShareMy = true
+          }
           getHeight(this);
           this.overlayshow = false;
         }
@@ -364,7 +368,7 @@ export default {
   },
 
   getNFTHistory() {
-    let url = this.$api.nft.getNFTHistory + `?id=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTHistory + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {

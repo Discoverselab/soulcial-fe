@@ -171,6 +171,7 @@
                 display: block;
                 width: 20px;
                 height: auto;
+                cursor: pointer;
             }
         }
 
@@ -222,6 +223,7 @@
                 position: absolute;
                 top: 0;
                 right: 0;
+                cursor: pointer;
 
                 &:active {
                     opacity: 0.6;
@@ -309,6 +311,7 @@
                 border-radius: 45px;
                 height: 40px;
                 line-height: 40px;
+                cursor: pointer;
 
                 .earn_diamond {
                     position: absolute;

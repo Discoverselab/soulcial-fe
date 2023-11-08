@@ -150,6 +150,14 @@ export default new Router({
       component: user,
     },
     {
+      path: "/:realTokenId/:code",
+      name: "share_pick",
+      component: explore_details,
+      meta: {
+        isSharePick: true,
+      },
+    },
+    {
       path: "/settings",
       name: "settings",
       component: settings,

@@ -35,8 +35,7 @@
         >
           <div class="earn_list" v-for="(item, index) in VSoulHistory" :key="index">
             <div class="list_left">
-              <img v-if="item.number > 0" src="../../assets/Pick.png" alt />
-              <img v-else src="../../assets/Promotion.png" alt />
+              <img  src="../../assets/start.png" alt />
               <div class="title_time">
                 <p class="list_name">{{ earnType[`${item.type}`] || "Promotion"}}</p>
                 <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
@@ -101,8 +100,7 @@
           >
             <div class="earn_list" v-for="(item, index) in WalletHistory" :key="index">
             <div class="list_left">
-              <img v-if="item.type == 0 || item.type == 1" src="../../assets/pickss.png" alt />
-              <img v-else src="../../assets/start.png" alt />
+              <img  src="@/assets/pickss.png" alt />
               <div class="title_time">
                 <p class="list_name">{{ walletTypeNmae[item.type] }}</p>
                 <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
@@ -264,8 +262,8 @@ export default {
       walletTypeNmae: {
         0: "Deposit",
         1: "Withdraw",
-        2: "Earn",
-        3: "Collect",
+        2: "Compensation",
+        3: "Pump",
         4: "Refund",
         5: "Sell",
         6: "Creartor Earnings"

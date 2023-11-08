@@ -1,4 +1,3 @@
-import { website } from "@/http/api.js";
 import Clipboard from "clipboard";
 import { get } from "../../../http/http";
 export default {
@@ -21,8 +20,8 @@ export default {
             });
     },
     shareTiwtter() {
-        const url = `${website}#/t/${this.superInviteCode}`;
-        const text = `This SoulCast NFT looks extraordinary! Come to Soulcial via ${url} and PUMP it.  Get the rewards in crypto. My invite code: soul-${this.superInviteCode}`;
+        const value = document.querySelector(".content").innerHTML;
+        const text = `${value}`;
         const intentUrl =
             "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
         window.open(intentUrl, "_blank", "width=550,height=420");
