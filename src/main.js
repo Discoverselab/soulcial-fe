@@ -1,21 +1,33 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import rem from './rem'
-import api from './http/api';
-import loginData from './libs/loginData';
-import VueDragscroll from 'vue-dragscroll'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import rem from "./rem";
+import api from "./http/api";
+import loginData from "./libs/loginData";
+import VueDragscroll from "vue-dragscroll";
 import AOS from "aos";
 import "../node_modules/aos/dist/aos.css";
-import "./assets/css/public.scss"
-import "./assets/font/font.css"
-import Vant from 'vant';
-import 'vant/lib/index.css';
-import '@vant/touch-emulator';
-import VueLazyload from 'vue-lazyload';
-import loadingImg from './assets/loadingImg.png'
+import "./assets/css/public.scss";
+import "./assets/font/font.css";
+import Vant from "vant";
+import "vant/lib/index.css";
+import "@vant/touch-emulator";
+import VueLazyload from "vue-lazyload";
+import loadingImg from "./assets/loadingImg.png";
 import Overlay from "./components/Overlay.vue";
-import "@/assets/css/iconfont.css"
+import "@/assets/css/iconfont.css";
+import Meta from "vue-meta";
+
+Vue.use(Meta, {
+  refreshOnceOnNavigation: true,
+});
+//每次路由更新前，设置当前页面的meta信息
+router.beforeEach((to, from, next) => {
+  const themeColor = to.meta.metaInfo?.theme_color || '#f5f5ee';
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
+  next();
+});
+
 
 const token = "a47c446ea7f061";
 const timezone = localStorage.getItem("timezone")
@@ -39,41 +51,41 @@ Vue.use(VueLazyload, {
   attempt: 1, // 尝试加载次数
   throttleWait: 0, // 滚动节流时间
   observerOptions: {
-    rootMargin: '0px', // 根边界
+    rootMargin: "0px", // 根边界
     threshold: 0.1, // 阈值，表示元素进入可视区域的比例
   },
 });
 Vue.use(Vant);
-Vue.use(AOS)
-Vue.use(VueDragscroll)
+Vue.use(AOS);
+Vue.use(VueDragscroll);
 // import vConsole from 'vconsole'
 // Vue.prototype.$vConsole = new vConsole()
-import MetaInfo from 'vue-meta-info'
-import VueI18n from 'vue-i18n'
-import "./icons/index.js"
+import MetaInfo from "vue-meta-info";
+import VueI18n from "vue-i18n";
+import "./icons/index.js";
 
-Vue.use(MetaInfo)
-Vue.use(VueI18n)
-Vue.component('Overlay', Overlay)
+Vue.use(MetaInfo);
+Vue.use(VueI18n);
+Vue.component("Overlay", Overlay);
 const i18n = new VueI18n({
-  locale: localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en-US',
+  locale: localStorage.getItem("lang") ? localStorage.getItem("lang") : "en-US",
   messages: {
-    'en-US': require('./lang/en'),
-    'ko-RE': require('./lang/ko'),
-    'jpn': require('./lang/jpn'),
-  }
-})
+    "en-US": require("./lang/en"),
+    "ko-RE": require("./lang/ko"),
+    jpn: require("./lang/jpn"),
+  },
+});
 Vue.prototype.$network = "ETH";
 Vue.prototype.$api = api;
-Vue.prototype.$loginData = loginData
-Vue.config.productionTip = false
+Vue.prototype.$loginData = loginData;
+Vue.config.productionTip = false;
 // new WOW().init();
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
   router,
   rem,
   i18n,
   mounted() {
-    document.dispatchEvent(new Event('render-event'))
+    document.dispatchEvent(new Event("render-event"));
   },
-}).$mount('#app')
+}).$mount("#app");
