@@ -380,14 +380,14 @@
         <p class="introduce_title">What is Pump</p>
         <p class="content end">The Pump game lets you collect SoulCast NFTs and earn vSOULs.</p>
         <p class="introduce_title">How to Pump</p>
-        <p class="content">1.Choose a slot from #0, #1, #2, and #3.</p>
-        <p class="content">2.Confirm your Pump, and the payment will be deducted from your wallet.</p>
-        <p class="content">3.Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting the SoulCast NFT.</p>
-        <p class="content end">4.The other three Pumpers will receive a full refund plus an additional 4% in ETH as compensation.</p>
+        <p class="content">1. Choose a slot from #0, #1, #2, and #3.</p>
+        <p class="content">2. Confirm your Pump, and the payment will be deducted from your wallet.</p>
+        <p class="content">3. Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting the SoulCast NFT.</p>
+        <p class="content end">4. The other three Pumpers will receive a full refund plus an additional 4% in ETH as compensation.</p>
         <p class="introduce_title">Features</p>
-        <p class="content">1.All Pumpers gain access to group chats with the creator of the SoulCast.</p>
-        <p class="content">2.The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
-        <p class="content">3.All Pumpers are rewarded with vSOULs for participating.</p>
+        <p class="content">1. All Pumpers gain access to group chats with the creator of the SoulCast.</p>
+        <p class="content">2. The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
+        <p class="content">3. All Pumpers are rewarded with vSOULs for participating.</p>
         <div class="setBut">
           <button class="backBtn" @click="dialogShow = false">back</button>
         </div>
