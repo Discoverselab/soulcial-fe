@@ -87,8 +87,8 @@
 
     <!-- Activity -->
     <div class="activity" v-if="TabActive === 3">
-      <van-list v-model="activityLoading" :finished="activityFinished" loading-text="Loading" @load="onActivityLoad" :immediate-check="false"
-        finished-text="">
+      <van-list v-model="activityLoading" :finished="activityFinished" loading-text="Loading" @load="onActivityLoad"
+        :immediate-check="false" finished-text="">
         <div class="activity_list" v-for="item in activityList" :key="item.id" @click="linkNftDetail(item.tokenId)">
           <div class="left">
             <img class="userImg" :src="item.userImg" alt />
@@ -154,6 +154,7 @@ export default {
       levelImg: levelImg,
       TabActive: 1,
       getNFTLevel: getNFTLevel,
+      timer: null,
       nftList: [],
       activityList: [],
       showBackground: false,
@@ -187,56 +188,7 @@ export default {
     Overlay,
     Sift
   },
-  created() {
-    const handleShowPWA = () => {
-      // 今天的日期
-      let pwa_today = +new Date().getDate();
-      // 本地存储的日期
-      let pwa_day = window.localStorage.getItem("pwa_day");
-
-      if (pwa_day && pwa_day != pwa_today) {
-        window.localStorage.setItem("pwa_isShow", 'false')
-        window.localStorage.setItem("pwa_day", pwa_today)
-      }
-      // 今日是否看过弹窗
-      let pwa_isShow = window.localStorage.getItem("pwa_isShow") || 'false';
-      // 弹窗总次数
-      let pwa_count = window.localStorage.getItem("pwa_count") || 0;
-
-      // 判断总次数是否小于3
-      if (pwa_count >= 3) return;
-      if (pwa_isShow == "true") return;
-      window.localStorage.setItem("pwa_isShow", 'true')
-      // 弹窗次数加1
-      window.localStorage.setItem("pwa_count", Number(pwa_count) + 1);
-      // 展示弹窗
-      this.pwaModalShow = true
-    }
-
-    const isSafari = window.navigator.vendor === 'Apple Computer, Inc.';
-    if (this._isMobile()) {
-      //移动设备
-      if (isSafari) {
-        // ios safari 浏览器
-        if (!window.navigator.standalone) {
-          handleShowPWA()
-        } else {
-          // isPWA
-          window.localStorage.setItem("isPWA", true);
-        }
-      } else {
-        // 其他浏览器
-        if (!window.matchMedia('(display-mode: standalone)').matches) {
-          handleShowPWA()
-        } else {
-          window.localStorage.setItem("isPWA", true);
-        }
-      }
-    } else {
-      window.localStorage.setItem("isPWA", false);
-    }
-
-  },
+  created() { },
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
@@ -251,6 +203,10 @@ export default {
     // window.addEventListener("scroll", this.scrollToTop);
   },
   activated() {
+    this.timer = setTimeout(() => {
+      this.handleShowModal();
+    }, 1000 * 30);
+
     if (!this.$route.meta.keepAlive) {
       this.nftList = []; //清空原有数据
       this.getData(); // 重新加载
@@ -258,6 +214,12 @@ export default {
     this.$route.meta.keepAlive = false; // 通过这个控制刷新，x否则会一直为true
     this.$refs.tabbar.BarActive = this.$route.path;
     this.$refs.tabbar.walletShow = false;
+  },
+  deactivated() {
+    this.timer && clearTimeout(this.timer);
+  },
+  beforeDestroy() {
+    this.timer && clearTimeout(this.timer);
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
@@ -335,4 +297,5 @@ export default {
   }
 
   // margin-bottom: 20px;
-}</style>
+}
+</style>

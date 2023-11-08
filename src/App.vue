@@ -20,6 +20,8 @@ export default {
     // TabBar,
   },
   created() {
+    // 记录进入时间戳
+    window.localStorage.setItem("firstApptime", new Date().getTime());
     // const isSafari = window.navigator.vendor === 'Apple Computer, Inc.';
     // if (this._isMobile()) {
     //   //移动设备
