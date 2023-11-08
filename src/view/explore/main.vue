@@ -87,7 +87,7 @@
 
     <!-- Activity -->
     <div class="activity" v-if="TabActive === 3">
-      <van-list v-model="activityLoading" :finished="activityFinished" loading-text="Loading" :immediate-check="false"
+      <van-list v-model="activityLoading" :finished="activityFinished" loading-text="Loading" @load="onActivityLoad" :immediate-check="false"
         finished-text="">
         <div class="activity_list" v-for="item in activityList" :key="item.id" @click="linkNftDetail(item.tokenId)">
           <div class="left">

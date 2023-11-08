@@ -351,18 +351,6 @@ export default {
       this.TabActive = 1;
     }
 
-    const token = "a47c446ea7f061";
-    this.overlayshow = true;
-    fetch(`https://ipinfo.io/json?token=${token}`)
-      .then(response => response.json())
-      .then(data => {
-        window.localStorage.setItem("timezone", data.timezone);
-        console.log(data.timezone,'data.timezonedata.timezone')
-      })
-      .catch(error => {
-        window.localStorage.removeItem("timezone");
-        console.error(error)
-      })
     me.getBalance();
     // me.BalanceOf();
     me.getMintedNFTPage(1);

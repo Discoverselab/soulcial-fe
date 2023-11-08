@@ -68,7 +68,9 @@ export default {
         }
     },
     getActivityData(){
-        this.overlayshow = true;
+        if (this.currentPage < 2) {
+            this.overlayshow = true;
+        }
         let url =
             this.$api.nft.getActivePage +
             `?current=${this.currentPage}&size=${this.pageSize}`;
@@ -83,6 +85,7 @@ export default {
                     if (this.activityList.length >= data.total) {
                         this.activityFinished = true;
                     }
+                    console.log(this.activityList,'this.activityList')
                 } else {
                     // 加载状态结束
                     this.activityLoading = false;
@@ -190,7 +193,7 @@ export default {
         this.currentPage++; // 更新页数
         this.getData();
     },
-    activityLoad(){
+    onActivityLoad(){
         this.currentPage++; // 更新页数
         this.getActivityData();
     },
