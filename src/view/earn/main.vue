@@ -264,8 +264,8 @@ export default {
       walletTypeNmae: {
         0: "Deposit",
         1: "Withdraw",
-        2: "Earn",
-        3: "Collect",
+        2: "Compensation",
+        3: "Pump",
         4: "Refund",
         5: "Sell",
         6: "Creartor Earnings"
