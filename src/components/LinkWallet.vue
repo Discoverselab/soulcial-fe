@@ -71,33 +71,15 @@
         </template>-->
       </div>
     </van-action-sheet>
-    <van-dialog
-      v-model="dialogShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      title="Create Lens Handle"
-      :before-close="newGroupBefColse"
-      confirmButtonText="CONFIRM"
-      @confirm="dialog_confirm"
-    >
-      <input
-        placeholder="Please enter"
-        onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')"
-        maxlength="10"
-        type="text"
-        @input="restrictInput"
-        v-model="handle"
-      />
+    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
+      :before-close="newGroupBefColse" confirmButtonText="CONFIRM" @confirm="dialog_confirm">
+      <input placeholder="Please enter" onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')" maxlength="10"
+        type="text" @input="restrictInput" v-model="handle" />
       <p class="point_out">Handle must be minimum of 5 length and maximum of 31 length</p>
     </van-dialog>
     <!-- 白名单弹窗 -->
-    <van-dialog
-      v-model="whiteShow"
-      :close-on-click-overlay="false"
-      :z-index="99999999"
-      confirmButtonText="Join the waitlist"
-      @confirm="white_confirm"
-    >
+    <van-dialog v-model="whiteShow" :close-on-click-overlay="false" :z-index="99999999"
+      confirmButtonText="Join the waitlist" @confirm="white_confirm">
       <p class="fee_dint">
         Sorry, Soulcial is now in beta stage. It seems that you are not eligible
         temporally. Please join the waitlist first.
@@ -135,7 +117,7 @@ export default {
   props: {
     walletShow: Boolean
   },
-  data: function() {
+  data: function () {
     let _clientH = document.documentElement.clientHeight;
     return {
       userLens: {},
@@ -365,11 +347,9 @@ export default {
       this.overlayshow = true;
       let streamID = streamId ? streamId : Date.parse(new Date());
       let prefix = this.$api.login.login;
-      let params = `?address=${this.address}&&loginType=${
-        this.loginType
-      }&&particleType=${
-        this.preferredAuthType
-      }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
+      let params = `?address=${this.address}&&loginType=${this.loginType
+        }&&particleType=${this.preferredAuthType
+        }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
         ""}&&signature=${signParams?.signature || ""}`;
       post(prefix + params)
         .then(res => {
@@ -407,7 +387,7 @@ export default {
     },
     metamaskChack() {
       let me = this;
-      const clear = function() {
+      const clear = function () {
         if (me.$loginData.Auth_Token) {
           me.$loginData.out();
           window.localStorage.removeItem("loginInfo");
@@ -517,7 +497,12 @@ export default {
         })
         .catch(error => {
           console.error("personal_sign err", error);
-          this.$toast("Wrong signature");
+          if (error.code === 10005) {
+            // 10005,登录过期
+            // 4001, message: 'The user rejected the request'
+          } else {
+            // this.$toast("Wrong signature");
+          }
         });
     },
     async particle(preferredAuthType, type) {
