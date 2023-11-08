@@ -126,7 +126,7 @@ module.exports = {
         manifestOptions: {
             icons: [
                 {
-                    src: "./static/img/logo_app.4509d496.png",
+                    src: "./static/img/logo_app.4dc3ab5d.png",
                     sizes: "1000x1000",
                     type: "image/png",
                 },

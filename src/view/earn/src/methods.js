@@ -7,9 +7,8 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "@/http/http";
 import wethABI from "@/libs/weth.json";
-import { ABIAddress } from "@/libs/common.js";
+import { ABIAddress, clearInfo } from "@/libs/common.js";
 import { ethers } from "ethers";
-import { ParticleProvider } from "@particle-network/provider";
 const provider = window.ethereum ? window.ethereum : null;
 let signer;
 let providers;
@@ -33,13 +32,17 @@ export default {
                 this.handleBalance(balance);
             });
         } else {
-            await window.web3.eth.getBalance(address, (err, balance) => {
-                if (err) {
-                    this.WalletBalance = "0";
-                    return;
-                }
-                this.handleBalance(balance);
-            });
+            if (window.web3.eth) {
+                await window.web3.eth.getBalance(address, (err, balance) => {
+                    if (err) {
+                        this.WalletBalance = "0";
+                        return;
+                    }
+                    this.handleBalance(balance);
+                });
+            }else{
+                clearInfo();
+            }
         }
     },
     // 获取W余额
