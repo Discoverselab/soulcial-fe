@@ -47,11 +47,11 @@ export default {
         setUserInfo: `${api}pfp/api/admin/home/setUserInfo`, //设置用户信息
         getTagsList: `${api}pfp/api/admin/home/getTagsList`, //获取用户标签选项list（Tags）
         setUserTags: `${api}pfp/api/admin/home/setUserTags`, //设置用户标签(1到12,多个用逗号隔开)
-        getPicksNFTPage: `${api}pfp/api/admin/home/getPicksNFTPage`, //设置用户标签(1到12,多个用逗号隔开)
-        addWallectHistory: `${api}pfp/api/admin/wallect/addWallectHistory`, //设置用户标签(1到12,多个用逗号隔开)
-        getWallectHistory: `${api}pfp/api/admin/wallect/getWallectHistory`, //设置用户标签(1到12,多个用逗号隔开)
-        getVSoulBalance: `${api}pfp/api/admin/wallect/getVSoulBalance`, //设置用户标签(1到12,多个用逗号隔开)
-        getVSoulHistory: `${api}pfp/api/admin/wallect/getVSoulHistory`, //设置用户标签(1到12,多个用逗号隔开)
+        getPicksNFTPage: `${api}pfp/api/admin/home/getPicksNFTPage`,
+        addWallectHistory: `${api}pfp/api/admin/wallect/addWallectHistory`,
+        getWallectHistory: `${api}pfp/api/admin/wallect/getWallectHistory`,
+        getVSoulBalance: `${api}pfp/api/admin/wallect/getVSoulBalance`,
+        getVSoulHistory: `${api}pfp/api/admin/wallect/getVSoulHistory`,
         getNFTMood: `${api}pfp/api/admin/nft/getNFTMood`, //Mood下拉
         getNFTColor: `${api}pfp/api/admin/nft/getNFTColor`, //Color下拉
         getNFTPersonality: `${api}pfp/api/admin/nft/getNFTPersonality`, //角色下拉
@@ -60,7 +60,8 @@ export default {
         getSearchList: `${api}pfp/api/admin/explor/indexSearch`  // 首页搜索
     },
     chat: {
-        getUserMessage: `${api}pfp/api/admin/message/getUserMessage`, //设置用户标签(1到12,多个用逗号隔开)
-        getRewardInfo: `${api}pfp/api/admin/message/getRewardInfo`, //设置用户标签(1到12,多个用逗号隔开)
+        getUserMessage: `${api}pfp/api/admin/message/getUserMessage`,
+        getRewardInfo: `${api}pfp/api/admin/message/getRewardInfo`,
+        getChatDetail: `${api}pfp/api/admin/message/chat/detail`,
     }
 }

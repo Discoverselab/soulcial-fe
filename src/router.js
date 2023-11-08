@@ -24,6 +24,7 @@ import addToHome from "@/view/AddToHome/index";
 import settingsBio from "@/view/settingsBio/main";
 import settingsName from "@/view/settingsName/main";
 import Congratulations from "@/view/Congratulations/main";
+import conversation from "@/view/conversation/main";
 import sorry from "@/view/sorry/main";
 import owner from "@/view/owner/main";
 import share from "@/view/share/main";
@@ -172,6 +173,11 @@ export default new Router({
       path: "/Congratulations",
       name: "Congratulations",
       component: Congratulations,
+    },
+    {
+      path: "/conversation",
+      name: "conversation",
+      component: conversation,
     },
     {
       path: "/sorry",
