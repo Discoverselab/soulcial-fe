@@ -112,8 +112,8 @@
     <div class="set_but" v-if="TabActive == 1 ">
       <button
         @click="showLaunch"
-        :disabled="!UserInfo.canMint && !(UserInfo.pickCount<3)"
-        :class="{disabled: !UserInfo.canMint&& !(UserInfo.pickCount<3)}"
+        :disabled="!UserInfo.mintStatus"
+        :class="{disabled: !UserInfo.mintStatus}"
       >Launch SoulCast</button>
     </div>
     <!-- NFT list -->
@@ -168,9 +168,9 @@
       <div class="introduce">
         <p class>Would like Free Launch your exclusive SoulCast NFT？</p>
         <p class>Just PUMP 3 other SoulCast!</p>
-        <p class>{{`（Pumped ${UserInfo.pickCount}/3）`}}</p>
+        <p class>{{`（Pumped ${UserInfo.pickCount >= 3 ? 3 :UserInfo.pickCount }/3）`}}</p>
         <div class="setBut">
-          <button @click="goPump" v-if="!UserInfo.canMint">Go to PUMP</button>
+          <button @click="goPump" v-if="UserInfo.pickCount < 3">Go to PUMP</button>
           <button @click="goLaunch" v-else>Free Launch SoulCast</button>
           <!-- <button>Pay 0.025{{ $network }} for Launching</button> -->
         </div>
