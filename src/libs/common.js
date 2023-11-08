@@ -119,6 +119,7 @@ export const goParticle = function () {
         return;
     }
     try {
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f5f5ee');
         const url = window.particle.buildWalletUrl({
             topMenuType: "close",
             mode: "iframe",
@@ -141,11 +142,13 @@ export const goParticle = function () {
         // //if topMenuType is "close"
         window.addEventListener("message", (event) => {
             if (event.data === "PARTICLE_WALLET_CLOSE_IFRAME") {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff');
                 iframe && document.body.removeChild(iframe);
                 barCont.style.display = "flex";
             }
         });
     } catch (error) {
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff');
         console.log("🔥🔥🔥🚀 ~ file: common.js:150 ~ error:", error);
         clearInfo();
     }
