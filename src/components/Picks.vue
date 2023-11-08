@@ -139,7 +139,7 @@ export default {
       const web3 = new Web3(window.ethereum);
       web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
         if (error) {
-          console.error(error);
+          console.log("🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:", error);
           this.overlayshow = false;
         } else if (receipt && receipt.status === true) {
           console.log("链上交易已执行完毕");
@@ -171,15 +171,14 @@ export default {
     //   return Number(this.PoolBalance) > 0;
     // },
     async save() {
-      // 选择网络链接钱包
-      if (!this.$loginData.Auth_Token) {
-        this.walletShow = true;
-        return;
-      }
       if (this.$loginData.loginType == 0) {
         await addVTNetwork(this.getApproved, this.getApproved);
       } else {
-        window.particle ? this.getApproved() : (this.walletShow = true);
+        if (window.particle) {
+          this.getApproved();
+        } else {
+          onParticle(this.getApproved)
+        }
       }
     },
     async getApproved() {
@@ -216,12 +215,12 @@ export default {
           me.jcHash(hash);
         })
         .on("error", function (error) {
+          console.error("🔥🔥🔥🚀 ~ file: Picks.vue:218 ~ error:", error);
           if (me.$loginData.loginType == 1) {
-            onParticle(me.getApproved)
+            // onParticle(me.getApproved)
           }
           me.overlayshow = false;
-          me.$toast(error);
-          console.error("Error: ", error);
+          me.$toast('something error');
         });
     }
   }
