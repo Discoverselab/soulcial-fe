@@ -291,7 +291,7 @@ export default {
   },
   getNFTPickInfo() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -342,7 +342,7 @@ export default {
   // },
   getData() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -364,7 +364,7 @@ export default {
   },
 
   getNFTHistory() {
-    let url = this.$api.nft.getNFTHistory + `?id=${this.$route.query.id}`;
+    let url = this.$api.nft.getNFTHistory + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {

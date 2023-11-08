@@ -77,7 +77,7 @@ export default {
     NFTDetail: Object,
     PicksShow: Boolean,
     pickIndex: Number,
-    PoolBalance: String
+    PoolBalance: String,
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight;
@@ -86,8 +86,15 @@ export default {
       // dialogShow: false,
       price: "",
       levelImg: levelImg,
-      getNFTLevel: getNFTLevel
+      getNFTLevel: getNFTLevel,
+      isSharePick:false,
     };
+  },
+  mounted() {
+    if(this.$route.meta.isSharePick) {
+      this.isSharePick = true
+    }
+
   },
   computed: {},
   components: { Overlay },
@@ -144,7 +151,9 @@ export default {
         } else if (receipt && receipt.status === true) {
           console.log("链上交易已执行完毕");
           this.getPickInfo();
-          // this.pickByInviteCode()
+          if(this.isSharePick){
+            this.pickByInviteCode()
+          }
         } else {
           this.jcHash(txHash);
           console.log("链上交易未执行完毕");
@@ -153,10 +162,8 @@ export default {
     },
     // 使用邀请码pick
     pickByInviteCode() {
-      this.overlayshow = true;
+     const superInviteCode = JSON.parse(localStorage.getItem("userInfo")).superInviteCode.slice(-6)
       let url = this.$api.infor.pickByInviteCode;
-      let superInviteCode = JSON.parse(localStorage.getItem("userInfo"))
-        .superInviteCode;
       let data = {
         inviteCode: superInviteCode
       };
@@ -164,7 +171,6 @@ export default {
         .then(res => { })
         .catch(error => { })
         .finally(() => {
-          this.overlayshow = false;
         });
     },
     // IFBalance() {

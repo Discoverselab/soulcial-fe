@@ -195,7 +195,7 @@
             <span class="pump">Pump</span>
             <img class="point_out" @click="dialogShow = true" src="../../assets/point_out.png" alt />
           </span>
-          <span class="title_right" @click="$router.push('/share_pick')">
+          <span class="title_right" @click="$router.push(`/share_pick?id=${NFTDetail.realTokenId}`)">
             <img src="@/assets/diamond.png" alt />
             <span class="invite_earn">Invite & Earn</span>
           </span>
@@ -373,17 +373,24 @@
       v-model="dialogShow"
       :close-on-click-overlay="true"
       :z-index="99999999999999999999"
-      confirmButtonText="BACK"
+      :show-confirm-button="false"
       @confirm="dialog_confirm"
     >
       <div class="introduce">
-        <p>1.You can choose a slot from #0 to #3 to pump.</p>
-        <p>
-          2.When all of 4 slots are full, it will enter the Launchpad. And the winning result is determined according to
-          the last character of latest block hash of {{ 'BNB Chain' }}.
-        </p>
-        <p>3.When you confirm the pump, the payment amount will be deducted from the wallet pool.</p>
-        <p>4.If you don't win the pump, the system will refund the prepaid amount to the wallet pool.</p>
+        <p class="introduce_title">What is Pump</p>
+        <p class="content end">The Pump game lets you collect SoulCast NFTs and earn vSOULs.</p>
+        <p class="introduce_title">How to Pump</p>
+        <p class="content">1.Choose a slot from #0, #1, #2, and #3.</p>
+        <p class="content">2.Confirm your Pump, and the payment will be deducted from your wallet.</p>
+        <p class="content">3.Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting the SoulCast NFT.</p>
+        <p class="content end">4.The other three Pumpers will receive a full refund plus an additional 4% in ETH as compensation.</p>
+        <p class="introduce_title">Features</p>
+        <p class="content">1.All Pumpers gain access to group chats with the creator of the SoulCast.</p>
+        <p class="content">2.The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
+        <p class="content">3.All Pumpers are rewarded with vSOULs for participating.</p>
+        <div class="setBut">
+          <button class="backBtn" @click="dialogShow = false">back</button>
+        </div>
       </div>
     </van-dialog>
     <van-dialog
@@ -467,7 +474,7 @@ export default {
       NFTPickInfo: {},
       PicksList: [],
       TabActive: 1,
-      height: 0 //图片高度
+      height: 0, //图片高度
     };
   },
   watch: watch,
@@ -496,6 +503,7 @@ export default {
     this.getData();
     this.getNFTHistory();
     this.getNFTPickInfo();
+
     AOS.init({
       offset: 200,
       duration: 200, //duration

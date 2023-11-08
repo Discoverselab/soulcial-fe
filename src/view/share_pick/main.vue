@@ -22,7 +22,7 @@
       This SoulCast NFT looks extraordinary! Come to Soulcial via
       <span
         style="display: inline;"
-      >{{`https://test2bsc.soulcial.network/#/t/${superInviteCode}`}}</span> {{`and PUMP it. Get the rewards in crypto. My invite code: soul-${superInviteCode}`}}
+      >{{`${website}#/${realTokenId}/${superInviteCode}`}}</span> {{`and PUMP it. Get the rewards in crypto. My invite code: soul-${superInviteCode}`}}
     </div>
    
     <div class="operate">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <button class="link">
-      <span class="link_content">{{`https://test2bsc.soulcial.network/#/t/${superInviteCode}`}}</span>
+      <span class="link_content">{{`${website}#/${realTokenId}/${superInviteCode}`}}</span>
       <img class="copy-button2" src="@/assets/copy1.png" alt @click="copyLink" />
     </button>
     <div
@@ -47,16 +47,23 @@
 </template>
   <script>
 import methods from "./src/methods";
+import { website } from "@/http/api.js";
+
 export default {
   data() {
     return {
       overlayshow: false,
       UserInfo:{},
       superInviteCode:undefined,
+      website:website,
+      realTokenId:undefined
     };
   },
   created() {
   this.getUserInfo()
+  },
+  mounted(){
+    this.realTokenId=this.$route.query.id
   },
   methods: methods
 };

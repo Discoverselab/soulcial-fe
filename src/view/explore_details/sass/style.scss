@@ -670,7 +670,7 @@
 
     .van-dialog {
         background-color: #f5f5ed;
-        padding: 60px 24px 40px 24px;
+        padding: 40px 24px 40px 24px;
 
         .introduce {
             p {
@@ -695,7 +695,23 @@
                     padding: 0;
                 }
             }
-
+            .introduce_title {
+                font-size: 16px;
+                border: none;
+                margin-bottom: 0px;
+                padding-bottom: 6px;
+            }
+            .content {
+                margin-bottom: 0;
+                border: none;
+                padding-bottom: 6px;
+                font-weight: 400;
+            }
+            .end {
+                border-bottom: 1px solid #dfdfce;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
             .canserImg {
                 display: block;
                 width: 160px;
@@ -705,7 +721,7 @@
 
             .setBut {
                 margin-top: 8px;
-
+                
                 button {
                     display: block;
                     width: 100%;
@@ -720,7 +736,10 @@
                     font-style: normal;
                     font-weight: 700;
                     text-transform: uppercase;
-
+                    &.backBtn{
+                        margin-top: 10px;
+                        cursor: pointer;
+                    }
                     &:active {
                         opacity: 0.8;
                     }
