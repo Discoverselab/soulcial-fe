@@ -26,14 +26,8 @@
         </div>
         <div class="EnterPrice">
           <div class="input_cont">
-            <input
-              readonly
-              oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
-              @blur="price = $event.target.value"
-              class="cont_input"
-              v-model="NFTDetail.price"
-              type="text"
-            />
+            <input readonly oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
+              @blur="price = $event.target.value" class="cont_input" v-model="NFTDetail.price" type="text" />
             <p class="unit">
               <img :src="require(`../assets/${$network}.png`)" alt />
               {{ $network }}
@@ -85,7 +79,7 @@ export default {
     pickIndex: Number,
     PoolBalance: String
   },
-  data: function() {
+  data: function () {
     let _clientH = document.documentElement.clientHeight;
     return {
       overlayshow: false,
@@ -166,8 +160,8 @@ export default {
         inviteCode: superInviteCode
       };
       post(url, data)
-        .then(res => {})
-        .catch(error => {})
+        .then(res => { })
+        .catch(error => { })
         .finally(() => {
           this.overlayshow = false;
         });
@@ -192,18 +186,18 @@ export default {
       try {
         this.$loginData.loginType == 1 ? this.particlePay() : this.toPay();
       } catch (error) {
+        this.overlayshow = false;
+        this.$toast(error);
         console.error(error);
       }
     },
     // particle交易
     async particlePay() {
-      this.overlayshow = true;
       const contract = new window.web3.eth.Contract(MarketABI, marketAddress);
       this.handlePickItem(contract);
     },
     // metatask交易
     async toPay() {
-      this.overlayshow = true;
       const web3 = new Web3(window.ethereum);
       var myContract = new web3.eth.Contract(MarketABI, marketAddress);
       this.handlePickItem(myContract);
@@ -215,12 +209,14 @@ export default {
       contract.methods
         .pickItem(nftAddress, tokenId, this.pickIndex)
         .send({ from: this.$loginData.Auth_Token, value: value })
-        .on("transactionHash", function(hash) {
+        .on("transactionHash", function (hash) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:", hash);
           // 交易已发送，可以显示交易哈希或执行其他操作
           me.jcHash(hash);
         })
-        .on("error", function(error) {
+        .on("error", function (error) {
+          me.overlayshow = false;
+          me.$toast(error);
           console.error("Error: ", error);
         });
     }
