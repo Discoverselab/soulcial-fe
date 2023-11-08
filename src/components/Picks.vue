@@ -127,6 +127,7 @@ export default {
           if (res.code === 200) {
             if (res.data[`indexUserName${me.pickIndex}`]) {
               this.$parent.NFTPickInfo = res.data;
+              this.$parent.onlyPickOnce()
               me.close();
               me.overlayshow = false;
             } else {
@@ -149,7 +150,7 @@ export default {
         } else if (receipt && receipt.status === true) {
           console.log("链上交易已执行完毕");
           this.getPickInfo();
-          this.pickByInviteCode()
+          // this.pickByInviteCode()
         } else {
           this.jcHash(txHash);
           console.log("链上交易未执行完毕");

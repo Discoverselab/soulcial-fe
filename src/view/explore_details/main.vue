@@ -212,7 +212,7 @@
               <p class="name">{{ pickIsUser(0) ? 'You' : NFTPickInfo.indexUserName0 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(0)">
-              <button :class="{ disabledBUtton: isPick() }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
             </div>
             <span class="number">#0</span>
           </div>
@@ -227,7 +227,7 @@
               <p class="name">{{ pickIsUser(1) ? 'You' : NFTPickInfo.indexUserName1 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(1)">
-              <button :class="{ disabledBUtton: isPick() }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
             </div>
             <span class="number">#1</span>
           </div>
@@ -242,7 +242,7 @@
               <p class="name">{{ pickIsUser(2) ? 'You' : NFTPickInfo.indexUserName2 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(2)">
-              <button :class="{ disabledBUtton: isPick() }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
             </div>
             <span class="number">#2</span>
           </div>
@@ -257,7 +257,7 @@
               <p class="name">{{ pickIsUser(3) ? 'You' : NFTPickInfo.indexUserName3 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(3)">
-              <button :class="{ disabledBUtton: isPick() }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
             </div>
             <span class="number">#3</span>
           </div>
@@ -442,6 +442,7 @@ export default {
       PicksShow: false,
       pathEx: true,
       History_list: [],
+      gray: false,
       flippedShow: false,
       pickIndex: 0,
       overlayshow: false,
