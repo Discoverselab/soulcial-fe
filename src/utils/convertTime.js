@@ -8,6 +8,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(relativeTime); // 相对时间
 dayjs.extend(updateLocale);
+
 dayjs.updateLocale("en", {
     relativeTime: {
         future: "in %s",
@@ -44,14 +45,13 @@ export function convertToTargetTimeZone(initialTime) {
 }
 
 export function getLastTimeStr(time) {
-    const targetTimeString = time;
-    const targetDate = dayjs(targetTimeString);
+    const targetDate = dayjs(time);
     const transformDate = convertToTargetTimeZone(dayjs());
     const currentDate = dayjs(transformDate)
     const daysDifference = currentDate.diff(targetDate, "day");
     if (daysDifference > 30) {
         return dayjs(new Date(time)).format("YYYY-MM-DD");
     } else {
-        return dayjs(time).fromNow();
+        return dayjs(time).from(currentDate);
     }
 }

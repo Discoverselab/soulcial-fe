@@ -48,5 +48,6 @@ export const addVTNetwork = async (
         } else {
             Toast(error.message);
         }
+        throw error
     }
 };

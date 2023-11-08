@@ -5,34 +5,34 @@
       <div class="content">
         <p class="headLin" @click="close"></p>
         <P class="title">Connect Wallet</P>
-        <img class="wallet_img" src="../assets/wellat_img.png" alt="" />
+        <img class="wallet_img" src="../assets/wellat_img.png" alt />
         <div v-if="!isPWA" class="wallet_list" @click="metamask">
           <div class="list_left">
-            <img src="../assets/metamask.png" alt="" />
+            <img src="../assets/metamask.png" alt />
             <p>MetaMask</p>
           </div>
-          <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
+          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
         <div class="wallet_list" @click="particle('phone', 1)">
           <div class="list_left">
-            <img src="../assets/Subtract1.png" alt="" />
+            <img src="../assets/Subtract1.png" alt />
             <p>Phone</p>
           </div>
-          <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
+          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
         <div class="wallet_list" @click="particle('email', 2)">
           <div class="list_left">
-            <img src="../assets/Exclude.png" alt="" />
+            <img src="../assets/Exclude.png" alt />
             <p>Email</p>
           </div>
-          <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
+          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
         <div class="wallet_list" @click="particle('google', 4)">
           <div class="list_left">
-            <img src="../assets/gogo.png" alt="" />
+            <img src="../assets/gogo.png" alt />
             <p>Google</p>
           </div>
-          <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
+          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
         <!-- <div class="wallet_list" @click="WalletConnect">
           <div class="list_left">
@@ -40,7 +40,7 @@
             <p>WalletConnect</p>
           </div>
           <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
-        </div> -->
+        </div>-->
         <!-- <div class="attention">
           <van-icon name="info" size="20" />
           <div class="attention_text">
@@ -54,7 +54,7 @@
               Instead of creating new accounts and passwords on every website, just connect your wallet.
             </p>
           </div>
-        </div> -->
+        </div>-->
         <!-- <template v-if="!isPWA">
           <div class="lins">
             <p class="lin"></p>
@@ -68,20 +68,36 @@
             <img @click="particle('google', 4)" src="../assets/gogo.png" alt="" />
             <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" />
           </div>
-        </template> -->
+        </template>-->
       </div>
     </van-action-sheet>
-    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
-      :before-close="newGroupBefColse" confirmButtonText="CONFIRM" @confirm="dialog_confirm">
-      <input placeholder="Please enter" onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')" maxlength="10"
-        type="text" @input="restrictInput" v-model="handle" />
-      <p class="point_out">
-        Handle must be minimum of 5 length and maximum of 31 length
-      </p>
+    <van-dialog
+      v-model="dialogShow"
+      :close-on-click-overlay="true"
+      :z-index="9999999"
+      title="Create Lens Handle"
+      :before-close="newGroupBefColse"
+      confirmButtonText="CONFIRM"
+      @confirm="dialog_confirm"
+    >
+      <input
+        placeholder="Please enter"
+        onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')"
+        maxlength="10"
+        type="text"
+        @input="restrictInput"
+        v-model="handle"
+      />
+      <p class="point_out">Handle must be minimum of 5 length and maximum of 31 length</p>
     </van-dialog>
     <!-- 白名单弹窗 -->
-    <van-dialog v-model="whiteShow" :close-on-click-overlay="false" :z-index="99999999"
-      confirmButtonText="Join the waitlist" @confirm="white_confirm">
+    <van-dialog
+      v-model="whiteShow"
+      :close-on-click-overlay="false"
+      :z-index="99999999"
+      confirmButtonText="Join the waitlist"
+      @confirm="white_confirm"
+    >
       <p class="fee_dint">
         Sorry, Soulcial is now in beta stage. It seems that you are not eligible
         temporally. Please join the waitlist first.
@@ -97,7 +113,7 @@ import Overlay from "../components/Overlay.vue";
 import {
   RuntimeConnector,
   Extension,
-  RESOURCE,
+  RESOURCE
 } from "@dataverse/runtime-connector";
 const runtimeConnector = new RuntimeConnector(Extension);
 let dataverse = false;
@@ -108,18 +124,18 @@ import Web3 from "web3";
 import {
   LensClient,
   development,
-  isRelayerResult,
+  isRelayerResult
 } from "@lens-protocol/client";
 import { ethers } from "ethers";
-import { onParticle } from '@/libs/common.js'
+import { onParticle } from "@/libs/common.js";
 const client = new LensClient({
-  environment: development,
+  environment: development
 });
 export default {
   props: {
-    walletShow: Boolean,
+    walletShow: Boolean
   },
-  data: function () {
+  data: function() {
     let _clientH = document.documentElement.clientHeight;
     return {
       userLens: {},
@@ -131,7 +147,7 @@ export default {
       isPWA: false,
       overlayshow: false,
       preferredAuthType: "",
-      handle: "",
+      handle: ""
     };
   },
   components: { Overlay },
@@ -161,7 +177,7 @@ export default {
       let pkh = await runtimeConnector.createCapability({
         app,
         resource: RESOURCE.CERAMIC,
-        wallet: this.wallet,
+        wallet: this.wallet
       });
       this.pkh = pkh;
     },
@@ -175,7 +191,7 @@ export default {
         wisdom: false,
         art: false,
         courage: false,
-        soulscore: false,
+        soulscore: false
       });
       let Stream = await runtimeConnector.createStream({
         modelId: dataverse
@@ -192,8 +208,8 @@ export default {
           soulscore: data.levelScore || 0,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          encrypted,
-        },
+          encrypted
+        }
       });
       this.overlayshow = false;
       this.login(data.isRegister, data.levelScore, Stream.streamId, "", "");
@@ -209,13 +225,20 @@ export default {
         loginType: this.loginType,
         address: address,
         particleType: this.preferredAuthType,
-        refreshScore: version ? 1 : 0,
+        refreshScore: version ? 1 : 0
       };
       let url = this.$api.login.checkSteamId;
       get(url, data)
-        .then((res) => {
+        .then(res => {
           if (res.code === 200) {
-            this.login(res.data.isRegister, res.data.levelScore, "", "", "", signParams);
+            this.login(
+              res.data.isRegister,
+              res.data.levelScore,
+              "",
+              "",
+              "",
+              signParams
+            );
             // if (!version) {
             //   this.check_lens(data);
             //   // this.login(res.data.isRegister,res.data.levelScore);
@@ -237,12 +260,12 @@ export default {
             // }
           } else if (res.code === 400) {
             // this.whiteShow = true
-            this.$router.push('/welcome')
+            this.$router.push("/welcome");
           }
           this.overlayshow = false;
         })
-        .catch((error) => {
-          this.overlayshow = false
+        .catch(error => {
+          this.overlayshow = false;
         });
     },
 
@@ -250,7 +273,7 @@ export default {
       // 根据当前连接钱包账户判断是否注册过lens账户
       const allOwnedProfiles = await client.profile.fetchAll({
         ownedBy: [this.address],
-        limit: 1,
+        limit: 1
       });
       // 判断lens账户List长度
       if (allOwnedProfiles.items.length) {
@@ -300,10 +323,10 @@ export default {
       //签名
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x13881" }],
+        params: [{ chainId: "0x13881" }]
       });
       await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_requestAccounts"
       });
       const r = await client.authentication.generateChallenge(this.address);
       const provider = window.ethereum
@@ -319,7 +342,7 @@ export default {
       //创建个人资料
       const profileCreateResult = await client.profile.create({
         handle: this.handle,
-        profilePictureUri: null,
+        profilePictureUri: null
         // followModule: {
         //   revertFollowModule: true,
         // },
@@ -339,28 +362,33 @@ export default {
       }
     },
     login(isRegister, levelScore, streamId, lensId, handle, signParams) {
-      this.overlayshow = true
+      this.overlayshow = true;
       let streamID = streamId ? streamId : Date.parse(new Date());
       let prefix = this.$api.login.login;
-      let params = `?address=${this.address}&&loginType=${this.loginType}&&particleType=${this.preferredAuthType}&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message || ''}&&signature=${signParams?.signature || ''}`;
+      let params = `?address=${this.address}&&loginType=${
+        this.loginType
+      }&&particleType=${
+        this.preferredAuthType
+      }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
+        ""}&&signature=${signParams?.signature || ""}`;
       post(prefix + params)
-        .then((res) => {
+        .then(res => {
           if (res.code === 200) {
             const loginInfo = {
               usedInviteCode: res.data.usedInviteCode,
               whiteUser: res.data.whiteUser
-            }
-            localStorage.setItem('loginInfo', JSON.stringify(loginInfo))
+            };
+            localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
             this.$loginData.in({
               authToken: this.address,
               login_type: this.loginType,
-              id: res.data.tokenValue,
+              id: res.data.tokenValue
             });
-            this.$emit("init");  // 分享页登录后重新获取user页面数据
+            this.$emit("init"); // 分享页登录后重新获取user页面数据
             this.close();
             // if (isRegister && !levelScore) {
             //   this.$router.push("/welcome");
-            // } 
+            // }
             if (!res.data.usedInviteCode && !res.data.whiteUser) {
               this.$router.push("/welcome");
             } else {
@@ -369,26 +397,26 @@ export default {
               }
             }
           } else {
-            this.$toast(res.msg)
+            this.$toast(res.msg);
           }
           this.overlayshow = false;
         })
-        .catch((error) => {
+        .catch(error => {
           this.overlayshow = false;
         });
     },
     metamaskChack() {
       let me = this;
-      const clear = function () {
+      const clear = function() {
         if (me.$loginData.Auth_Token) {
           me.$loginData.out();
-          window.localStorage.removeItem('loginInfo');
-          localStorage.removeItem('userInfo');
-          localStorage.removeItem('mintedNFTPage');
+          window.localStorage.removeItem("loginInfo");
+          localStorage.removeItem("userInfo");
+          localStorage.removeItem("mintedNFTPage");
           me.$router.push("/");
-          window.localStorage.setItem('Sift', '4down')
+          window.localStorage.setItem("Sift", "4down");
         }
-      }
+      };
       // 监听账户切换
       window.ethereum.on("accountsChanged", clear);
       // 监听网络切换
@@ -404,21 +432,18 @@ export default {
       await provider.enable();
 
       let unit = "\n";
-      let timestamp = String(+new Date()).slice(-6)
+      let timestamp = String(+new Date()).slice(-6);
 
       //TO-DO: Message should be generated on server side with a nonce
       let message = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`;
 
       //Sign message with Metamask (private key)
-      const signedMessage = await web3.eth.personal.sign(
-        message,
-        accounts[0]
-      );
+      const signedMessage = await web3.eth.personal.sign(message, accounts[0]);
       if (signedMessage) {
         let signParams = {
           message: encodeURIComponent(message),
-          signature: signedMessage,
-        }
+          signature: signedMessage
+        };
         this.loginType = 0;
         this.preferredAuthType = "";
         this.checkSteamId(accounts[0], signParams);
@@ -437,7 +462,13 @@ export default {
     async metamask() {
       if (typeof window.ethereum !== "undefined") {
         //选择网络链接钱包
-        addVTNetwork(this.handleSign, this.handleAddCatch)
+        try {
+          this.overlayshow = true;
+          await addVTNetwork(this.handleSign, this.handleAddCatch);
+        } catch (error) {
+          this.overlayshow = false;
+        }
+        //  this.overlayshow = false
       } else {
         window.open("https://metamask.io/");
       }
@@ -445,7 +476,7 @@ export default {
     // interlinkageWalletConnect
     async WalletConnect() {
       const provider = new WalletConnectProvider({
-        infuraId: "5491a1035f5d42cfb17022aa25a97ea9",
+        infuraId: "5491a1035f5d42cfb17022aa25a97ea9"
       });
       try {
         let accounts = await provider.enable();
@@ -475,33 +506,32 @@ export default {
       let msg = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`;
       window.web3.eth.personal
         .sign(msg, accounts[0])
-        .then((result) => {
+        .then(result => {
           console.log("personal_sign", result);
           let signParams = {
             message: encodeURIComponent(msg),
-            signature: result,
-          }
+            signature: result
+          };
           this.loginType = 1;
           this.checkSteamId(accounts[0], signParams);
         })
-        .catch((error) => {
+        .catch(error => {
           console.error("personal_sign err", error);
           this.$toast("Wrong signature");
-
         });
     },
     async particle(preferredAuthType, type) {
       this.preferredAuthType = type;
       this.overlayshow = true;
-      onParticle(this.particleCallback)
-    },
+      onParticle(this.particleCallback);
+    }
   },
   created() {
     this.metamaskChack();
   },
   mounted() {
-    this.isPWA = window.localStorage.getItem("isPWA") == 'true';
-  },
+    this.isPWA = window.localStorage.getItem("isPWA") == "true";
+  }
 };
 </script>
 <style lang="scss">
