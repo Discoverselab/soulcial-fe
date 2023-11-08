@@ -8,23 +8,21 @@
       <div class="back"></div>
     </div>
     <div class="income">
-      Invite your friends to PUMP the SoulCast, you can earn
+      1.Invite your friends to PUMP the SoulCast, you can earn
       <b style="color: #FFC23D;">100 vSOUL</b> once he/she PUMPed.
     </div>
+    <div
+      class="makesure"
+    >2.To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</div>
     <div class="decoration">
       <div class="layout">
         <img class="market1" src="@/assets/market1.png" alt />
         <img class="market2" src="@/assets/market2.png" alt />
       </div>
-        
     </div>
-    <div class="content">
-      This SoulCast NFT looks extraordinary! Come to Soulcial via
-      <span
-        style="display: inline;"
-      >{{`${website}#/${realTokenId}/${superInviteCode}`}}</span> {{`and PUMP it. Get the rewards in crypto. My invite code: soul-${superInviteCode}`}}
+    <div class="content">Discover the unique features of {{ this.$route.query.isShareMy ? "my" : "the" }} SoulCast NFT :) Visit Soulcial via {{`${website}#/${realTokenId}/${superInviteCode}`}} to Pump and receive crypto rewards. Use my invite code: soul-{{ superInviteCode }}
     </div>
-   
+
     <div class="operate">
       <div @click="shareTiwtter" class="btn">
         <div class="twitter_btn">TWITTER</div>
@@ -39,9 +37,6 @@
       <span class="link_content">{{`${website}#/${realTokenId}/${superInviteCode}`}}</span>
       <img class="copy-button2" src="@/assets/copy1.png" alt @click="copyLink" />
     </button>
-    <div
-      class="condition"
-    >*You should hold at least one SoulCast NFT to earn vSOUL. If you don't have SoulCast, vSOUL can not be rewarded.</div>
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
@@ -53,17 +48,17 @@ export default {
   data() {
     return {
       overlayshow: false,
-      UserInfo:{},
-      superInviteCode:undefined,
-      website:website,
-      realTokenId:undefined
+      UserInfo: {},
+      superInviteCode: undefined,
+      website: website,
+      realTokenId: undefined
     };
   },
   created() {
-  this.getUserInfo()
+    this.getUserInfo();
   },
-  mounted(){
-    this.realTokenId=this.$route.query.id
+  mounted() {
+    this.realTokenId = this.$route.query.id;
   },
   methods: methods
 };

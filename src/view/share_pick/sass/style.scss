@@ -56,12 +56,14 @@
         }
     }
 
-    .income {
+    .income,.makesure {
         font-family: Inter;
         font-size: 14px;
         font-weight: 600;
-        margin-bottom: 24px;
         padding: 0 16px;
+    }
+    .makesure{
+        margin-bottom: 24px;
     }
     .decoration {
         text-align: center;
@@ -92,14 +94,6 @@
         span {
             font: inherit;
         }
-    }
-    .condition {
-        font-family: Inter;
-        margin-top: 24px;
-        font-size: 12px;
-        font-weight: 500;
-        opacity: 0.5;
-        padding: 0 16px;
     }
     .operate {
         display: flex;
