@@ -13,7 +13,7 @@
       :values="values" />
     <!-- operation -->
     <div class="cudset_but">
-      <button @click="$router.push('/mint_select')" v-if="UserInfo.mintStatus === 2">
+      <button @click="$router.push('/mint_select')" v-if="UserInfo.mintStatus === 2 && UserInfo.twitterStatus === 1">
         Launch SoulCast NFT
         <span class="FREE">FREE</span>
       </button>

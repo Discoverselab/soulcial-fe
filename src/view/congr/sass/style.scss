@@ -75,6 +75,7 @@
         margin-top: 60px;
 
         button {
+            cursor: pointer;
             position: relative;
 
             &:active {
@@ -136,7 +137,7 @@
             font-style: normal;
             font-weight: 600;
             margin-top: 20px;
-
+            cursor: pointer;
             span {
                 color: #f3b228;
             }

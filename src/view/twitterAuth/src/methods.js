@@ -2,7 +2,7 @@ import { get, post } from "@/http/http";
 let version = true;
 export default {
     skip() {
-        this.$router.push("/congr");
+        this.checkSteamId(this.address)
     },
     clearUrl() {
         var clean_uri =
