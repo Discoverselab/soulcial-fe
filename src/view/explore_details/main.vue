@@ -176,7 +176,7 @@
             v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
             $loginData.Auth_Token.toLocaleUpperCase() && !NFTDetail.pickStatus
             "
-          >List for {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
+          >LIST FOR {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
         </div>
 
         <!-- <button
