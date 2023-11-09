@@ -26,12 +26,18 @@ const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 import { Toast } from "vant";
 export default {
   goBack() {
-    let path = this.$route.query.path || "";
-    if (path) {
+    // let path = this.$route.query.path || "";
+    // if (path) {
+    //   this.$router.push("/");
+    // } else {
+    //   this.$router.go(-1);
+    // }
+    const isSharePick = this.$route.meta.isSharePick
+    if(isSharePick) {
       this.$router.push("/");
     } else {
-      this.$router.go(-1);
-    }
+        this.$router.go(-1);
+      }
   },
   walletClose() {
     this.walletShow = false;

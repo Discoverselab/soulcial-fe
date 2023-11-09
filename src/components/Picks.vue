@@ -228,7 +228,7 @@ export default {
             // onParticle(me.getApproved)
           }
           me.overlayshow = false;
-          me.$toast('something error');
+          me.$toast('Signature denied');
         });
     }
   }
