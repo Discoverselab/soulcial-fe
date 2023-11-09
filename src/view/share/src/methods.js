@@ -99,7 +99,7 @@ export default {
         });
     },
     copy() {
-        const clipboard = new Clipboard(".copy-button", {
+        const clipboard = new Clipboard(".copy", {
             text: () => `${website}#/t/${this.code}`,
         });
         clipboard.on("success", (e) => {

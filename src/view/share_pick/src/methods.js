@@ -40,7 +40,7 @@ export default {
     },
     copyLink() {
         const value = document.querySelector(".link_content").innerHTML;
-        const clipboard = new Clipboard(".copy-button2", {
+        const clipboard = new Clipboard(".copy", {
             text: () => `${value}`,
         });
         clipboard.on("success", (e) => {
