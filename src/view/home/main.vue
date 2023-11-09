@@ -188,7 +188,7 @@
         <p class>You should link your Twitter account before launch your SoulCast NFT.</p>
         <div class="setBut">
           <button @click="$router.push('/twitterAuth')">Go to link</button>
-          <button @click=" bindTwitterShow = false">Cancel</button>
+          <button style="background-color: #DFDFCE;" @click=" bindTwitterShow = false">Cancel</button>
         </div>
       </div>
     </van-dialog>
