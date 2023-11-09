@@ -6,9 +6,9 @@ export default {
     login: {
         login: `${api}pfp/api/admin/login/login`,
         checkSteamId: `${api}pfp/api/admin/login/checkSteamId`,
-        setTwitterUserInfo: `${api}/pfp/api/admin/login/setTwitterUserInfo`,
-        twitterRedirect: `${api}/pfp/api/admin/login/twitterRedirect`,
-        cancelTwitterBind: `${api}/pfp/api/admin/home/cancelTwitterBind`,
+        setTwitterUserInfo: `${api}pfp/api/admin/login/setTwitterUserInfo`,
+        twitterRedirect: `${api}pfp/api/admin/login/twitterRedirect`,
+        cancelTwitterBind: `${api}pfp/api/admin/home/cancelTwitterBind`,
     },
     nft: {
         getNFTPage: `${api}pfp/api/admin/explor/getNFTPage`, //NFT paging
@@ -19,18 +19,18 @@ export default {
         collectNFT: `${api}pfp/api/admin/explor/collectNFT`, //Buy NFT
         listNFTApprove: `${api}pfp/api/admin/market/listNFT`, //Buy NFT
         cancelListNFT: `${api}pfp/api/admin/home/cancelListNFT`, //取消出售
-        collectNFTOnline: `${api}/pfp/api/admin/explor/collectNFTOnline`, //购买
+        collectNFTOnline: `${api}pfp/api/admin/explor/collectNFTOnline`, //购买
         getNFTHistory: `${api}pfp/api/admin/explor/getNFTHistory`, //NFT History
         getNFTPickInfo: `${api}pfp/api/admin/pick/getNFTPickInfo`, //getNFTPickInfo
         pickNFT: `${api}pfp/api/admin/pick/pickNFT`, //getNFTPickInfo
-        cutAndUpload: `${api}/pfp/api/admin/AIGC/cutAndUpload`, //getNFTPickInfo
-        getLastMintPictur: `${api}/pfp/api/admin/nft/getLastMintPictur`, //getNFTPickInfo
+        cutAndUpload: `${api}pfp/api/admin/AIGC/cutAndUpload`, //getNFTPickInfo
+        getLastMintPictur: `${api}pfp/api/admin/nft/getLastMintPictur`, //getNFTPickInfo
         prePickNFT: `${api}pfp/api/admin/pick/prePickNFT`, //getNFTPickInfo
         getActivePage: `${api}pfp/api/admin/explor/getActivePage` // 获取平台动态分页
     },
     infor: {
         useInviteCode: `${api}pfp/api/admin/login/useInviteCode`,  // 使用邀请码
-        getInviteCodeList: `${api}/pfp/api/admin/home/getInviteCodes`,  //获取用户的邀请码列表
+        getInviteCodeList: `${api}pfp/api/admin/home/getInviteCodes`,  //获取用户的邀请码列表
         pickByInviteCode: `${api}pfp/api/admin/home/pickByInviteCode`, // 使用邀请码pick
         addConnect: `${api}pfp/api/admin/connect/subConnect`, // 发起加好友请求
         getConnectList: `${api}pfp/api/admin/connect/list` , //获取好友请求列表
