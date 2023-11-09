@@ -4,7 +4,7 @@
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt="" />
       <div class="info">
         <div class="left">
-          <img src="../../assets/logo_app.png" alt="">
+          <img :src="chatDetailDto.avatar || '../../assets/logo_app.png'" alt="">
         </div>
         <div class="right">
           <div class="name">Lasdf</div>
@@ -15,6 +15,9 @@
       </div>
     </div>
     <div class="chatBox">
+      <div v-if="isGettingMessage" class="loading">
+        <van-loading color="#1989fa" />
+      </div>
       <div class="item" v-for="(item, index) in messageList" :key="index">
         <div v-if="item.userId != userId" class="other">
           <div class="othersImg">
@@ -69,6 +72,9 @@ export default {
     return {
       messageList: [],
       inputContent: "",
+      chatDetailDto: {},
+      chatBoxOldHeight: 0,
+      isGettingMessage: false,
       userId: this.$loginData.userId
     };
   },
@@ -81,11 +87,21 @@ export default {
   },
   components: {},
   async created() {
-    this.getMessageList();
+    await this.getMessageList();
+    this.gotoNewMessage();
   },
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
+
+    let chatBox = document.querySelector('.chatBox');
+    chatBox.addEventListener('scroll', (e) => {
+      if (chatBox.scrollTop < 1) {
+        // 获取更多记录
+        this.isGettingMessage ? null : this.getMessageList(this.messageList[0].messageId);
+      }
+    })
+
     AOS.init({
       offset: 200,
       duration: 200, //duration
@@ -199,6 +215,7 @@ export default {
   }
 
   .chatBox {
+    position: relative;
     height: calc(100vh - 64px - 108px);
     box-sizing: border-box;
     overflow: auto;
@@ -206,7 +223,16 @@ export default {
     border-top: 2px solid #DFDFCE;
     border-bottom: 2px solid #DFDFCE;
     background-color: #f3f4ea;
-
+    .loading{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 20px;
+      left: calc(50% - 15px);
+    }
     .other {
       display: flex;
       align-items: flex-start;

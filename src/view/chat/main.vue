@@ -11,20 +11,20 @@
         <div class="list_left">
           <div class="portrait">
             <div class="portrait_img">
-              <img  :src="item.fromUserAvatar" alt="" />
-              <img class="online" v-if="!item.isRead" src="../../assets/online.png" alt="" />
+              <img :src="item.avator" alt="" />
+              <!-- <img class="online" v-if="!item.isRead" src="../../assets/online.png" alt="" /> -->
             </div>
-           
-            
+
+
           </div>
           <div class="name_news">
-            <p class="name" :class="{yidu:item.isRead}"> SoulCast #{{item.businessId}} Launched</p>
-            <p class="news" :class="{yidu:item.isRead}">Check your rewards！</p>
+            <p class="name" :class="{ yidu: item.isRead }">{{ item.title }}</p>
+            <p class="news" :class="{ yidu: item.isRead }">{{ item.relatedContent }}</p>
           </div>
         </div>
         <div class="list_right">
-          <p class="times" :class="{yidu:item.isRead}">{{ item.createTimeStr }}</p>
-          <span class="isRead" v-if="!item.isRead">1</span>
+          <!-- <p class="times" :class="{ yidu: item.isRead }">{{ item.time }}</p> -->
+          <span class="isRead" v-if="item.unreadNum > 0">{{ item.unreadNum }}</span>
         </div>
       </div>
     </div>
@@ -47,43 +47,14 @@ export default {
   name: "home",
   data() {
     return {
-      overlayshow:false,
-      ChatList: [
-        // {
-        //   portrait: require("../../assets/portrait1.png"),
-        //   name: "Lili",
-        //   news: "I’m watching Friends, what are I’m watching Friends, what are",
-        //   time: "34 min",
-        //   number: 3,
-        // },
-        // {
-        //   portrait: require("../../assets/portrait2.png"),
-        //   name: "Lana",
-        //   news: "See you on the next meeting! 😂",
-        //   time: "1 hour",
-        //   number: 12,
-        // },
-        // {
-        //   portrait: require("../../assets/portrait3.png"),
-        //   name: "Lana",
-        //   news: "Really find the subject very interesting 😍",
-        //   time: "1 hour",
-        //   number: 0,
-        // },
-        // {
-        //   portrait: require("../../assets/portrait4.png"),
-        //   name: "Lana",
-        //   news: "So cool and I love it 😜",
-        //   time: "4 hour",
-        //   number: 0,
-        // },
-      ],
+      overlayshow: false,
+      ChatList: [],
     };
   },
   watch: watch,
   methods: methods,
   computed: computed,
-  components: {TabBar,Overlay},
+  components: { TabBar, Overlay },
   created() {
     let me = this;
     me.getDate()
@@ -105,7 +76,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {},
+  destroyed() { },
 };
 </script>
 

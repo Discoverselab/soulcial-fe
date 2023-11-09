@@ -12,8 +12,9 @@ export default {
     getDate() {
         let me = this
         me.overlayshow = true
-        let url = this.$api.chat.getUserMessage
+        let url = `${this.$api.chat.getChatList}?userId=1705225272440528898`
         get(url).then((res) => {
+            console.log("🔥🔥🔥🚀 ~ file: methods.js:17 ~ res:", res);
             if (res.code === 200) {
                 this.ChatList = res.data
             } else {
@@ -26,12 +27,6 @@ export default {
         });
     },
     links(item){
-        if(item.message=='REWARD_SUCCESS'){
-            this.$router.push(`/Congratulations?id=${item.id}`)
-        }else if(item.message=='REWARD_FAILED'){
-            this.$router.push(`/sorry?id=${item.id}`)
-        }else{
-            this.$router.push(`/owner?id=${item.id}`)
-        }
+        this.$router.push(`/conversation?id=${item.id}`)
     }
 }

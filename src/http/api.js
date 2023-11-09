@@ -63,5 +63,6 @@ export default {
         getUserMessage: `${api}pfp/api/admin/message/getUserMessage`,
         getRewardInfo: `${api}pfp/api/admin/message/getRewardInfo`,
         getChatDetail: `${api}pfp/api/admin/message/chat/detail`,
+        getChatList: `${api}pfp/api/admin/message/chat/list`,
     }
 }
