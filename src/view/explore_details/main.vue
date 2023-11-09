@@ -8,7 +8,7 @@
         </div>
         <p class="name">{{ NFTDetail.ownerUserName }}</p>
       </div>
-      <img v-if="isShow" class="label" src="../../assets/label.png" alt />
+      <img v-if="isShow" class="label" src="../../assets/label.png" alt @click="jumpSharePick" />
       <div v-else></div>
     </div>
     <div class="details_cont" v-if="NFTDetail.pictureUrl">
@@ -387,7 +387,7 @@
         <p class="introduce_title">Features</p>
         <p class="content">1. All Pumpers gain access to group chats with the creator of the SoulCast.</p>
         <p class="content">2. The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
-        <p class="content">3. All Pumpers are rewarded with vSOULs for participating.</p>
+        <p class="content">3. The Pumpers who hold at least one SoulCast NFT are rewarded with vSOULs for participating.</p>
         <div class="setBut">
           <button class="backBtn" @click="dialogShow = false">back</button>
         </div>
