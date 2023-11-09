@@ -50,7 +50,9 @@
         <template #right-icon>
           <div @click="submit" class="btn">
             <div class="searchImg">
-              <img class="img" src="@/assets/icon_img.png" alt />
+              <van-uploader :after-read="afterRead">
+                <img class="img" src="@/assets/icon_img.png" alt />
+              </van-uploader>
             </div>
             <div class="searchImg">
               <img class="text" src="@/assets/icon_send.png" alt />
@@ -223,7 +225,8 @@ export default {
     border-top: 2px solid #DFDFCE;
     border-bottom: 2px solid #DFDFCE;
     background-color: #f3f4ea;
-    .loading{
+
+    .loading {
       width: 30px;
       height: 30px;
       display: flex;
@@ -233,6 +236,7 @@ export default {
       top: 20px;
       left: calc(50% - 15px);
     }
+
     .other {
       display: flex;
       align-items: flex-start;
@@ -294,8 +298,8 @@ export default {
         height: 24px;
 
         img {
-          width: 100%;
-          height: 100%;
+          width: 24px;
+          height: 24px;
         }
       }
     }

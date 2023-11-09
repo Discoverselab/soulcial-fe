@@ -5,8 +5,7 @@ matters need attention
 
 ps: https://cn.vuejs.org/v2/api/#methods
 */
-import { valueFromAST } from "graphql";
-import { get } from "../../../http/http";
+import { get, post } from "../../../http/http";
 import { ImagePreview } from "vant";
 import Clipboard from "clipboard";
 export default {
@@ -51,17 +50,34 @@ export default {
       address.substring(address.length - 5, address.length)
     ).toLocaleUpperCase();
   },
+  afterRead(file) {
+    const data = new FormData();
+    data.append("file", file.file);
+
+    let url = this.$api.chat.fetchUpload;
+    post(url, data, true, 'multipart/form-data')
+      .then((res) => {
+        if (res.code === 200) {
+          console.log("🔥🔥🔥🚀 ~ file: methods.js:64 ~ res:", res);
+        }
+      })
+      .catch((error) => {
+        console.log("🔥🔥🔥🚀 ~ file: methods.js:69 ~ error:", error);
+      });
+  },
   submit(e) {
-    e.preventDefault();
     if (e.target.className === "text") {
-      if (!this.inputContent) return;
       console.log(
-        "🔥🔥🔥🚀 ~ file: methods.js:67 ~ submit:",
+        "🔥🔥🔥🚀 ~ file: methods.js:67 ~ submit text:",
         this.inputContent
       );
+      if (!this.inputContent) return;
     }
     if (e.target.className === "img") {
-      //
+      console.log(
+        "🔥🔥🔥🚀 ~ file: methods.js:67 ~ submit img:",
+        this.inputContent
+      );
     }
   },
   copy(val) {

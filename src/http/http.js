@@ -91,7 +91,8 @@ export function get(url, params, loding) {
  * @param {String} url [Requested url address]
  * @param {Object} params [Parameters carried in the request]
  */
-export function post(url, params, type) {
+export function post(url, params, type, contentType) {
+    axios.defaults.headers.post['Content-Type'] = contentType || 'application/x-www-form-urlencoded'
     return new Promise((resolve, reject) => {
         let data
         if (!type) {

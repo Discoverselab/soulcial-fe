@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="Save" v-else>
+    <div class="Save" v-if="!overlayshow && ChatList.length == 0">
       <img src="../../assets/noChat.png" alt="">
       <p class="SaveText">NO Chat</p>
     </div>
