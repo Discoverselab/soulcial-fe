@@ -44,7 +44,6 @@ export default {
                     );
                     this.usedInviteCode = loginInfo.usedInviteCode;
                     this.whiteUser = loginInfo.whiteUser;
-            localStorage.setItem("userInfo", JSON.stringify(res.data));
                 }
             })
             .catch((error) => {

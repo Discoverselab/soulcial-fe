@@ -263,7 +263,7 @@
           </div>
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
-        <p class="picksTime" v-if="NFTPickInfo.rewardTimeStr">
+        <p class="picksTime" v-if="NFTPickInfo.nowPickCount === 4">
           Launching！
           <br />
           Waiting for {{ 'BNB Chain' }} Block #{{ NFTPickInfo.rewardBlockHeight }} coming

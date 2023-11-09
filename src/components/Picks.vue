@@ -132,7 +132,9 @@ export default {
               me.close();
               me.overlayshow = false;
             } else {
+              setTimeout(() => {
               me.getPickInfo();
+              },3000)
             }
           }
         })
@@ -162,12 +164,12 @@ export default {
     },
     // 使用邀请码pick
     pickByInviteCode() {
-     const superInviteCode = JSON.parse(localStorage.getItem("userInfo")).superInviteCode.slice(-6)
-      let url = this.$api.infor.pickByInviteCode;
+     const superInviteCode = this.$route.params.code
+      let url = this.$api.infor.pickByInviteCode
       let data = {
         inviteCode: superInviteCode
       };
-      post(url, data)
+      post(url, data,true)
         .then(res => { })
         .catch(error => { })
         .finally(() => {
