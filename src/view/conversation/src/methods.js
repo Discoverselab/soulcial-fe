@@ -13,14 +13,33 @@ export default {
   onPreview(file) {
     ImagePreview([file]);
   },
-  async getMessageList() {
+  gotoNewMessage() {
+    let boxHeight = document.querySelector(".chatBox").scrollHeight;
+    document.querySelector(".chatBox").scrollTop = boxHeight;
+  },
+  async getMessageList(messageId = "") {
+    this.isGettingMessage = true;
     try {
-      let url = this.$api.chat.getChatDetail + `?chatId=1`;
-      const {code,data} = await get(url);
+      let url =
+        this.$api.chat.getChatDetail +
+        `?chatId=${this.$route.query?.id}&messageId=${messageId}`;
+      const { code, data } = await get(url);
       if (code === 200) {
-        this.messageList = data.detaillist;
+        this.messageList = data.detaillist.concat(this.messageList);
+        this.chatDetailDto = data.chatDetailDto;
+        this.isGettingMessage = false;
+        this.$nextTick(() => {
+          if (messageId) {
+            let chatBox = document.querySelector(".chatBox");
+            // 根据新的内容高度调整滚动位置
+            chatBox.scrollTop = chatBox.scrollHeight - this.chatBoxOldHeight;
+          }
+          this.chatBoxOldHeight =
+            document.querySelector(".chatBox").scrollHeight;
+        });
       }
     } catch (error) {
+      this.isGettingMessage = false;
       console.log("🔥🔥🔥🚀 ~ file: methods.js:22 ~ error:", error);
     }
   },
