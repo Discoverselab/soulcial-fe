@@ -195,7 +195,7 @@
             <span class="pump">Pump</span>
             <img class="point_out" @click="dialogShow = true" src="../../assets/point_out.png" alt />
           </span>
-          <span class="title_right" @click="$router.push(`/share_pick?id=${NFTDetail.realTokenId}&isShareMy=${isShareMy}`)">
+          <span class="title_right" @click="jumpSharePick">
             <img src="@/assets/diamond.png" alt />
             <span class="invite_earn">Invite & Earn</span>
           </span>
