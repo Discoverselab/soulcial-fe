@@ -25,13 +25,13 @@
         <img src="@/assets/Twitters.png" alt />
       </div>
       <div class="btn">
-        <div class="Contact_btn">Contact</div>
-        <img class="copy-button1" src="@/assets/copy1.png" alt @click="copyContent" />
+        <div class="Contact_btn" @click="copyContent">Contact</div>
+        <img class="copy-button1" src="@/assets/copy1.png" alt  />
       </div>
     </div>
-    <button class="link">
+    <button class="link" @click="copyLink" >
       <span class="link_content">{{`${website}#/${realTokenId}/${superInviteCode}`}}</span>
-      <img class="copy-button2" src="@/assets/copy1.png" alt @click="copyLink" />
+      <img class="copy-button2" src="@/assets/copy1.png" alt />
     </button>
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>

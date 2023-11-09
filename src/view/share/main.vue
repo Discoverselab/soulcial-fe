@@ -135,9 +135,9 @@
         <img src="@/assets/download-cloud-fill.png" alt />
       </div>
     </div>
-    <div class="btn cpoy" style="text-transform: none;">
+    <div class="btn cpoy" style="text-transform: none;" @click="copy">
       <div>{{ `${website}#/t/${this.code}` }}</div>
-      <img @click="copy" class="copy-button" round src="../../assets//copy1.png" alt />
+      <img  class="copy-button" round src="../../assets//copy1.png" alt />
     </div>
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
