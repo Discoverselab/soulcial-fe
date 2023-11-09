@@ -94,7 +94,7 @@
       <div class="introduce">
         <p class>To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
         <div class="setBut">
-          <button @click="continueList" >Continue List</button>
+          <button @click="continueList" >Continue To List</button>
           <button style="background-color: #DFDFCE;" @click="earnVsoulShow = false" >Cancel</button>
         </div>
       </div>
