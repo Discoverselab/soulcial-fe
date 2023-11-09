@@ -44,7 +44,7 @@
             <span>{{ PoolBalance }} {{$network}}</span>
           </p>-->
           <p class="walletBalance">
-            Potential Launch Reward (4%) :
+            Potential Compensation (4%) :
             <span>{{ formatNumber(NFTDetail.price * 0.04) }} {{ $network }}</span>
           </p>
         </div>
