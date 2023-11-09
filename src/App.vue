@@ -9,6 +9,7 @@
 
 <script>
 // import TabBar from "./components/TabBar.vue";
+
 export default {
   name: "app",
   data() {
@@ -46,6 +47,16 @@ export default {
     // }
   },
   methods: {
+    clear(){
+      if (this.$loginData.Auth_Token) {
+          this.$loginData.out();
+          window.localStorage.removeItem("loginInfo");
+          localStorage.removeItem("userInfo");
+          localStorage.removeItem("mintedNFTPage");
+          this.$router.push("/");
+          window.localStorage.setItem("Sift", "4down");
+        }
+    },
     IsBar() {
       if (this.BarList.indexOf(this.$route.path) === -1) {
         return false;
@@ -60,6 +71,12 @@ export default {
       return flag;
     },
   },
+  mounted(){
+     // 监听账户切换
+ window.ethereum.on("accountsChanged", this.clear);
+      // 监听网络切换
+      window.ethereum.on("networkChanged", this.clear);
+  }
 };
 </script>
 

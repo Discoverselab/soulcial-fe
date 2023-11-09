@@ -241,6 +241,7 @@
             margin-bottom: 56px;
             cursor: pointer;
             button {
+            text-transform: uppercase;
                 &:active {
                     opacity: 0.8;
                 }
@@ -273,4 +274,44 @@
             }
         }
     }
+
+        .van-dialog {
+          width: 342px;
+          padding: 40px 20px;
+          box-sizing: border-box;
+          background-color: #f5f5ed !important;
+      
+          .van-dialog__content {
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+          }
+          .introduce {
+            text-align: center;
+            p {
+                font-size: 16px;
+            }
+            .setBut {
+                margin-top: 30px;
+                button {
+                    cursor: pointer;
+                    width: 100%;
+                    padding: 8px 26px;
+                    border-radius: 45px;
+                    border: 2px solid #000;
+                    background: #fff;
+                    color: #000;
+                    font-family: Inter;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    text-transform: uppercase;
+                    &:nth-child(2){
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+        }
 }

@@ -320,12 +320,12 @@ export default {
     this.$router.push("/mint_select");
   },
   showLaunch() {
-    if (this.UserInfo.mintStatus === 2) {
-      this.$router.push("/mint_select");
-    } else if (this.UserInfo.mintStatus === 1) {
-      if (this.UserInfo.twitterStatus === 0) {
-        this.bindTwitterShow = true;
-      } else {
+    if (this.UserInfo.twitterStatus === 0) {
+      this.bindTwitterShow = true;
+    } else if (this.UserInfo.twitterStatus === 1) {
+      if (this.UserInfo.mintStatus === 2) {
+        this.$router.push("/mint_select");
+      } else if (this.UserInfo.mintStatus === 1) {
         this.launchShow = true;
       }
     }

@@ -26,12 +26,18 @@ const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 import { Toast } from "vant";
 export default {
   goBack() {
-    let path = this.$route.query.path || "";
-    if (path) {
+    // let path = this.$route.query.path || "";
+    // if (path) {
+    //   this.$router.push("/");
+    // } else {
+    //   this.$router.go(-1);
+    // }
+    const isSharePick = this.$route.meta.isSharePick
+    if(isSharePick) {
       this.$router.push("/");
     } else {
-      this.$router.go(-1);
-    }
+        this.$router.go(-1);
+      }
   },
   walletClose() {
     this.walletShow = false;
@@ -69,7 +75,7 @@ export default {
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
     } else {
-      if (this.isPick() ||this.gray) {
+      if (this.isPick() || this.gray) {
         return;
       }
 
@@ -291,7 +297,9 @@ export default {
   },
   getNFTPickInfo() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
+    let url =
+      this.$api.nft.getNFTPickInfo +
+      `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -306,19 +314,20 @@ export default {
   },
   // 当pick后其余pick位置置灰
   onlyPickOnce() {
-    if(!this.$loginData.Auth_Token) return
+    if (!this.$loginData.Auth_Token) return;
     const indexAddressList = Object.keys(this.NFTPickInfo).filter((key) =>
       key.includes("indexAddress")
     );
-    const addressValueList = indexAddressList.map((key) =>
-      {
-       return this.NFTPickInfo[key] ? this.NFTPickInfo[key].toLocaleUpperCase() : ""
-      }
-    );
-    if(addressValueList.includes(this.$loginData.Auth_Token.toLocaleUpperCase())){
-        this.gray = true
+    const addressValueList = indexAddressList.map((key) => {
+      return this.NFTPickInfo[key]
+        ? this.NFTPickInfo[key].toLocaleUpperCase()
+        : "";
+    });
+    if (
+      addressValueList.includes(this.$loginData.Auth_Token.toLocaleUpperCase())
+    ) {
+      this.gray = true;
     }
-    
   },
   // async callBack(txHash) {
   //     this.overlayshow = true;
@@ -342,7 +351,9 @@ export default {
   // },
   getData() {
     this.overlayshow = true;
-    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
+    let url =
+      this.$api.nft.getNFTDetail +
+      `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -353,10 +364,14 @@ export default {
           this.values.push(item.art);
           this.values.push(item.wisdom);
           this.values.push(item.energy);
-          this.values.push(item.extroversion);        
-          const isSame = this.NFTDetail.mintUserAddress.toLocaleUpperCase() === this.$loginData.Auth_Token.toLocaleUpperCase() || this.NFTDetail.ownerAddress.toLocaleUpperCase() === this.$loginData.Auth_Token.toLocaleUpperCase()
-          if(isSame){
-            this.isShareMy = true
+          this.values.push(item.extroversion);
+          const isSame =
+            this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
+              this.$loginData.Auth_Token.toLocaleUpperCase() ||
+            this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
+              this.$loginData.Auth_Token.toLocaleUpperCase();
+          if (isSame) {
+            this.isShareMy = true;
           }
           getHeight(this);
           this.overlayshow = false;
@@ -368,7 +383,9 @@ export default {
   },
 
   getNFTHistory() {
-    let url = this.$api.nft.getNFTHistory + `?id=${this.$route.query.id ||  this.$route.params.realTokenId}`;
+    let url =
+      this.$api.nft.getNFTHistory +
+      `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
@@ -389,5 +406,14 @@ export default {
     const soulLength = String(soul).length;
     const k = 0.0052;
     return { fontSize: `${(705 / soulLength) * k}rem` };
+  },
+  jumpSharePick() {
+    if (!this.$loginData.Auth_Token) {
+      this.walletShow = true;
+    } else {
+      this.$router.push(
+        `/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`
+      );
+    }
   },
 };

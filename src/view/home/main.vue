@@ -166,8 +166,8 @@
       :show-confirm-button="false"
     >
       <div class="introduce">
-        <p class>Would like Free Launch your exclusive SoulCast NFT？</p>
-        <p class>Just PUMP 3 other SoulCast!</p>
+        <p class>Want to Free Launch Your Own SoulCast NFT？</p>
+        <p class>PUMP 3 Different SoulCast to Unlock!</p>
         <p class>{{`（Pumped ${UserInfo.pickCount >= 3 ? 3 :UserInfo.pickCount }/3）`}}</p>
         <div class="setBut">
           <button @click="goPump" v-if="UserInfo.pickCount < 3">Go to PUMP</button>
@@ -188,7 +188,7 @@
         <p class>You should link your Twitter account before launch your SoulCast NFT.</p>
         <div class="setBut">
           <button @click="$router.push('/twitterAuth')">Go to link</button>
-          <button @click=" bindTwitterShow = false">Cancel</button>
+          <button style="background-color: #DFDFCE;" @click=" bindTwitterShow = false">Cancel</button>
         </div>
       </div>
     </van-dialog>

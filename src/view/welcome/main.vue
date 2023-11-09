@@ -34,7 +34,7 @@
         <!-- <button @click="nuxt">reveal my SOUL</button> -->
         <!-- <p class="skip" @click="$router.push('/')">
 <span>Skip</span> and <span>Explore</span> other souls
-        </p>-->
+        </p> -->
       </div>
     </div>
     <!-- 邀请码被使用了的弹窗 -->

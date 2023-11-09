@@ -26,8 +26,14 @@
         </div>
         <div class="EnterPrice">
           <div class="input_cont">
-            <input readonly oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
-              @blur="price = $event.target.value" class="cont_input" v-model="NFTDetail.price" type="text" />
+            <input
+              readonly
+              oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
+              @blur="price = $event.target.value"
+              class="cont_input"
+              v-model="NFTDetail.price"
+              type="text"
+            />
             <p class="unit">
               <img :src="require(`../assets/${$network}.png`)" alt />
               {{ $network }}
@@ -77,9 +83,9 @@ export default {
     NFTDetail: Object,
     PicksShow: Boolean,
     pickIndex: Number,
-    PoolBalance: String,
+    PoolBalance: String
   },
-  data: function () {
+  data: function() {
     let _clientH = document.documentElement.clientHeight;
     return {
       overlayshow: false,
@@ -87,14 +93,13 @@ export default {
       price: "",
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
-      isSharePick:false,
+      isSharePick: false
     };
   },
   mounted() {
-    if(this.$route.meta.isSharePick) {
-      this.isSharePick = true
+    if (this.$route.meta.isSharePick) {
+      this.isSharePick = true;
     }
-
   },
   computed: {},
   components: { Overlay },
@@ -128,11 +133,13 @@ export default {
           if (res.code === 200) {
             if (res.data[`indexUserName${me.pickIndex}`]) {
               this.$parent.NFTPickInfo = res.data;
-              this.$parent.onlyPickOnce()
+              this.$parent.onlyPickOnce();
               me.close();
               me.overlayshow = false;
             } else {
-              me.getPickInfo();
+              setTimeout(() => {
+                me.getPickInfo();
+              }, 3000);
             }
           }
         })
@@ -148,30 +155,32 @@ export default {
         if (error) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:", error);
           this.overlayshow = false;
+          return
         } else if (receipt && receipt.status === true) {
           console.log("链上交易已执行完毕");
           this.getPickInfo();
-          if(this.isSharePick){
-            this.pickByInviteCode()
+          if (this.isSharePick) {
+            this.pickByInviteCode();
           }
         } else {
-          this.jcHash(txHash);
-          console.log("链上交易未执行完毕");
+          setTimeout(() => {
+            this.jcHash(txHash);
+            console.log("链上交易未执行完毕");
+          }, 3000);
         }
       });
     },
     // 使用邀请码pick
     pickByInviteCode() {
-     const superInviteCode = JSON.parse(localStorage.getItem("userInfo")).superInviteCode.slice(-6)
+      const superInviteCode = this.$route.params.code;
       let url = this.$api.infor.pickByInviteCode;
       let data = {
         inviteCode: superInviteCode
       };
-      post(url, data)
-        .then(res => { })
-        .catch(error => { })
-        .finally(() => {
-        });
+      post(url, data, true)
+        .then(res => {})
+        .catch(error => {})
+        .finally(() => {});
     },
     // IFBalance() {
     //   return Number(this.PoolBalance) > 0;
@@ -183,7 +192,7 @@ export default {
         if (window.particle) {
           this.getApproved();
         } else {
-          onParticle(this.getApproved)
+          onParticle(this.getApproved);
         }
       }
     },
@@ -215,18 +224,22 @@ export default {
       contract.methods
         .pickItem(nftAddress, tokenId, this.pickIndex)
         .send({ from: this.$loginData.Auth_Token, value: value })
-        .on("transactionHash", function (hash) {
+        .on("transactionHash", function(hash) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:", hash);
           // 交易已发送，可以显示交易哈希或执行其他操作
           me.jcHash(hash);
         })
-        .on("error", function (error) {
+        .on("error", function(error) {
           console.error("🔥🔥🔥🚀 ~ file: Picks.vue:218 ~ error:", error);
           if (me.$loginData.loginType == 1) {
             // onParticle(me.getApproved)
           }
           me.overlayshow = false;
-          me.$toast('something error');
+          if (error.code === 4001) {
+            me.$toast("Signature denied");
+          } else {
+            me.$toast("Transaction failed");
+          }
         });
     }
   }

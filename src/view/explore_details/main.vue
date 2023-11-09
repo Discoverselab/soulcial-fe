@@ -8,7 +8,7 @@
         </div>
         <p class="name">{{ NFTDetail.ownerUserName }}</p>
       </div>
-      <img v-if="isShow" class="label" src="../../assets/label.png" alt />
+      <img v-if="isShow" class="label" src="../../assets/label.png" alt @click="jumpSharePick" />
       <div v-else></div>
     </div>
     <div class="details_cont" v-if="NFTDetail.pictureUrl">
@@ -176,7 +176,7 @@
             v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
             $loginData.Auth_Token.toLocaleUpperCase() && !NFTDetail.pickStatus
             "
-          >List for {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
+          >LIST FOR {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
         </div>
 
         <!-- <button
@@ -195,7 +195,7 @@
             <span class="pump">Pump</span>
             <img class="point_out" @click="dialogShow = true" src="../../assets/point_out.png" alt />
           </span>
-          <span class="title_right" @click="$router.push(`/share_pick?id=${NFTDetail.realTokenId}&isShareMy=${isShareMy}`)">
+          <span class="title_right" @click="jumpSharePick">
             <img src="@/assets/diamond.png" alt />
             <span class="invite_earn">Invite & Earn</span>
           </span>
@@ -263,7 +263,7 @@
           </div>
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
-        <p class="picksTime" v-if="NFTPickInfo.rewardTimeStr">
+        <p class="picksTime" v-if="NFTPickInfo.nowPickCount === 4">
           Launching！
           <br />
           Waiting for {{ 'BNB Chain' }} Block #{{ NFTPickInfo.rewardBlockHeight }} coming
@@ -387,7 +387,7 @@
         <p class="introduce_title">Features</p>
         <p class="content">1. All Pumpers gain access to group chats with the creator of the SoulCast.</p>
         <p class="content">2. The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
-        <p class="content">3. All Pumpers are rewarded with vSOULs for participating.</p>
+        <p class="content">3. The Pumpers who hold at least one SoulCast NFT are rewarded with vSOULs for participating.</p>
         <div class="setBut">
           <button class="backBtn" @click="dialogShow = false">back</button>
         </div>

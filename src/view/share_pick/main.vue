@@ -17,21 +17,21 @@
         <img class="market2" src="@/assets/market2.png" alt />
       </div>
     </div>
-    <div class="content">Discover the unique features of {{ this.$route.query.isShareMy ? "my" : "the" }} SoulCast NFT :) Visit Soulcial via {{`${website}#/${realTokenId}/${superInviteCode}`}} to Pump and receive crypto rewards. Use my invite code: soul-{{ superInviteCode }}</div>
+    <div class="content">Discover the unique features of {{ this.$route.query.isShareMy=== "true" ? "my" : "the" }} SoulCast NFT :) Visit @SoulcialGlobal via {{`${website}#/${realTokenId}/${superInviteCode}`}} to Pump and receive crypto rewards. Use my invite code: soul-{{ superInviteCode }}</div>
 
     <div class="operate">
       <div @click="shareTiwtter" class="btn">
         <div class="twitter_btn">TWITTER</div>
         <img src="@/assets/Twitters.png" alt />
       </div>
-      <div class="btn">
-        <div class="Contact_btn">Contact</div>
-        <img class="copy-button1" src="@/assets/copy1.png" alt @click="copyContent" />
+      <div class="btn copy-button1" @click="copyContent">
+        <div class="Contact_btn" >Contact</div>
+        <img  src="@/assets/copy1.png" alt  />
       </div>
     </div>
-    <button class="link">
+    <button class="link copy-button2" @click="copyLink" >
       <span class="link_content">{{`${website}#/${realTokenId}/${superInviteCode}`}}</span>
-      <img class="copy-button2" src="@/assets/copy1.png" alt @click="copyLink" />
+      <img  src="@/assets/copy1.png" alt />
     </button>
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>

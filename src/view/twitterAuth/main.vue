@@ -6,7 +6,7 @@
     <div style="" class="my_soul">
       <div class="cudset_but">
         <button @click="linkTwitter">link with twitter</button>
-        <!-- <button @click="skip" style="background-color: #DFDFCE;">SKIP</button> -->
+        <button @click="skip" style="background-color: #DFDFCE;">SKIP</button>
       </div>
     </div>
 
