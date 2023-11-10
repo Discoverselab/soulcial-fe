@@ -6,14 +6,15 @@
         <p class="headLin" @click="close"></p>
         <P class="title">Connect Wallet</P>
         <img class="wallet_img" src="../assets/wellat_img.png" alt />
-        <div v-if="!isPWA" class="wallet_list" @click="metamask">
+        <div v-if="!isPWA" :class="{noBottom: !isPWA}"  class="wallet_list " @click="metamask">
           <div class="list_left">
             <img src="../assets/metamask.png" alt />
             <p>MetaMask</p>
           </div>
           <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
-        <div class="wallet_list" @click="particle('phone', 1)">
+        <template v-if="isPWA">
+          <div class="wallet_list" @click="particle('phone', 1)">
           <div class="list_left">
             <img src="../assets/Subtract1.png" alt />
             <p>Phone</p>
@@ -34,14 +35,17 @@
           </div>
           <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
         </div>
+        </template>
+        
+      
         <!-- <div class="wallet_list" @click="WalletConnect">
           <div class="list_left">
             <img src="../assets/wallet_connect.png" alt="" />
             <p>WalletConnect</p>
           </div>
           <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
-        </div>-->
-        <!-- <div class="attention">
+        </div>
+        <div class="attention">
           <van-icon name="info" size="20" />
           <div class="attention_text">
             <p class="attention_title">What is a Wallet?</p>
@@ -54,21 +58,21 @@
               Instead of creating new accounts and passwords on every website, just connect your wallet.
             </p>
           </div>
-        </div>-->
-        <!-- <template v-if="!isPWA">
+        </div> -->
+        <template v-if="!isPWA">
           <div class="lins">
             <p class="lin"></p>
-            <p class="lin_text">Or connect with Particle Wallet</p>
+            <p class="lin_text">Or connect with</p>
             <p class="lin"></p>
           </div>
           <div class="img_list">
             <img @click="particle('phone', 1)" src="../assets/Subtract1.png" alt="" />
             <img @click="particle('email', 2)" src="../assets/Exclude.png" alt="" />
-            <img @click="particle('apple', 3)" src="../assets/phones.png" alt="" />
+            <!-- <img @click="particle('apple', 3)" src="../assets/phones.png" alt="" /> -->
             <img @click="particle('google', 4)" src="../assets/gogo.png" alt="" />
-            <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" />
+            <!-- <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" /> -->
           </div>
-        </template>-->
+        </template>
       </div>
     </van-action-sheet>
     <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
@@ -523,7 +527,7 @@ export default {
 .wallet {
   @media screen and (min-width: 750px) {
     .van-action-sheet__content {
-      padding: 8px 430px 42px 430px !important;
+      padding: 0px 430px 0px 430px !important;
       border: 1px solid #000;
     }
 
@@ -541,7 +545,7 @@ export default {
   }
 
   .content {
-    padding: 8px 25px 42px 25px;
+    padding: 8px 25px 70px 25px;
     background-color: #f5f5ed;
 
     .headLin {
@@ -568,7 +572,9 @@ export default {
       height: auto;
       margin: 35px auto 50px auto;
     }
-
+    .noBottom {
+        border-bottom: none !important;
+      }
     .wallet_list {
       display: flex;
       align-items: center;
@@ -576,7 +582,8 @@ export default {
       border-bottom: 2px solid #dfdfce;
       padding-bottom: 10px;
       margin-bottom: 20px;
-
+      cursor: pointer;
+     
       .list_left {
         display: flex;
         align-items: center;
@@ -669,7 +676,12 @@ export default {
       justify-content: space-around;
 
       img {
-        transform: scale(0.5);
+        cursor: pointer;
+        display: block;
+          width: 22.5px;
+          height: auto;
+          margin-right: 18px;
+        // transform: scale(0.6);
         /* scaling */
       }
     }
