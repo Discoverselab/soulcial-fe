@@ -20,11 +20,11 @@ self.addEventListener("notificationclick", (evt) => {
 // 推送通知
 self.addEventListener("push", function (event) {
   console.log("🔥🔥🔥🚀 ~ file: sw.js:49 ~ push event:", event);
-  const title = "Soulcial";
+  const title = "Soulcial-test";
   const options = {
     body: event.data.json(),
-    icon: "/images/icon.png",
-    badge: "/images/badge.png",
+    icon: "./static/img/logo_app.4dc3ab5d.png",
+    badge: "./static/img/logo_app.4dc3ab5d.png",
   };
   self.registration.showNotification(title, options);
 });
