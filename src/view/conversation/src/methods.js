@@ -8,6 +8,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 import { get, post } from "../../../http/http";
 import { ImagePreview } from "vant";
 import Clipboard from "clipboard";
+import { connectWebsocket, closeWebsocket } from "../../../socket/socket";
 export default {
   onPreview(file) {
     ImagePreview([file]);
@@ -24,7 +25,7 @@ export default {
         `?chatId=${this.$route.query?.id}&messageId=${messageId}`;
       const { code, data } = await get(url);
       if (code === 200) {
-        this.messageList = data.detaillist.concat(this.messageList);
+        this.messageList = data.detaillist.reverse().concat(this.messageList);
         this.chatDetailDto = data.chatDetailDto;
         this.isGettingMessage = false;
         this.$nextTick(() => {
@@ -55,23 +56,43 @@ export default {
     data.append("file", file.file);
 
     let url = this.$api.chat.fetchUpload;
-    post(url, data, true, 'multipart/form-data')
+    post(url, data, true, "multipart/form-data")
       .then((res) => {
         if (res.code === 200) {
-          console.log("🔥🔥🔥🚀 ~ file: methods.js:64 ~ res:", res);
+          let agentData = {
+            type: 1, //图片类型
+            content: res.data, //内容
+          };
+          this.connectWS(agentData);
         }
       })
       .catch((error) => {
         console.log("🔥🔥🔥🚀 ~ file: methods.js:69 ~ error:", error);
       });
   },
+  connectWS(agentData) {
+    let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$route.query?.id}/${this.$loginData.userId}`;
+    connectWebsocket(
+      wsUrl,
+      agentData,
+      (res) => {
+        console.log("🔥🔥🔥🚀 ~ file: methods.js:85 ~ res:", res);
+        this.inputContent = '';
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  },
   submit(e) {
+    closeWebsocket();
     if (e.target.className === "text") {
-      console.log(
-        "🔥🔥🔥🚀 ~ file: methods.js:67 ~ submit text:",
-        this.inputContent
-      );
       if (!this.inputContent) return;
+      let agentData = {
+        type: 0, //消息类型
+        content: this.inputContent, //内容
+      };
+      this.connectWS(agentData);
     }
     if (e.target.className === "img") {
       console.log(

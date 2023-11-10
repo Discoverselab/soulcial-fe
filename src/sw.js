@@ -1,16 +1,16 @@
-  // 安装Service Worker
-  self.addEventListener('install', function(event) {
-
-    event.waitUntil(
-    // caches.open('my-cache').then(function(cache) {
-      // return cache.addAll([
-      //   '/',
-      //   '/index.html',
-      //   '/styles.css',
-      //   '/app.js'
-      // ]);
-    // })
-  );
+// 安装Service Worker
+self.addEventListener("install", function (event) {
+  console.log("🔥🔥🔥🚀 ~ file: sw.js:3 ~ event:", event);
+  // event.waitUntil(
+  // caches.open('my-cache').then(function(cache) {
+  // return cache.addAll([
+  //   '/',
+  //   '/index.html',
+  //   '/styles.css',
+  //   '/app.js'
+  // ]);
+  // })
+  // );
 });
 
 // // 激活Service Worker
@@ -44,13 +44,27 @@
 //   }
 // });
 
-// // 推送通知
-// self.addEventListener('push', function(event) {
-//   const title = 'My App';
-//   const options = {
-//     body: event.data.text(),
-//     icon: '/images/icon.png',
-//     badge: '/images/badge.png'
-//   };
-//   event.waitUntil(self.registration.showNotification(title, options));
-// });
+self.addEventListener("notificationclick", (evt) => {
+  evt.notification.close();
+  // 获取client
+  evt.waitUntil(
+    self.clients.matchAll({ type: "window" }).then((clients) => {
+      clients.forEach((client) => {
+        // postMessage将信息发送给界面
+        client.postMessage(evt.notification.body);
+      });
+    })
+  );
+});
+
+// 推送通知
+self.addEventListener("push", function (event) {
+  console.log("🔥🔥🔥🚀 ~ file: sw.js:49 ~ push event:", event);
+  const title = "Soulcial";
+  const options = {
+    body: event.data.json(),
+    icon: "/images/icon.png",
+    badge: "/images/badge.png",
+  };
+  self.registration.showNotification(title, options);
+});

@@ -67,6 +67,7 @@
 import watch from "./src/watch";
 import methods from "./src/methods";
 import { linkOpen } from "@/libs/common.js"
+import { closeWebsocket } from "@/socket/socket.js"
 import AOS from "aos";
 export default {
   name: "conversation",
@@ -91,6 +92,9 @@ export default {
   async created() {
     await this.getMessageList();
     this.gotoNewMessage();
+  },
+  beforeDestroy() {
+    closeWebsocket();
   },
   mounted: async function () {
     console.log("this：", this);
