@@ -246,6 +246,6 @@ export default {
         }
     },
     jumpOP(){
-        window.location.href = 'https://app.optimism.io/bridge/deposit';
+        window.open('https://app.optimism.io/bridge/deposit', '_blank');
     }
 };

@@ -76,7 +76,7 @@
   .Sift {
     @media screen and (min-width: 750px) {
       .van-action-sheet__content {
-        padding: 8px 430px 42px 430px !important;
+        padding: 0px 430px 0px 430px !important;
         border: 1px solid #000;
       }
       .van-action-sheet {
