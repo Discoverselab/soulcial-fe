@@ -23,8 +23,7 @@
               </div>
               <div class="Connects" v-if="isOwn">
                 <button
-                  style="border: 2px solid #000;;"
-                  class="userBtn"
+                  class="userBtn connect"
                   v-if="UserInfo.connectStatus !== 0 && !UserInfo.connectStatus && !connectSuccess"
                   @click="connectUser"
                 >Connect</button>

@@ -49,7 +49,7 @@
     .success {
         margin: 32px 0 40px 0;
         text-align: center;
-
+        padding: 0 24px;
         .success_title {
             font-family: 'DINCond-Bold';
             font-style: normal;
@@ -61,11 +61,14 @@
         }
 
         .success_infor {
-            font-family: 'Inter';
+            
+            .content{
+                font-family: 'Inter';
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
-
+            line-height: 26px;
+            }
             span {
                 font-family: 'Inter';
                 font-style: normal;

@@ -39,7 +39,7 @@ export const chainList = isPROD
       ];
 
 export const linkOpen = (type, has) => {
-    window.open(`https://bscscan.com/block/${has}`);
+    window.open(`https://goerli-optimism.etherscan.io/tx/${has}`);
 };
 
 // addChain_Params

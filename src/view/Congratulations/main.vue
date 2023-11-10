@@ -1,7 +1,7 @@
 <template>
   <div class="Congratulations">
     <div class="navigate">
-      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt="" />
+      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="nav_name">
         <p class="name"></p>
       </div>
@@ -9,43 +9,44 @@
     </div>
     <div class="success">
       <p class="success_title">Congratulations!</p>
-      <p class="success_infor" style="margin-bottom:20px;">
-        According to <span @click="linkOpen(1, hiess.rewardBlockHeight)">{{ 'BNB Chain'}} Block
-          #{{ hiess.rewardBlockHeight }}</span> <br> with Hash <span @click="linkOpen(2, hiess.rewardBlockHash)">{{
-            substring(hiess.rewardBlockHash) }}</span>, <br> Slot #{{ hiess.rewardIndex }} {{ hiess.userName }} is the
-        winner!
+        <p class="content">
+          Pump Winner of SoulCast #{{ NFTDetail.realTokenId }}!
+        </p>
+        <p class="content">
+        You have successfully collected SoulCast and gained access to private chat with the creator {{hiess.userName }}.
+        </p>
+      <p class="content">
+        Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
       </p>
-      <p class="success_infor">Congratulations! You have successfully <br />collected SoulCast #{{ NFTDetail.realTokenId }} and
-        earned {{ hiess.vsoulPrice }} $vSoul.</p>
     </div>
     <div class="details_cont">
       <div class="Nft_details">
         <!-- NFT -->
         <div class="box">
           <div class="img_icon">
-            <img :src="NFTDetail.pictureUrl" alt="" />
+            <img :src="NFTDetail.pictureUrl" alt />
           </div>
         </div>
         <div class="bottom_infor" v-if="NFTDetail.pictureUrl">
-          <svg-icon :style="{
+          <svg-icon
+            :style="{
             color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
-          }" className="svgName" iconClass="Vector1"></svg-icon>
+          }"
+            class="svgName"
+            iconClass="Vector1"
+          ></svg-icon>
           <div class="grade_price">
             <div class="grade">
-              <img src="../../assets/level1.png" alt="" />
+              <img src="../../assets/level1.png" alt />
               <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
               <p class="Personality_name">
                 <!-- {{ getNFTPersonality[NFTDetail.personality] }} -->
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p class="price">
-              {{ NFTDetail.price || 0 }} {{ $network }}
-            </p>
+            <p class="price">{{ NFTDetail.price || 0 }} {{ $network }}</p>
           </div>
-          <div class="love">
-            #{{ NFTDetail.realTokenId }}
-          </div>
+          <div class="love">#{{ NFTDetail.realTokenId }}</div>
         </div>
         <!-- User label -->
         <div class="label_cont">
@@ -60,49 +61,56 @@
       <div class="author">
         <div class="author_list" @click="LinkOwner(1)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.mintUserAvatar" alt="" />
-            <img class="chat_link" src="../../assets/chat.png" alt="" />
+            <img class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
+            <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Launched By</p>
           <p class="name">{{ NFTDetail.isMineMint == 1 ? 'You' : NFTDetail.mintUserName }}</p>
         </div>
         <div class="author_list" @click="LinkOwner(2)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt="" />
-            <img class="chat_link" src="../../assets/chat.png" alt="" />
+            <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
+            <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Owned By</p>
-          <p class="name">{{ NFTDetail.isMineOwner == 1 ? 'You' : NFTDetail.ownerUserName }} </p>
+          <p class="name">{{ NFTDetail.isMineOwner == 1 ? 'You' : NFTDetail.ownerUserName }}</p>
         </div>
       </div>
       <!-- Selected picture -->
       <!-- operation -->
       <div class="shapset_but">
+        <button @click="$router.push(`/chat`)">
+          Go to Chat
+        </button>
         <div v-if="isShow">
-          <button @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">List for
-            {{ formatNumber(hiess.pfpTokenDetailVo.nextListPrice) }} {{ $network }}</button>
+          <button @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">
+            List for
+            {{ formatNumber(hiess.pfpTokenDetailVo.nextListPrice) }} {{ $network }}
+          </button>
         </div>
-        <button @click="$router.push('/earn?type=1')">Check Earnings</button>
+        <!-- <button @click="$router.push('/earn?type=1')">Check Earnings</button> -->
         <!-- <button class="prohibit">SHARE</button> -->
       </div>
-      <p class="lations">If you do not receive earnings, please wait for the transcation processing, which can take a few
-        minutes.</p>
+      <p class="lations">
+        If you do not receive earnings, please wait for the transcation processing, which can take a few
+        minutes.
+      </p>
     </div>
   </div>
 </template>
 <script>
 import watch from "./src/watch";
 import methods from "./src/methods";
-import { linkOpen } from "@/libs/common.js"
+import { linkOpen } from "@/libs/common.js";
 import AOS from "aos";
 import {
   getNFTLevel,
   getNFTPersonality,
   NFTColor,
   getNFTMood,
-  Weather,
+  Weather
 } from "../../libs/target";
-import { isShow } from "@/libs/isShow.js"
+import { isShow } from "@/libs/isShow.js";
 export default {
   name: "",
   data() {
@@ -116,7 +124,7 @@ export default {
       getNFTPersonality: getNFTPersonality,
       NFTColor: NFTColor,
       getNFTMood: getNFTMood,
-      Weather: Weather,
+      Weather: Weather
     };
   },
   watch: watch,
@@ -127,22 +135,22 @@ export default {
     },
     linkOpen() {
       return (type, has) => linkOpen(type, has);
-    },
+    }
   },
   components: {},
   async created() {
     let me = this;
     await me.getData();
-    me.getNFTPickInfo()
+    me.getNFTPickInfo();
   },
-  mounted: async function () {
+  mounted: async function() {
     console.log("this：", this);
     console.log("$route：", this.$route);
     AOS.init({
       offset: 200,
       duration: 200, //duration
       easing: "ease-in-sine",
-      delay: 100,
+      delay: 100
     });
     console.log(this.$loginData);
     window.addEventListener("scroll", this.scrollToTop);
@@ -152,7 +160,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() { },
+  destroyed() {}
 };
 </script>
 
