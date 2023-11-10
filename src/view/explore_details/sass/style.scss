@@ -519,7 +519,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-
                         button {
                             border-radius: 45px;
                             border: 2px solid #000;
@@ -530,7 +529,7 @@
                             font-style: normal;
                             font-weight: 600;
                             padding: 8px 26px;
-
+                        cursor: pointer;
                             &:active {
                                 opacity: 0.6;
                             }

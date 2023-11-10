@@ -14,13 +14,18 @@
     </div>
     <div class="success">
       <p class="success_title">sorry!</p>
-      <p class="success_infor" style="margin-bottom:20px;">
+      <!-- <p class="success_infor" style="margin-bottom:20px;">
         According to <span @click="linkOpen(1,hiess.rewardBlockHeight)">{{ 'BNB Chain' }} Block #{{ hiess.rewardBlockHeight}}</span> <br>  with Hash <span @click="linkOpen(2,hiess.rewardBlockHash)">{{ substring(hiess.rewardBlockHash) }}</span>, <br> Slot #{{hiess.rewardIndex}} {{hiess.userName}} is the winner!
+      </p> -->
+      <p class="content">Pumper #{{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}! </p>
+      <p class="content">
+        You will receive a full refund plus an additional {{hiess.rewardPirce}}{{ $network }} as compensation.
       </p>
-      <p class="success_infor">
+      <p class="content">Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span></p>
+      <!-- <p class="success_infor">
         Sorry, You did not get SoulCast #{{NFTDetail.realTokenId }}.<br />
         But you earned {{ hiess.rewardPirce }} {{ $network }} launch <br> reward and {{hiess.vsoulPrice}} $vSoul.
-      </p>
+      </p> -->
     </div>
     <div class="details_cont">
       <img class="sorry" src="../../assets/sorry.png" alt="">

@@ -478,6 +478,7 @@ export default {
       margin-top: 76px;
 
       button {
+        cursor: pointer;
         position: relative;
 
         &:active {

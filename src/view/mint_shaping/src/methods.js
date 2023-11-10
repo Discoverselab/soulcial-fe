@@ -9,15 +9,19 @@ import { get, post } from "../../../http/http";
 import { Toast } from "vant";
 export default {
     getUserInfo() {
+        this.overlayshow = true
         let url = this.$api.infor.getUserInfo;
         get(url)
             .then((res) => {
                 if (res.code === 200) {
                     this.UserInfo = res.data;
                 }
+        this.overlayshow = false
             })
             .catch((error) => {
                 console.log(error);
+        this.overlayshow = false
+
             });
     },
     cutAndUpload() {

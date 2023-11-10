@@ -14,10 +14,21 @@
     </div>
     <div class="success">
       <p class="success_title">Congratulations!</p>
-      <p class="success_infor" style="margin-bottom:20px;">
-        According to <span @click="linkOpen(1,hiess.rewardBlockHeight)">{{ 'BNB Chain' }}  Block #{{ hiess.rewardBlockHeight}}</span> <br> with Hash <span @click="linkOpen(2,hiess.rewardBlockHash)">{{ substring(hiess.rewardBlockHash) }}</span>, <br> Slot #{{hiess.rewardIndex}} {{hiess.userName}} is the winner!
-      </p>
-      <p class="success_infor">Congratulations! You earned {{ hiess.rewardPirce }} {{ $network }}</p>
+      <div class="success_infor" >
+        <p class="content">
+          Pumper #{{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}! 
+        </p>
+        <p class="content">
+          You will receive {{hiess.rewardPirce}}{{ $network }} as earnings. 
+        </p>
+        <!-- <p class="content">
+          You will receive 【4%交易费用】ETH as creator earnings. 
+        </p> -->
+        
+        <p class="content">
+          Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
+        </p>
+      </div>
     </div>
     <div class="details_cont">
       <div class="Nft_details">
