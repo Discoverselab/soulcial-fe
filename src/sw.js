@@ -5,30 +5,22 @@ self.addEventListener("install", function (event) {
 
 self.addEventListener("notificationclick", (evt) => {
   evt.notification.close();
-  // 获取client
+  // 在新窗口打开页面
   evt.waitUntil(
-    self.clients.matchAll({ type: "window" }).then((clients) => {
-      console.log("🔥🔥🔥🚀 ~ file: sw.js:16 ~ clients:", clients);
-      window.open(clients[0]?.url, '_blank');
-      // clients.forEach((client) => {
-      //   // postMessage将信息发送给界面
-      //   client.postMessage(evt.notification.body);
-      // });
-    })
+    // eslint-disable-next-line no-undef
+    clients.openWindow(evt.notification.data.url)
   );
 });
 
 // 推送通知
 self.addEventListener("push", function (event) {
-  console.log("🔥🔥🔥🚀 ~ file: sw.js:49 ~ push event:", event);
-  const title = "Soulcial-test";
+  let { title, body, url, icon } = event.data.json();
   const options = {
-    body: event.data.text(),
-    icon: "./static/img/logo_app.4dc3ab5d.png",
-    badge: "./static/img/logo_app.4dc3ab5d.png",
+    body,
+    icon,
+    data: {
+      url,
+    },
   };
-  console.log("🔥🔥🔥🚀 ~ file: sw.js:29 ~ text:", event.data.text());
-  console.log("🔥🔥🔥🚀 ~ file: sw.js:29 ~ json:", event.data.json());
-  console.log("🔥🔥🔥🚀 ~ file: sw.js:29 ~ parse:", JSON.parse(event.data.json()));
   self.registration.showNotification(title, options);
 });
