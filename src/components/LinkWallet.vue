@@ -372,9 +372,9 @@ export default {
             if (!res.data.usedInviteCode && !res.data.whiteUser) {
               this.$router.push("/welcome");
             } else {
-              if (localStorage.getItem("routers")) {
-                this.$router.push(localStorage.getItem("routers"));
-              }
+              // if (localStorage.getItem("routers")) {
+              //   this.$router.push(localStorage.getItem("routers"));
+              // }
             }
           } else {
             this.$toast(res.msg);
