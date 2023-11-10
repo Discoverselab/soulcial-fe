@@ -172,7 +172,7 @@
         >CANCEL LIST</button>
         <div v-if="isShow">
           <button
-            @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)"
+          @click="jumpToList"
             v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
             $loginData.Auth_Token.toLocaleUpperCase() && !NFTDetail.pickStatus
             "
@@ -405,7 +405,7 @@
         <img class="canserImg" src="../../assets/cancel_pick.png" alt />
         <div class="setBut">
           <button class="cancel" @click="cancelListNFT">cancel</button>
-          <button @click="cancelShow = false">back</button>
+          <button class="backBtn" @click="cancelShow = false">back</button>
         </div>
       </div>
     </van-dialog>
@@ -419,6 +419,22 @@
       @close="PicksShow = false"
       :PicksShow="PicksShow"
     ></Picks>
+    <!-- 未挂单nft需要大于1才能赚取积分 -->
+    <van-dialog
+      v-model="earnVsoulShow"
+      :close-on-click-overlay="true"
+      :z-index="9999999"
+      :show-cancel-button="false"
+      :show-confirm-button="false"
+    >
+      <div class="introduce">
+        <p class="earnVsoul">To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
+        <div class="setBut">
+          <button @click="continueList" >Continue To List</button>
+          <button class="backBtn" style="background-color: #DFDFCE;" @click="earnVsoulShow = false" >Cancel</button>
+        </div>
+      </div>
+    </van-dialog>
   </div>
 </template>
 <script>
@@ -476,6 +492,9 @@ export default {
       PicksList: [],
       TabActive: 1,
       height: 0, //图片高度
+      NftList:[],
+      UnregisteredList: [], // 未挂单nft 
+      earnVsoulShow:false,
     };
   },
   watch: watch,
@@ -504,7 +523,7 @@ export default {
     this.getData();
     this.getNFTHistory();
     this.getNFTPickInfo();
-
+    this.getMintedNFTPage()
     AOS.init({
       offset: 200,
       duration: 200, //duration

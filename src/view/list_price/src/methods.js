@@ -129,9 +129,6 @@ export default {
   },
   async Complete() {
     let me = this;
-    if (this.UnregisteredList.length === 1) {
-      return (me.earnVsoulShow = true);
-    }
     me.overlayshow = true;
     if (this.$loginData.loginType == 0) {
       await addVTNetwork(me.getApproved, me.getApproved);
@@ -140,25 +137,16 @@ export default {
     }
     // me.overlayshow = false;
   },
-  async continueList() {
-    this.earnVsoulShow = false;
-    this.overlayshow = true;
-    if (this.$loginData.loginType == 0) {
-      await addVTNetwork(this.getApproved, this.getApproved);
-    } else {
-      this.getApproved();
-    }
-    // me.overlayshow = false;
-  },
+ 
   getData() {
-    // this.overlayshow = true;
+    this.overlayshow = true;
     let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
     get(url)
       .then((res) => {
         if (res.code === 200) {
           this.NFTDetail = res.data;
         }
-        // this.overlayshow = false;
+        this.overlayshow = false;
       })
       .catch((error) => {
         this.overlayshow = false;
@@ -172,43 +160,5 @@ export default {
         : 0.8;
     return price * k;
   },
-  getMintedNFTPage() {
-    this.overlayshow = true;
-    let data = {
-      current: 1,
-      size: 99,
-    };
-    let url = this.$api.infor.getMintedNFTPage;
-    get(url, data)
-      .then((res) => {
-        if (res.code === 200) {
-          this.NftList = this.NftList.concat(res.data.records);
-          this.getCollectNFTPage();
-        }
-      })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
-  },
-
-  getCollectNFTPage() {
-    let data = {
-      current: 1,
-      size: 99,
-    };
-    let url = this.$api.infor.getCollectNFTPage;
-    get(url, data)
-      .then((res) => {
-        if (res.code === 200) {
-          this.NftList = this.NftList.concat(res.data.records);
-          this.UnregisteredList = this.NftList.filter(
-            (item) => item.pickStatus != 1
-          );
-        }
-        this.overlayshow = false;
-      })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
-  },
+  
 };
