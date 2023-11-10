@@ -65,5 +65,8 @@ export default {
         getChatDetail: `${api}pfp/api/admin/message/chat/detail`,
         getChatList: `${api}pfp/api/admin/message/chat/list`,
         fetchUpload: `${api}pfp/api/admin/message/chat/upload`,
+    },
+    pwa: {
+        fetchSubscribe: `${api}pfp/api/notification/subscribe`,
     }
 }

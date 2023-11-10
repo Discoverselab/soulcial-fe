@@ -17,7 +17,7 @@ import loadingImg from "./assets/loadingImg.png";
 import Overlay from "./components/Overlay.vue";
 import "@/assets/css/iconfont.css";
 import Meta from "vue-meta";
-
+import './registerServiceWorker.js'
 Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
