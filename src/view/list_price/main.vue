@@ -83,22 +83,7 @@
         <button class="Cancel" @click="$router.go(-1)">Cancel</button>
       </div>
     </div>
-    <!-- 未挂单nft需要大于1才能赚取积分 -->
-    <van-dialog
-      v-model="earnVsoulShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
-      <div class="introduce">
-        <p class>To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
-        <div class="setBut">
-          <button @click="continueList" >Continue To List</button>
-          <button style="background-color: #DFDFCE;" @click="earnVsoulShow = false" >Cancel</button>
-        </div>
-      </div>
-    </van-dialog>
+    
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
@@ -131,7 +116,6 @@ export default {
       NFTDetail: {},
       NftList:[],
       UnregisteredList: [], // 未挂单nft 
-      earnVsoulShow:false,
     };
   },
   watch: watch,
@@ -147,7 +131,6 @@ export default {
     console.log("this：", this);
     console.log("$route：", this.$route);
     this.getData();
-    this.getMintedNFTPage()
     AOS.init({
       offset: 200,
       duration: 200, //duration

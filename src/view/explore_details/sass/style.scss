@@ -683,7 +683,7 @@
                 font-weight: 600;
                 margin-bottom: 28px;
 
-                &.cancelPick {
+                &.cancelPick,&.earnVsoul {
                     color: #000;
                     text-align: center;
                     font-family: "Inter";
@@ -693,6 +693,9 @@
                     border: none;
                     margin-bottom: 29px;
                     padding: 0;
+                }
+                &.earnVsoul {
+                    text-align: left;
                 }
             }
             .introduce_title {
@@ -736,9 +739,9 @@
                     font-style: normal;
                     font-weight: 700;
                     text-transform: uppercase;
+                    cursor: pointer;
                     &.backBtn{
-                        margin-top: 10px;
-                        cursor: pointer;
+                        margin-top: 20px;
                     }
                     &:active {
                         opacity: 0.8;

@@ -296,7 +296,7 @@ export default {
       });
   },
   getNFTPickInfo() {
-    this.overlayshow = true;
+    // this.overlayshow = true;
     let url =
       this.$api.nft.getNFTPickInfo +
       `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
@@ -306,7 +306,7 @@ export default {
           this.NFTPickInfo = res.data;
         }
         this.onlyPickOnce();
-        this.overlayshow = false;
+        // this.overlayshow = false;
       })
       .catch((error) => {
         this.overlayshow = false;
@@ -350,7 +350,7 @@ export default {
   //         });
   // },
   getData() {
-    this.overlayshow = true;
+    // this.overlayshow = true;
     let url =
       this.$api.nft.getNFTDetail +
       `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
@@ -374,7 +374,7 @@ export default {
             this.isShareMy = true;
           }
           getHeight(this);
-          this.overlayshow = false;
+          // this.overlayshow = false;
         }
       })
       .catch((error) => {
@@ -415,5 +415,54 @@ export default {
         `/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`
       );
     }
+  },
+  getMintedNFTPage() {
+    this.overlayshow = true;
+    let data = {
+      current: 1,
+      size: 99,
+    };
+    let url = this.$api.infor.getMintedNFTPage;
+    get(url, data)
+      .then((res) => {
+        if (res.code === 200) {
+          this.NftList = this.NftList.concat(res.data.records);
+          this.getCollectNFTPage();
+        }
+      })
+      .catch((error) => {
+        this.overlayshow = false;
+      });
+  },
+
+  getCollectNFTPage() {
+    let data = {
+      current: 1,
+      size: 99,
+    };
+    let url = this.$api.infor.getCollectNFTPage;
+    get(url, data)
+      .then((res) => {
+        if (res.code === 200) {
+          this.NftList = this.NftList.concat(res.data.records);
+          this.UnregisteredList = this.NftList.filter(
+            (item) => item.pickStatus != 1
+          );
+        }
+        this.overlayshow = false;
+      })
+      .catch((error) => {
+        this.overlayshow = false;
+      });
+  },
+  jumpToList(){
+    if (this.UnregisteredList.length === 1) {
+      this.earnVsoulShow = true
+    } else {
+      this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}`)
+    }
+  },
+   continueList() {
+    this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}`)
   },
 };
