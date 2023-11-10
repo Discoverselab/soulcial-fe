@@ -65,6 +65,13 @@
           <p class="list_name" style="color:#62625F">Balance</p>
           <p class="er_balance">{{ WalletBalance }} {{ $network }}</p>
         </div>
+        <div style="text-align: right;" v-if="!isPWA">
+          <button @click="jumpOP" class="bridge">
+          Bridge
+        </button>
+        </div>
+        
+       
         <!-- <div class="earned">
           <div class="money">
             <div class="earn_money">Earned</div>
@@ -256,6 +263,7 @@ export default {
       ReplaceShow: false,
       VSoulBalance: "",
       erID: 1,
+      isPWA: false,
       Available: 0,
       showNoData: false, // vsoul页面没有历史数据展示图片
       showNoWallet: false,//wallet页面没有历史数据时展示
@@ -365,6 +373,7 @@ export default {
       delay: 100
     });
     console.log(this.$loginData);
+    this.isPWA = window.localStorage.getItem("isPWA") == "true";
     window.addEventListener("scroll", this.scrollToTop);
   },
   beforeRouteLeave(to, form, next) {

@@ -245,4 +245,7 @@ export default {
             }
         }
     },
+    jumpOP(){
+        window.location.href = 'https://app.optimism.io/bridge/deposit';
+    }
 };

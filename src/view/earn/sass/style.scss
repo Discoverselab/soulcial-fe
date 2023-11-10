@@ -1,453 +1,461 @@
 .earn {
-    min-height: 100vh;
-    padding: 26px 24px 100px 24px;
+  min-height: 100vh;
+  padding: 26px 24px 100px 24px;
+  box-sizing: border-box;
+
+  .earnings {
+    margin-top: 54px;
+  }
+
+  .TabCont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .Tab_list {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 600;
+      padding-right: 24px;
+      font-size: 14px;
+      height: 30px;
+      line-height: 30px;
+      color: #7b7b77;
+      cursor: pointer;
+
+      &.Tab_list_Active {
+        font-style: normal;
+        font-weight: 900;
+        font-size: 18px;
+        color: #000;
+      }
+    }
+  }
+
+  .earn_list {
+    padding-bottom: 23px;
+    background: #f5f5ed;
+    border-bottom: 2px solid #dfdfce;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    &.earn_list_one {
+      margin-bottom: 50px;
+      border: 0;
+    }
+
+    .list_left {
+      display: flex;
+      align-items: center;
+
+      img {
+        display: block;
+        width: 16px;
+        margin-right: 26px;
+      }
+
+      .times {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        margin-top: 10px;
+        color: #989895;
+      }
+    }
+
+    .wallet_ti {
+      color: #000;
+      text-align: right;
+      font-family: "Inter";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .list_right {
+      border: none;
+      display: block;
+      height: 32px;
+
+      box-sizing: border-box;
+      padding: 5px 8px;
+      background: #5cd685;
+      border-radius: 4px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+
+      &.list_right_fu {
+        background-color: #e03131;
+        color: #fff;
+      }
+    }
+
+    .list_name {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .emptys {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 150%;
+      color: #e03131;
+      margin-top: 10px;
+    }
+
+    .balance {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      color: #000;
+    }
+
+    .er_balance {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      color: #000;
+      &.Nobalance {
+        color: red;
+      }
+    }
+  }
+  .earned {
+    display: flex;
+    justify-content: flex-end;
+    .money {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 8px;
+      align-items: center;
+      border-radius: 4px;
+      background: #dfdfce;
+      font-style: normal;
+      font-family: Inter;
+      .earn_money {
+        color: #000;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin-right: 20px;
+      }
+      .make_money {
+        color: #000;
+        font: inherit;
+
+        font-size: 16px;
+
+        font-weight: 700;
+        line-height: 24px;
+      }
+    }
+  }
+  .bridge {
+    background: #dfdfce;
+    border: none;
+    font-size: 16px;
+    padding: 10px 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .earn_list_title {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    background: #f5f5ed;
+    border-bottom: 2px solid #dfdfce;
+
+    &.earn_list_title_wallet {
+      margin-top: 40px;
+    }
+
+    .title {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+    }
+  }
+
+  .set_but {
     box-sizing: border-box;
+    margin-top: 150px;
 
-    .earnings {
-        margin-top: 54px;
+    &.set_but_wallet {
+      margin-top: 80px;
     }
 
-    .TabCont {
+    button {
+      &:active {
+        opacity: 0.8;
+      }
+
+      &.disabled {
+        background-color: #f1f1e7;
+        color: #c4c4be;
+        border: 2px solid #c4c4be;
+      }
+
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 26px;
+      gap: 10px;
+      height: 40px;
+      background: #ffffff;
+      border: 2px solid #000000;
+      border-radius: 45px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+    }
+  }
+
+  // collections
+  .collections {
+    margin-top: 30.5px;
+
+    // 二级tab
+    .ercont_cont {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 15px 24px;
+      box-sizing: border-box;
+      border-bottom: 2px solid #dfdfce;
+      width: calc(100% + 48px);
+      margin-left: -24px;
+
+      .ercont {
         display: flex;
         align-items: center;
-        justify-content: space-between;
 
-        .Tab_list {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 600;
-            padding-right: 24px;
-            font-size: 14px;
-            height: 30px;
-            line-height: 30px;
-            color: #7b7b77;
-            cursor: pointer;
+        .ercont_list {
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          height: 17px;
+          line-height: 17px;
+          text-transform: uppercase;
+          color: #7b7b77;
+          margin-right: 24px;
 
-            &.Tab_list_Active {
-                font-style: normal;
-                font-weight: 900;
-                font-size: 18px;
-                color: #000;
-            }
+          &.ercont_list_active {
+            color: #000;
+          }
         }
+      }
+
+      .Tab_right {
+        img {
+          display: block;
+          width: 16.25px;
+          height: 16.88px;
+        }
+      }
     }
 
-    .earn_list {
-        padding-bottom: 23px;
+    // NFT List
+    .nft_cont {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 10px;
+
+      .nft_list {
         background: #f5f5ed;
-        border-bottom: 2px solid #dfdfce;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
+        border: 1px solid #dfdfce;
+        cursor: pointer;
 
-        &.earn_list_one {
-            margin-bottom: 50px;
-            border: 0;
-        }
+        .img_cont {
+          background: #f5f5ed;
+          border: 2px solid #dfdfce;
+          position: relative;
 
-        .list_left {
-            display: flex;
-            align-items: center;
-
-            img {
-                display: block;
-                width: 16px;
-                margin-right: 26px;
-            }
-
-            .times {
-                font-family: "Inter";
-                font-style: normal;
-                font-weight: 600;
-                font-size: 12px;
-                margin-top: 10px;
-                color: #989895;
-            }
-        }
-
-        .wallet_ti {
-            color: #000;
-            text-align: right;
-            font-family: "Inter";
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
-        }
-
-        .list_right {
-            border: none;
-            display: block;
-            height: 32px;
-
-            box-sizing: border-box;
-            padding: 5px 8px;
-            background: #5cd685;
-            border-radius: 4px;
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 14px;
-
-            &.list_right_fu {
-                background-color: #e03131;
-                color: #fff;
-            }
-        }
-
-        .list_name {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .emptys {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 150%;
-            color: #e03131;
-            margin-top: 10px;
-        }
-
-        .balance {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            color: #000;
-        }
-
-        .er_balance {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            color: #000;
-            &.Nobalance {
-                color: red;
-            }
-        }
-    }
-    .earned {
-        display: flex;
-        justify-content: flex-end;
-        .money {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 8px;
-            align-items: center;
-            border-radius: 4px;
-            background: #dfdfce;
-            font-style: normal;
-            font-family: Inter;
-            .earn_money {
-                color: #000;
-                font: inherit;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 24px;
-                margin-right: 20px;
-            }
-            .make_money {
-                color: #000;
-                font: inherit;
-            
-                font-size: 16px;
-  
-                font-weight: 700;
-                line-height: 24px; 
-            }
-        }
-    }
-    .earn_list_title {
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        background: #f5f5ed;
-        border-bottom: 2px solid #dfdfce;
-
-        &.earn_list_title_wallet {
-            margin-top: 56px;
-        }
-
-        .title {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 24px;
-        }
-    }
-
-    .set_but {
-        box-sizing: border-box;
-        margin-top: 150px;
-
-        &.set_but_wallet {
-            margin-top: 80px;
-        }
-
-        button {
-            &:active {
-                opacity: 0.8;
-            }
-
-            &.disabled {
-                background-color: #f1f1e7;
-                color: #c4c4be;
-                border: 2px solid #c4c4be;
-            }
-
-            cursor: pointer;
+          .nftUrl {
             display: block;
             width: 100%;
-            margin-top: 20px;
+            height: 100%;
+          }
+
+          .subtract {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            display: block;
+            width: 16px;
+            height: 16px;
+          }
+
+          .point {
+            position: absolute;
+            right: 13.5px;
+            top: 15.5px;
+            display: flex;
+            align-items: center;
+
+            span {
+              display: inline-block;
+              margin-left: 2px;
+              background-color: #000;
+              border-radius: 50%;
+              width: 4.5px;
+              height: 4.5px;
+            }
+          }
+        }
+
+        .nft_infor {
+          padding: 10px 12px;
+
+          .top_name_price {
+            display: flex;
+            align-items: center;
+
+            .name {
+              color: #7b7b77;
+              display: inline-block;
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 10px;
+              margin-right: 4px;
+            }
+
+            .price {
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 700;
+              font-size: 14px;
+              color: #000;
+            }
+          }
+
+          .flow_id {
+            margin: 0px 0 14px 0;
+            display: flex;
+            align-items: center;
+
+            .flow {
+              display: inline-block;
+              margin: 0 8px 0 6px;
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 12px;
+              color: #000;
+            }
+
+            .flow_lin {
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 12px;
+              color: #000;
+            }
+
+            img {
+              display: block;
+              width: 14.76px;
+            }
+          }
+
+          .Listing {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            justify-content: space-between;
+
+            span {
+              display: inline-block;
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 10px;
+              color: #7b7b77;
+
+              &:nth-child(1) {
+                margin-right: 25px;
+              }
+            }
+          }
+
+          .price_botm {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            span {
+              font-family: "Inter";
+              font-style: normal;
+              font-weight: 600;
+              font-size: 12px;
+              color: rgb(98, 98, 95);
+            }
+          }
+        }
+
+        .Launching {
+          width: 100%;
+          height: 20px;
+
+          .LaunchingData {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 26px;
-            gap: 10px;
-            height: 40px;
-            background: #ffffff;
-            border: 2px solid #000000;
-            border-radius: 45px;
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 18px;
-            color: #000;
+            background: #dfdfce;
+
+            span {
+              color: #595952;
+              font-family: "Inter";
+              font-size: 10px;
+              font-style: normal;
+              font-weight: 700;
+            }
+          }
         }
+      }
+    }
+  }
+
+  .Save {
+    margin-top: 10%;
+
+    img {
+      display: block;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 32px auto;
     }
 
-    // collections
-    .collections {
-        margin-top: 30.5px;
-
-        // 二级tab
-        .ercont_cont {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px 15px 24px;
-            box-sizing: border-box;
-            border-bottom: 2px solid #dfdfce;
-            width: calc(100% + 48px);
-            margin-left: -24px;
-
-            .ercont {
-                display: flex;
-                align-items: center;
-
-                .ercont_list {
-                    font-family: "Inter";
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 14px;
-                    height: 17px;
-                    line-height: 17px;
-                    text-transform: uppercase;
-                    color: #7b7b77;
-                    margin-right: 24px;
-
-                    &.ercont_list_active {
-                        color: #000;
-                    }
-                }
-            }
-
-            .Tab_right {
-                img {
-                    display: block;
-                    width: 16.25px;
-                    height: 16.88px;
-                }
-            }
-        }
-
-        // NFT List
-        .nft_cont {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px 10px;
-
-            .nft_list {
-                background: #f5f5ed;
-                border: 1px solid #dfdfce;
-                cursor: pointer;
-
-                .img_cont {
-                    background: #f5f5ed;
-                    border: 2px solid #dfdfce;
-                    position: relative;
-
-                    .nftUrl {
-                        display: block;
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .subtract {
-                        position: absolute;
-                        left: 12px;
-                        top: 12px;
-                        display: block;
-                        width: 16px;
-                        height: 16px;
-                    }
-
-                    .point {
-                        position: absolute;
-                        right: 13.5px;
-                        top: 15.5px;
-                        display: flex;
-                        align-items: center;
-
-                        span {
-                            display: inline-block;
-                            margin-left: 2px;
-                            background-color: #000;
-                            border-radius: 50%;
-                            width: 4.5px;
-                            height: 4.5px;
-                        }
-                    }
-                }
-
-                .nft_infor {
-                    padding: 10px 12px;
-
-                    .top_name_price {
-                        display: flex;
-                        align-items: center;
-
-                        .name {
-                            color: #7b7b77;
-                            display: inline-block;
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 500;
-                            font-size: 10px;
-                            margin-right: 4px;
-                        }
-
-                        .price {
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 700;
-                            font-size: 14px;
-                            color: #000;
-                        }
-                    }
-
-                    .flow_id {
-                        margin: 0px 0 14px 0;
-                        display: flex;
-                        align-items: center;
-
-                        .flow {
-                            display: inline-block;
-                            margin: 0 8px 0 6px;
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 600;
-                            font-size: 12px;
-                            color: #000;
-                        }
-
-                        .flow_lin {
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 600;
-                            font-size: 12px;
-                            color: #000;
-                        }
-
-                        img {
-                            display: block;
-                            width: 14.76px;
-                        }
-                    }
-
-                    .Listing {
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 8px;
-                        justify-content: space-between;
-
-                        span {
-                            display: inline-block;
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 500;
-                            font-size: 10px;
-                            color: #7b7b77;
-
-                            &:nth-child(1) {
-                                margin-right: 25px;
-                            }
-                        }
-                    }
-
-                    .price_botm {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-
-                        span {
-                            font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 600;
-                            font-size: 12px;
-                            color: rgb(98, 98, 95);
-                        }
-                    }
-                }
-
-                .Launching {
-                    width: 100%;
-                    height: 20px;
-
-                    .LaunchingData {
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background: #dfdfce;
-
-                        span {
-                            color: #595952;
-                            font-family: "Inter";
-                            font-size: 10px;
-                            font-style: normal;
-                            font-weight: 700;
-                        }
-                    }
-                }
-            }
-        }
+    .SaveText {
+      color: #000;
+      text-align: center;
+      font-family: DINCond-Bold;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 500;
+      text-transform: uppercase;
     }
-
-    .Save {
-        margin-top: 10%;
-
-        img {
-            display: block;
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 32px auto;
-        }
-
-        .SaveText {
-            color: #000;
-            text-align: center;
-            font-family: DINCond-Bold;
-            font-size: 40px;
-            font-style: normal;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-    }
+  }
 }
