@@ -64,6 +64,6 @@ export default {
         getRewardInfo: `${api}pfp/api/admin/message/getRewardInfo`,
         getChatDetail: `${api}pfp/api/admin/message/chat/detail`,
         getChatList: `${api}pfp/api/admin/message/chat/list`,
-        fetchUpload: `${api}/pfp/api/admin/message/chat/upload`,
+        fetchUpload: `${api}pfp/api/admin/message/chat/upload`,
     }
 }
