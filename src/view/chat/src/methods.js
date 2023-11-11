@@ -7,13 +7,12 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get } from "../../../http/http";
 export default {
-  getDate() {
+  getData() {
     let me = this;
     me.overlayshow = true;
     let url = this.$api.chat.getChatList;
     get(url)
       .then((res) => {
-        console.log("🔥🔥🔥🚀 ~ file: methods.js:17 ~ res:", res);
         if (res.code === 200) {
           this.ChatList = res.data;
         } else {

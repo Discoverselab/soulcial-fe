@@ -9,6 +9,8 @@ import { get, post } from "../../../http/http";
 import { ImagePreview } from "vant";
 import Clipboard from "clipboard";
 import { connectWebsocket, sendMessage } from "../../../socket/socket";
+import { getTimeDiffText } from "@/utils/convertTime.js";
+import { formatTimeToDateMinuteSecond } from "@/utils/format.js";
 export default {
   onPreview(file) {
     ImagePreview({ images: [file], showIndex: false });
@@ -72,10 +74,17 @@ export default {
       });
   },
   connectWS() {
-    // let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
-    let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/80595c0b-7597-4850-a29b-b56921ea515c`;
+    let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
+    // let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/80595c0b-7597-4850-a29b-b56921ea515c`;
+    let agentData = {
+      type: 888,
+      chatId: this.$route.query?.id, //聊天id
+      userId: this.$loginData.user_id, //用户id
+      startTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
+    };
     connectWebsocket(
       wsUrl,
+      agentData,
       (res) => {
         console.log(
           "🔥🔥🔥🚀 ~ file: methods.js:85 ~ message res:",
@@ -95,8 +104,15 @@ export default {
       }
     );
   },
+  handleShowTime(time, index) {
+    if (index == 0) return false;
+    return getTimeDiffText(
+      new Date(time),
+      new Date(this.messageList[index - 1]?.time)
+    );
+  },
   submit(e) {
-    if (e.target.className === "text") {
+    if (e === "text" || e.target?.className === "text") {
       if (!this.inputContent) return;
       let agentData = {
         type: 0, //消息类型

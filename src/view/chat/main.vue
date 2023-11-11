@@ -18,13 +18,13 @@
 
           </div>
           <div class="name_news">
-            <p class="name" :class="{ yidu: item.isRead }">{{ item.title }}</p>
+            <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : item.title }}</p>
             <p class="news" :class="{ yidu: item.isRead }">{{ item.relatedContent || 'Start to chat' }}</p>
           </div>
         </div>
         <div class="list_right">
-          <!-- <p class="times" :class="{ yidu: item.isRead }">{{ item.time }}</p> -->
-          <span class="isRead" v-if="item.unreadNum > 0">{{ item.unreadNum }}</span>
+          <p class="times" :class="{ yidu: item.isRead }">{{ getTimeDescription(item.time) }}</p>
+          <span class="isRead" v-if="item.unreadNum > 0"><van-badge :content="item.unreadNum" max="99" /></span>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
 <script>
 import watch from "./src/watch";
 import methods from "./src/methods";
-import computed from "./src/computed";
+import { getTimeDescription } from "@/utils/convertTime.js";
 import Overlay from "../../components/Overlay.vue";
 import AOS from "aos";
 import TabBar from "../../components/TabBar.vue";
@@ -53,11 +53,16 @@ export default {
   },
   watch: watch,
   methods: methods,
-  computed: computed,
+  computed: {
+    getTimeDescription() {
+      return getTimeDescription
+    }
+  },
   components: { TabBar, Overlay },
   created() {
+    // this.connectWS();
     let me = this;
-    me.getDate()
+    me.getData()
   },
   mounted: async function () {
     console.log("this：", this);

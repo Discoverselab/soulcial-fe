@@ -11,16 +11,19 @@ let messageCallback = null
 // 连接失败，执行回调函数
 let errorCallback = null
 
+let agentData = {}
+
 /**
  * 发起websocket请求函数
  * @param {string} url ws连接地址
  * @param {function} successCallback 接收到ws数据，对数据进行处理的回调函数
  * @param {function} errCallback ws连接错误的回调函数
  */
-export const connectWebsocket = (url, successCallback, errCallback) => {
+export const connectWebsocket = (url, data, successCallback, errCallback) => {
   wsUrl = url
   messageCallback = successCallback
   errorCallback = errCallback
+  agentData = data
   createWebSoket()
 }
 
@@ -95,6 +98,11 @@ export const sendMessage = (message) => {
 
 const onWsOpen = (event) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
+  if (wsObj.readyState === wsObj.OPEN) { // wsObj.OPEN = 1
+    // 发给后端的数据需要字符串化
+    wsObj.send(JSON.stringify(agentData))
+    console.log('发送标识', agentData)
+  }
   if (wsObj.readyState === wsObj.CLOSED) { // wsObj.CLOSED = 3
     writeToScreen('wsObj.readyState=3, ws连接异常，开始重连')
     reconnect()
@@ -180,7 +188,7 @@ const heartCheck = {
     this.timeoutObj = setTimeout(() => {
       writeToScreen('心跳检查，发送ping到后台')
       try {
-        const datas = { ping: true }
+        const datas = { type: 999 }
         wsObj.send(JSON.stringify(datas))
       } catch (err) {
         writeToScreen('发送ping异常')

@@ -18,14 +18,16 @@
       <div v-if="isGettingMessage" class="loading">
         <van-loading color="#1989fa" />
       </div>
-      <div class="item" v-for="(item, index) in messageList" :key="index">
+      <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
+        <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
         <div v-if="item.userId != $loginData.user_id" class="other">
           <div class="othersImg">
             <img :src="item.userAvatar || '../../assets/logo_black.png'" alt="">
           </div>
           <div class="msg othersMsg">
             <span v-if="item.type == 0">{{ item.content }}</span>
-            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180" :src="item.content">
+            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+              :src="`${item.content}?x-oss-process=image-resize,w_180`">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
@@ -35,7 +37,8 @@
         <div v-else class="me">
           <div class="msg meMsg">
             <span v-if="item.type == 0">{{ item.content }}</span>
-            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180" :src="item.content">
+            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+              :src="`${item.content}?x-oss-process=image-resize,w_180`">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
@@ -67,7 +70,8 @@
 import watch from "./src/watch";
 import methods from "./src/methods";
 import { linkOpen } from "@/libs/common.js"
-import { closeWebsocket } from "@/socket/socket.js"
+import { closeWebsocket, sendMessage } from "@/socket/socket.js"
+import { formatTimeToDateMinuteSecond } from "@/utils/format.js";
 import AOS from "aos";
 export default {
   name: "conversation",
@@ -90,11 +94,17 @@ export default {
   },
   components: {},
   async created() {
+    document.onkeydown = (e) => {
+      let _key = window.event.keyCode;
+      if (_key === 13) {
+        this.submit('text');
+      }
+    }
     this.connectWS();
     await this.getMessageList();
     this.gotoNewMessage();
   },
-  beforeDestroy() {
+  async beforeDestroy() {
     closeWebsocket();
   },
   mounted: async function () {
@@ -119,6 +129,13 @@ export default {
     window.addEventListener("scroll", this.scrollToTop);
   },
   beforeRouteLeave(to, form, next) {
+    let agentData = {
+      type: 888,
+      userId: this.$loginData.user_id, //用户id
+      chatId: this.$route.query?.id, //聊天id
+      endTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
+    };
+    sendMessage(agentData);
     // Leave the route to remove the scrolling event
     window.removeEventListener("scroll", this.scrollToTop);
     next();
@@ -239,6 +256,12 @@ export default {
       position: absolute;
       top: 20px;
       left: calc(50% - 15px);
+    }
+
+    .timeTip {
+      margin: 10px 0 0;
+      text-align: center;
+      color: #575754;
     }
 
     .other {

@@ -18,19 +18,19 @@ export function formatTimeToSecond(val) {
 }
 
 /**
- * 格式化年月日 时分秒
+ * 格式化月日 时分
  * @param {*} val
  */
-export function formatTimeToDateSecond(val) {
-  return formatTime(val, 'YYYY-MM-DD HH:mm:ss')
+export function formatTimeTo(val) {
+  return formatTime(val, 'MM-DD HH:mm')
 }
 
 /**
  * 格式化年月日 时分
  * @param {*} val
  */
-export function formatTimeToDateMinute(val) {
-  return formatTime(val, 'YYYY-MM-DD HH:mm')
+export function formatTimeToDateMinuteSecond(val) {
+  return formatTime(val, 'YYYY-MM-DD HH:mm:ss')
 }
 
 /**
