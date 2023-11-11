@@ -8,10 +8,10 @@ ps: https://cn.vuejs.org/v2/api/#methods
 import { get, post } from "../../../http/http";
 import { ImagePreview } from "vant";
 import Clipboard from "clipboard";
-import { connectWebsocket, closeWebsocket } from "../../../socket/socket";
+import { connectWebsocket, sendMessage } from "../../../socket/socket";
 export default {
   onPreview(file) {
-    ImagePreview([file]);
+    ImagePreview({ images: [file], showIndex: false });
   },
   gotoNewMessage() {
     let boxHeight = document.querySelector(".chatBox").scrollHeight;
@@ -61,23 +61,34 @@ export default {
         if (res.code === 200) {
           let agentData = {
             type: 1, //图片类型
+            chatId: this.$route.query?.id, //聊天id
             content: res.data, //内容
           };
-          this.connectWS(agentData);
+          sendMessage(agentData);
         }
       })
       .catch((error) => {
         console.log("🔥🔥🔥🚀 ~ file: methods.js:69 ~ error:", error);
       });
   },
-  connectWS(agentData) {
-    let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$route.query?.id}/${this.$loginData.userId}`;
+  connectWS() {
+    // let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
+    let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/80595c0b-7597-4850-a29b-b56921ea515c`;
     connectWebsocket(
       wsUrl,
-      agentData,
       (res) => {
-        console.log("🔥🔥🔥🚀 ~ file: methods.js:85 ~ res:", res);
-        this.inputContent = '';
+        console.log(
+          "🔥🔥🔥🚀 ~ file: methods.js:85 ~ message res:",
+          JSON.parse(res)
+        );
+        if (JSON.parse(res).type < 9) {
+          this.messageList.push(JSON.parse(res));
+          this.inputContent = "";
+          let me = this;
+          this.$nextTick(() => {
+            me.gotoNewMessage();
+          });
+        }
       },
       (err) => {
         console.log("err", err);
@@ -85,14 +96,14 @@ export default {
     );
   },
   submit(e) {
-    closeWebsocket();
     if (e.target.className === "text") {
       if (!this.inputContent) return;
       let agentData = {
         type: 0, //消息类型
+        chatId: this.$route.query?.id, //聊天id
         content: this.inputContent, //内容
       };
-      this.connectWS(agentData);
+      sendMessage(agentData);
     }
     if (e.target.className === "img") {
       console.log(

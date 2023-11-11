@@ -366,7 +366,8 @@ export default {
             this.$loginData.in({
               authToken: this.address,
               login_type: this.loginType,
-              id: res.data.tokenValue
+              id: res.data.tokenValue,
+              userid: res.data.userId,
             });
             this.$emit("init"); // 分享页登录后重新获取user页面数据
             this.close();

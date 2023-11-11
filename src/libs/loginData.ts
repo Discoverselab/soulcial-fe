@@ -14,6 +14,7 @@ interface Login {
   invitation_code: any,
   id_card: any,
   id: any,
+  userid: any,
   level: any,
   authToken: any,
   unique_code: any,
@@ -55,6 +56,12 @@ export class UserData {
   }
   get userId() {
     return local_storage('userId') || '';
+  }
+  set user_id(value: any) {
+    value ? local_storage('user_id', value) : remove_local_storage_item('user_id');
+  }
+  get user_id() {
+    return local_storage('user_id') || '';
   }
   set userName(value: any) {
     value ? local_storage('userName', value) : remove_local_storage_item('userName');
@@ -121,6 +128,7 @@ export class UserData {
     this.loginTime = '';
     this.userName = '';
     this.userId = '';
+    this.user_id = '';
     this.userLevel = '';
     this.userMobile = '';
     this.inviteCode = '';
@@ -140,6 +148,7 @@ export class UserData {
     invitation_code,
     id_card,
     id,
+    userid,
     level,
     authToken,
     unique_code,
@@ -149,6 +158,7 @@ export class UserData {
     this.loginType = login_type;
     this.userName = user_name;
     this.userId = id;
+    this.user_id = userid;
     this.userLevel = level;
     this.userMobile = mobile;
     this.inviteCode = invitation_code;

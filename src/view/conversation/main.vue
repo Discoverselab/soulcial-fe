@@ -19,27 +19,27 @@
         <van-loading color="#1989fa" />
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="index">
-        <div v-if="item.userId != userId" class="other">
+        <div v-if="item.userId != $loginData.user_id" class="other">
           <div class="othersImg">
             <img :src="item.userAvatar || '../../assets/logo_black.png'" alt="">
           </div>
           <div class="msg othersMsg">
-            <span>{{ item.content }}</span>
-            <!-- <van-image @click="onPreview('https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg')" width="180" fit="cover" height="180" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg">
+            <span v-if="item.type == 0">{{ item.content }}</span>
+            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180" :src="item.content">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
-            </van-image> -->
+            </van-image>
           </div>
         </div>
         <div v-else class="me">
           <div class="msg meMsg">
-            <span>{{ item.content }}</span>
-            <!-- <van-image @click="onPreview('https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg')" width="180" fit="cover" height="180" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg">
+            <span v-if="item.type == 0">{{ item.content }}</span>
+            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180" :src="item.content">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
-            </van-image> -->
+            </van-image>
           </div>
         </div>
       </div>
@@ -90,6 +90,7 @@ export default {
   },
   components: {},
   async created() {
+    this.connectWS();
     await this.getMessageList();
     this.gotoNewMessage();
   },
@@ -122,7 +123,6 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() { },
 };
 </script>
 

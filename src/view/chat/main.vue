@@ -19,7 +19,7 @@
           </div>
           <div class="name_news">
             <p class="name" :class="{ yidu: item.isRead }">{{ item.title }}</p>
-            <p class="news" :class="{ yidu: item.isRead }">{{ item.relatedContent }}</p>
+            <p class="news" :class="{ yidu: item.isRead }">{{ item.relatedContent || 'Start to chat' }}</p>
           </div>
         </div>
         <div class="list_right">

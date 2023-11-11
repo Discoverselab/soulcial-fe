@@ -2,31 +2,26 @@
 let wsObj = null
 // ws连接地址
 let wsUrl = null
-// let userId = null;
 // 是否执行重连 true/不执行 ； false/执行
-let lockReconnect = true
+let lockReconnect = false
 // 重连定时器
 let wsCreateHandler = null
 // 连接成功，执行回调函数
 let messageCallback = null
 // 连接失败，执行回调函数
 let errorCallback = null
-// 发送给后台的数据
-let sendDatas = {}
 
 /**
  * 发起websocket请求函数
  * @param {string} url ws连接地址
- * @param {Object} agentData 传给后台的参数
  * @param {function} successCallback 接收到ws数据，对数据进行处理的回调函数
  * @param {function} errCallback ws连接错误的回调函数
  */
-export const connectWebsocket = (url, agentData, successCallback, errCallback) => {
+export const connectWebsocket = (url, successCallback, errCallback) => {
   wsUrl = url
-  createWebSoket()
   messageCallback = successCallback
   errorCallback = errCallback
-  sendDatas = agentData
+  createWebSoket()
 }
 
 // 手动关闭websocket （这里手动关闭会执行onclose事件）
@@ -49,9 +44,6 @@ const createWebSoket = () => {
     writeToScreen('您的浏览器不支持WebSocket，无法获取数据')
     return false
   }
-  // const host = window.location.host;
-  // userId = GetQueryString("userId");
-  // wsUrl = "ws://" + host + "/websoket" + userId;
 
   try {
     wsObj = new WebSocket(wsUrl)
@@ -67,7 +59,7 @@ const initWsEventHandle = () => {
     // 连接成功
     wsObj.onopen = (event) => {
       onWsOpen(event)
-      // heartCheck.start()
+      heartCheck.start()
     }
 
     // 监听服务器端返回的信息
@@ -92,16 +84,17 @@ const initWsEventHandle = () => {
   }
 }
 
-const onWsOpen = (event) => {
-  writeToScreen('CONNECT')
-  // // 客户端与服务器端通信
-  // wsObj.send('我发送消息给服务端');
-  // 添加状态判断，当为OPEN时，发送消息
+// 发送消息
+export const sendMessage = (message) => {
   if (wsObj.readyState === wsObj.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
-    console.log('发送标识', sendDatas)
-    wsObj.send(sendDatas)
+    wsObj.send(JSON.stringify(message))
+    console.log('发送标识', message)
   }
+}
+
+const onWsOpen = (event) => {
+  writeToScreen('CONNECT! ! ! ! ! ! !')
   if (wsObj.readyState === wsObj.CLOSED) { // wsObj.CLOSED = 3
     writeToScreen('wsObj.readyState=3, ws连接异常，开始重连')
     reconnect()
@@ -152,7 +145,6 @@ const reconnect = () => {
 }
 
 // 从浏览器地址中获取对应参数
-// eslint-disable-next-line no-unused-vars
 const GetQueryString = (name) => {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
   // 获取url中 ? 符后的字符串并正则匹配
@@ -166,7 +158,7 @@ const GetQueryString = (name) => {
 
 // 心跳检查（看看websocket是否还在正常连接中）
 const heartCheck = {
-  timeout: 60000,
+  timeout: 55000,
   timeoutObj: null,
   serverTimeoutObj: null,
   // 重启
@@ -192,13 +184,13 @@ const heartCheck = {
         wsObj.send(JSON.stringify(datas))
       } catch (err) {
         writeToScreen('发送ping异常')
+        console.log('内嵌定时器this.serverTimeoutObj: ', this.serverTimeoutObj)
+        // 内嵌定时器
+        this.serverTimeoutObj = setTimeout(() => {
+          writeToScreen('没有收到后台的数据，重新连接')
+          reconnect()
+        }, 100)
       }
-      console.log('内嵌定时器this.serverTimeoutObj: ', this.serverTimeoutObj)
-      // 内嵌定时器
-      this.serverTimeoutObj = setTimeout(() => {
-        writeToScreen('没有收到后台的数据，重新连接')
-        reconnect()
-      }, 100)
     }, this.timeout)
   }
 }

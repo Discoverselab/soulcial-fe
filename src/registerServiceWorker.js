@@ -27,16 +27,8 @@ if ("serviceWorker" in navigator) {
   // 公钥
   const publicKey =
     "BHLORrWUCwqhTvCWfpAGn2-EfWygzKJYv0oTrdMt0TTELMlU_vSn29ADKjPjyILhk4ayqkKDBA5wkdYVglCjS_w";
-  console.log(
-    "🔥🔥🔥🚀 ~ file: registerServiceWorker.js:5 ~ publicKey:",
-    publicKey
-  );
 
   navigator.serviceWorker.register("./sw.js").then((registration) => {
-    console.log(
-      "🔥🔥🔥🚀 ~ file: registerServiceWorker.js:27 ~ registration:",
-      registration
-    );
     // 检查浏览器是否支持推送通知
     if (!("Notification" in window)) {
       console.log("This browser does not support push notification.");
@@ -46,10 +38,6 @@ if ("serviceWorker" in navigator) {
     // 请求用户授权
     console.log("🔥🔥🔥🚀 ~ file: registerServiceWorker.js:35 ~ 请求用户授权:");
     Notification.requestPermission().then((permission) => {
-      console.log(
-        "🔥🔥🔥🚀 ~ file: registerServiceWorker.js:36 ~ permission:",
-        permission
-      );
       if (permission === "granted") {
         console.log("Notification permission granted.");
 
@@ -78,7 +66,7 @@ if ("serviceWorker" in navigator) {
             post(url, data, true)
               .then((res) => {
                 console.log(
-                  "save push endpoint result, " + JSON.stringify(res)
+                  "订阅成功 save push endpoint result, " + JSON.stringify(res)
                 );
               })
               .catch((error) => {
