@@ -89,7 +89,7 @@ const initWsEventHandle = () => {
 
 // 发送消息
 export const sendMessage = (message) => {
-  if (wsObj.readyState === wsObj.OPEN) { // wsObj.OPEN = 1
+  if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     wsObj.send(JSON.stringify(message))
     console.log('发送标识', message)
@@ -98,12 +98,12 @@ export const sendMessage = (message) => {
 
 const onWsOpen = (event) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
-  if (wsObj.readyState === wsObj.OPEN) { // wsObj.OPEN = 1
+  if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     wsObj.send(JSON.stringify(agentData))
     console.log('发送标识', agentData)
   }
-  if (wsObj.readyState === wsObj.CLOSED) { // wsObj.CLOSED = 3
+  if (wsObj?.readyState === wsObj?.CLOSED) { // wsObj.CLOSED = 3
     writeToScreen('wsObj.readyState=3, ws连接异常，开始重连')
     reconnect()
     errorCallback()
