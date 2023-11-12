@@ -150,12 +150,11 @@ export default {
         });
     },
     async jcHash(txHash) {
-      const web3 = new Web3(window.ethereum);
+      const web3 = this.$loginData.loginType == 0 ? new Web3(window.ethereum) : window.web3;
       web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
         if (error) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:", error);
           this.overlayshow = false;
-          return
         } else if (receipt && receipt.status === true) {
           console.log("链上交易已执行完毕");
           this.getPickInfo();

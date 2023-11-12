@@ -28,7 +28,7 @@ export default {
       "🔥🔥🔥🚀 ~ onWsMessage onWsMessage~ message res:",
       JSON.parse(res)
     );
-    if (JSON.parse(res).type < 2) {
+    if (JSON.parse(res).type < 2 && this.$route.query?.id == JSON.parse(res).chatId) {
       this.messageList.push(JSON.parse(res));
       this.inputContent = "";
       this.isSubmiting = false;
