@@ -97,7 +97,8 @@ export const sendMessage = (message) => {
     // 发给后端的数据需要字符串化
     wsObj?.send(JSON.stringify(message))
     console.log('发送标识', message)
-  }else{
+  }
+  if (!wsObj) { 
     reconnect(()=>{wsObj.send(JSON.stringify(message))})
   }
 }
@@ -173,30 +174,31 @@ const GetQueryString = (name) => {
 
 // 心跳检查（看看websocket是否还在正常连接中）
 const heartCheck = {
-  timeout: 55000,
+  timeout: 15000,
   timeoutObj: null,
   serverTimeoutObj: null,
   // 重启
   reset() {
-    clearTimeout(this.timeoutObj)
+    clearInterval(this.timeoutObj)
     clearTimeout(this.serverTimeoutObj)
     this.start()
   },
   // 停止
   stop() {
-    clearTimeout(this.timeoutObj)
+    clearInterval(this.timeoutObj)
     clearTimeout(this.serverTimeoutObj)
   },
   // 开启定时器
   start() {
-    this.timeoutObj && clearTimeout(this.timeoutObj)
+    this.timeoutObj && clearInterval(this.timeoutObj)
     this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj)
     // 15s之内如果没有收到后台的消息，则认为是连接断开了，需要重连
-    this.timeoutObj = setTimeout(() => {
+    this.timeoutObj = setInterval(() => {
       writeToScreen('心跳检查，发送ping到后台')
       try {
         const datas = { type: 999 }
         wsObj.send(JSON.stringify(datas))
+        console.log("🔥🔥🔥🚀 ~ file: socket.js:201 ~ datas:", datas);
       } catch (err) {
         writeToScreen('发送ping异常')
         console.log('内嵌定时器this.serverTimeoutObj: ', this.serverTimeoutObj)

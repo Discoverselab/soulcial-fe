@@ -60,7 +60,7 @@ export default {
     handleRelatedContent() {
       return (item) => {
         if (item.type == 1) {
-          return item.relatedContent ? `${item.username}：${item.relatedContent}` : 'Start to chat'
+          return item.relatedContent ? `${item.username}: ${item.relatedContent}` : 'Start to chat'
         } else {
           return item.relatedContent || 'Start to chat'
         }

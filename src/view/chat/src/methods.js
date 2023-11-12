@@ -27,7 +27,7 @@ export default {
       });
   },
   connectWS() {
-    let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
+    let wsUrl = `wss://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
     // let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/${this.$loginData.userId}`;
     connectWebsocket(
       wsUrl,
@@ -35,17 +35,20 @@ export default {
       (res) => {
         let resData = JSON.parse(res);
         console.log("🔥🔥🔥🚀 ~ ws res:", resData);
-        this.ChatList.forEach((item) => {
-          if (item.id == resData.chatId) {
-            item.relatedContent = resData.type == 0 ? resData.content : "[image]";
-            item.time = resData.time;
-            item.username = resData.userName;
-            item.unreadNum = Number(item.unreadNum) + 1;
-          }
-        });
-        this.ChatList.sort((a, b) => {
-          return +new Date(b.time) - +new Date(a.time);
-        });
+        if (resData.type < 2) {
+          this.ChatList.forEach((item) => {
+            if (item.id == resData.chatId) {
+              item.relatedContent =
+                resData.type == 0 ? resData.content : "[image]";
+              item.time = resData.time;
+              item.username = resData.userName;
+              item.unreadNum = Number(item.unreadNum) + 1;
+            }
+          });
+          this.ChatList.sort((a, b) => {
+            return +new Date(b.time) - +new Date(a.time);
+          });
+        }
       },
       (err) => {
         console.log("ws err", err);
