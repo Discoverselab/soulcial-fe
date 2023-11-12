@@ -161,6 +161,11 @@ export default new Router({
       path: "/settings",
       name: "settings",
       component: settings,
+      meta: {
+        metaInfo: {
+          theme_color: "#fff",
+        },
+      },
     },
     {
       path: "/addToHome",
