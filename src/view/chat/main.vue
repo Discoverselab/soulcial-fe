@@ -18,7 +18,7 @@
 
           </div>
           <div class="name_news">
-            <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : item.title }}</p>
+            <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : `SoulCast ${item.title} (${item.memberNum})` }}</p>
             <p class="news" :class="{ yidu: item.isRead }">{{ handleRelatedContent(item) }}</p>
           </div>
         </div>

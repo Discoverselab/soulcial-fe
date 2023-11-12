@@ -56,6 +56,8 @@ export default {
     );
   },
   links(item) {
-    this.$router.push(`/conversation?id=${item.id}`);
+    if (item.type < 3) {
+      this.$router.push(`/conversation?id=${item.id}`);
+    }
   },
 };

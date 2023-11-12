@@ -4,10 +4,11 @@
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt="" />
       <div class="info">
         <div @click="goPersonDetail(chatDetailDto)" class="left">
-          <img :src="chatDetailDto.avatar || '../../assets/logo_app.png'" alt="">
+          <img :src="chatDetailDto.avatar" alt="">
         </div>
         <div class="right">
-          <div class="name">{{ chatDetailDto.title || '-' }}</div>
+          <div class="name" v-if="chatDetailDto.type == 0">{{ chatDetailDto.title }}</div>
+          <div class="name" v-else>SoulCast {{ chatDetailDto.title }} ({{ chatDetailDto.memberNumber }})</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
           </div> -->
@@ -22,7 +23,7 @@
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
         <div v-if="item.userId != $loginData.user_id" class="other">
           <div @click="goPersonDetail(item)" class="othersImg">
-            <img :src="item.userAvatar || '../../assets/logo_black.png'" alt="">
+            <img :src="item.userAvatar" alt="">
           </div>
           <div class="msg othersMsg">
             <span v-if="item.type == 0">{{ item.content }}</span>
@@ -210,6 +211,8 @@ export default {
         width: 40px;
         height: 40px;
         margin-right: 10px;
+        box-sizing: border-box;
+        border: 1px solid #000;
 
         img {
           width: 100%;

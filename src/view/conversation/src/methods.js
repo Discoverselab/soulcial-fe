@@ -52,7 +52,7 @@ export default {
         `?chatId=${this.$route.query?.id}&messageId=${messageId}`;
       const { code, data } = await get(url);
       if (code === 200) {
-        this.messageList = data.detaillist.reverse().concat(this.messageList);
+        this.messageList = data.detaillist?.reverse().concat(this.messageList);
         this.chatDetailDto = data.chatDetailDto;
         this.isGettingMessage = false;
         this.$nextTick(() => {
