@@ -16,7 +16,7 @@
     </div>
     <div class="chatBox">
       <div v-if="isGettingMessage" class="loading">
-        <van-loading color="#1989fa" />
+        <van-loading color="#efa92c" />
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
@@ -70,7 +70,7 @@
 import watch from "./src/watch";
 import methods from "./src/methods";
 import { linkOpen } from "@/libs/common.js"
-import { closeWebsocket, sendMessage } from "@/socket/socket.js"
+import { closeWebsocket, sendMessage, changeMessageCallback } from "@/socket/socket.js"
 import { formatTimeToDateMinuteSecond } from "@/utils/format.js";
 import AOS from "aos";
 export default {
@@ -81,6 +81,7 @@ export default {
       inputContent: "",
       chatDetailDto: {},
       chatBoxOldHeight: 0,
+      isSubmiting: false,
       isGettingMessage: false,
       userId: this.$loginData.userId
     };
@@ -94,18 +95,25 @@ export default {
   },
   components: {},
   async created() {
+    changeMessageCallback(this.onWsMessage);
     document.onkeydown = (e) => {
       let _key = window.event.keyCode;
       if (_key === 13) {
-        this.submit('text');
+        this.submit();
       }
     }
-    this.connectWS();
+    let agentData = {
+      type: 888,
+      chatId: this.$route.query?.id, //聊天id
+      userId: this.$loginData.user_id, //用户id
+      startTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
+    };
+    sendMessage(agentData);
     await this.getMessageList();
     this.gotoNewMessage();
   },
   async beforeDestroy() {
-    closeWebsocket();
+    // closeWebsocket();
   },
   mounted: async function () {
     console.log("this：", this);

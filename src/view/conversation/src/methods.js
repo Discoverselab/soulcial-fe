@@ -15,6 +15,23 @@ export default {
   onPreview(file) {
     ImagePreview({ images: [file], showIndex: false });
   },
+  onWsMessage(res) {
+    console.log(
+      "🔥🔥🔥🚀 ~ onWsMessage onWsMessage~ message res:",
+      JSON.parse(res)
+    );
+    if (JSON.parse(res).type < 2) {
+      this.messageList.push(JSON.parse(res));
+      this.inputContent = "";
+      this.isSubmiting = false;
+      let me = this;
+      this.$nextTick(() => {
+        me.gotoNewMessage();
+        const input = document.getElementsByClassName("van-field__control")[0];
+        input.focus();
+      });
+    }
+  },
   gotoNewMessage() {
     let boxHeight = document.querySelector(".chatBox").scrollHeight;
     document.querySelector(".chatBox").scrollTop = boxHeight;
@@ -73,37 +90,6 @@ export default {
         console.log("🔥🔥🔥🚀 ~ file: methods.js:69 ~ error:", error);
       });
   },
-  connectWS() {
-    let wsUrl = `ws://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
-    // let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/80595c0b-7597-4850-a29b-b56921ea515c`;
-    let agentData = {
-      type: 888,
-      chatId: this.$route.query?.id, //聊天id
-      userId: this.$loginData.user_id, //用户id
-      startTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
-    };
-    connectWebsocket(
-      wsUrl,
-      agentData,
-      (res) => {
-        console.log(
-          "🔥🔥🔥🚀 ~ file: methods.js:85 ~ message res:",
-          JSON.parse(res)
-        );
-        if (JSON.parse(res).type < 9) {
-          this.messageList.push(JSON.parse(res));
-          this.inputContent = "";
-          let me = this;
-          this.$nextTick(() => {
-            me.gotoNewMessage();
-          });
-        }
-      },
-      (err) => {
-        console.log("err", err);
-      }
-    );
-  },
   handleShowTime(time, index) {
     if (index == 0) return false;
     return getTimeDiffText(
@@ -111,22 +97,15 @@ export default {
       new Date(this.messageList[index - 1]?.time)
     );
   },
-  submit(e) {
-    if (e === "text" || e.target?.className === "text") {
-      if (!this.inputContent) return;
-      let agentData = {
-        type: 0, //消息类型
-        chatId: this.$route.query?.id, //聊天id
-        content: this.inputContent, //内容
-      };
-      sendMessage(agentData);
-    }
-    if (e.target.className === "img") {
-      console.log(
-        "🔥🔥🔥🚀 ~ file: methods.js:67 ~ submit img:",
-        this.inputContent
-      );
-    }
+  submit() {
+    if (!this.inputContent || this.isSubmiting) return;
+    let agentData = {
+      type: 0, //消息类型
+      chatId: this.$route.query?.id, //聊天id
+      content: this.inputContent, //内容
+    };
+    this.isSubmiting = true;
+    sendMessage(agentData);
   },
   copy(val) {
     const clipboard = new Clipboard(".mycopy", {

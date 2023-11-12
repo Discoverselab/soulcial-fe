@@ -69,6 +69,7 @@ export default {
           if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
             localStorage.setItem("routers", data.path);
             this.walletShow = true;
+            this.$router.push('/');
           } else {
             localStorage.setItem("routers", "");
             this.BarActive = data.path;

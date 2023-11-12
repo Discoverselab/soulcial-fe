@@ -69,7 +69,7 @@ export const getTimeDiffText = (time1, time2) => {
   } else if (isToday(time1)) {
     return formatTimeToMinute(tt);
   } else if (isYesterday(time1)) {
-    return "Yesterday " + formatTimeToMinute(tt);
+    return "yesterday " + formatTimeToMinute(tt);
   } else if (isWithinAWeek(time1)) {
     return getWeekdayName(time1) + " " + formatTimeToMinute(tt);
   } else {
@@ -104,13 +104,13 @@ function isWithinAWeek(date) {
 
 function getWeekdayName(date) {
   const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
   ];
   return weekdays[date.getDay()];
 }

@@ -19,7 +19,7 @@
           </div>
           <div class="name_news">
             <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : item.title }}</p>
-            <p class="news" :class="{ yidu: item.isRead }">{{ item.relatedContent || 'Start to chat' }}</p>
+            <p class="news" :class="{ yidu: item.isRead }">{{ handleRelatedContent(item) }}</p>
           </div>
         </div>
         <div class="list_right">
@@ -56,11 +56,20 @@ export default {
   computed: {
     getTimeDescription() {
       return getTimeDescription
+    },
+    handleRelatedContent() {
+      return (item) => {
+        if (item.type == 1) {
+          return item.relatedContent ? `${item.username}：${item.relatedContent}` : 'Start to chat'
+        } else {
+          return item.relatedContent || 'Start to chat'
+        }
+      }
     }
   },
   components: { TabBar, Overlay },
   created() {
-    // this.connectWS();
+    this.connectWS();
     let me = this;
     me.getData()
   },

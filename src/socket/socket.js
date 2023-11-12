@@ -27,6 +27,10 @@ export const connectWebsocket = (url, data, successCallback, errCallback) => {
   createWebSoket()
 }
 
+export const changeMessageCallback = (callback) => {
+  messageCallback = callback
+}
+
 // 手动关闭websocket （这里手动关闭会执行onclose事件）
 export const closeWebsocket = () => {
   if (wsObj) {
@@ -42,7 +46,7 @@ export const closeWebsocket = () => {
 }
 
 // 创建ws函数
-const createWebSoket = () => {
+const createWebSoket = (callback) => {
   if (typeof (WebSocket) === 'undefined') {
     writeToScreen('您的浏览器不支持WebSocket，无法获取数据')
     return false
@@ -50,18 +54,18 @@ const createWebSoket = () => {
 
   try {
     wsObj = new WebSocket(wsUrl)
-    initWsEventHandle()
+    initWsEventHandle(callback)
   } catch (e) {
     writeToScreen('连接异常，开始重连')
     reconnect()
   }
 }
 
-const initWsEventHandle = () => {
+const initWsEventHandle = (callback) => {
   try {
     // 连接成功
     wsObj.onopen = (event) => {
-      onWsOpen(event)
+      onWsOpen(event, callback)
       heartCheck.start()
     }
 
@@ -91,16 +95,19 @@ const initWsEventHandle = () => {
 export const sendMessage = (message) => {
   if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
-    wsObj.send(JSON.stringify(message))
+    wsObj?.send(JSON.stringify(message))
     console.log('发送标识', message)
+  }else{
+    reconnect(()=>{wsObj.send(JSON.stringify(message))})
   }
 }
 
-const onWsOpen = (event) => {
+const onWsOpen = (event, callback) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
   if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     wsObj.send(JSON.stringify(agentData))
+    callback && callback()
     console.log('发送标识', agentData)
   }
   if (wsObj?.readyState === wsObj?.CLOSED) { // wsObj.CLOSED = 3
@@ -136,7 +143,7 @@ const writeToScreen = (massage) => {
 }
 
 // 重连函数
-const reconnect = () => {
+const reconnect = (callback) => {
   if (lockReconnect) {
     return
   }
@@ -146,7 +153,7 @@ const reconnect = () => {
   wsCreateHandler && clearTimeout(wsCreateHandler)
   wsCreateHandler = setTimeout(() => {
     writeToScreen('重连...' + wsUrl)
-    createWebSoket()
+    createWebSoket(callback)
     lockReconnect = false
     writeToScreen('重连完成')
   }, 3000)
