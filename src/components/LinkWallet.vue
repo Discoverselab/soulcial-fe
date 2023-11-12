@@ -6,7 +6,7 @@
         <p class="headLin" @click="close"></p>
         <P class="title">Connect Wallet</P>
         <img class="wallet_img" src="../assets/wellat_img.png" alt />
-        <div v-if="!isPWA" :class="{noBottom: !isPWA}"  class="wallet_list " @click="metamask">
+        <div v-if="!isPWA" :class="{ noBottom: !isPWA }" class="wallet_list " @click="metamask">
           <div class="list_left">
             <img src="../assets/metamask.png" alt />
             <p>MetaMask</p>
@@ -15,29 +15,29 @@
         </div>
         <template v-if="isPWA">
           <div class="wallet_list" @click="particle('phone', 1)">
-          <div class="list_left">
-            <img src="../assets/Subtract1.png" alt />
-            <p>Phone</p>
+            <div class="list_left">
+              <img src="../assets/Subtract1.png" alt />
+              <p>Phone</p>
+            </div>
+            <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
           </div>
-          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
-        </div>
-        <div class="wallet_list" @click="particle('email', 2)">
-          <div class="list_left">
-            <img src="../assets/Exclude.png" alt />
-            <p>Email</p>
+          <div class="wallet_list" @click="particle('email', 2)">
+            <div class="list_left">
+              <img src="../assets/Exclude.png" alt />
+              <p>Email</p>
+            </div>
+            <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
           </div>
-          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
-        </div>
-        <div class="wallet_list" @click="particle('google', 4)">
-          <div class="list_left">
-            <img src="../assets/gogo.png" alt />
-            <p>Google</p>
+          <div class="wallet_list" @click="particle('google', 4)">
+            <div class="list_left">
+              <img src="../assets/gogo.png" alt />
+              <p>Google</p>
+            </div>
+            <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
           </div>
-          <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
-        </div>
         </template>
-        
-      
+
+
         <!-- <div class="wallet_list" @click="WalletConnect">
           <div class="list_left">
             <img src="../assets/wallet_connect.png" alt="" />
@@ -513,7 +513,7 @@ export default {
     async particle(preferredAuthType, type) {
       this.preferredAuthType = type;
       this.overlayshow = true;
-      onParticle(this.particleCallback);
+      onParticle(this.particleCallback, preferredAuthType, () => { this.overlayshow = false });
     }
   },
   created() {
@@ -573,9 +573,11 @@ export default {
       height: auto;
       margin: 35px auto 50px auto;
     }
+
     .noBottom {
-        border-bottom: none !important;
-      }
+      border-bottom: none !important;
+    }
+
     .wallet_list {
       display: flex;
       align-items: center;
@@ -584,7 +586,7 @@ export default {
       padding-bottom: 10px;
       margin-bottom: 20px;
       cursor: pointer;
-     
+
       .list_left {
         display: flex;
         align-items: center;
@@ -679,9 +681,9 @@ export default {
       img {
         cursor: pointer;
         display: block;
-          width: 22.5px;
-          height: auto;
-          margin-right: 18px;
+        width: 22.5px;
+        height: auto;
+        margin-right: 18px;
         // transform: scale(0.6);
         /* scaling */
       }
