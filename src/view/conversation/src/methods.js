@@ -8,12 +8,20 @@ ps: https://cn.vuejs.org/v2/api/#methods
 import { get, post } from "../../../http/http";
 import { ImagePreview } from "vant";
 import Clipboard from "clipboard";
-import { connectWebsocket, sendMessage } from "../../../socket/socket";
+import { sendMessage } from "../../../socket/socket";
 import { getTimeDiffText } from "@/utils/convertTime.js";
-import { formatTimeToDateMinuteSecond } from "@/utils/format.js";
 export default {
   onPreview(file) {
     ImagePreview({ images: [file], showIndex: false });
+  },
+  goPersonDetail(val) {
+    if (!val.userId) return;
+    this.$router.push({
+      path: "/user",
+      query: {
+        id: val.userId,
+      },
+    });
   },
   onWsMessage(res) {
     console.log(

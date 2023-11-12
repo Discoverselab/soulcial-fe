@@ -3,14 +3,14 @@
     <div class="navigate">
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt="" />
       <div class="info">
-        <div class="left">
+        <div @click="goPersonDetail(chatDetailDto)" class="left">
           <img :src="chatDetailDto.avatar || '../../assets/logo_app.png'" alt="">
         </div>
         <div class="right">
-          <div class="name">Lasdf</div>
-          <div class="address">asdfasdfasdfasf
+          <div class="name">{{ chatDetailDto.title || '-' }}</div>
+          <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
         <div v-if="item.userId != $loginData.user_id" class="other">
-          <div class="othersImg">
+          <div @click="goPersonDetail(item)" class="othersImg">
             <img :src="item.userAvatar || '../../assets/logo_black.png'" alt="">
           </div>
           <div class="msg othersMsg">
