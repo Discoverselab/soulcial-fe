@@ -38,7 +38,7 @@
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
                     <p class="grade_name">
                       <span>
-                        Lv {{ item.level }}
+                        Lv{{ item.level }}
                       </span>
                       {{ getNFTLevel[item.level] }}</p>
                   </div>
@@ -74,7 +74,7 @@
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
                     <p class="grade_name">
                       <span>
-                        Lv {{ item.level }}
+                        Lv{{ item.level }}
                       </span>
                       {{ getNFTLevel[item.level] }}
                       </p>

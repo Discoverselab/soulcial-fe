@@ -39,16 +39,12 @@
               {{ $network }}
             </p>
           </div>
-          <!-- <p class="walletBalance">
-            Pool Balance:
-            <span>{{ PoolBalance }} {{$network}}</span>
-          </p>-->
           <p class="walletBalance">
             Potential Compensation (4%) :
             <span>{{ formatNumber(NFTDetail.price * 0.04) }} {{ $network }}</span>
           </p>
           <p class="walletBalance">
-            Next Listing Price (10%) :
+            Next Listing Price :
             <span>{{ formatNumber(NFTDetail.price * 1.10) }} {{ $network }}</span>
           </p>
         </div>
@@ -464,6 +460,9 @@ export default {
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
+        &:nth-child(3){
+          margin-top: 5px;
+        }
 
         span {
           margin-top: 15px;
