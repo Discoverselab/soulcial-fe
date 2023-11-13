@@ -1,17 +1,17 @@
 <template>
   <div class="mint_success">
     <div class="navigate">
-      <span></span>
-      <!-- <img
-        @click="$router.go(-1)"
+      <!-- <span></span> -->
+      <img
+        @click="$router.push('/')"
         class="back"
         src="../../assets/back.png"
         alt=""
-      /> -->
+      />
       <div class="nav_name">
         <p class="name">Launch SoulCast</p>
       </div>
-      <span></span>
+      <span class="back"></span>
     </div>
     <div class="success">
       <p class="success_title">Congratulations!</p>

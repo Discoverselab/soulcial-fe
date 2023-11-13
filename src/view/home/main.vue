@@ -227,6 +227,10 @@ export default {
         {
           name: "collected",
           id: 2
+        },
+        {
+          name: "pumping",
+          id: 3
         }
         // {
         //   name: "liked",

@@ -21,7 +21,11 @@
       <div>
       <div>
         <div class="earn_list_title">
-          <p class="title">History</p>
+          <p class="title">
+            History
+            <img class="point_out"  src="@/assets/point_out.png" alt />
+          </p>
+
         </div>
         <van-list
           v-model="earnLoading"

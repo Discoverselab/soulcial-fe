@@ -83,7 +83,7 @@
           Go to Chat
         </button>
         <div v-if="isShow">
-          <button @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">
+          <button style="background-color: #DFDFCE;" @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">
             List for
             {{ formatNumber(hiess.pfpTokenDetailVo.nextListPrice) }} {{ $network }}
           </button>

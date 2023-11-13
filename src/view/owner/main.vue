@@ -18,13 +18,12 @@
         <p class="content">
           Pumper #{{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}! 
         </p>
-        <p class="content">
+        <p class="content" v-if="this.$route.query.creator">
+          You will receive {{hiess.rewardPirce}}{{ $network }} as creator earnings. 
+        </p>
+        <p class="content" v-else>
           You will receive {{hiess.rewardPirce}}{{ $network }} as earnings. 
         </p>
-        <!-- <p class="content">
-          You will receive 【4%交易费用】ETH as creator earnings. 
-        </p> -->
-        
         <p class="content">
           Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
         </p>
@@ -145,6 +144,7 @@ export default {
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
+    console.log("this.$route.creator",this.$route.query.creator)
     AOS.init({
       offset: 200,
       duration: 200, //duration

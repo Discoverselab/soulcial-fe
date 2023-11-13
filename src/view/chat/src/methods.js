@@ -58,6 +58,16 @@ export default {
   links(item) {
     if (item.type < 3) {
       this.$router.push(`/conversation?id=${item.id}`);
+    } else {
+      if (item.sysMessage == "REWARD_SUCCESS") {
+        this.$router.push(`/Congratulations?id=${item.id}`);
+      } else if (item.sysMessage == "REWARD_FAILED") {
+        this.$router.push(`/sorry?id=${item.id}`);
+      } else if(item.sysMessage == "MINTER_REWARD") {
+        this.$router.push(`/owner?id=${item.id}&creator=creator`);
+      } else {
+        this.$router.push(`/owner?id=${item.id}`);
+      }
     }
   },
 };

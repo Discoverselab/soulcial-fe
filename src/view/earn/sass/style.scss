@@ -185,6 +185,14 @@
       font-style: normal;
       font-weight: 700;
       font-size: 24px;
+      display: flex;
+      align-items: center;
+      .point_out{
+        width: 24px;
+        height: 24px;
+        margin-left: 16px;
+        cursor: pointer;
+      }
     }
   }
 
