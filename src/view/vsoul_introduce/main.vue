@@ -26,11 +26,11 @@
       <thead>
         <tr>
           <th>SoulCast Level</th>
-          <th>L1 ORIGIN</th>
-          <th>L2 VITALITY</th>
-          <th>L3 EUREKA</th>
-          <th>L4 SPARK</th>
-          <th>L5 FLOW</th>
+          <th>Lv 1 ORIGIN</th>
+          <th>Lv 2 VITALITY</th>
+          <th>Lv 3 EUREKA</th>
+          <th>Lv 4 SPARK</th>
+          <th>Lv 5 FLOW</th>
         </tr>
       </thead>
       <tbody>

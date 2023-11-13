@@ -96,7 +96,7 @@
           </div>
           <div class="right">
             <div class="order">{{ item.username || item.userAddress.substring(0, 6) }} {{ item.type === 0 ? 'Listed' :
-              'Pumped' }} SoulCast #{{ item.tokenId }} {{ item.type === 0 ? '' : `${item.pickCount}/4` }}</div>
+              'Pumped' }} SoulCast #{{ item.tokenId }} {{ item.type === 0 ? '' : `(${item.pickCount}/4)` }}</div>
             <div class="price">{{ item.price }} {{ $network }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.createTime)) }}</div>
           </div>
