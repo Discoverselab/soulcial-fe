@@ -146,6 +146,10 @@
                             font-size: 14px;
                             text-transform: uppercase;
                             color: #000000;
+                            span {
+                            text-transform: none;
+
+                            }
                         }
                     }
 

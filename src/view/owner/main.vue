@@ -25,7 +25,7 @@
           You will receive {{hiess.rewardPirce}}{{ $network }} as earnings. 
         </p>
         <p class="content">
-          Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
+          Check transaction <span style="text-transform: lowercase;" @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
         </p>
       </div>
     </div>
