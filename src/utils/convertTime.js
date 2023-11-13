@@ -131,7 +131,7 @@ export function convertToTargetTimeZone(initialTime) {
 
   return targetTime;
 }
-
+// 获取相对时间
 export function getLastTimeStr(time) {
   const targetDate = dayjs(time);
   const transformDate = convertToTargetTimeZone(dayjs());
@@ -143,3 +143,15 @@ export function getLastTimeStr(time) {
     return dayjs(time).from(currentDate);
   }
 }
+
+// 计算指定时间与当前时间的差值
+export function calculateSecondsUntil(targetDate) {
+  const targetDateTime = new Date(targetDate);
+  const currentDate = new Date();
+  const timeDifference = Math.floor((targetDateTime - currentDate) / 1000);
+  if(timeDifference < 0) {
+    return 0 
+  }
+  return timeDifference;
+}
+

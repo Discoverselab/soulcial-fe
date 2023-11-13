@@ -187,12 +187,35 @@
       font-size: 24px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       .point_out{
         width: 24px;
         height: 24px;
         margin-left: 16px;
         cursor: pointer;
       }
+      .title_right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 8px 5px 8px;
+        height: 25px;
+        background-color: #5cd685;
+        border-radius: 28px;
+        border: 2px solid #000;
+        cursor: pointer;
+        img {
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+        }
+
+        .invite_earn {
+            font-family: Inter;
+            font-size: 12px;
+            font-weight: 700;
+        }
+}
     }
   }
 
