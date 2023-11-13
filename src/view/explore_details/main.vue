@@ -16,23 +16,14 @@
         <!-- NFT -->
         <div class="box" :class="{ flipped: turnShow, flippedShow: flippedShow && turnShow }">
           <div class="img_icon img_icon1">
-            <div
-              class="match"
-              :class="{ matchs: turnShow }"
-              v-if="NFTDetail.pictureUrl && $loginData.Auth_Token && !isPick()"
-            >
-              <p
-                :style="{
+            <div class="match" :class="{ matchs: turnShow }"
+              v-if="NFTDetail.pictureUrl && $loginData.Auth_Token && !isPick()">
+              <p :style="{
                 color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
-              }"
-                class="center"
-              >{{ NFTDetail.match || "0" }}%</p>
-              <p
-                :style="{
+              }" class="center">{{ NFTDetail.match || "0" }}%</p>
+              <p :style="{
                 color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
-              }"
-                class="name"
-              >match</p>
+              }" class="name">match</p>
             </div>
             <a :href="NFTDetail.squarePictureUrl" target="_blank">
               <img id="pfpNft" :src="NFTDetail.pictureUrl" alt />
@@ -40,23 +31,14 @@
           </div>
           <!-- hexagonCalculate points -->
           <div class="img_icon img_icon2">
-            <Hexagon
-              v-if="this.values.length > 5 && turnShow"
-              :type="false"
-              :level="NFTDetail.level"
-              :levelScore="NFTDetail.levelScore"
-              :values="values"
-            />
+            <Hexagon v-if="this.values.length > 5 && turnShow" :type="false" :level="NFTDetail.level"
+              :levelScore="NFTDetail.levelScore" :values="values" />
           </div>
         </div>
         <div class="bottom_infor" v-if="NFTDetail.pictureUrl">
-          <svg-icon
-            :style="{
+          <svg-icon :style="{
             color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
-          }"
-            class="svgName"
-            iconClass="Vector1"
-          ></svg-icon>
+          }" class="svgName" iconClass="Vector1"></svg-icon>
           <div class="grade_price">
             <div class="grade">
               <img :class="`level${NFTDetail.level}`" :src="levelImg[NFTDetail.level]" alt />
@@ -66,16 +48,10 @@
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p
-              class="price"
-              v-if="NFTDetail.price && NFTDetail.pickStatus != 0"
-            >{{ NFTDetail.price || 0 }}{{ $network }}</p>
+            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ NFTDetail.price || 0 }}{{ $network }}
+            </p>
             <!-- <p class="price priceinfp" v-else> {{ getNFTPersonality[NFTDetail.personality] }}</p> -->
-            <p
-              class="price priceinfp"
-              v-else
-              :style="getSoulSbtiStyle(NFTDetail.soul)"
-            >{{ NFTDetail.soul || '-' }}</p>
+            <p class="price priceinfp" v-else :style="getSoulSbtiStyle(NFTDetail.soul)">{{ NFTDetail.soul || '-' }}</p>
           </div>
           <div class="turn" @click="turnShowClick">
             <img src="../../assets/turn.png" alt />
@@ -112,7 +88,7 @@
                 <span class="key">Contract Address</span>
                 <span class="value hand copy-button" @click="copy(NFTDetail.contractAddress)">
                   {{
-                  substring(NFTDetail.contractAddress)
+                    substring(NFTDetail.contractAddress)
                   }}
                 </span>
               </div>
@@ -148,7 +124,7 @@
             <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
             <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
-          <div class="Created">{{'Owned By'}}</div>
+          <div class="Created">{{ 'Owned By' }}</div>
           <div class="name">{{ isUser(2) ? "You" : NFTDetail.ownerUserName }}</div>
         </div>
       </div>
@@ -163,20 +139,13 @@
         >
           Collect Now
         </button>-->
-        <button
-          class="cancel"
-          @click="cancelShow = true"
-          v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
+        <button class="cancel" @click="cancelShow = true" v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
           $loginData.Auth_Token.toLocaleUpperCase() && !NFTDetail.nowPickCount && NFTDetail.pickStatus > 0
-          "
-        >CANCEL LIST</button>
+          ">CANCEL LIST</button>
         <div v-if="isShow">
-          <button
-          @click="jumpToList"
-            v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
+          <button @click="jumpToList" v-if="NFTDetail.ownerAddress.toLocaleUpperCase() ===
             $loginData.Auth_Token.toLocaleUpperCase() && !NFTDetail.pickStatus
-            "
-          >LIST FOR {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
+            ">LIST FOR {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
         </div>
 
         <!-- <button
@@ -303,42 +272,20 @@
               <van-icon class-prefix="my-icon" :name="activeNamesHistory == '1' ? 'up' : 'down'" />
             </template>
             <div class="more_list_cont">
-              <van-collapse
-                v-for="(item, index) of History_list"
-                :key="index"
-                v-model="CollectList"
-                class="collapse_er"
-              >
+              <van-collapse v-for="(item, index) of History_list" :key="index" v-model="CollectList" class="collapse_er">
                 <van-collapse-item :name="index">
                   <template #title>
                     <div class="more_list more_list_history">
                       <div class="type_cont">
-                        <img
-                          v-if="item.type == 1"
-                          class="left_icon"
-                          src="../../assets/start.png"
-                          alt
-                        />
-                        <img
-                          v-if="item.type == 0"
-                          class="left_icon"
-                          src="../../assets/mint.png"
-                          alt
-                        />
-                        <img
-                          v-if="item.type == 2"
-                          class="left_icon"
-                          src="../../assets/Transfer.png"
-                          alt
-                        />
+                        <img v-if="item.type == 1" class="left_icon" src="../../assets/start.png" alt />
+                        <img v-if="item.type == 0" class="left_icon" src="../../assets/mint.png" alt />
+                        <img v-if="item.type == 2" class="left_icon" src="../../assets/Transfer.png" alt />
                         <div>
                           <span class="value">
                             {{ item.type == 1 ? 'Collect' : item.type == 2 ? 'Transfer' : 'Launch'
                             }}
                           </span>
-                          <p
-                            class="hisname"
-                          >{{ CollectList.indexOf(index) == '-1' ? '+ More' : '- Less' }}</p>
+                          <p class="hisname">{{ CollectList.indexOf(index) == '-1' ? '+ More' : '- Less' }}</p>
                         </div>
                       </div>
                       <div>
@@ -351,9 +298,7 @@
                     <div class="type_cont">
                       <div class="positioning"></div>
                       <div v-if="item.type != 0">
-                        <span
-                          class="value"
-                        >{{ substring(item.type == 0 ? item.toAddress : item.fromAddress) }}</span>
+                        <span class="value">{{ substring(item.type == 0 ? item.toAddress : item.fromAddress) }}</span>
                         <p class="hisname">{{ item.type == 0 ? 'To Owner' : 'From' }}</p>
                       </div>
                     </div>
@@ -369,37 +314,30 @@
         </van-collapse>
       </div>
     </div>
-    <van-dialog
-      v-model="dialogShow"
-      :close-on-click-overlay="true"
-      :z-index="99999999999999999999"
-      :show-confirm-button="false"
-      @confirm="dialog_confirm"
-    >
+    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+      :show-confirm-button="false" @confirm="dialog_confirm">
       <div class="introduce">
         <p class="introduce_title">What is Pump</p>
         <p class="content end">The Pump game lets you collect SoulCast NFTs and earn vSOULs.</p>
         <p class="introduce_title">How to Pump</p>
         <p class="content">1. Choose a slot from #0, #1, #2, and #3.</p>
         <p class="content">2. Confirm your Pump, and the payment will be deducted from your wallet.</p>
-        <p class="content">3. Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting the SoulCast NFT.</p>
-        <p class="content end">4. The other three Pumpers will receive a full refund plus an additional 4% in ETH as compensation.</p>
+        <p class="content">3. Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting
+          the SoulCast NFT.</p>
+        <p class="content end">4. The other three Pumpers will receive a full refund plus an additional 4% in ETH as
+          compensation.</p>
         <p class="introduce_title">Features</p>
         <p class="content">1. All Pumpers gain access to group chats with the creator of the SoulCast.</p>
         <p class="content">2. The winners of each Pump gain access to private chats with the creator of SoulCast.</p>
-        <p class="content">3. The Pumpers who hold at least one SoulCast NFT are rewarded with vSOULs for participating.</p>
+        <p class="content">3. The Pumpers who hold at least one SoulCast NFT are rewarded with vSOULs for participating.
+        </p>
         <div class="setBut">
           <button class="backBtn" @click="dialogShow = false">back</button>
         </div>
       </div>
     </van-dialog>
-    <van-dialog
-      v-model="cancelShow"
-      :close-on-click-overlay="true"
-      :z-index="99999999999999999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
+    <van-dialog v-model="cancelShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+      :show-cancel-button="false" :show-confirm-button="false">
       <div class="introduce">
         <p class="cancelPick">Do you want to cancel the list?</p>
         <img class="canserImg" src="../../assets/cancel_pick.png" alt />
@@ -411,27 +349,17 @@
     </van-dialog>
     <Overlay :overlayshow="overlayshow"></Overlay>
     <Wallet :path="pathEx" @close="walletClose()" :walletShow="walletShow"></Wallet>
-    <Picks
-      :PoolBalance="PoolBalance"
-      :pickIndex="pickIndex"
-      @callBack="callBack"
-      :NFTDetail="NFTDetail"
-      @close="PicksShow = false"
-      :PicksShow="PicksShow"
-    ></Picks>
+    <Picks :PoolBalance="PoolBalance" :pickIndex="pickIndex" @callBack="callBack" :NFTDetail="NFTDetail"
+      @close="PicksShow = false" :PicksShow="PicksShow"></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
-    <van-dialog
-      v-model="earnVsoulShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
+    <van-dialog v-model="earnVsoulShow" :close-on-click-overlay="true" :z-index="9999999" :show-cancel-button="false"
+      :show-confirm-button="false">
       <div class="introduce">
-        <p class="earnVsoul">To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
+        <p class="earnVsoul">To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards
+          cannot be granted.</p>
         <div class="setBut">
-          <button @click="continueList" >Continue To List</button>
-          <button class="backBtn" style="background-color: #DFDFCE;" @click="earnVsoulShow = false" >Cancel</button>
+          <button @click="continueList">Continue To List</button>
+          <button class="backBtn" style="background-color: #DFDFCE;" @click="earnVsoulShow = false">Cancel</button>
         </div>
       </div>
     </van-dialog>
@@ -456,11 +384,11 @@ import {
 } from "../../libs/target";
 import { isShow } from "@/libs/isShow.js";
 export default {
-  name: "",
+  name: "explore_details",
   data() {
     return {
-      loginInfo:undefined,
-      isShareMy:false,
+      loginInfo: undefined,
+      isShareMy: false,
       dialogShow: false,
       cancelShow: false,
       PoolBalance: "",
@@ -493,9 +421,9 @@ export default {
       PicksList: [],
       TabActive: 1,
       height: 0, //图片高度
-      NftList:[],
+      NftList: [],
       UnregisteredList: [], // 未挂单nft 
-      earnVsoulShow:false,
+      earnVsoulShow: false,
     };
   },
   watch: watch,
@@ -518,7 +446,7 @@ export default {
     let me = this;
     // this.BalanceOf()
   },
-  mounted: async function() {
+  mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
     this.getData();
@@ -533,17 +461,10 @@ export default {
     });
     window.addEventListener("scroll", this.scrollToTop);
   },
-  beforeRouteLeave(to, form, next) {
-    // Leave the route to remove the scrolling event
-    if (to.path == "/") {
-      to.meta.keepAlive = true;
-    } else {
-      to.meta.keepAlive = false;
-    }
+  beforeRouteLeave(to, from, next) {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {}
 };
 </script>
 

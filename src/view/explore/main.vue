@@ -207,11 +207,11 @@ export default {
       this.handleShowModal();
     }, 1000 * 30);
 
-    if (!this.$route.meta.keepAlive) {
+    if (this.$route.meta.from !== "explore_details") {
       this.nftList = []; //清空原有数据
       this.getData(); // 重新加载
     }
-    this.$route.meta.keepAlive = false; // 通过这个控制刷新，x否则会一直为true
+    
     this.$refs.tabbar.BarActive = this.$route.path;
     this.$refs.tabbar.walletShow = false;
   },

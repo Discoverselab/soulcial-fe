@@ -21,13 +21,6 @@ import './registerServiceWorker.js'
 Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
-//每次路由更新前，设置当前页面的meta信息
-router.beforeEach((to, from, next) => {
-  const themeColor = to.meta.metaInfo?.theme_color || '#f5f5ee';
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
-  next();
-});
-
 
 const token = "a47c446ea7f061";
 const timezone = localStorage.getItem("timezone")
@@ -43,8 +36,6 @@ if(!timezone) {
     console.error(error)
   })
 }
-
-
 
 Vue.use(VueLazyload, {
   loading: loadingImg, // 占位符图片
