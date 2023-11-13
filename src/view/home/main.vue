@@ -11,7 +11,7 @@
       </div>
       <!-- Avatar name and address -->
       <div class="userinfo">
-        <img @click="goTwitter" class="portrait" :src="UserInfo.avatar" alt />
+        <img @click="goTwitter(UserInfo)" class="portrait" :src="UserInfo.avatar" alt />
         <!--  -->
         <div class="nameAddres" v-if="UserInfo.userName">
           <p class="name">{{ UserInfo.userName }}</p>

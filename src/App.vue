@@ -192,8 +192,8 @@ body {
   }
 }
 
-.van-toast {
-  z-index: 9999999999999999999999 !important;
+.myToast {
+  z-index: 9999999999999999 !important;
 }
 
 .van-uploader__upload {

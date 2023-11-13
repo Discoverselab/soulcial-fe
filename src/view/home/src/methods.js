@@ -45,8 +45,10 @@ const provider = window.ethereum
   : null;
 //
 export default {
-  goTwitter() {
-    window.open(`https://twitter.com/${this.UserInfo.twitterUserName}`);
+  goTwitter(info) {
+    if (info.twitterStatus == 1) {
+      window.open(`https://twitter.com/${this.UserInfo.twitterUserName}`);
+    }
   },
   getNFTDetailSoul() {
     this.overlayshow = true;

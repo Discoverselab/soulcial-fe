@@ -117,7 +117,7 @@ export default {
           (item) => !this.MyList.some((ele) => Number(ele) === item)
         );
       } else {
-        this.$toast("Selected Max3");
+        this.$toast({message: "Selected Max3", className: 'myToast'});
       }
     },
   },
