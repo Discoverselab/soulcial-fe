@@ -237,13 +237,13 @@ export default {
     },
     changeTabActive(id) {
         this.TabActive = id;
-        if (this.TabActive === 1) {
-            if (!this.VSoulHistory.length) {
-                this.VSoulHistory = [];
-                this.getVSoulHistory();
-                this.getVSoulBalance();
-            }
-        }
+        // if (this.TabActive === 1) {
+            // if (!this.VSoulHistory.length) {
+            //     this.VSoulHistory = [];
+            //     // this.getVSoulHistory();
+            //     // this.getVSoulBalance();
+            // }
+        // }
     },
     jumpOP(){
         window.open('https://app.optimism.io/bridge/deposit', '_blank');

@@ -22,9 +22,9 @@
       <div>
         <div>
           <div class="earn_list_title">
-            <p class="title" >
+            <p class="title">
               History
-              <span class="title_right" @click="$router.push('/vsoul_introduce')" >
+              <span class="title_right" @click="$router.push('/vsoul_introduce')">
                 <img src="@/assets/diamond.png" alt />
                 <span class="invite_earn">Earn vSOUL</span>
               </span>
@@ -257,7 +257,7 @@ export default {
       walletCurrentPage: 1,
       walletPageSize: 20,
       walletFinished: false,
-      TabActive: 2,
+      TabActive: 1,
       VSoulHistory: [],
       WalletHistory: [],
       walletType: true,
@@ -289,8 +289,8 @@ export default {
         {
           name: "WALLET",
           id: 2
-        },
-        
+        }
+
         // {
         //   name: "COLLECTIONS",
         //   id: 3
@@ -363,6 +363,8 @@ export default {
       this.TabActive = 1;
     }
 
+    me.getVSoulHistory();
+    me.getVSoulBalance();
     me.getBalance();
     // me.BalanceOf();
     // me.getMintedNFTPage(1);
