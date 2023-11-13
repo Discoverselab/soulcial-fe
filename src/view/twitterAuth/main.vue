@@ -30,7 +30,6 @@ export default {
       address: "",
       loginType: 0,
       overlayshow: false,
-      UserInfo: { address: "" },
     };
   },
   watch: watch,
@@ -49,7 +48,7 @@ export default {
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
-    this.address = window.localStorage.getItem('address') || '-';
+    this.address = this.$loginData.Auth_Token;
     AOS.init({
       offset: 200,
       duration: 200, //duration
