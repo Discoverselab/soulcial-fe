@@ -146,7 +146,7 @@
           </div>
           <div class="price_botm">
             <span class="bot_price">{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
-            <span class="bot_price" v-if="TabActive == 2">{{ item.costPrice || 0 }} {{ $network }}</span>
+            <span class="bot_price" v-if="TabActive == 2">{{ item.lastSale || 0 }} {{ $network }}</span>
           </div>
           
         </div>
