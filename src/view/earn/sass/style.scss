@@ -10,24 +10,29 @@
   .TabCont {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: flex-start;
 
     .Tab_list {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 600;
-      padding-right: 24px;
-      font-size: 14px;
-      height: 30px;
-      line-height: 30px;
-      color: #7b7b77;
+      color: #000;
+font-family: DINCond-Bold;
+font-size: 24px;
+font-weight: 500;
+// line-height: 36px; /* 150% */
+letter-spacing: -0.96px;
+padding-right: 12px;
+text-transform: uppercase;
+color: rgba(0, 0, 0, .2);
       cursor: pointer;
 
       &.Tab_list_Active {
-        font-style: normal;
-        font-weight: 900;
-        font-size: 18px;
         color: #000;
+        font-family: DINCond-Bold;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 36px; /* 120% */
+        letter-spacing: -1.2px;
+        text-transform: uppercase;
       }
     }
   }
@@ -39,9 +44,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    margin-bottom: 20px;
     &.earn_list_one {
       border: 0;
+      margin-bottom: 0;
     }
 
     .list_left {
@@ -172,6 +178,7 @@
     font-size: 16px;
     padding: 10px 8px;
     font-weight: 700;
+    border-radius: 4px;
     cursor: pointer;
   }
   .earn_list_title {

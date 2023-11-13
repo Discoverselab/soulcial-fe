@@ -129,7 +129,6 @@ export default {
           if (this.activityList.length >= data.total) {
             this.activityFinished = true;
           }
-          console.log(this.activityList, "this.activityList");
         } else {
           // 加载状态结束
           this.activityLoading = false;

@@ -236,7 +236,7 @@
           PUMPING！
           <br />
           Results will be revealed in approximately <br />
-           {{ calculateSecondsUntil("2023-11-13 18:12:00") }} seconds
+           {{ calculateSecondsUntil(NFTPickInfo.rewardTime) }} seconds
         </p>
       </div>
       <!-- picks -->
