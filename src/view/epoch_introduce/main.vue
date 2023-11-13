@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="banner">
-      <img src="../../assets/img_epoch.png" alt="">
+      <img src="../../assets/banner_epoch.jpg" alt="">
     </div>
     <div class="introduce">
       <div class="title">PUMP Epoch</div>
@@ -17,11 +17,11 @@
       <div class="title">Double vSOUL</div>
       <div class="content">
         <p>1. PUMP SoulCast NFT, and win double vSOUL rewards.</p>
-        <p>2. Top 10 Pumpers on leaderboard share $2100 rewards pool.</p>
-        <p class="sec"> · 1st: 800$</p>
-        <p class="sec"> · 2nd: 400$</p>
-        <p class="sec"> · 3rd: 200$</p>
-        <p class="sec"> · 4th-10th: 100$</p>
+        <p>2. Top 10 Pumpers on leaderboard share <span class="bold">$2100</span> rewards pool.</p>
+        <p class="sec"> · 1st: <span class="bold">$800</span></p>
+        <p class="sec"> · 2nd: <span class="bold">$400</span></p>
+        <p class="sec"> · 3rd: <span class="bold">$200</span></p>
+        <p class="sec"> · 4th-10th: <span class="bold">$100</span></p>
       </div>
 
       <div class="title">Lucky 3-in-a-row</div>
@@ -96,6 +96,9 @@
       border-bottom: 1px solid #dfdfce;
       margin-bottom: 10px;
       padding-bottom: 10px;
+      .bold{
+        font-weight: 600;
+      }
     }
   }
 

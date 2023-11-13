@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <div class="name" v-if="chatDetailDto.type == 0">{{ chatDetailDto.title }}</div>
-          <div class="name" v-else>{{ `SoulCast #${chatDetailDto.tokenId} Group  (${chatDetailDto.memberNumber})` }}</div>
+          <div class="name" v-else>{{ `SoulCast #${chatDetailDto.tokenId} Group (${chatDetailDto.memberNumber})` }}</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
           </div> -->
@@ -21,7 +21,7 @@
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
-        <div class="timeTip" v-if="item.type ==99">{{ `${item.userName} ${item.content}` }}</div>
+        <div class="timeTip" v-if="item.type == 99">{{ `${item.userName} ${item.content}` }}</div>
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
             <div @click="goPersonDetail(item)" class="othersImg">
@@ -290,6 +290,7 @@ export default {
         border-radius: 20px;
         overflow: hidden;
         margin-right: 17px;
+        flex-shrink: 0;
 
         img {
           width: 100%;
@@ -300,8 +301,9 @@ export default {
       .othersMsg {
         padding: 12px;
         border-radius: 10px;
-        max-width: 285px;
+        max-width: 275px;
         background: #DFDFCE;
+        overflow-wrap: break-word;
       }
     }
 
@@ -312,9 +314,10 @@ export default {
 
       .msg {
         padding: 12px;
-        max-width: 285px;
+        max-width: 280px;
         border-radius: 10px;
         background: #F2B229;
+        overflow-wrap: break-word;
       }
     }
   }

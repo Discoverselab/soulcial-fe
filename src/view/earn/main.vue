@@ -13,7 +13,7 @@
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
       <div @click="$router.push('/epoch_introduce')" class="epoch">
-        <img src="@/assets/banner_epoch.png" alt="">
+        <img src="@/assets/banner_epoch.jpg" alt="">
       </div>
       <div>
         <div>
