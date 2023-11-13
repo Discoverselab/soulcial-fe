@@ -15,45 +15,47 @@
     <!-- earnings -->
     <div class="earnings" v-if="TabActive == 1">
       <div class="earn_list earn_list_one">
-        <p class="list_name" style="color:#62625F" >Balance</p>
+        <p class="list_name" style="color:#62625F">Balance</p>
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
       <div>
-      <div>
-        <div class="earn_list_title">
-          <p class="title">
-            History
-            <img class="point_out" @click="$router.push('/vsoul_introduce')" src="@/assets/point_out.png" alt />
-          </p>
-
-        </div>
-        <van-list
-          v-model="earnLoading"
-          offset="200"
-          loading-text="Loading"
-          :immediate-check="false"
-          :finished="earnFinished"
-          finished-text
-          @load="onEarnLoad"
-          v-if="VSoulHistory.length>0"
-        >
-          <div class="earn_list" v-for="(item, index) in VSoulHistory" :key="index">
-            <div class="list_left">
-              <img  src="../../assets/start.png" alt />
-              <div class="title_time">
-                <p class="list_name">{{ earnType[`${item.type}`] || "Promotion"}}</p>
-                <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
-              </div>
-            </div>
-            <button class="list_right">{{ `+${item.vsoulPrice} vSOUL` }}</button>
+        <div>
+          <div class="earn_list_title">
+            <p class="title" >
+              History
+              <span class="title_right" @click="$router.push('/vsoul_introduce')" >
+                <img src="@/assets/diamond.png" alt />
+                <span class="invite_earn">Invite & Earn</span>
+              </span>
+            </p>
           </div>
-        </van-list>
-        <div class="Save" v-else-if="showNoData">
-          <img src="../../assets/noDist.png" alt />
-          <p class="SaveText">No data to display</p>
+          <van-list
+            v-model="earnLoading"
+            offset="200"
+            loading-text="Loading"
+            :immediate-check="false"
+            :finished="earnFinished"
+            finished-text
+            @load="onEarnLoad"
+            v-if="VSoulHistory.length>0"
+          >
+            <div class="earn_list" v-for="(item, index) in VSoulHistory" :key="index">
+              <div class="list_left">
+                <img src="../../assets/start.png" alt />
+                <div class="title_time">
+                  <p class="list_name">{{ earnType[`${item.type}`] || "Promotion"}}</p>
+                  <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
+                </div>
+              </div>
+              <button class="list_right">{{ `+${item.vsoulPrice} vSOUL` }}</button>
+            </div>
+          </van-list>
+          <div class="Save" v-else-if="showNoData">
+            <img src="../../assets/noDist.png" alt />
+            <p class="SaveText">No data to display</p>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <!-- wallet -->
     <!-- 暂时隐藏 -->
@@ -70,18 +72,15 @@
           <p class="er_balance">{{ WalletBalance }} {{ $network }}</p>
         </div>
         <div style="text-align: right;" v-if="!isPWA">
-          <button @click="jumpOP" class="bridge">
-          Bridge
-        </button>
+          <button @click="jumpOP" class="bridge">Bridge</button>
         </div>
-        
-       
+
         <!-- <div class="earned">
           <div class="money">
             <div class="earn_money">Earned</div>
             <div class="make_money">{{ `0` }} {{$network}}</div>
           </div>
-        </div> -->
+        </div>-->
         <!-- <div class="earn_list">
           <p class="list_name" style="color:#62625F">Pool Balance</p>
           <p
@@ -96,40 +95,42 @@
           </div>
         </div>-->
         <div>
-        <div class="earn_list_title earn_list_title_wallet">
-          <p class="title">History</p>
-        </div>
+          <div class="earn_list_title earn_list_title_wallet">
+            <p class="title">History</p>
+          </div>
           <van-list
-          v-model="walletLoading"
-          offset="200"
-          loading-text="Loading"
-          :immediate-check="false"
-          :finished="walletFinished"
-          finished-text
-          @load="onWalletLoad"
-          v-if="WalletHistory.length>0"
+            v-model="walletLoading"
+            offset="200"
+            loading-text="Loading"
+            :immediate-check="false"
+            :finished="walletFinished"
+            finished-text
+            @load="onWalletLoad"
+            v-if="WalletHistory.length>0"
           >
             <div class="earn_list" v-for="(item, index) in WalletHistory" :key="index">
-            <div class="list_left">
-              <img  src="@/assets/pickss.png" alt />
-              <div class="title_time">
-                <p class="list_name">{{ walletTypeNmae[item.type] }}</p>
-                <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
+              <div class="list_left">
+                <img src="@/assets/pickss.png" alt />
+                <div class="title_time">
+                  <p class="list_name">{{ walletTypeNmae[item.type] }}</p>
+                  <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
+                </div>
               </div>
+              <button
+                class="list_right"
+                :class="{ list_right_fu: item.type == 3 || item.type == 1 }"
+              >
+                {{ item.type != 1 &&
+                item.type != 3
+                ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
+              </button>
             </div>
-            <button class="list_right" :class="{ list_right_fu: item.type == 3 || item.type == 1 }">
-              {{ item.type != 1 &&
-              item.type != 3
-              ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
-            </button>
-          </div>
           </van-list>
           <div class="Save" v-else-if="showNoWallet">
-          <img src="../../assets/noDist.png" alt />
-          <p class="SaveText">No data to display</p>
+            <img src="../../assets/noDist.png" alt />
+            <p class="SaveText">No data to display</p>
+          </div>
         </div>
-        
-      </div>
       </div>
       <!-- <div class="set_but set_but_wallet" v-if="TabActive == 2">
         <button
@@ -141,7 +142,6 @@
           @click="addFunds(false)"
         >Withdraw From Pool</button>
       </div>-->
-      
     </div>
     <!-- 暂时隐藏 -->
 
@@ -228,7 +228,6 @@
       :type="walletType"
       :ReplaceShow="ReplaceShow"
     ></Replace>
-  
   </div>
 </template>
 <script>
@@ -250,13 +249,13 @@ export default {
       levelImg: levelImg,
       earnType: earnType,
       earnLoading: false,
-      walletLoading:false,
+      walletLoading: false,
       earnFinished: false,
       earnPageSize: 20,
       earnCurrentPage: 1,
-      walletCurrentPage:1,
-      walletPageSize:20,
-      walletFinished:false,
+      walletCurrentPage: 1,
+      walletPageSize: 20,
+      walletFinished: false,
       TabActive: 2,
       VSoulHistory: [],
       WalletHistory: [],
@@ -270,7 +269,7 @@ export default {
       isPWA: false,
       Available: 0,
       showNoData: false, // vsoul页面没有历史数据展示图片
-      showNoWallet: false,//wallet页面没有历史数据时展示
+      showNoWallet: false, //wallet页面没有历史数据时展示
       walletTypeNmae: {
         0: "Deposit",
         1: "Withdraw",

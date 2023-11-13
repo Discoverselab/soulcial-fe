@@ -3,7 +3,7 @@
     <div class="navigate">
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" />
       <div class="nav_name">
-        <p class="name">vsoul Introduce</p>
+        <p class="name">ABOUT vSOUL</p>
       </div>
       <div class="back"></div>
     </div>
@@ -106,7 +106,7 @@
       }
 
       .name {
-        text-transform: uppercase;
+        // text-transform: uppercase;
         font-family: "Inter";
         font-style: normal;
         font-weight: 700;
@@ -132,7 +132,7 @@
       line-height: 20px;
       border-bottom: 1px solid #dfdfce;
       margin-bottom: 10px;
-     
+     padding-bottom: 10px;
     }
   }
   table {
@@ -144,7 +144,7 @@
   td {
     border: 1px solid #dddddd;
     text-align: center;
-    padding: 8px;
+    padding: 8px 4px;
     font-size: 8px;
     &:first-child {
       text-align: left; /* 设置第一列文本左对齐 */
