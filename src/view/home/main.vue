@@ -148,7 +148,16 @@
             <span class="bot_price">{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
             <span class="bot_price" v-if="TabActive == 2">{{ item.costPrice || 0 }} {{ $network }}</span>
           </div>
+          
         </div>
+        <div class="Launching" v-if="TabActive === 3">
+              <div class="LaunchingData" v-if="item.pickStatus > 0">
+                <span v-if="!item.nowPickCount">Pump 0/4</span>
+                <span
+                  v-else
+                >{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
+              </div>
+            </div>
       </div>
     </div>
     <div class="Save" v-else>

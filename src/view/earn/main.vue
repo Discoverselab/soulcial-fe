@@ -282,17 +282,18 @@ export default {
       },
       TabList: [
         {
-          name: "WALLET",
-          id: 2
-        },
-        {
           name: "vSOUL",
           id: 1
         },
         {
-          name: "COLLECTIONS",
-          id: 3
-        }
+          name: "WALLET",
+          id: 2
+        },
+        
+        // {
+        //   name: "COLLECTIONS",
+        //   id: 3
+        // }
       ],
       erList: [
         {
@@ -363,7 +364,7 @@ export default {
 
     me.getBalance();
     // me.BalanceOf();
-    me.getMintedNFTPage(1);
+    // me.getMintedNFTPage(1);
     me.getWallectHistory();
   },
   mounted: async function() {
