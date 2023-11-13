@@ -15,7 +15,7 @@
         <p>Nov 14 - Nov 28</p>
       </div>
       <div class="title">Double vSOUL</div>
-      <div class="content" style="border: none;">
+      <div class="content">
         <p>1. PUMP SoulCast NFT, and win double vSOUL rewards.</p>
         <p>2. Top 10 Pumpers on leaderboard share $2100 rewards pool.</p>
         <p class="sec"> · 1st: 800$</p>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="title">Get OG Badge</div>
-      <div class="content">
+      <div class="content" style="border: none;">
         <p>1. Participants in PUMP in the Epoch will be rewarded OG Badge. </p>
         <p>2. OG Badge holders have early access to future features, exclusive content, and more. </p>
       </div>
@@ -102,15 +102,18 @@
   .btn {
     width: 100%;
     height: 48px;
-    background: #000;
-    border-radius: 8px;
-    color: #fff;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #000;
+    background: #dadac6;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    padding: 8px 26px;
+    border-radius: 45px;
+    font-family: "Inter";
   }
 
   .sec {

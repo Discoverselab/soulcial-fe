@@ -250,10 +250,10 @@ export default {
 
   .chatBox {
     position: relative;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 64px - 108px);
     box-sizing: border-box;
     overflow: auto;
-    padding: 0px 24px 132px;
+    padding: 0px 24px 24px;
     border-top: 2px solid #DFDFCE;
     background-color: #f3f4ea;
 
