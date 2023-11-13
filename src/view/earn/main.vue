@@ -206,7 +206,7 @@
                 <span v-if="!item.nowPickCount">Pump 0/4</span>
                 <span
                   v-else
-                >{{ item.nowPickCount >= 4 ? 'Launching' : `Pump ${item.nowPickCount}/4` }}</span>
+                >{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
               </div>
             </div>
           </div>

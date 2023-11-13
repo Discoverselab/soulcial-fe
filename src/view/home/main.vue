@@ -11,13 +11,13 @@
       </div>
       <!-- Avatar name and address -->
       <div class="userinfo">
-        <img @click="goTwitter" class="portrait" :src="UserInfo.avatar" alt />
+        <img @click="goTwitter(UserInfo)" class="portrait" :src="UserInfo.avatar" alt />
         <!--  -->
         <div class="nameAddres" v-if="UserInfo.userName">
           <p class="name">{{ UserInfo.userName }}</p>
-          <p class="address">
-            <span @click="goParticle">{{ substring($loginData.Auth_Token) }}</span>
-            <img @click="copy" class="copy-button" round src="../../assets/copy1.png" alt />
+          <p @click="$loginType == 0 ? copy : goTwitter" class="address">
+            <img class="copy-button" round src="../../assets/icon_wallet.png" alt />
+            <span>{{ substring($loginData.Auth_Token) }}</span>
           </p>
         </div>
       </div>

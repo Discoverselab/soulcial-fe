@@ -24,22 +24,34 @@ export default {
     // 记录进入时间戳
     window.localStorage.setItem("firstApptime", new Date().getTime());
 
+    // 时区检测
+    const token = "a47c446ea7f061";
+    const timezone = localStorage.getItem("timezone")
+    if (!timezone) {
+      console.log(timezone, 'timezone')
+      fetch(`https://ipinfo.io/json?token=${token}`)
+        .then(response => response.json())
+        .then(data => {
+          window.localStorage.setItem("timezone", data.timezone);
+        })
+        .catch(error => {
+          // window.localStorage.removeItem("timezone");
+          console.error(error)
+        })
+    }
+
+    // PWA环境检测
     const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
     if (this._isMobile()) {
       //移动设备
       if (isSafari) {
         // ios safari 浏览器
-        if (!window.navigator.standalone) {
-          //
-        } else {
-          // isPWA
+        if (window.navigator.standalone) {
           window.localStorage.setItem("isPWA", true);
         }
       } else {
         // 其他浏览器
-        if (!window.matchMedia("(display-mode: standalone)").matches) {
-          //
-        } else {
+        if (window.matchMedia("(display-mode: standalone)").matches) {
           window.localStorage.setItem("isPWA", true);
         }
       }
@@ -192,8 +204,8 @@ body {
   }
 }
 
-.van-toast {
-  z-index: 9999999999999999999999 !important;
+.myToast {
+  z-index: 9999999999999999 !important;
 }
 
 .van-uploader__upload {
