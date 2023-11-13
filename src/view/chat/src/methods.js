@@ -27,10 +27,8 @@ export default {
       });
   },
   connectWS() {
-    let wsUrl = `wss://test2bsc.soulcial.network/pfp/websocket/${this.$loginData.userId}`;
-    // let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/${this.$loginData.userId}`;
     connectWebsocket(
-      wsUrl,
+      '',
       {},
       (res) => {
         let resData = JSON.parse(res);

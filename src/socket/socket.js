@@ -1,7 +1,10 @@
+import loginData from "@/libs/loginData";
 // websocket实例
 let wsObj = null
 // ws连接地址
-let wsUrl = null
+let wsUrl = `wss://test2bsc.soulcial.network/pfp/websocket/${loginData.userId}`;
+// let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/${loginData.userId}`;
+
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false
 // 重连定时器
@@ -20,7 +23,7 @@ let agentData = {}
  * @param {function} errCallback ws连接错误的回调函数
  */
 export const connectWebsocket = (url, data, successCallback, errCallback) => {
-  wsUrl = url
+  url ? (wsUrl = url) : null
   messageCallback = successCallback
   errorCallback = errCallback
   agentData = data
