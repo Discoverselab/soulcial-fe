@@ -111,7 +111,7 @@
                 width: 16px;
                 display: flex;
                 align-items: center;
-
+                cursor: pointer;
                 img {
                     width: 100%;
                 }
@@ -163,5 +163,6 @@
         text-align: center;
         color: #000;
         background-color: #fff;
+        cursor: pointer;
     }
 }

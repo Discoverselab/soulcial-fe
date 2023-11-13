@@ -165,7 +165,7 @@
         <div class="nft_cont" v-if="NftList.length">
           <div
             class="nft_list"
-            @click="$router.push(`/explore_details?id=${item.id}&path=`)"
+            @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
             v-for="(item, index) in NftList"
             :key="index"
           >
@@ -184,7 +184,7 @@
               <div class="flow_id">
                 <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
                 <span class="flow">{{ getNFTLevel[item.level] }}</span>
-                <span class="flow_lin">#{{ item.id }}</span>
+                <span class="flow_lin">#{{ item.realTokenId }}</span>
               </div>
               <div class="Listing">
                 <span>Listing Price</span>

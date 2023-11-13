@@ -363,4 +363,109 @@
             }
         }
     }
+    .van-dialog {
+        background-color: #f5f5ed;
+        padding: 40px 24px 40px 24px;
+
+        .introduce {
+            p {
+                padding-bottom: 12px;
+                border-bottom: 1px solid #dfdfce;
+                color: #000;
+                font-family: "Inter";
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 600;
+                margin-bottom: 28px;
+
+                &.cancelPick,&.earnVsoul {
+                    color: #000;
+                    text-align: center;
+                    font-family: "Inter";
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    border: none;
+                    margin-bottom: 29px;
+                    padding: 0;
+                }
+                &.earnVsoul {
+                    text-align: left;
+                }
+            }
+            .introduce_title {
+                font-size: 16px;
+                border: none;
+                margin-bottom: 0px;
+                padding-bottom: 6px;
+            }
+            .content {
+                margin-bottom: 0;
+                border: none;
+                padding-bottom: 6px;
+                font-weight: 400;
+            }
+            .end {
+                border-bottom: 1px solid #dfdfce;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            .canserImg {
+                display: block;
+                width: 160px;
+                height: 160px;
+                margin: 0 auto;
+            }
+
+            .setBut {
+                margin-top: 8px;
+                
+                button {
+                    display: block;
+                    width: 100%;
+                    padding: 8px 26px;
+                    border-radius: 45px;
+                    border: 2px solid #000;
+                    background: #fff;
+                    color: #000;
+                    text-align: center;
+                    font-family: "Inter";
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    &.backBtn{
+                        margin-top: 20px;
+                    }
+                    &:active {
+                        opacity: 0.8;
+                    }
+
+                    &.cancel {
+                        margin-bottom: 20px;
+                        border: 2px solid #e03131;
+                        background: #ffd8d8;
+                        color: #e03131;
+                    }
+                }
+            }
+        }
+
+        .van-dialog__confirm {
+            border-radius: 45px;
+            border: 2px solid #000;
+            background: #fff;
+
+            span {
+                color: #000;
+                text-align: center;
+                font-family: "Inter";
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+        }
+    }
 }

@@ -83,7 +83,7 @@
       <!-- operation -->
       <div class="shapset_but">
         <div v-if="isShow">
-          <button @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}&path=1`)">List for
+          <button @click="jumpToList">List for
             {{ formatNumber(NFTDetail.price) }} {{ $network }}</button>
         </div>
         <button class="Cancels" @click="$router.push('/')">
@@ -92,6 +92,24 @@
         <!-- <button @click="$router.go(-1)">BACK</button> -->
       </div>
     </div>
+    <!-- 未挂单nft需要大于1才能赚取积分 -->
+    <van-dialog
+      v-model="earnVsoulShow"
+      :close-on-click-overlay="true"
+      :z-index="9999999"
+      :show-cancel-button="false"
+      :show-confirm-button="false"
+    >
+      <div class="introduce">
+        <p class="earnVsoul">To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
+        <div class="setBut">
+          <button @click="continueList" >Continue To List</button>
+          <button class="backBtn" style="background-color: #DFDFCE;" @click="earnVsoulShow = false" >Cancel</button>
+        </div>
+      </div>
+    </van-dialog>
+    <Overlay :overlayshow="overlayshow"></Overlay>
+
   </div>
 </template>
 <script>
@@ -102,6 +120,8 @@ import AOS from "aos";
 import Hexagon from "../../components/Hexagon.vue";
 import { getNFTLevel, getNFTPersonality, NFTColor, getNFTMood, Weather } from "../../libs/target";
 import {isShow} from "@/libs/isShow.js"
+import Overlay from "@/components/Overlay.vue";
+
 export default {
   name: "",
   data() {
@@ -109,12 +129,16 @@ export default {
       values: [],
       flippedShow: false,
       turnShow: false,
+      overlayshow:false,
       NFTDetail: {},
       getNFTLevel: getNFTLevel,
       getNFTPersonality: getNFTPersonality,
       NFTColor: NFTColor,
       getNFTMood: getNFTMood,
-      Weather: Weather
+      Weather: Weather,
+      earnVsoulShow:false,
+      UnregisteredList: [], // 未挂单nft 
+      NftList:[],
     };
   },
   watch: watch,
@@ -125,11 +149,13 @@ export default {
     }
   },
   components: {
-    Hexagon
+    Hexagon,
+    Overlay
   },
   created() {
     let me = this;
     me.getData();
+    me.getMintedNFTPage()
   },
   mounted: async function () {
     console.log("this：", this);

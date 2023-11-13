@@ -53,4 +53,53 @@ export default {
         const k = 0.0052;
         return {fontSize: `${705 / soulLength * k}rem`}
     },
+    jumpToList(){
+        if (this.UnregisteredList.length === 1) {
+          this.earnVsoulShow = true
+        } else {
+          this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}&path=1`)
+        }
+      },
+      continueList() {
+        this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}&path=1`)
+      },
+      getMintedNFTPage() {
+        this.overlayshow = true;
+        let data = {
+          current: 1,
+          size: 99,
+        };
+        let url = this.$api.infor.getMintedNFTPage;
+        get(url, data)
+          .then((res) => {
+            if (res.code === 200) {
+              this.NftList = this.NftList.concat(res.data.records);
+              this.getCollectNFTPage();
+            }
+          })
+          .catch((error) => {
+            this.overlayshow = false;
+          });
+      },
+    
+      getCollectNFTPage() {
+        let data = {
+          current: 1,
+          size: 99,
+        };
+        let url = this.$api.infor.getCollectNFTPage;
+        get(url, data)
+          .then((res) => {
+            if (res.code === 200) {
+              this.NftList = this.NftList.concat(res.data.records);
+              this.UnregisteredList = this.NftList.filter(
+                (item) => item.pickStatus != 1
+              );
+            }
+            this.overlayshow = false;
+          })
+          .catch((error) => {
+            this.overlayshow = false;
+          });
+      },
 };
