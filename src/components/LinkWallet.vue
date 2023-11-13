@@ -6,7 +6,7 @@
         <p class="headLin" @click="close"></p>
         <P class="title">Connect Wallet</P>
         <img class="wallet_img" src="../assets/wellat_img.png" alt />
-        <div v-if="!isPWA" :class="{ noBottom: !isPWA }" class="wallet_list " @click="metamask">
+        <div v-if="!isPWA" :class="{ noBottom: !isPWA }" class="wallet_list" @click="metamask">
           <div class="list_left">
             <img src="../assets/metamask.png" alt />
             <p>MetaMask</p>
@@ -37,7 +37,6 @@
           </div>
         </template>
 
-
         <!-- <div class="wallet_list" @click="WalletConnect">
           <div class="list_left">
             <img src="../assets/wallet_connect.png" alt="" />
@@ -58,7 +57,7 @@
               Instead of creating new accounts and passwords on every website, just connect your wallet.
             </p>
           </div>
-        </div> -->
+        </div>-->
         <template v-if="!isPWA">
           <div class="lins">
             <p class="lin"></p>
@@ -66,24 +65,42 @@
             <p class="lin"></p>
           </div>
           <div class="img_list">
-            <img @click="particle('phone', 1)" src="../assets/Subtract1.png" alt="" />
-            <img @click="particle('email', 2)" src="../assets/Exclude.png" alt="" />
+            <img @click="particle('phone', 1)" src="../assets/Subtract1.png" alt />
+            <img @click="particle('email', 2)" src="../assets/Exclude.png" alt />
             <!-- <img @click="particle('apple', 3)" src="../assets/phones.png" alt="" /> -->
-            <img @click="particle('google', 4)" src="../assets/gogo.png" alt="" />
+            <img @click="particle('google', 4)" src="../assets/gogo.png" alt />
             <!-- <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" /> -->
           </div>
         </template>
       </div>
     </van-action-sheet>
-    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
-      :before-close="newGroupBefColse" confirmButtonText="CONFIRM" @confirm="dialog_confirm">
-      <input placeholder="Please enter" onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')" maxlength="10"
-        type="text" @input="restrictInput" v-model="handle" />
+    <van-dialog
+      v-model="dialogShow"
+      :close-on-click-overlay="true"
+      :z-index="9999999"
+      title="Create Lens Handle"
+      :before-close="newGroupBefColse"
+      confirmButtonText="CONFIRM"
+      @confirm="dialog_confirm"
+    >
+      <input
+        placeholder="Please enter"
+        onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')"
+        maxlength="10"
+        type="text"
+        @input="restrictInput"
+        v-model="handle"
+      />
       <p class="point_out">Handle must be minimum of 5 length and maximum of 31 length</p>
     </van-dialog>
     <!-- 白名单弹窗 -->
-    <van-dialog v-model="whiteShow" :close-on-click-overlay="false" :z-index="99999999"
-      confirmButtonText="Join the waitlist" @confirm="white_confirm">
+    <van-dialog
+      v-model="whiteShow"
+      :close-on-click-overlay="false"
+      :z-index="99999999"
+      confirmButtonText="Join the waitlist"
+      @confirm="white_confirm"
+    >
       <p class="fee_dint">
         Sorry, Soulcial is now in beta stage. It seems that you are not eligible
         temporally. Please join the waitlist first.
@@ -121,7 +138,7 @@ export default {
   props: {
     walletShow: Boolean
   },
-  data: function () {
+  data: function() {
     let _clientH = document.documentElement.clientHeight;
     return {
       userLens: {},
@@ -351,9 +368,11 @@ export default {
       this.overlayshow = true;
       let streamID = streamId ? streamId : Date.parse(new Date());
       let prefix = this.$api.login.login;
-      let params = `?address=${this.address}&&loginType=${this.loginType
-        }&&particleType=${this.preferredAuthType
-        }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
+      let params = `?address=${this.address}&&loginType=${
+        this.loginType
+      }&&particleType=${
+        this.preferredAuthType
+      }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
         ""}&&signature=${signParams?.signature || ""}`;
       post(prefix + params)
         .then(res => {
@@ -367,7 +386,7 @@ export default {
               authToken: this.address,
               login_type: this.loginType,
               id: res.data.tokenValue,
-              userid: res.data.userId,
+              userid: res.data.userId
             });
             this.$emit("init"); // 分享页登录后重新获取user页面数据
             this.close();
@@ -392,7 +411,7 @@ export default {
     },
     metamaskChack() {
       let me = this;
-      const clear = function () {
+      const clear = function() {
         if (me.$loginData.Auth_Token) {
           me.$loginData.out();
           window.localStorage.removeItem("loginInfo");
@@ -415,7 +434,6 @@ export default {
 
       //Connect to Metamask (not sure how to do like web3.eth.connect)
       await provider.enable();
-
       let unit = "\n";
       let timestamp = String(+new Date()).slice(-6);
 
@@ -423,18 +441,27 @@ export default {
       let message = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`;
 
       //Sign message with Metamask (private key)
-      const signedMessage = await web3.eth.personal.sign(message, accounts[0]);
-      if (signedMessage) {
-        let signParams = {
-          message: encodeURIComponent(message),
-          signature: signedMessage
-        };
-        this.loginType = 0;
-        this.preferredAuthType = "";
-        this.checkSteamId(accounts[0], signParams);
-      } else {
-        // 异常
-        this.$toast("Wrong signature");
+
+      try {
+        const signedMessage = await web3.eth.personal.sign(
+          message,
+          accounts[0]
+        );
+
+        if (signedMessage) {
+          let signParams = {
+            message: encodeURIComponent(message),
+            signature: signedMessage
+          };
+          this.loginType = 0;
+          this.preferredAuthType = "";
+          this.checkSteamId(accounts[0], signParams);
+        } else {
+          // 异常
+          this.$toast("Wrong signature");
+        }
+      } catch (error) {
+        this.overlayshow = false;
       }
     },
     handleAddCatch(provider, accounts) {
@@ -451,6 +478,7 @@ export default {
           this.overlayshow = true;
           await addVTNetwork(this.handleSign, this.handleAddCatch);
         } catch (error) {
+          console.log("error", error, "error");
           this.overlayshow = false;
         }
         //  this.overlayshow = false
@@ -513,7 +541,9 @@ export default {
     async particle(preferredAuthType, type) {
       this.preferredAuthType = type;
       this.overlayshow = true;
-      onParticle(this.particleCallback, preferredAuthType, () => { this.overlayshow = false });
+      onParticle(this.particleCallback, preferredAuthType, () => {
+        this.overlayshow = false;
+      });
     }
   },
   created() {
