@@ -250,12 +250,11 @@ export default {
 
   .chatBox {
     position: relative;
-    height: calc(100vh - 64px - 108px);
+    height: calc(100vh - 64px);
     box-sizing: border-box;
     overflow: auto;
-    padding: 0px 24px 24px;
+    padding: 0px 24px 132px;
     border-top: 2px solid #DFDFCE;
-    border-bottom: 2px solid #DFDFCE;
     background-color: #f3f4ea;
 
     .loading {
@@ -318,12 +317,16 @@ export default {
   }
 
   .footer {
+    position: fixed;
+    width: 390px;
+    bottom: 0;
     display: flex;
     align-items: center;
     text-align: center;
     height: 108px;
     padding: 0px 12px;
     box-sizing: border-box;
+    border-top: 2px solid #DFDFCE;
     background-color: #fff;
 
     .btn {

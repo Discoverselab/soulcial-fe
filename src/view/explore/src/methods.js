@@ -13,25 +13,15 @@ export default {
   handleShowModal() {
     const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
     if (this._isMobile()) {
-      //移动设备
       if (isSafari) {
-        // ios safari 浏览器
         if (!window.navigator.standalone) {
           this.handleShowPWA();
-        } else {
-          // isPWA
-          window.localStorage.setItem("isPWA", true);
         }
       } else {
-        // 其他浏览器
         if (!window.matchMedia("(display-mode: standalone)").matches) {
           this.handleShowPWA();
-        } else {
-          window.localStorage.setItem("isPWA", true);
         }
       }
-    } else {
-      window.localStorage.setItem("isPWA", false);
     }
   },
   handleShowPWA() {

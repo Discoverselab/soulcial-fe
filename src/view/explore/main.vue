@@ -109,16 +109,16 @@
     <!-- pwa弹窗 -->
     <van-dialog v-model="pwaModalShow" :close-on-click-overlay="false" confirmButtonText="BACK" :z-index="99999">
       <div class="title level_desc">
-        <span style="text-transform: none;">For a smoother experience, add Soulcial to your home screen</span>
+        <span style="text-transform: none;">For a smoother experience, add Soulcial to your Home Screen</span>
       </div>
       <div class="fee_dint">
-        1.Open your browser Menu
+        1.Open your browser <span>Menu</span>
       </div>
       <div class="fee_dint">
-        2.Tap the Share icon
+        2.Tap the <span>Share icon</span>
       </div>
       <div class="fee_dint">
-        3.Select “Add to Home Screen”
+        3.Select <span>“Add to Home Screen”</span>
       </div>
     </van-dialog>
   </div>
@@ -203,15 +203,16 @@ export default {
     // window.addEventListener("scroll", this.scrollToTop);
   },
   activated() {
+    this.handleShowModal();
     this.timer = setTimeout(() => {
       this.handleShowModal();
     }, 1000 * 30);
 
-    if (!this.$route.meta.keepAlive) {
+    if (this.$route.meta.from !== "explore_details") {
       this.nftList = []; //清空原有数据
       this.getData(); // 重新加载
     }
-    this.$route.meta.keepAlive = false; // 通过这个控制刷新，x否则会一直为true
+
     this.$refs.tabbar.BarActive = this.$route.path;
     this.$refs.tabbar.walletShow = false;
   },
@@ -289,13 +290,11 @@ export default {
   color: #333;
   font-size: 16px;
   font-family: "Inter";
-  // font-weight: 600;
   font-style: normal;
 
   span {
-    font: inherit;
+    font-weight: 600;
+    font-size: 16px;
   }
-
-  // margin-bottom: 20px;
 }
 </style>

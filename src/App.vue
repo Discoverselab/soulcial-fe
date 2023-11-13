@@ -23,39 +23,40 @@ export default {
   created() {
     // 记录进入时间戳
     window.localStorage.setItem("firstApptime", new Date().getTime());
-    // const isSafari = window.navigator.vendor === 'Apple Computer, Inc.';
-    // if (this._isMobile()) {
-    //   //移动设备
-    //   if (isSafari) {
-    //     // ios safari 浏览器
-    //     if (!window.navigator.standalone) {
-    //       this.$router.replace("/addtohome");
-    //     } else {
-    //       // isPWA
-    //       window.localStorage.setItem("isPWA", true);
-    //     }
-    //   } else {
-    //     // 其他浏览器
-    //     if (!window.matchMedia('(display-mode: standalone)').matches) {
-    //       this.$router.replace("/addtohome");
-    //     } else {
-    //       window.localStorage.setItem("isPWA", true);
-    //     }
-    //   }
-    // } else {
-    //   window.localStorage.setItem("isPWA", false);
-    // }
+
+    const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
+    if (this._isMobile()) {
+      //移动设备
+      if (isSafari) {
+        // ios safari 浏览器
+        if (!window.navigator.standalone) {
+          //
+        } else {
+          // isPWA
+          window.localStorage.setItem("isPWA", true);
+        }
+      } else {
+        // 其他浏览器
+        if (!window.matchMedia("(display-mode: standalone)").matches) {
+          //
+        } else {
+          window.localStorage.setItem("isPWA", true);
+        }
+      }
+    } else {
+      window.localStorage.setItem("isPWA", false);
+    }
   },
   methods: {
-    clear(){
+    clear() {
       if (this.$loginData.Auth_Token) {
-          this.$loginData.out();
-          window.localStorage.removeItem("loginInfo");
-          localStorage.removeItem("userInfo");
-          localStorage.removeItem("mintedNFTPage");
-          this.$router.push("/");
-          window.localStorage.setItem("Sift", "4down");
-        }
+        this.$loginData.out();
+        window.localStorage.removeItem("loginInfo");
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("mintedNFTPage");
+        this.$router.push("/");
+        window.localStorage.setItem("Sift", "4down");
+      }
     },
     IsBar() {
       if (this.BarList.indexOf(this.$route.path) === -1) {
@@ -71,11 +72,11 @@ export default {
       return flag;
     },
   },
-  mounted(){
-     // 监听账户切换
- window.ethereum.on("accountsChanged", this.clear);
-      // 监听网络切换
-      window.ethereum.on("networkChanged", this.clear);
+  mounted() {
+    // 监听账户切换
+    window.ethereum.on("accountsChanged", this.clear);
+    // 监听网络切换
+    window.ethereum.on("networkChanged", this.clear);
   }
 };
 </script>

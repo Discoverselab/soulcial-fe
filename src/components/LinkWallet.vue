@@ -551,6 +551,7 @@ export default {
   },
   mounted() {
     this.isPWA = window.localStorage.getItem("isPWA") == "true";
+    console.log("🔥🔥🔥🚀 ~ file: LinkWallet.vue:554 ~ this.isPWA:", this.isPWA);
   }
 };
 </script>

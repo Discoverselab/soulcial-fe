@@ -33,16 +33,17 @@ import search from "@/view/search/main";
 import share_pick from "@/view/share_pick/main";
 import vsoul_introduce from "@/view/vsoul_introduce/main"
 Vue.use(Router);
-export default new Router({
+const router = new Router({
   mode: "hash",
   linkActiveClass: "active",
   routes: [
     {
       path: "/",
-      name: "explore",
+      name: "Explore",
       component: explore,
       meta: {
         keepAlive: true,
+        from: "",
       },
     },
     {
@@ -138,7 +139,7 @@ export default new Router({
     {
       path: "/user",
       name: "user",
-      component: user, 
+      component: user,
       meta: {
         metaInfo: {
           theme_color: "#fff",
@@ -244,3 +245,19 @@ const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
+
+router.beforeEach(async (to, from, next) => {
+  if (from.name === "explore_details" && to.name === "Explore") {
+    to.meta.from = "explore_details";
+  } else {
+    to.meta.from = "";
+  }
+  //每次路由更新前，设置当前页面的meta信息
+  const themeColor = to.meta.metaInfo?.theme_color || "#f5f5ee";
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", themeColor);
+  next();
+});
+
+export default router;
