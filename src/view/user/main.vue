@@ -10,7 +10,7 @@
         </div>
       </div>
       <!-- Avatar name and address -->
-      <div class="userinfo" >
+      <div class="userinfo">
         <div @click="goTwitter" class="portrait">
           <img :src="UserInfo.avatar" alt />
         </div>
@@ -19,45 +19,29 @@
             <p class="name noTwitter">{{ UserInfo.userName }}</p>
             <div class="info">
               <div>
-                <img @click="goTwitter" class="twitterBrid"  src="@/assets/Twitters.png" alt="" v-if="UserInfo.twitterStatus === 1" >
+                <img @click="goTwitter" class="twitterBrid" src="@/assets/Twitters.png" alt=""
+                  v-if="UserInfo.twitterStatus === 1">
               </div>
               <div class="Connects" v-if="isOwn">
-                <button
-                  class="userBtn connect"
+                <button class="userBtn connect"
                   v-if="UserInfo.connectStatus !== 0 && !UserInfo.connectStatus && !connectSuccess"
-                  @click="connectUser"
-                >Connect</button>
-                <button
-                  class="userBtn"
-                  @click="confirmConnect(isEmpty[0].id)"
-                  v-else-if="UserInfo.connectStatus === 0 && shouldConfirm"
-                  style="background-color: #F3B228;"
-                >
+                  @click="connectUser">Connect</button>
+                <button class="userBtn" @click="confirmConnect(isEmpty[0].id)"
+                  v-else-if="UserInfo.connectStatus === 0 && shouldConfirm" style="background-color: #F3B228;">
                   <img src="@/assets/checkbox_circle.png" alt />
                   Confirm
                 </button>
-                <button
-                  class="userBtn"
-                  v-else-if="UserInfo.connectStatus === 0 || connectSuccess"
-                  style="background-color: #F3B228;"
-                >
+                <button class="userBtn" v-else-if="UserInfo.connectStatus === 0 || connectSuccess"
+                  style="background-color: #F3B228;">
                   <img src="@/assets/send_plane.png" alt />
                   Sent
                 </button>
-                <button
-                  class="userBtn"
-                  @click="cancelConnect(allList[0]?.id, isEmpty[0]?.id)"
-                  v-else-if="UserInfo.connectStatus === 1"
-                  style="color: #666666;"
-                >
+                <button class="userBtn" @click="cancelConnect(allList[0]?.id, isEmpty[0]?.id)"
+                  v-else-if="UserInfo.connectStatus === 1" style="color: #666666;">
                   <img src="@/assets/arrow_left_right_line.png" alt />
                   Connected
                 </button>
-                <button
-                  class="userBtn"
-                  v-else-if="UserInfo.connectStatus === 2"
-                  style="color: #F3B228;"
-                >
+                <button class="userBtn" v-else-if="UserInfo.connectStatus === 2" style="color: #F3B228;">
                   <img src="@/assets/star_smile_fill.png" alt />
                   Connected
                 </button>
@@ -70,21 +54,16 @@
       <!-- User label -->
       <div class="label_cont">
         <div class="label_left">
-          <svg-icon
-            v-for="(item, index) in TagsList"
-            :key="index"
-            :className="`svgName${item}`"
-            :iconClass="`tag${item}`"
-          ></svg-icon>
+          <svg-icon v-for="(item, index) in TagsList" :key="index" :className="`svgName${item}`"
+            :iconClass="`tag${item}`"></svg-icon>
         </div>
         <!-- <img class="edit" src="../../assets/user_chat.png" alt="" /> -->
       </div>
       <!-- Calculate points -->
       <div class="Calculate">
         <div class="soul">
-          <span
-            :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)"
-          >{{ `${UserInfo.personality} ${UserInfo.chracter}` || '-' }}</span>
+          <span :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)">{{ `${UserInfo.personality}
+                      ${UserInfo.chracter}` || '-' }}</span>
 
           <img src="@/assets/sbti.png" alt />
         </div>
@@ -92,13 +71,8 @@
           <img src="../../assets/time.png" class="time" alt="">
           Update SBTI
         </button>-->
-        <Hexagon
-          v-if="this.values.length > 5"
-          :type="true"
-          :level="UserInfo.level"
-          :levelScore="UserInfo.levelScore"
-          :values="values"
-        />
+        <Hexagon v-if="this.values.length > 5" :type="true" :level="UserInfo.level" :levelScore="UserInfo.levelScore"
+          :values="values" />
         <!-- Ranking data information -->
         <div class="rank_cont" style="margin-top: 20px;">
           <!-- <div @click="FollList(1)" class="rank_list">
@@ -134,24 +108,14 @@
     </div>
     <!-- Tab -->
     <div class="TabCont">
-      <div
-        class="Tab_list"
-        :class="{
+      <div class="Tab_list" :class="{
         Tab_list_Active: TabActive == item.id,
-      }"
-        @click="TabClick(item.id)"
-        v-for="(item, index) in TabList"
-        :key="index"
-      >{{ item.name }}</div>
+      }" @click="TabClick(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
     </div>
     <!-- NFT list -->
     <div class="nft_cont" v-if="NftList.length">
-      <div
-        class="nft_list"
-        v-for="(item, index) in NftList"
-        @click="$router.push(`/explore_details?id=${item.id}&path=`)"
-        :key="index"
-      >
+      <div class="nft_list" v-for="(item, index) in NftList" @click="$router.push(`/explore_details?id=${item.id}&path=`)"
+        :key="index">
         <div class="img_cont">
           <img class="nftUrl" :src="item.squarePictureUrl" alt />
           <div v-if="TabActive == 1 || TabActive == 2" class="point">
@@ -186,19 +150,13 @@
     <Overlay :overlayshow="overlayshow"></Overlay>
 
     <!-- 取消连接弹窗 -->
-    <van-dialog
-      v-model="connectShow"
-      :close-on-click-overlay="true"
-      :z-index="99999999999999999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
+    <van-dialog v-model="connectShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+      :show-cancel-button="false" :show-confirm-button="false">
       <div class="introduce">
         <p class="cancelConnect">Confirm to disconnect?</p>
         <div class="setBut">
           <button @click="onCancelConnect" style="margin-bottom: 20px;">Confirm</button>
-          <button @click="connectShow = false" style="background-color:#F5F5ED;
-">Cancel</button>
+          <button @click="connectShow = false" style="background-color:#F5F5ED;">Cancel</button>
         </div>
       </div>
     </van-dialog>
@@ -226,7 +184,7 @@ export default {
       isEmpty: [], // 当前访问主页是否在我的待添加好友列表里
       connectSuccess: false,
       connectedNum: null,
-      userId:null,
+      userId: null,
       TagsList: [],
       overlayshow: false,
       levelImg: levelImg,
@@ -261,8 +219,7 @@ export default {
     }
   },
   components: { Hexagon, Overlay, Wallet },
-  created() {},
-  mounted: async function() {
+  mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
     await this.init();
@@ -280,7 +237,6 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {}
 };
 </script>
 

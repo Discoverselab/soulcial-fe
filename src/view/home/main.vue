@@ -15,7 +15,7 @@
         <!--  -->
         <div class="nameAddres" v-if="UserInfo.userName">
           <p class="name">{{ UserInfo.userName }}</p>
-          <p @click="$loginType == 0 ? copy : goTwitter" class="address">
+          <p @click="$loginData.loginType == 0 ? copy() : goParticle()" class="address">
             <img class="copy-button" round src="../../assets/icon_wallet.png" alt />
             <span>{{ substring($loginData.Auth_Token) }}</span>
           </p>

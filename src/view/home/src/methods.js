@@ -28,7 +28,6 @@ import {
 //lens
 import {
   LensClient,
-  production,
   development,
   isRelayerResult,
 } from "@lens-protocol/client";
@@ -46,7 +45,7 @@ const provider = window.ethereum
 //
 export default {
   goTwitter(info) {
-    if (info.twitterStatus == 1) {
+    if (info?.twitterStatus == 1) {
       window.open(`https://twitter.com/${this.UserInfo.twitterUserName}`);
     }
   },
@@ -394,14 +393,17 @@ export default {
     };
     let url =
       type == 1
-        ? this.$api.infor.getMintedNFTPage :  type == 2 ? this.$api.infor.getCollectNFTPage : this.$api.infor.getPicksNFTPage 
+        ? this.$api.infor.getMintedNFTPage
+        : type == 2
+        ? this.$api.infor.getCollectNFTPage
+        : this.$api.infor.getPicksNFTPage;
     this.NftList = [];
     get(url, data)
       .then((res) => {
         if (res.code === 200) {
           // this.NftList = res.data.records.filter(item => item.pickStatus !== 1) // 没有挂单的nft
           this.NftList = res.data.records; // 全部nft
-          if(type === 1) {
+          if (type === 1) {
             localStorage.setItem("mintedNFTPage", JSON.stringify(this.NftList));
           }
         }
