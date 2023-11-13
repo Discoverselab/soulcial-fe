@@ -123,6 +123,11 @@ export default {
       );
       this.listNFTApprove();
     } catch (error) {
+      if (error.code === "ACTION_REJECTED") {
+        this.$toast("Signature denied");
+      } else {
+        this.$toast("Transaction failed")
+      }
       this.overlayshow = false;
       console.error(error);
     }
@@ -137,7 +142,7 @@ export default {
     }
     // me.overlayshow = false;
   },
- 
+
   getData() {
     this.overlayshow = true;
     let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
@@ -160,5 +165,4 @@ export default {
         : 0.8;
     return price * k;
   },
-  
 };
