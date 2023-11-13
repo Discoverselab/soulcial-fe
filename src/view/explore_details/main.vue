@@ -233,12 +233,10 @@
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
         <p class="picksTime" v-if="NFTPickInfo.nowPickCount === 4">
-          Launching！
+          PUMPING！
           <br />
-          Waiting for {{ 'BNB Chain' }} Block #{{ NFTPickInfo.rewardBlockHeight }} coming
-          out.
-          <br />
-          Approximately in {{ NFTPickInfo.rewardTimeStr }}
+          Results will be revealed in approximately <br />
+           {{ calculateSecondsUntil("2023-11-13 18:12:00") }} seconds
         </p>
       </div>
       <!-- picks -->
@@ -290,7 +288,7 @@
                       </div>
                       <div>
                         <span v-if="item.type == 1" class="value">{{ item.price }} {{ $network }}</span>
-                        <p class="hisname hisname_right">{{ item.transTimeStr }}</p>
+                        <p class="hisname hisname_right">{{ getLastTimeStr(convertToTargetTimeZone(item.createTime))  }}</p>
                       </div>
                     </div>
                   </template>
@@ -374,6 +372,7 @@ import Hexagon from "../../components/Hexagon.vue";
 import Overlay from "../../components/Overlay.vue";
 import Picks from "../../components/Picks.vue";
 import { copy } from "@/libs/common.js";
+import {calculateSecondsUntil,getLastTimeStr,convertToTargetTimeZone} from "@/utils/convertTime.js"
 import {
   getNFTLevel,
   getNFTPersonality,
@@ -434,6 +433,15 @@ export default {
     },
     copy() {
       return copy;
+    },
+    calculateSecondsUntil(){
+      return calculateSecondsUntil
+    },
+    getLastTimeStr(){
+      return getLastTimeStr
+    },
+    convertToTargetTimeZone(){
+      return convertToTargetTimeZone
     }
   },
   components: {

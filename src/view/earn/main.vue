@@ -25,7 +25,7 @@
               History
               <span class="title_right" @click="$router.push('/vsoul_introduce')" >
                 <img src="@/assets/diamond.png" alt />
-                <span class="invite_earn">Invite & Earn</span>
+                <span class="invite_earn">Earn vSOUL</span>
               </span>
             </p>
           </div>
