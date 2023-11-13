@@ -22,21 +22,6 @@ Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
 
-const token = "a47c446ea7f061";
-const timezone = localStorage.getItem("timezone")
-if(!timezone) {
-  console.log(timezone,'timezone')
-  fetch(`https://ipinfo.io/json?token=${token}`)
-  .then(response => response.json())
-  .then(data => {
-    window.localStorage.setItem("timezone", data.timezone);
-  })
-  .catch(error => {
-    // window.localStorage.removeItem("timezone");
-    console.error(error)
-  })
-}
-
 Vue.use(VueLazyload, {
   loading: loadingImg, // 占位符图片
   attempt: 1, // 尝试加载次数
