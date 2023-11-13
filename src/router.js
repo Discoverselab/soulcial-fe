@@ -31,6 +31,7 @@ import share from "@/view/share/main";
 import invite from "@/view/invite/main";
 import search from "@/view/search/main";
 import share_pick from "@/view/share_pick/main";
+import vsoul_introduce from "@/view/vsoul_introduce/main"
 Vue.use(Router);
 export default new Router({
   mode: "hash",
@@ -221,6 +222,11 @@ export default new Router({
       path: "/share_pick",
       name: "share_pick",
       component: share_pick,
+    },
+    {
+      path: "/vsoul_introduce",
+      name: "vsoul_introduce",
+      component: vsoul_introduce,
     },
   ],
   scrollBehavior(to, from, savedPosition) {

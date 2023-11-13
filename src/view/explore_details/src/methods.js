@@ -411,6 +411,7 @@ export default {
     return { fontSize: `${(705 / soulLength) * k}rem` };
   },
   jumpSharePick() {
+    this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
     } else if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser){

@@ -23,7 +23,7 @@
         <div class="earn_list_title">
           <p class="title">
             History
-            <img class="point_out"  src="@/assets/point_out.png" alt />
+            <img class="point_out" @click="$router.push('/vsoul_introduce')" src="@/assets/point_out.png" alt />
           </p>
 
         </div>
@@ -278,7 +278,8 @@ export default {
         3: "Pump",
         4: "Refund",
         5: "Sell",
-        6: "Creartor Earnings"
+        6: "Creartor Earnings",
+        7: "Pump Epoch Reward"
       },
       TabList: [
         {
