@@ -624,8 +624,8 @@ export default {
 
         img {
           display: block;
-          width: 22.5px;
-          height: auto;
+          width: 24px;
+          height: 24px;
           margin-right: 18px;
         }
 
