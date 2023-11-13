@@ -32,8 +32,8 @@ export default {
 
     if (pwa_day && pwa_day != pwa_today) {
       window.localStorage.setItem("pwa_isShow", "false");
-      window.localStorage.setItem("pwa_day", pwa_today);
     }
+    window.localStorage.setItem("pwa_day", pwa_today);
     // 今日是否看过弹窗
     let pwa_isShow = window.localStorage.getItem("pwa_isShow") || "false";
     // 弹窗总次数
