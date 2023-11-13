@@ -18,6 +18,7 @@
         <p class="list_name" style="color:#62625F">Balance</p>
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
+      <div @click="$router.push('/epoch_introduce')" class="epoch">PUMP Epoch is Live！</div>
       <div>
         <div>
           <div class="earn_list_title">

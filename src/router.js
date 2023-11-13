@@ -32,6 +32,7 @@ import invite from "@/view/invite/main";
 import search from "@/view/search/main";
 import share_pick from "@/view/share_pick/main";
 import vsoul_introduce from "@/view/vsoul_introduce/main"
+import epoch_introduce from "@/view/epoch_introduce/main"
 Vue.use(Router);
 const router = new Router({
   mode: "hash",
@@ -228,6 +229,11 @@ const router = new Router({
       path: "/vsoul_introduce",
       name: "vsoul_introduce",
       component: vsoul_introduce,
+    },
+    {
+      path: "/epoch_introduce",
+      name: "epoch_introduce",
+      component: epoch_introduce,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
