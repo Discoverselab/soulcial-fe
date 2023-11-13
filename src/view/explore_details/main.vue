@@ -459,6 +459,7 @@ export default {
   name: "",
   data() {
     return {
+      loginInfo:undefined,
       isShareMy:false,
       dialogShow: false,
       cancelShow: false,

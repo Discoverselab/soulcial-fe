@@ -82,6 +82,7 @@
         z-index: 99;
 
         button {
+            cursor: pointer;
             &:active {
                 opacity: 0.8;
             }

@@ -72,8 +72,11 @@ export default {
     }
   },
   picksTxH(index) {
+     this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
+    } else  if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser){
+      this.$router.push("/welcome")
     } else {
       if (this.isPick() || this.gray) {
         return;
@@ -410,6 +413,8 @@ export default {
   jumpSharePick() {
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
+    } else if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser){
+      this.$router.push("/welcome")
     } else {
       this.$router.push(
         `/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`
