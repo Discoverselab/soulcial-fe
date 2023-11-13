@@ -23,28 +23,29 @@ export default {
   created() {
     // 记录进入时间戳
     window.localStorage.setItem("firstApptime", new Date().getTime());
-    // const isSafari = window.navigator.vendor === 'Apple Computer, Inc.';
-    // if (this._isMobile()) {
-    //   //移动设备
-    //   if (isSafari) {
-    //     // ios safari 浏览器
-    //     if (!window.navigator.standalone) {
-    //       this.$router.replace("/addtohome");
-    //     } else {
-    //       // isPWA
-    //       window.localStorage.setItem("isPWA", true);
-    //     }
-    //   } else {
-    //     // 其他浏览器
-    //     if (!window.matchMedia('(display-mode: standalone)').matches) {
-    //       this.$router.replace("/addtohome");
-    //     } else {
-    //       window.localStorage.setItem("isPWA", true);
-    //     }
-    //   }
-    // } else {
-    //   window.localStorage.setItem("isPWA", false);
-    // }
+
+    const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
+    if (this._isMobile()) {
+      //移动设备
+      if (isSafari) {
+        // ios safari 浏览器
+        if (!window.navigator.standalone) {
+          //
+        } else {
+          // isPWA
+          window.localStorage.setItem("isPWA", true);
+        }
+      } else {
+        // 其他浏览器
+        if (!window.matchMedia("(display-mode: standalone)").matches) {
+          //
+        } else {
+          window.localStorage.setItem("isPWA", true);
+        }
+      }
+    } else {
+      window.localStorage.setItem("isPWA", false);
+    }
   },
   methods: {
     clear() {
