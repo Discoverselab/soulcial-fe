@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <div class="name" v-if="chatDetailDto.type == 0">{{ chatDetailDto.title }}</div>
-          <div class="name" v-else>SoulCast {{ chatDetailDto.title }} ({{ chatDetailDto.memberNumber }})</div>
+          <div class="name" v-else>{{ `SoulCast #${chatDetailDto.tokenId} Group  (${chatDetailDto.memberNumber})` }}</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
           </div> -->
@@ -21,31 +21,34 @@
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
-        <div v-if="item.userId != $loginData.user_id" class="other">
-          <div @click="goPersonDetail(item)" class="othersImg">
-            <img :src="item.userAvatar" alt="">
+        <div class="timeTip" v-if="item.type ==99">{{ `${item.userName} ${item.content}` }}</div>
+        <template v-else>
+          <div v-if="item.userId != $loginData.user_id" class="other">
+            <div @click="goPersonDetail(item)" class="othersImg">
+              <img :src="item.userAvatar" alt="">
+            </div>
+            <div class="msg othersMsg">
+              <span v-if="item.type == 0">{{ item.content }}</span>
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`">
+                <template v-slot:loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+            </div>
           </div>
-          <div class="msg othersMsg">
-            <span v-if="item.type == 0">{{ item.content }}</span>
-            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
-              :src="`${item.content}?x-oss-process=image-resize,w_180`">
-              <template v-slot:loading>
-                <van-loading type="spinner" size="20" />
-              </template>
-            </van-image>
+          <div v-else class="me">
+            <div class="msg meMsg">
+              <span v-if="item.type == 0">{{ item.content }}</span>
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`">
+                <template v-slot:loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+            </div>
           </div>
-        </div>
-        <div v-else class="me">
-          <div class="msg meMsg">
-            <span v-if="item.type == 0">{{ item.content }}</span>
-            <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
-              :src="`${item.content}?x-oss-process=image-resize,w_180`">
-              <template v-slot:loading>
-                <van-loading type="spinner" size="20" />
-              </template>
-            </van-image>
-          </div>
-        </div>
+        </template>
       </div>
     </div>
     <div class="footer">

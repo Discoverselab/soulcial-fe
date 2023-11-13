@@ -2,15 +2,9 @@
   <div class="earn">
     <!-- Tab -->
     <div class="TabCont">
-      <div
-        class="Tab_list"
-        :class="{
+      <div class="Tab_list" :class="{
         Tab_list_Active: TabActive == item.id,
-      }"
-        @click="changeTabActive(item.id)"
-        v-for="(item, index) in TabList"
-        :key="index"
-      >{{ item.name }}</div>
+      }" @click="changeTabActive(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
     </div>
     <!-- earnings -->
     <div class="earnings" v-if="TabActive == 1">
@@ -18,7 +12,9 @@
         <p class="list_name" style="color:#62625F">Balance</p>
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
-      <div @click="$router.push('/epoch_introduce')" class="epoch">PUMP Epoch is Live！</div>
+      <div @click="$router.push('/epoch_introduce')" class="epoch">
+        <img src="@/assets/banner_epoch.png" alt="">
+      </div>
       <div>
         <div>
           <div class="earn_list_title">
@@ -30,21 +26,13 @@
               </span>
             </p>
           </div>
-          <van-list
-            v-model="earnLoading"
-            offset="200"
-            loading-text="Loading"
-            :immediate-check="false"
-            :finished="earnFinished"
-            finished-text
-            @load="onEarnLoad"
-            v-if="VSoulHistory.length>0"
-          >
+          <van-list v-model="earnLoading" offset="200" loading-text="Loading" :immediate-check="false"
+            :finished="earnFinished" finished-text @load="onEarnLoad" v-if="VSoulHistory.length > 0">
             <div class="earn_list" v-for="(item, index) in VSoulHistory" :key="index">
               <div class="list_left">
                 <img src="../../assets/start.png" alt />
                 <div class="title_time">
-                  <p class="list_name">{{ earnType[`${item.type}`] || "Promotion"}}</p>
+                  <p class="list_name">{{ earnType[`${item.type}`] || "Promotion" }}</p>
                   <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
                 </div>
               </div>
@@ -99,16 +87,8 @@
           <div class="earn_list_title earn_list_title_wallet">
             <p class="title">History</p>
           </div>
-          <van-list
-            v-model="walletLoading"
-            offset="200"
-            loading-text="Loading"
-            :immediate-check="false"
-            :finished="walletFinished"
-            finished-text
-            @load="onWalletLoad"
-            v-if="WalletHistory.length>0"
-          >
+          <van-list v-model="walletLoading" offset="200" loading-text="Loading" :immediate-check="false"
+            :finished="walletFinished" finished-text @load="onWalletLoad" v-if="WalletHistory.length > 0">
             <div class="earn_list" v-for="(item, index) in WalletHistory" :key="index">
               <div class="list_left">
                 <img src="@/assets/pickss.png" alt />
@@ -117,13 +97,10 @@
                   <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
                 </div>
               </div>
-              <button
-                class="list_right"
-                :class="{ list_right_fu: item.type == 3 || item.type == 1 }"
-              >
+              <button class="list_right" :class="{ list_right_fu: item.type == 3 || item.type == 1 }">
                 {{ item.type != 1 &&
-                item.type != 3
-                ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
+                  item.type != 3
+                  ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
               </button>
             </div>
           </van-list>
@@ -154,13 +131,8 @@
         <!-- Secondary menu list -->
         <div class="ercont_cont">
           <div class="ercont">
-            <div
-              @click="erIDClick(item)"
-              class="ercont_list"
-              :class="{ ercont_list_active: item.id == erID }"
-              v-for="(item, index) in erList"
-              :key="index"
-            >{{ item.name }}</div>
+            <div @click="erIDClick(item)" class="ercont_list" :class="{ ercont_list_active: item.id == erID }"
+              v-for="(item, index) in erList" :key="index">{{ item.name }}</div>
           </div>
           <div class="Tab_right">
             <img src="../../assets/sift.png" alt />
@@ -168,12 +140,8 @@
         </div>
         <!-- NFT List -->
         <div class="nft_cont" v-if="NftList.length">
-          <div
-            class="nft_list"
-            @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-            v-for="(item, index) in NftList"
-            :key="index"
-          >
+          <div class="nft_list" @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
+            v-for="(item, index) in NftList" :key="index">
             <div class="img_cont">
               <img class="nftUrl" :src="item.squarePictureUrl" alt />
               <div v-if="erID == 1" class="point">
@@ -196,18 +164,14 @@
                 <span v-if="erID == 1">Cost</span>
               </div>
               <div class="price_botm">
-                <span
-                  class="bot_price"
-                >{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
+                <span class="bot_price">{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
                 <span class="bot_price" v-if="erID == 1">{{ item.costPrice || 0 }} {{ $network }}</span>
               </div>
             </div>
             <div class="Launching">
               <div class="LaunchingData" v-if="item.pickStatus > 0">
                 <span v-if="!item.nowPickCount">Pump 0/4</span>
-                <span
-                  v-else
-                >{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
+                <span v-else>{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
               </div>
             </div>
           </div>
@@ -221,14 +185,8 @@
 
     <Overlay :overlayshow="overlayshow"></Overlay>
     <TabBar></TabBar>
-    <Replace
-      @callBack="callBack"
-      @close="ReplaceShow = false"
-      :WalletBalance="WalletBalance"
-      :PoolBalance="PoolBalance"
-      :type="walletType"
-      :ReplaceShow="ReplaceShow"
-    ></Replace>
+    <Replace @callBack="callBack" @close="ReplaceShow = false" :WalletBalance="WalletBalance" :PoolBalance="PoolBalance"
+      :type="walletType" :ReplaceShow="ReplaceShow"></Replace>
   </div>
 </template>
 <script>
@@ -370,7 +328,7 @@ export default {
     // me.getMintedNFTPage(1);
     me.getWallectHistory();
   },
-  mounted: async function() {
+  mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
 
@@ -389,7 +347,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {}
+  destroyed() { }
 };
 </script>
 

@@ -18,7 +18,7 @@
 
           </div>
           <div class="name_news">
-            <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : item.type == 3 ? `SoulCast ${item.title.match(/#(\d+)/)[0]} PUMPed`  : `SoulCast ${item.title} (${item.memberNum})` }}</p>
+            <p class="name" :class="{ yidu: item.isRead }">{{ item.type == 0 ? (item.username || '-') : item.type == 3 ? `SoulCast ${item.title.match(/#(\d+)/)[0]} PUMPed`  : `SoulCast #${item.tokenId} Group (${item.memberNum})` }}</p>
             <p class="news" :class="{ yidu: item.isRead }">{{ handleRelatedContent(item) }}</p>
           </div>
         </div>

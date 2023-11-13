@@ -107,7 +107,7 @@ const onWsOpen = (event, callback) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
   if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
-    wsObj.send(JSON.stringify(agentData))
+    // wsObj.send(JSON.stringify(agentData))
     callback && callback()
     console.log('发送标识', agentData)
   }
@@ -174,7 +174,7 @@ const GetQueryString = (name) => {
 
 // 心跳检查（看看websocket是否还在正常连接中）
 const heartCheck = {
-  timeout: 30000,
+  timeout: 20000,
   timeoutObj: null,
   serverTimeoutObj: null,
   // 重启
