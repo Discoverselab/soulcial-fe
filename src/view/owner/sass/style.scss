@@ -96,9 +96,11 @@
                     margin: 0 auto;
                     // position: absolute;
                     background-color: #f5f5ed;
-
+                    text-align: center;
                     img {
-                        width: 100%;
+                        max-width: 272px;
+                        max-height: 362px;
+                        display: inline-block;
                     }
 
                     .match {

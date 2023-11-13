@@ -13,7 +13,7 @@
           Pump Winner of SoulCast #{{ NFTDetail.realTokenId }}!
         </p>
         <p class="content">
-        You have successfully collected SoulCast and gained access to private chat with the creator {{hiess.userName }}.
+        You have successfully collected SoulCast and gained access to private chat with the creator {{NFTDetail.mintUserName }}.
         </p>
       <p class="content">
         Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
