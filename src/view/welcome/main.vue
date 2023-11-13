@@ -77,6 +77,8 @@ export default {
   computed: computed,
   components: { Overlay },
   created() {
+    window.sessionStorage.getItem("inviteCode") &&
+      (this.inviteCode = 'soul-' + window.sessionStorage.getItem("inviteCode"));
     let me = this;
     me.getUserInfo();
   },

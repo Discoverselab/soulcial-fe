@@ -218,6 +218,13 @@ export default {
       return isShow;
     }
   },
+  created() {
+    let inviteCode = "";
+    if(window.location.href.indexOf("/t/") > -1){
+      inviteCode = window.location.href.split("/t/")[1];
+      window.sessionStorage.setItem("inviteCode", inviteCode);
+    }
+  },
   components: { Hexagon, Overlay, Wallet },
   mounted: async function () {
     console.log("this：", this);

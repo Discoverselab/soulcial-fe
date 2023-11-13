@@ -285,7 +285,7 @@ export default {
     }
   },
   copy() {
-    const clipboard = new Clipboard(".copy-button", {
+    const clipboard = new Clipboard(".address", {
       text: () => this.$loginData.Auth_Token,
     });
     clipboard.on("success", (e) => {

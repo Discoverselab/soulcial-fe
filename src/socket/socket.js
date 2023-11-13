@@ -107,7 +107,7 @@ const onWsOpen = (event, callback) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
   if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
-    wsObj.send(JSON.stringify(agentData))
+    // wsObj.send(JSON.stringify(agentData))
     callback && callback()
     console.log('发送标识', agentData)
   }
