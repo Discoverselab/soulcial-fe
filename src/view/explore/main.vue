@@ -212,6 +212,7 @@ export default {
     // window.addEventListener("scroll", this.scrollToTop);
   },
   activated() {
+    this.TabActive = 1;
     this.handleShowModal();
     this.timer = setTimeout(() => {
       this.handleShowModal();
