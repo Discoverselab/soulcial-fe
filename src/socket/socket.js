@@ -174,7 +174,7 @@ const GetQueryString = (name) => {
 
 // 心跳检查（看看websocket是否还在正常连接中）
 const heartCheck = {
-  timeout: 15000,
+  timeout: 30000,
   timeoutObj: null,
   serverTimeoutObj: null,
   // 重启
