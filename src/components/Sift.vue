@@ -41,7 +41,7 @@ export default {
       activeID:SiftType,
       SiftList: [
         {
-          name: "SBTI",
+          name: "SBTI Level",
           show: true,
           id: 0,
           sort: [true, false],

@@ -47,6 +47,10 @@
             Potential Compensation (4%) :
             <span>{{ formatNumber(NFTDetail.price * 0.04) }} {{ $network }}</span>
           </p>
+          <p class="walletBalance">
+            Next Listing Price (10%) :
+            <span>{{ formatNumber(NFTDetail.price * 1.10) }} {{ $network }}</span>
+          </p>
         </div>
         <div class="cudset_but">
           <!-- <button @click="$router.push('/earn')" v-if="!IFBalance()">Go to add {{$network}}</button> -->

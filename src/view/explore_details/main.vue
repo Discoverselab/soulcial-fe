@@ -236,7 +236,7 @@
           PUMPING！
           <br />
           Results will be revealed in approximately <br />
-           {{ calculateSecondsUntil(NFTPickInfo.rewardTime) }} seconds
+           {{ calculateSecondsUntil(convertToTargetTimeZone(NFTPickInfo.rewardTime)) }} seconds
         </p>
       </div>
       <!-- picks -->

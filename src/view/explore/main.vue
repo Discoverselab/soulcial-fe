@@ -36,7 +36,11 @@
                 <div class="grade_price">
                   <div class="grade">
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
-                    <p class="grade_name">{{ getNFTLevel[item.level] }}</p>
+                    <p class="grade_name">
+                      <span>
+                        Lv {{ item.level }}
+                      </span>
+                      {{ getNFTLevel[item.level] }}</p>
                   </div>
                   <p class="price" v-if="item.price && item.pickStatus != 0">{{ item.price }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
@@ -68,7 +72,12 @@
                 <div class="grade_price">
                   <div class="grade">
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
-                    <p class="grade_name">{{ getNFTLevel[item.level] }}</p>
+                    <p class="grade_name">
+                      <span>
+                        Lv {{ item.level }}
+                      </span>
+                      {{ getNFTLevel[item.level] }}
+                      </p>
                   </div>
                   <p class="price" v-if="item.price && item.pickStatus != 0">{{ item.price }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->

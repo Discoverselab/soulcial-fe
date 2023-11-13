@@ -237,7 +237,6 @@ export default {
         4: "Refund",
         5: "Sell",
         6: "Creartor Earnings",
-        7: "Pump Epoch Reward"
       },
       TabList: [
         {
