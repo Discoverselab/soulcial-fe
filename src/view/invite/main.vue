@@ -14,11 +14,22 @@
           <div class="number">{{ i + 1 }}</div>
           <div class="code" :class="{ disabled: item.used === 1 }">{{ item.inviteCode }}</div>
           <div class="copy" :class="{ disabled: item.used === 1 }">
-            <img @click="copy(item.inviteCode)" class="copy-button" round src="../../assets//copy1.png" alt />
+            <img @click="copy(item.inviteCode, '.copy-button')" class="copy-button" round src="../../assets//copy1.png" alt />
           </div>
         </div>
       </van-skeleton>
+    </div>
 
+    <div class="invite_code">
+      <div class="title">invite link</div>
+      <van-skeleton :row="3" :loading="overlayshow">
+        <div class="code_nubmer">
+          <div class="code linkcode">{{ inviteLink }}</div>
+          <div class="copy">
+            <img @click="copy(inviteLink, '.copy-link')" class="copy-button copy-link" round src="../../assets//copy1.png" alt />
+          </div>
+        </div>
+      </van-skeleton>
     </div>
     <div class="reward">
       <div class="lay">
@@ -35,14 +46,22 @@
 </template>
 <script>
 import methods from "./src/methods";
+import { website } from "@/http/api.js";
 export default {
   data() {
     return {
       overlayshow: false,
-      inviteCodeList: []
+      inviteCodeList: [],
+      code: '',
+      inviteLink: '',
     };
   },
   created() {
+
+    const data = JSON.parse(localStorage.getItem("userInfo"));
+    this.code = data.superInviteCode.split("-")[1];
+    this.inviteLink = `${website}#/t/${this.code}`;
+
     this.getInviteCodeList();
   },
   methods: methods
