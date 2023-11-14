@@ -55,7 +55,7 @@ export default {
         .then((res) => {
           if (res.code === 200) {
             if (window.localStorage.getItem("isPWA") == "true") {
-              window.location.href = "res.data";
+              window.open(res.data, '_blank');
             } else {
               window.open(res.data, "_self");
             }

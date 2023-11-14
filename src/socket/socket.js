@@ -2,8 +2,7 @@ import loginData from "@/libs/loginData";
 // websocket实例
 let wsObj = null
 // ws连接地址
-let wsUrl = `wss://test2bsc.soulcial.network/pfp/websocket/${loginData.userId}`;
-// let wsUrl = `ws://192.168.31.15:9005/pfp/websocket/${loginData.userId}`;
+let wsUrl = `ws://${process.env.VUE_APP_BASE_IP}/pfp/websocket/${loginData.userId}`;
 
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false

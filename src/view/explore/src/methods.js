@@ -91,6 +91,7 @@ export default {
     });
   },
   changeTab(id) {
+    if (this.TabActive === id) return;
     this.TabActive = id;
     this.showBackground = false;
     if (this.TabActive === 1) {
