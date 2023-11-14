@@ -90,6 +90,7 @@ export default {
     localStorage.removeItem("loginInfo");
     localStorage.removeItem("userInfo");
     localStorage.removeItem("mintedNFTPage");
+    localStorage.removeItem("isUseInviteCode");
     this.$router.replace({
       path: "/",
     });

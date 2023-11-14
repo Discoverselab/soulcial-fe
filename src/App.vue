@@ -26,10 +26,7 @@ export default {
 
     // 时区检测
     const token = "a47c446ea7f061";
-    const timezone = localStorage.getItem("timezone")
-    if (!timezone) {
-      console.log(timezone, 'timezone')
-      fetch(`https://ipinfo.io/json?token=${token}`)
+    fetch(`https://ipinfo.io/json?token=${token}`)
         .then(response => response.json())
         .then(data => {
           window.localStorage.setItem("timezone", data.timezone);
@@ -38,7 +35,6 @@ export default {
           // window.localStorage.removeItem("timezone");
           console.error(error)
         })
-    }
 
     // PWA环境检测
     const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
@@ -64,6 +60,7 @@ export default {
       if (this.$loginData.Auth_Token) {
         this.$loginData.out();
         window.localStorage.removeItem("loginInfo");
+        localStorage.removeItem("isUseInviteCode");
         localStorage.removeItem("userInfo");
         localStorage.removeItem("mintedNFTPage");
         this.$router.push("/");
@@ -89,7 +86,7 @@ export default {
     window.ethereum.on("accountsChanged", this.clear);
     // 监听网络切换
     window.ethereum.on("networkChanged", this.clear);
-  }
+  },
 };
 </script>
 

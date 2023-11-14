@@ -415,6 +415,7 @@ export default {
         if (me.$loginData.Auth_Token) {
           me.$loginData.out();
           window.localStorage.removeItem("loginInfo");
+          localStorage.removeItem("isUseInviteCode");
           localStorage.removeItem("userInfo");
           localStorage.removeItem("mintedNFTPage");
           me.$router.push("/");
