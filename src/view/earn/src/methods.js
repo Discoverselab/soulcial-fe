@@ -7,7 +7,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "@/http/http";
 import wethABI from "@/libs/weth.json";
-import { ABIAddress, clearInfo, onParticle, formatNumber } from "@/libs/common.js";
+import { ABIAddress, formatNumber, fetchBalance } from "@/libs/common.js";
 import { ethers } from "ethers";
 const provider = window.ethereum ? window.ethereum : null;
 let signer;
@@ -16,46 +16,11 @@ providers = provider ? new ethers.providers.Web3Provider(provider) : null;
 signer = providers ? providers.getSigner() : null;
 const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 export default {
-    handleBalance(balance) {
-        let etherString = formatNumber(ethers.utils.formatEther(balance));
-        this.WalletBalance = String(parseFloat(etherString).toFixed(5));
-    },
     // 获取主链币钱包余额
     async getBalance() {
-        let address = this.$loginData.Auth_Token;
-        let provider = null;
-        if (this.$loginData.loginType == 0) {
-            provider = window.ethereum
-                ? new ethers.providers.Web3Provider(window.ethereum)
-                : null;
-            provider.getBalance(address).then((balance) => {
-                this.handleBalance(balance);
-            });
-        } else {
-            if (window.web3.eth) {
-                await window.web3.eth?.getBalance(address, (err, balance) => {
-                    if (err) {
-                        this.WalletBalance = "0";
-                        return;
-                    }
-                    this.handleBalance(balance);
-                });
-            }else{
-                const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
-                if (curParticle) {
-                    await onParticle();
-                    await window.web3.eth?.getBalance(address, (err, balance) => {
-                        if (err) {
-                            this.WalletBalance = "0";
-                            return;
-                        }
-                        this.handleBalance(balance);
-                    });
-                }else{
-                    clearInfo();
-                }
-            }
-        }
+        fetchBalance().then((res) => {
+            this.WalletBalance = res;
+        });
     },
     // 获取W余额
     async BalanceOf() {

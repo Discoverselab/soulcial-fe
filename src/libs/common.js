@@ -5,6 +5,7 @@ import router from "@/router";
 import Web3 from "web3";
 import loginData from "@/libs/loginData";
 import Clipboard from "clipboard";
+import { ethers } from "ethers";
 
 export const isPROD = process.env.VUE_APP_BUILD === "production";
 
@@ -241,4 +242,44 @@ export const formatNumber = (number) => {
       return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
     }
   }
+};
+
+const handleBalance = (balance) => {
+  let etherString = formatNumber(ethers.utils.formatEther(balance));
+  return String(parseFloat(etherString).toFixed(5));
+};
+// 获取主链币钱包余额
+export const fetchBalance = async () => {
+  let address = loginData.Auth_Token;
+  let provider = null;
+  let balanceRemain = 0;
+  if (loginData.loginType == 0) {
+    provider = window.ethereum
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : null;
+    provider.getBalance(address).then((balance) => {
+      balanceRemain = handleBalance(balance);
+    });
+  } else {
+    if (window.web3.eth) {
+      await window.web3.eth?.getBalance(address, (err, balance) => {
+        if (!err) {
+          balanceRemain = handleBalance(balance);
+        }
+      });
+    } else {
+      const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
+      if (curParticle) {
+        await onParticle();
+        await window.web3.eth?.getBalance(address, (err, balance) => {
+          if (!err) {
+            balanceRemain = handleBalance(balance);
+          }
+        });
+      } else {
+        clearInfo();
+      }
+    }
+  }
+  return balanceRemain;
 };
