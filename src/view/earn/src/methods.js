@@ -7,7 +7,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "@/http/http";
 import wethABI from "@/libs/weth.json";
-import { ABIAddress, clearInfo, handleParticleWeb3 } from "@/libs/common.js";
+import { ABIAddress, clearInfo, onParticle } from "@/libs/common.js";
 import { ethers } from "ethers";
 const provider = window.ethereum ? window.ethereum : null;
 let signer;
@@ -43,7 +43,7 @@ export default {
             }else{
                 const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
                 if (curParticle) {
-                    await handleParticleWeb3();
+                    await onParticle();
                     await window.web3.eth?.getBalance(address, (err, balance) => {
                         if (err) {
                             this.WalletBalance = "0";

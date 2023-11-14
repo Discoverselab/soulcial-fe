@@ -84,13 +84,6 @@ export const clearInfo = () => {
   window.localStorage.setItem("Sift", "4down");
 };
 
-export const handleParticleWeb3 = (particle) => {
-  if (particle) {
-    const particleProvider = new ParticleProvider(particle.auth);
-    window.web3 = new Web3(particleProvider);
-  }
-};
-
 // particle 登录
 export const onParticle = async (
   callback,
