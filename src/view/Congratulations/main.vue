@@ -16,7 +16,7 @@
         You have successfully collected SoulCast and gained access to private chat with the creator {{NFTDetail.mintUserName }}.
         </p>
       <p class="content">
-        Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
+        Check transaction  <span style="text-transform: lowercase;" @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
       </p>
     </div>
     <div class="details_cont">

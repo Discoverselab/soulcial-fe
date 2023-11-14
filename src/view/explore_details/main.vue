@@ -280,7 +280,7 @@
                         <img v-if="item.type == 2" class="left_icon" src="../../assets/Transfer.png" alt />
                         <div>
                           <span class="value">
-                            {{ item.type == 1 ? 'Collect' : item.type == 2 ? 'Transfer' : 'Launch'
+                            {{ item.type == 1 ? 'Collect' : item.type == 3 ? 'Transfer' : 'Launch'
                             }}
                           </span>
                           <p class="hisname">{{ CollectList.indexOf(index) == '-1' ? '+ More' : '- Less' }}</p>
@@ -424,6 +424,7 @@ export default {
       NftList: [],
       UnregisteredList: [], // 未挂单nft 
       earnVsoulShow: false,
+      isUseInviteCode:false, // 用户是否使用过邀请码 
     };
   },
   watch: watch,

@@ -79,6 +79,7 @@ export const clearInfo = () => {
   // 清除登录信息
   loginData.out();
   window.localStorage.removeItem("loginInfo");
+  localStorage.removeItem("isUseInviteCode");
   localStorage.removeItem("userInfo");
   localStorage.removeItem("mintedNFTPage");
   router.push("/");

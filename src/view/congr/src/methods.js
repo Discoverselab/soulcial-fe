@@ -36,6 +36,7 @@ export default {
                     this.values.push(item.wisdom);
                     this.values.push(item.energy);
                     this.values.push(item.extroversion);
+                    localStorage.setItem("isUseInviteCode",res.data.isUseInviteCode)
                 }
             })
             .catch((error) => {

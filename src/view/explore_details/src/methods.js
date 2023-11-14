@@ -26,18 +26,13 @@ const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 import { Toast } from "vant";
 export default {
   goBack() {
-    // let path = this.$route.query.path || "";
-    // if (path) {
-    //   this.$router.push("/");
-    // } else {
-    //   this.$router.go(-1);
-    // }
     const isSharePick = this.$route.meta.isSharePick
-    if(isSharePick) {
+    let path = this.$route.query.path || "";
+    if (path || isSharePick) {
       this.$router.push("/");
     } else {
-        this.$router.go(-1);
-      }
+      this.$router.go(-1);
+    }
   },
   walletClose() {
     this.walletShow = false;
@@ -59,10 +54,11 @@ export default {
     }
   },
   picksTxH(index) {
+    this.isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
      this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
-    } else  if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser){
+    } else  if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser && !this.isUseInviteCode){
       this.$router.push("/welcome")
     } else {
       if (this.isPick() || this.gray) {
@@ -398,6 +394,7 @@ export default {
     return { fontSize: `${(705 / soulLength) * k}rem` };
   },
   jumpSharePick() {
+    this.isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
     this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
