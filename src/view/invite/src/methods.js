@@ -19,8 +19,8 @@ export default {
                 // this.$toast(error)
             });
     },
-    copy(code) {
-        const clipboard = new Clipboard('.copy-button', {
+    copy(code, vv) {
+        const clipboard = new Clipboard(vv, {
             text: () => code
         });
         clipboard.on('success', e => {
