@@ -115,7 +115,7 @@ export const onParticle = async (
       userInfo = await window.particle.auth.login({
         preferredAuthType: preferredAuthType,
         supportAuthTypes: "email,phone,google", //need support social login types, split with ','. default value 'all'.
-        socialLoginPrompt: "none", //social login prompt.  none | consent | select_account
+        socialLoginPrompt: "consent", //social login prompt.  none | consent | select_account
       });
     } else {
       userInfo = await window.particle.auth.getUserInfo();

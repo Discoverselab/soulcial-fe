@@ -212,15 +212,13 @@ export default {
     // window.addEventListener("scroll", this.scrollToTop);
   },
   activated() {
-    this.TabActive = 1;
     this.handleShowModal();
     this.timer = setTimeout(() => {
       this.handleShowModal();
     }, 1000 * 30);
 
     if (this.$route.meta.from !== "explore_details") {
-      this.nftList = []; //清空原有数据
-      this.getData(); // 重新加载
+      this.changeTab(1);
     }
 
     this.$refs.tabbar.BarActive = this.$route.path;
