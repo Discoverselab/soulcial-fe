@@ -21,7 +21,7 @@
           </p>
         </div>
       </div>
-      <div class="bio" v-if="UserInfo.bio">{{ UserInfo.bio }}</div>
+      <div class="bio" :class="{noBio: !UserInfo.bio}" @click="jumpSettingBio(UserInfo.bio)">{{ UserInfo.bio || "Edit Bio" }}</div>
       <!-- User label -->
       <div class="label_cont">
         <div
@@ -39,7 +39,7 @@
           <img class="edit" @click="tagShow" src="../../assets/edit.png" alt />
         </div>
         <div class="set_but" v-else>
-          <button class="Cancel" @click="tagShow">Select your interest tags</button>
+          <button style="margin-top: 0;" class="Cancel" @click="tagShow">Select your interest tags</button>
         </div>
       </div>
       <!-- Calculate points -->

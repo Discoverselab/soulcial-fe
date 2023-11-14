@@ -50,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="bio" v-if="UserInfo.bio">{{ UserInfo.bio }}</div>
+      <div class="bio" >{{ UserInfo.bio }}</div>
       <!-- User label -->
       <div class="label_cont">
         <div class="label_left">
