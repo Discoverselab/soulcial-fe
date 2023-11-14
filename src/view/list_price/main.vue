@@ -101,6 +101,7 @@ import {
   Weather,
   levelImg,
 } from "../../libs/target";
+import { formatNumber } from "@/libs/common.js";
 export default {
   name: "",
   data() {
@@ -120,7 +121,11 @@ export default {
   },
   watch: watch,
   methods: methods,
-  computed: computed,
+  computed: {
+    formatNumber() {
+      return (num) => formatNumber(num);
+    }
+  },
   components: {
     Overlay,
   },

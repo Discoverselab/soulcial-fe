@@ -12,21 +12,6 @@ import { nftAddress, marketAddress } from "@/libs/common.js";
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
 import Web3 from "web3";
 export default {
-  // 选择网络链接钱包
-  formatNumber(number) {
-    if (Number.isInteger(number)) {
-      return number.toString(); // 如果是整数，直接返回
-    } else {
-      const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到4位小数
-      const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-      if (decimalPlaces && decimalPlaces.length > 6) {
-        return roundedNumber.toFixed(6); // 如果小数位超过4位，保留4位小数
-      } else {
-        return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
-      }
-    }
-  },
-
   listNFTApprove() {
     let me = this;
     let url = this.$api.nft.listNFTApprove;
