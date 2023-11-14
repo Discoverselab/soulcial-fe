@@ -13,7 +13,6 @@ import { addVTNetwork } from "@/libs/addVTNetwork.js";
 import Web3 from "web3";
 export default {
   listNFTApprove() {
-    let me = this;
     let url = this.$api.nft.listNFTApprove;
     let data = {
       id: this.NFTDetail.realTokenId,

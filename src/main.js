@@ -34,8 +34,8 @@ Vue.use(VueLazyload, {
 Vue.use(Vant);
 Vue.use(AOS);
 Vue.use(VueDragscroll);
-import vConsole from 'vconsole'
-Vue.prototype.$vConsole = new vConsole()
+// import vConsole from 'vconsole'
+// Vue.prototype.$vConsole = new vConsole()
 import MetaInfo from "vue-meta-info";
 import VueI18n from "vue-i18n";
 import "./icons/index.js";

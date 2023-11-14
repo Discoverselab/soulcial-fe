@@ -11,7 +11,7 @@ export const isPROD = process.env.VUE_APP_BUILD === "production";
 export const browser = isPROD ? "https://optimistic.etherscan.io/tx/" : "https://goerli-optimism.etherscan.io/tx/"
 // nft合约地址
 export const nftAddress = isPROD
-  ? "0x6AF9eBA0E7d216bA015f644fcCdA5BE7E18a0DbD"
+  ? "0xB39c5896A94287B9c0Bce736e505234b685c0E02"
   : "0x4508Ca82715A9de9FC3df76F354535B23aFb56Dd";
 
 // 交易所合约地址

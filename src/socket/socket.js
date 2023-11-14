@@ -110,8 +110,8 @@ const onWsOpen = (event, callback) => {
   if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     // wsObj.send(JSON.stringify(agentData))
+    // console.log('发送标识', agentData)
     callback && callback()
-    console.log('发送标识', agentData)
   }
   if (wsObj?.readyState === wsObj?.CLOSED) { // wsObj.CLOSED = 3
     writeToScreen('wsObj.readyState=3, ws连接异常，开始重连')
