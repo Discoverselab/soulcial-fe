@@ -52,12 +52,12 @@
       </div>
     </div>
     <div class="footer">
-      <van-search v-model="inputContent" placeholder="Tap a message..." background="transparent" :clearable="false"
-        shape="round" left-icon>
+      <van-search v-model="inputContent" placeholder="Tap a message..." :disabled="chatDetailDto.status != 1"
+        background="transparent" :clearable="false" shape="round" left-icon>
         <template #right-icon>
           <div @click="submit" class="btn">
             <div class="searchImg">
-              <van-uploader :after-read="afterRead">
+              <van-uploader :disabled="chatDetailDto.status != 1" :after-read="afterRead">
                 <img class="img" src="@/assets/icon_img.png" alt />
               </van-uploader>
             </div>

@@ -451,8 +451,11 @@ export default {
     Picks
   },
   created() {
-    let me = this;
     // this.BalanceOf()
+    if(this.$route.meta.isSharePick){
+      let urlList = window.location.href.split("/");
+      window.sessionStorage.setItem("inviteCode", urlList[urlList.length - 1]);
+    }
   },
   mounted: async function () {
     console.log("this：", this);
