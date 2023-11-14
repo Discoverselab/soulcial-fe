@@ -10,16 +10,16 @@
     <div class="introduce">
       <div class="title">What is vSOUL</div>
       <div class="content">
-        <p>1. vSOUL is the Reward Points of Soulcial.</p>
+        <p>1. vSOUL represents the reward points in Soulcial.</p>
         <p>2. vSOUL could be converted into Soulcial tokens in the future airdrop.</p>
       </div>
       <div class="title">How to earn vSOUL</div>
       <div class="content" style="border: none;">
         <p>1. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
-        <p>2. Pump, Invite Pump and Invite Friend will be rewarded with vSOUL:</p>
-        <p>20 vSOUL / Invite Friend</p>
-        <p>100 vSOUL / Invite Pump</p>
-        <p>Pump vSOUL = Base*(1+sum(Bonus)), Bonus varies depending on holding SoulCast NFT</p>
+        <p>2. You can earn vSOUL by joining a Pump game, inviting friends to join a Pump game, and inviting friends to register:</p>
+        <p>20 vSOUL for each invited friend</p>
+        <p>100 vSOUL for each invited Pump game</p>
+        <p>Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.</p>
       </div>
     </div>
     <table>
