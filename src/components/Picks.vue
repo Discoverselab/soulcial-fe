@@ -73,7 +73,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, marketAddress,goParticle, handleParticleWeb3 } from "../libs/common.js";
+import { nftAddress, onParticle, marketAddress,goParticle } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -201,9 +201,6 @@ export default {
         } else {
           const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
           if (curParticle) {
-            await handleParticleWeb3();
-            this.getApproved();
-          }else{
             onParticle(this.getApproved);
           }
         }

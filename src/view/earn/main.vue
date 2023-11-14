@@ -263,40 +263,7 @@ export default {
           id: 2
         }
       ],
-      HistoryList: [
-        {
-          time: "2023-04-25 19:41",
-          number: 234
-        },
-        {
-          time: "2023-04-25 19:41",
-          number: 220
-        },
-        {
-          time: "2023-04-25 19:41",
-          number: -400
-        }
-      ],
-      NftList: [
-        {
-          img: require("../../assets/Frame1.png")
-        },
-        {
-          img: require("../../assets/Frame2.png")
-        },
-        {
-          img: require("../../assets/Frame1.png")
-        },
-        {
-          img: require("../../assets/Frame2.png")
-        },
-        {
-          img: require("../../assets/Frame1.png")
-        },
-        {
-          img: require("../../assets/Frame2.png")
-        }
-      ]
+      NftList: []
     };
   },
   watch: watch,
