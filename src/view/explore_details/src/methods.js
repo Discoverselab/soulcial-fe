@@ -15,6 +15,7 @@ import {
   marketAddress,
   ABIAddress,
   getHeight,
+  fetchBalance
 } from "@/libs/common.js";
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
 const provider = window.ethereum;
@@ -25,6 +26,16 @@ signer = providers ? providers.getSigner() : null;
 const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 import { Toast } from "vant";
 export default {
+  getWalletBalance(){
+    if(this.$loginData.Auth_Token){
+      fetchBalance().then((res) => {
+    console.log('this.WalletBalance',this.WalletBalance)
+        
+        this.WalletBalance = res
+      })
+    }
+    
+   },
   goBack() {
     const isSharePick = this.$route.meta.isSharePick
     let path = this.$route.query.path || "";
