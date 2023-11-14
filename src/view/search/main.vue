@@ -302,6 +302,7 @@ display: none;
 
   .van-list {
     .van-cell {
+      cursor: pointer;
       height: 100%;
       background-color: transparent;
       padding: 0;

@@ -483,4 +483,11 @@ export default {
   showCenter() {
     this.$refs.radar.scoreLevelShow = true;
   },
+  jumpSettingBio(val){
+    if(!val){
+      this.$router.push(`/settingsBio?value=`)
+    } else {
+      return
+    }
+  }
 };
