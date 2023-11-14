@@ -181,7 +181,9 @@ export const goParticle = function () {
     let barCont = document.getElementById("barCont");
     // iframe插入页面
     document.body.appendChild(iframe);
-    barCont.style.display = "none";
+    if (barCont) {
+      barCont.style.display = "none";
+    }
 
     // //if topMenuType is "close"
     window.addEventListener("message", (event) => {
@@ -190,7 +192,9 @@ export const goParticle = function () {
           .querySelector('meta[name="theme-color"]')
           .setAttribute("content", "#fff");
         iframe && document.body.removeChild(iframe);
-        barCont.style.display = "flex";
+        if (barCont) {
+          barCont.style.display = "flex";
+        }
       }
     });
   } catch (error) {

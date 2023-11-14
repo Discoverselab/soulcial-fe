@@ -2,7 +2,7 @@ import loginData from "@/libs/loginData";
 // websocket实例
 let wsObj = null
 // ws连接地址
-// let wsUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/${loginData.userId}`;
+let wsUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/${loginData.userId}`;
 
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false
