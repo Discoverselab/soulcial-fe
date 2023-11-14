@@ -12,7 +12,7 @@
     <div class="introduce">
       <div class="title">PUMP Epoch</div>
       <div class="content">
-        <p>Nov 14 - Nov 28</p>
+        <p>Nov 15 - Nov 30</p>
       </div>
       <div class="title">Double vSOUL</div>
       <div class="content">

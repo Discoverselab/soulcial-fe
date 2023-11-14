@@ -67,7 +67,7 @@ export default {
   picksTxH(index) {
     this.isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
      this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
-    if (!this.$loginData.Auth_Token) {
+    if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
       this.walletShow = true;
     } else  if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser && !this.isUseInviteCode){
       this.$router.push("/welcome")

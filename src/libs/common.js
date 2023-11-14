@@ -16,7 +16,7 @@ export const nftAddress = isPROD
 
 // 交易所合约地址
 export const marketAddress = isPROD
-  ? "0x6AF9eBA0E7d216bA015f644fcCdA5BE7E18a0DbD"
+  ? "0xE575480af98B522BAcac422c9516D64f7492BEE6"
   : "0x31f9386398b9c310B9F9b2A766DBbEc75Fbb8AA4";
 
 export const ABIAddress = "0x4200000000000000000000000000000000000006";
