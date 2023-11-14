@@ -258,7 +258,7 @@ export const fetchBalance = async () => {
     provider = window.ethereum
       ? new ethers.providers.Web3Provider(window.ethereum)
       : null;
-    provider.getBalance(address).then((balance) => {
+    await provider.getBalance(address).then((balance) => {
       balanceRemain = handleBalance(balance);
     });
   } else {
