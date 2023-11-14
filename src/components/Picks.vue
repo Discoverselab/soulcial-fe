@@ -35,7 +35,8 @@
           </div>
           <p
             class="walletBalance"
-          >Insufficient {{ $network }} balance. 
+          >
+          Insufficient {{ $network }} balance.  
           <span class="link" @click="jump">
             Go to Deposit
           </span>
@@ -483,7 +484,7 @@ export default {
         font-weight: 600;
         &:first-of-type{
           color: #e03131;
-          margin-top: 15px;
+          margin-top: 15px;         
         }
         .link{
           color: #e03131;

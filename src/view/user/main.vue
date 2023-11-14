@@ -114,7 +114,7 @@
     </div>
     <!-- NFT list -->
     <div class="nft_cont" v-if="NftList.length">
-      <div class="nft_list" v-for="(item, index) in NftList" @click="$router.push(`/explore_details?id=${item.id}&path=`)"
+      <div class="nft_list" v-for="(item, index) in NftList" @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
         :key="index">
         <div class="img_cont">
           <img class="nftUrl" :src="item.squarePictureUrl" alt />
