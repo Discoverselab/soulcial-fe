@@ -5,7 +5,7 @@
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
       <img :class="`imgs${index + 1}`" v-else :src="item.img" alt="" />
     </div>
-    <Wallet v-if="$route.path=='/'" @close="walletShow = false" :walletShow="walletShow"></Wallet>
+    <Wallet v-if="$route.path == '/'" @close="walletShow = false" :walletShow="walletShow"></Wallet>
     <Tags @close="tagShow = false" @save="save" :userTags="userTags" :tagShow="tagShow"></Tags>
   </div>
 </template>
@@ -61,19 +61,41 @@ export default {
     BarClick(data) {
       if (this.BarActive != data.path) {
         if (data.name == "Explore") {
+          // 首页
           this.walletShow = false;
           localStorage.setItem("routers", "");
           this.BarActive = data.path;
           this.$router.push(data.path);
         } else {
-          if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
+          // 其他tabbar
+
+          // 未登录
+          if (!this.$loginData.Auth_Token) {
             localStorage.setItem("routers", data.path);
             this.walletShow = true;
             this.$router.push('/');
-          } else {
-            localStorage.setItem("routers", "");
+            return
+          }
+          // 小狐狸登录
+          if (this.$loginData.loginType == 0) {
             this.BarActive = data.path;
             this.$router.push(data.path);
+            return
+          }
+
+          // particle登录
+          const particle = window.sessionStorage.getItem("particle");
+          if (this.$loginData.loginType == 1) {
+
+            if (!window?.web3?.eth && !particle) {
+              localStorage.setItem("routers", data.path);
+              this.walletShow = true;
+              this.$router.push('/');
+            } else {
+              this.BarActive = data.path;
+              this.$router.push(data.path);
+            }
+
           }
         }
       }

@@ -26,14 +26,8 @@
         </div>
         <div class="EnterPrice">
           <div class="input_cont">
-            <input
-              readonly
-              oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
-              @blur="price = $event.target.value"
-              class="cont_input"
-              v-model="NFTDetail.price"
-              type="text"
-            />
+            <input readonly oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
+              @blur="price = $event.target.value" class="cont_input" v-model="NFTDetail.price" type="text" />
             <p class="unit">
               <img :src="require(`../assets/${$network}.png`)" alt />
               {{ $network }}
@@ -79,7 +73,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, marketAddress,goParticle } from "../libs/common.js";
+import { nftAddress, onParticle, marketAddress,goParticle, handleParticleWeb3 } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -92,7 +86,7 @@ export default {
     pickIndex: Number,
     PoolBalance: String
   },
-  data: function() {
+  data: function () {
     let _clientH = document.documentElement.clientHeight;
     return {
       overlayshow: false,
@@ -191,9 +185,9 @@ export default {
         inviteCode: superInviteCode
       };
       post(url, data, true)
-        .then(res => {})
-        .catch(error => {})
-        .finally(() => {});
+        .then(res => { })
+        .catch(error => { })
+        .finally(() => { });
     },
     // IFBalance() {
     //   return Number(this.PoolBalance) > 0;
@@ -205,7 +199,13 @@ export default {
         if (window.particle) {
           this.getApproved();
         } else {
-          onParticle(this.getApproved);
+          const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
+          if (curParticle) {
+            await handleParticleWeb3();
+            this.getApproved();
+          }else{
+            onParticle(this.getApproved);
+          }
         }
       }
     },
@@ -237,12 +237,12 @@ export default {
       contract.methods
         .pickItem(nftAddress, tokenId, this.pickIndex)
         .send({ from: this.$loginData.Auth_Token, value: value })
-        .on("transactionHash", function(hash) {
+        .on("transactionHash", function (hash) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:", hash);
           // 交易已发送，可以显示交易哈希或执行其他操作
           me.jcHash(hash);
         })
-        .on("error", function(error) {
+        .on("error", function (error) {
           console.error("🔥🔥🔥🚀 ~ file: Picks.vue:218 ~ error:", error);
           if (me.$loginData.loginType == 1) {
             // onParticle(me.getApproved)
