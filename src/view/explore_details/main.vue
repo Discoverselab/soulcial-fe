@@ -236,7 +236,7 @@
           PUMPING！
           <br />
           Results will be revealed in approximately <br />
-           {{ calculateSecondsUntil(convertToTargetTimeZone(NFTPickInfo.rewardTime)) }} seconds
+          {{ calculateSecondsUntil(convertToTargetTimeZone(NFTPickInfo.rewardTime)) }} seconds
         </p>
       </div>
       <!-- picks -->
@@ -288,7 +288,8 @@
                       </div>
                       <div>
                         <span v-if="item.type == 1" class="value">{{ item.price }} {{ $network }}</span>
-                        <p class="hisname hisname_right">{{ getLastTimeStr(convertToTargetTimeZone(item.createTime))  }}</p>
+                        <p class="hisname hisname_right">{{ getLastTimeStr(convertToTargetTimeZone(item.createTime)) }}
+                        </p>
                       </div>
                     </div>
                   </template>
@@ -371,8 +372,8 @@ import Wallet from "../../components/LinkWallet.vue";
 import Hexagon from "../../components/Hexagon.vue";
 import Overlay from "../../components/Overlay.vue";
 import Picks from "../../components/Picks.vue";
-import { copy } from "@/libs/common.js";
-import {calculateSecondsUntil,getLastTimeStr,convertToTargetTimeZone} from "@/utils/convertTime.js"
+import { copy, formatNumber } from "@/libs/common.js";
+import { calculateSecondsUntil, getLastTimeStr, convertToTargetTimeZone } from "@/utils/convertTime.js"
 import {
   getNFTLevel,
   getNFTPersonality,
@@ -435,14 +436,17 @@ export default {
     copy() {
       return copy;
     },
-    calculateSecondsUntil(){
+    calculateSecondsUntil() {
       return calculateSecondsUntil
     },
-    getLastTimeStr(){
+    getLastTimeStr() {
       return getLastTimeStr
     },
-    convertToTargetTimeZone(){
+    convertToTargetTimeZone() {
       return convertToTargetTimeZone
+    },
+    formatNumber() {
+      return (num) => formatNumber(num)
     }
   },
   components: {
@@ -453,7 +457,7 @@ export default {
   },
   created() {
     // this.BalanceOf()
-    if(this.$route.meta.isSharePick){
+    if (this.$route.meta.isSharePick) {
       let urlList = window.location.href.split("/");
       window.sessionStorage.setItem("inviteCode", urlList[urlList.length - 1]);
     }

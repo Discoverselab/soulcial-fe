@@ -120,6 +120,7 @@ import AOS from "aos";
 import Hexagon from "../../components/Hexagon.vue";
 import { getNFTLevel, getNFTPersonality, NFTColor, getNFTMood, Weather } from "../../libs/target";
 import {isShow} from "@/libs/isShow.js"
+import {formatNumber} from '@/libs/common.js'
 import Overlay from "@/components/Overlay.vue";
 
 export default {
@@ -146,6 +147,9 @@ export default {
   computed: {
     isShow() {
       return isShow;
+    },
+    formatNumber() {
+      return (num) => formatNumber(num);
     }
   },
   components: {

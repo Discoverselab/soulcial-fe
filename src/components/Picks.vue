@@ -33,13 +33,11 @@
               {{ $network }}
             </p>
           </div>
-          <p
-            class="walletBalance"
-          >
-          Insufficient {{ $network }} balance.  
-          <span class="link" @click="jump">
-            Go to Deposit
-          </span>
+          <p class="walletBalance">
+            Insufficient {{ $network }} balance.
+            <span class="link" @click="jump">
+              Go to Deposit
+            </span>
           </p>
           <p class="walletBalance">
             Potential Compensation (4%) :
@@ -74,7 +72,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, marketAddress,goParticle } from "../libs/common.js";
+import { nftAddress, onParticle, marketAddress, goParticle, formatNumber } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -106,26 +104,16 @@ export default {
   computed: {
     goParticle() {
       return goParticle;
-    }
+    },
+    formatNumber() {
+      return (num) => formatNumber(num);
+    },
   },
   components: { Overlay },
   watch: {},
   methods: {
     dialog_confirm() {
       this.$router.push("/earn");
-    },
-    formatNumber(number) {
-      if (Number.isInteger(number)) {
-        return number.toString(); // 如果是整数，直接返回
-      } else {
-        const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到4位小数
-        const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-        if (decimalPlaces && decimalPlaces.length > 6) {
-          return roundedNumber.toFixed(6); // 如果小数位超过4位，保留4位小数
-        } else {
-          return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
-        }
-      }
     },
     close() {
       this.$emit("close", true);
@@ -253,7 +241,7 @@ export default {
           }
         });
     },
-    jump(){
+    jump() {
       if (this.$loginData.loginType == 0) {
         window.open('https://app.optimism.io/bridge/deposit', '_blank');
       } else {
@@ -479,20 +467,23 @@ export default {
         font-family: "Inter";
         font-size: 12px;
         font-weight: 600;
-        &:first-of-type{
+
+        &:first-of-type {
           color: #e03131;
-          margin-top: 15px;         
+          margin-top: 15px;
         }
-        .link{
+
+        .link {
           color: #e03131;
           text-decoration: underline;
           cursor: pointer;
         }
+
         span {
           // margin-top: 15px;
           color: #000;
         }
-        
+
       }
     }
 

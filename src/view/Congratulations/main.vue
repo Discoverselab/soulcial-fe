@@ -101,7 +101,7 @@
 <script>
 import watch from "./src/watch";
 import methods from "./src/methods";
-import { linkOpen } from "@/libs/common.js";
+import { linkOpen, formatNumber } from "@/libs/common.js";
 import AOS from "aos";
 import {
   getNFTLevel,
@@ -135,6 +135,9 @@ export default {
     },
     linkOpen() {
       return (type, has) => linkOpen(type, has);
+    },
+    formatNumber() {
+      return (num) => formatNumber(num);
     }
   },
   components: {},

@@ -7,7 +7,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "@/http/http";
 import wethABI from "@/libs/weth.json";
-import { ABIAddress, clearInfo, onParticle } from "@/libs/common.js";
+import { ABIAddress, clearInfo, onParticle, formatNumber } from "@/libs/common.js";
 import { ethers } from "ethers";
 const provider = window.ethereum ? window.ethereum : null;
 let signer;
@@ -17,7 +17,7 @@ signer = providers ? providers.getSigner() : null;
 const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 export default {
     handleBalance(balance) {
-        let etherString = this.formatNumber(ethers.utils.formatEther(balance));
+        let etherString = formatNumber(ethers.utils.formatEther(balance));
         this.WalletBalance = String(parseFloat(etherString).toFixed(5));
     },
     // 获取主链币钱包余额
@@ -68,7 +68,7 @@ export default {
                 this.$loginData.Auth_Token
             );
             this.PoolBalance = ethers.utils.formatEther(
-                this.formatNumber(parseInt(BalanceOf._hex))
+                formatNumber(parseInt(BalanceOf._hex))
             );
         } catch (error) {
             this.PoolBalance = "0";
@@ -199,19 +199,6 @@ export default {
         }
         this.walletType = type;
         this.ReplaceShow = true;
-    },
-    formatNumber(number) {
-        if (Number.isInteger(number)) {
-            return number.toString(); // 如果是整数，直接返回
-        } else {
-            const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到4位小数
-            const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-            if (decimalPlaces && decimalPlaces.length > 6) {
-                return roundedNumber.toFixed(6); // 如果小数位超过4位，保留4位小数
-            } else {
-                return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
-            }
-        }
     },
     erIDClick(item) {
         this.erID = item.id;
