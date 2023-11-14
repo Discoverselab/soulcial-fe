@@ -33,7 +33,7 @@
               {{ $network }}
             </p>
           </div>
-          <p class="walletBalance">
+          <p class="walletBalance" style="color: #e03131;" v-if="WalletBalance < NFTDetail.price">
             Insufficient {{ $network }} balance.
             <span class="link" @click="jump">
               Go to Deposit
@@ -83,7 +83,8 @@ export default {
     NFTDetail: Object,
     PicksShow: Boolean,
     pickIndex: Number,
-    PoolBalance: String
+    PoolBalance: String,
+    WalletBalance: String
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight;
@@ -93,7 +94,7 @@ export default {
       price: "",
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
-      isSharePick: false
+      isSharePick: false,
     };
   },
   mounted() {
@@ -112,6 +113,8 @@ export default {
   components: { Overlay },
   watch: {},
   methods: {
+   
+    
     dialog_confirm() {
       this.$router.push("/earn");
     },
@@ -469,10 +472,9 @@ export default {
         font-weight: 600;
 
         &:first-of-type {
-          color: #e03131;
           margin-top: 15px;
         }
-
+        
         .link {
           color: #e03131;
           text-decoration: underline;

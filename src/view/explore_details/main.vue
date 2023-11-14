@@ -347,9 +347,9 @@
       </div>
     </van-dialog>
     <Overlay :overlayshow="overlayshow"></Overlay>
-    <Wallet :path="pathEx" @close="walletClose()" :walletShow="walletShow"></Wallet>
-    <Picks :PoolBalance="PoolBalance" :pickIndex="pickIndex" @callBack="callBack" :NFTDetail="NFTDetail"
-      @close="PicksShow = false" :PicksShow="PicksShow"></Picks>
+    <Wallet :path="pathEx"  @close="walletClose()" :walletShow="walletShow" @getWalletBalance="getWalletBalance"></Wallet>
+    <Picks :PoolBalance="PoolBalance" :WalletBalance="WalletBalance" :pickIndex="pickIndex" @callBack="callBack" :NFTDetail="NFTDetail"
+      @close="PicksShow = false"  :PicksShow="PicksShow"></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
     <van-dialog v-model="earnVsoulShow" :close-on-click-overlay="true" :z-index="9999999" :show-cancel-button="false"
       :show-confirm-button="false">
@@ -425,6 +425,7 @@ export default {
       UnregisteredList: [], // 未挂单nft 
       earnVsoulShow: false,
       isUseInviteCode:false, // 用户是否使用过邀请码 
+      WalletBalance: "0"
     };
   },
   watch: watch,
@@ -469,6 +470,8 @@ export default {
     this.getNFTHistory();
     this.getNFTPickInfo();
     this.getMintedNFTPage()
+    this.getWalletBalance()
+
     AOS.init({
       offset: 200,
       duration: 200, //duration

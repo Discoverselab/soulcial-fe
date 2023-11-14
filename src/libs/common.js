@@ -8,7 +8,7 @@ import Clipboard from "clipboard";
 import { ethers } from "ethers";
 
 export const isPROD = process.env.VUE_APP_BUILD === "production";
-
+export const browser = isPROD ? "https://optimistic.etherscan.io/tx/" : "https://goerli-optimism.etherscan.io/tx/"
 // nft合约地址
 export const nftAddress = isPROD
   ? "0x6AF9eBA0E7d216bA015f644fcCdA5BE7E18a0DbD"
@@ -17,7 +17,7 @@ export const nftAddress = isPROD
 // 交易所合约地址
 export const marketAddress = isPROD
   ? "0x6AF9eBA0E7d216bA015f644fcCdA5BE7E18a0DbD"
-  : "0x3E3B23b081DFA80F04919493b68535EA9437a18D";
+  : "0x31f9386398b9c310B9F9b2A766DBbEc75Fbb8AA4";
 
 export const ABIAddress = "0x4200000000000000000000000000000000000006";
 
@@ -40,7 +40,7 @@ export const chainList = isPROD
     ];
 
 export const linkOpen = (type, has) => {
-  window.open(`https://goerli-optimism.etherscan.io/tx/${has}`);
+  window.open(`${browser}${has}`);
 };
 
 // addChain_Params
