@@ -39,6 +39,13 @@
               {{ $network }}
             </p>
           </div>
+          <p
+            class="walletBalance"
+          >Insufficient {{ $network }} balance. 
+          <span class="link" @click="jump">
+            Go to Deposit
+          </span>
+          </p>
           <p class="walletBalance">
             Potential Compensation (4%) :
             <span>{{ formatNumber(NFTDetail.price * 0.04) }} {{ $network }}</span>
@@ -72,7 +79,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, marketAddress } from "../libs/common.js";
+import { nftAddress, onParticle, marketAddress,goParticle } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -101,7 +108,11 @@ export default {
       this.isSharePick = true;
     }
   },
-  computed: {},
+  computed: {
+    goParticle() {
+      return goParticle;
+    }
+  },
   components: { Overlay },
   watch: {},
   methods: {
@@ -150,7 +161,10 @@ export default {
         });
     },
     async jcHash(txHash) {
-      const web3 = this.$loginData.loginType == 0 ? new Web3(window.ethereum) : window.web3;
+      const web3 =
+        this.$loginData.loginType == 0
+          ? new Web3(window.ethereum)
+          : window.web3;
       web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
         if (error) {
           console.log("🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:", error);
@@ -240,6 +254,14 @@ export default {
             me.$toast("Transaction failed");
           }
         });
+    },
+    jump(){
+      if (this.$loginData.loginType == 0) {
+        window.open('https://app.optimism.io/bridge/deposit', '_blank');
+      } else {
+        this.goParticle()
+      }
+
     }
   }
 };
@@ -454,24 +476,25 @@ export default {
       }
 
       .walletBalance {
-        margin-top: 15px;
+        margin-top: 5px;
         color: #62625f;
         font-family: "Inter";
         font-size: 12px;
-        font-style: normal;
         font-weight: 600;
-        &:nth-child(3){
-          margin-top: 5px;
-        }
-
-        span {
+        &:first-of-type{
+          color: #e03131;
           margin-top: 15px;
-          color: #000;
-          font-family: "Inter";
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 600;
         }
+        .link{
+          color: #e03131;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        span {
+          // margin-top: 15px;
+          color: #000;
+        }
+        
       }
     }
 
