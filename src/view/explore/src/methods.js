@@ -90,8 +90,9 @@ export default {
       },
     });
   },
-  changeTab(id) {
-    if (this.TabActive === id) return;
+  changeTab(id,refresh) {
+    // refresh 当TabActive===1 从tabbar切换时刷新数据
+    if (this.TabActive === id && refresh !== "refresh") return;
     this.TabActive = id;
     this.showBackground = false;
     if (this.TabActive === 1) {

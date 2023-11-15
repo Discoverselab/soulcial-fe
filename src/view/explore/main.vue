@@ -218,7 +218,7 @@ export default {
     }, 1000 * 30);
 
     if (this.$route.meta.from !== "explore_details") {
-      this.changeTab(1);
+      this.changeTab(1,"refresh");
     }
 
     this.$refs.tabbar.BarActive = this.$route.path;
