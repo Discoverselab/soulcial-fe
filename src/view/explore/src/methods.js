@@ -90,7 +90,7 @@ export default {
       },
     });
   },
-  changeTab(id,refresh) {
+  changeTab(id, refresh) {
     // refresh 当TabActive===1 从tabbar切换时刷新数据
     if (this.TabActive === id && refresh !== "refresh") return;
     this.TabActive = id;
@@ -114,6 +114,7 @@ export default {
     }
   },
   getActivityData() {
+    if (this.overlayshow) return;
     if (this.currentPage < 2) {
       this.overlayshow = true;
     }
