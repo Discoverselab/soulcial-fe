@@ -199,17 +199,12 @@ export default {
   },
   created() { },
   mounted: async function () {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
-    this.getData();
     AOS.init({
       offset: 200,
       duration: 200, //duration
       easing: "ease-in-sine",
       delay: 100
     });
-    console.log(this.$loginData);
-    // window.addEventListener("scroll", this.scrollToTop);
   },
   activated() {
     this.handleShowModal();
