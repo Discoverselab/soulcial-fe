@@ -277,7 +277,7 @@
                       <div class="type_cont">
                         <img v-if="item.type == 1" class="left_icon" src="../../assets/start.png" alt />
                         <img v-if="item.type == 0" class="left_icon" src="../../assets/mint.png" alt />
-                        <img v-if="item.type == 2" class="left_icon" src="../../assets/Transfer.png" alt />
+                        <img v-if="item.type == 3" class="left_icon" src="../../assets/Transfer.png" alt />
                         <div>
                           <span class="value">
                             {{ item.type == 1 ? 'Collect' : item.type == 3 ? 'Transfer' : 'Launch'
