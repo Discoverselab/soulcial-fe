@@ -103,10 +103,10 @@
             <img class="userImg" :src="item.userImg" alt />
             <img class="nftImg" :src="item.tokenImg" alt />
           </div>
-          <div class="right">
+          <div class="right" :style="item.type === 2 ? { justifyContent: 'center' } : {}">
             <div class="order">{{ item.username || item.userAddress.substring(0, 6) }} {{ item.type === 0 ? 'Listed' :
-              'Pumped' }} SoulCast #{{ item.tokenId }} {{ item.type === 0 ? '' : `(${item.pickCount}/4)` }}</div>
-            <div class="price">{{ item.price }} {{ $network }}</div>
+              item.type === 2 ? 'Canceled' : 'Pumped'  }} SoulCast #{{ item.tokenId }} {{ item.type === 0 ||  item.type === 2 ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ? "listing" :"" }}</div>
+            <div class="price" v-if="item.type !== 2">{{ item.price  }} {{ $network }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.createTime)) }}</div>
           </div>
         </div>
