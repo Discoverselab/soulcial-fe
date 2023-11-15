@@ -34,7 +34,7 @@
     <div class="reward">
       <div class="lay">
         <div class="point"></div>
-        <div class="desc">Invite your friend with your code, and increase your SBTI.</div>
+        <div class="desc">Invite your friend with your code or link, and increase your SBTI.</div>
       </div>
       <div class="lay">
         <div class="point"></div>
