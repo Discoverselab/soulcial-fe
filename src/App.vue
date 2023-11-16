@@ -8,8 +8,7 @@
 </template>
 
 <script>
-// import TabBar from "./components/TabBar.vue";
-
+import { get } from "@/http/http";
 export default {
   name: "app",
   data() {
@@ -18,23 +17,25 @@ export default {
     };
   },
   components: {
-    // TabBar,
   },
   created() {
+    // 获取聊天未读数
+    this.getChatData();
+
     // 记录进入时间戳
     window.localStorage.setItem("firstApptime", new Date().getTime());
 
     // 时区检测
     const token = "a47c446ea7f061";
     fetch(`https://ipinfo.io/json?token=${token}`)
-        .then(response => response.json())
-        .then(data => {
-          window.localStorage.setItem("timezone", data.timezone);
-        })
-        .catch(error => {
-          // window.localStorage.removeItem("timezone");
-          console.error(error)
-        })
+      .then(response => response.json())
+      .then(data => {
+        window.localStorage.setItem("timezone", data.timezone);
+      })
+      .catch(error => {
+        // window.localStorage.removeItem("timezone");
+        console.error(error)
+      })
 
     // PWA环境检测
     const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
@@ -56,6 +57,22 @@ export default {
     }
   },
   methods: {
+    getChatData() {
+      let url = this.$api.chat.getChatList;
+      get(url)
+        .then((res) => {
+          if (res.code === 200) {
+            res.data.forEach(ele => {
+              if(ele.unreadNum){
+                this.$store.commit("updateChatRedPoint", true);
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          console.log("🔥🔥🔥🚀 ~ file: App.vue:71 ~ error:", error);
+        });
+    },
     clear() {
       if (this.$loginData.Auth_Token) {
         this.$loginData.out();

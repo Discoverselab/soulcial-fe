@@ -15,7 +15,12 @@ export default {
     get(url)
       .then((res) => {
         if (res.code === 200) {
+          let initNum = 0;
           this.ChatList = res.data;
+          this.ChatList.forEach((v) => {
+            v.unreadNum ? initNum++ : "";
+          });
+          this.$store.commit("updateChatRedPoint", initNum > 0);
         } else {
           this.$toast(res.msg);
         }
@@ -28,7 +33,7 @@ export default {
   },
   connectWS() {
     connectWebsocket(
-      '',
+      "",
       {},
       (res) => {
         let resData = JSON.parse(res);
@@ -47,6 +52,9 @@ export default {
             return +new Date(b.time) - +new Date(a.time);
           });
         }
+        if (resData.type < 5) {
+          this.$store.commit("updateChatRedPoint", true);
+        }
       },
       (err) => {
         console.log("ws err", err);
@@ -61,7 +69,7 @@ export default {
         this.$router.push(`/Congratulations?id=${item.id}`);
       } else if (item.sysMessage == "REWARD_FAILED") {
         this.$router.push(`/sorry?id=${item.id}`);
-      } else if(item.sysMessage == "MINTER_REWARD") {
+      } else if (item.sysMessage == "MINTER_REWARD") {
         this.$router.push(`/owner?id=${item.id}&creator=creator`);
       } else {
         this.$router.push(`/owner?id=${item.id}`);
