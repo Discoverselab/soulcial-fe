@@ -17,7 +17,9 @@ import loadingImg from "./assets/loadingImg.png";
 import Overlay from "./components/Overlay.vue";
 import "@/assets/css/iconfont.css";
 import Meta from "vue-meta";
-import './registerServiceWorker.js'
+import "./registerServiceWorker.js";
+import vConsole from 'vconsole'
+import { isPROD } from "./libs/common.js";
 Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
@@ -34,8 +36,9 @@ Vue.use(VueLazyload, {
 Vue.use(Vant);
 Vue.use(AOS);
 Vue.use(VueDragscroll);
-// import vConsole from 'vconsole'
-// Vue.prototype.$vConsole = new vConsole()
+if (!isPROD) {
+  Vue.prototype.$vConsole = new vConsole()
+}
 import MetaInfo from "vue-meta-info";
 import VueI18n from "vue-i18n";
 import "./icons/index.js";
