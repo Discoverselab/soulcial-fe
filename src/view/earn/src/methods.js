@@ -9,6 +9,8 @@ import { get, post } from "@/http/http";
 import wethABI from "@/libs/weth.json";
 import { ABIAddress, formatNumber, fetchBalance } from "@/libs/common.js";
 import { ethers } from "ethers";
+import { mapMutations } from 'vuex'
+
 const provider = window.ethereum ? window.ethereum : null;
 let signer;
 let providers;
@@ -16,6 +18,7 @@ providers = provider ? new ethers.providers.Web3Provider(provider) : null;
 signer = providers ? providers.getSigner() : null;
 const contract = new ethers.Contract(ABIAddress, wethABI, signer);
 export default {
+    ...mapMutations(["updateEranRedPoint"]),
   // 获取排行榜
   getVSoulRank() {
     let url = this.$api.infor.getVSoulRank;

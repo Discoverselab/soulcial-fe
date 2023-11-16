@@ -2,7 +2,7 @@
   <!-- tabBar -->
   <div id="barCont" class="barCont">
     <div @click="BarClick(item)" class="bar_list" v-for="(item, index) in BarList" :key="index">
-      <!-- <div v-if="item.name === 'Chat'" class="dot"></div> -->
+      <div v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules()" class="dot"></div>
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
       <img :class="`imgs${index + 1}`" v-else :src="item.img" alt="" />
     </div>
@@ -53,6 +53,11 @@ export default {
     Tags,
   },
   methods: {
+    myRules() {
+      if (this.BarActive !== "/earn" && this.$store.state.eranRedPoint) {
+        return true;
+      }
+    },
     tagshos() {
       this.tagShow = true;
     },
@@ -113,6 +118,15 @@ export default {
   .barCont {
     height: 60px !important;
   }
+
+  .dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 5px !important;
+    position: absolute !important;
+    top: 25px !important;
+    right: 104px !important;
+  }
 }
 
 .barCont {
@@ -138,14 +152,14 @@ export default {
     justify-content: center;
     cursor: pointer;
 
-    .dot{
-      width: 12px;
-      height: 12px;
-      background-color: #ea121f;
-      border-radius: 6px;
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #fe6463;
+      border-radius: 4px;
       position: absolute;
-      top: 16px;
-      right: 10px;
+      top: 38px;
+      right: 6px;
     }
 
     .barName {

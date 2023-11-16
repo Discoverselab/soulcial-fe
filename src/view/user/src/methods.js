@@ -208,7 +208,6 @@ export default {
             .then((res) => {
                 if (res.code === 200) {
                     this.getUserInfo();
-                    // this.Updatedb3(res.data)
                 } else {
                     this.$toast(res.msg);
                 }

@@ -270,7 +270,6 @@ import Overlay from "../../components/Overlay.vue";
 import Replace from "../../components/Replace.vue";
 import { isShow } from "@/libs/isShow.js";
 import { convertToTargetTimeZone } from "@/utils/convertTime";
-import ipinfo from "ipinfo";
 export default {
   name: "",
   data() {
@@ -372,7 +371,7 @@ export default {
     if (this.$route.query.type == 1) {
       this.TabActive = 1;
     }
-
+    this.updateEranRedPoint(false);
     me.getVSoulHistory();
     me.getVSoulBalance();
     me.getBalance();

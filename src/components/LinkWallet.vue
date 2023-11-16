@@ -37,27 +37,6 @@
           </div>
         </template>
 
-        <!-- <div class="wallet_list" @click="WalletConnect">
-          <div class="list_left">
-            <img src="../assets/wallet_connect.png" alt="" />
-            <p>WalletConnect</p>
-          </div>
-          <svg-icon className="Polygon" iconClass="Polygon"></svg-icon>
-        </div>
-        <div class="attention">
-          <van-icon name="info" size="20" />
-          <div class="attention_text">
-            <p class="attention_title">What is a Wallet?</p>
-            <p class="title_one">A Home for your Digital Assets</p>
-            <p class="text">
-              Wallets are used to send, receive, store, and display digital assets like Tokens and NFTs.
-            </p>
-            <p class="title_one">A New Way to Log In</p>
-            <p class="text">
-              Instead of creating new accounts and passwords on every website, just connect your wallet.
-            </p>
-          </div>
-        </div>-->
         <template v-if="!isPWA">
           <div class="lins">
             <p class="lin"></p>
@@ -111,18 +90,9 @@
 </template>
 <script>
 import { post, get } from "../http/http";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import Overlay from "../components/Overlay.vue";
-import {
-  RuntimeConnector,
-  Extension,
-  RESOURCE
-} from "@dataverse/runtime-connector";
-const runtimeConnector = new RuntimeConnector(Extension);
-let dataverse = false;
 let version = false;
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
-const app = dataverse ? "soulcial" : "soulcial4";
 import Web3 from "web3";
 import {
   LensClient,
@@ -162,61 +132,7 @@ export default {
         event.preventDefault();
       }
     },
-    async testLink(data) {
-      //Connect wallet
-      try {
-        this.overlayshow = true;
-        const res = await runtimeConnector.connectWallet();
-        this.wallet = res.wallet;
-        await this.linkCapability();
-        await this.creatData(data);
-        this.overlayshow = false;
-      } catch (error) {
-        this.overlayshow = false;
-      }
-    },
-    async linkCapability() {
-      //Establish capability model createCapability
-      let pkh = await runtimeConnector.createCapability({
-        app,
-        resource: RESOURCE.CERAMIC,
-        wallet: this.wallet
-      });
-      this.pkh = pkh;
-    },
-    async creatData(data) {
-      //Create streamcreateStream
-      const encrypted = JSON.stringify({
-        level: false,
-        charisma: false,
-        extroversion: false,
-        energy: false,
-        wisdom: false,
-        art: false,
-        courage: false,
-        soulscore: false
-      });
-      let Stream = await runtimeConnector.createStream({
-        modelId: dataverse
-          ? "kjzl6hvfrbw6c7bz8dm3olx6u48rc7acu6d5khlbu3yeltho4k3oluq2bsbxvdo"
-          : "kjzl6hvfrbw6c76e72zrpizt50pwpobmqbr49u1mks91zxkdr433l3masps9og8",
-        streamContent: {
-          level: String(data.level),
-          charisma: data.charisma || 0,
-          extroversion: data.extroversion || 0,
-          energy: data.energy || 0,
-          wisdom: data.wisdom || 0,
-          art: data.art || 0,
-          courage: data.courage || 0,
-          soulscore: data.levelScore || 0,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          encrypted
-        }
-      });
-      this.overlayshow = false;
-      this.login(data.isRegister, data.levelScore, Stream.streamId, "", "");
-    },
+
     close() {
       this.$emit("close", true);
     },
@@ -242,25 +158,7 @@ export default {
               "",
               signParams
             );
-            // if (!version) {
-            //   this.check_lens(data);
-            //   // this.login(res.data.isRegister,res.data.levelScore);
-            // } else {
-            //   if (res.data.streamId) {
-            //     this.login(
-            //       res.data.isRegister,
-            //       res.data.levelScore,
-            //       res.data.streamId,
-            //       "",
-            //       ""
-            //     );
-            //   } else {
-            //     let me = this;
-            //     setTimeout(() => {
-            //       me.testLink(res.data);
-            //     }, 100);
-            //   }
-            // }
+
           } else if (res.code === 400) {
             // this.whiteShow = true
             this.$router.push("/welcome");
@@ -486,21 +384,6 @@ export default {
         //  this.overlayshow = false
       } else {
         window.open("https://metamask.io/");
-      }
-    },
-    // interlinkageWalletConnect
-    async WalletConnect() {
-      const provider = new WalletConnectProvider({
-        infuraId: "5491a1035f5d42cfb17022aa25a97ea9"
-      });
-      try {
-        let accounts = await provider.enable();
-        this.loginType = 0;
-        this.preferredAuthType = "";
-        this.checkSteamId(accounts[0]);
-        this.disconnect(provider);
-      } catch (err) {
-        console.log(err);
       }
     },
     disconnect(provider) {
