@@ -108,13 +108,13 @@ export default {
       this.pageType = 1;
       this.getData();
     } else if (this.TabActive === 3) {
+      this.activityFinished = false
       this.activityList = [];
       this.currentPage = 1;
       this.getActivityData();
     }
   },
   getActivityData() {
-    if (this.overlayshow) return;
     if (this.currentPage < 2) {
       this.overlayshow = true;
     }
@@ -238,6 +238,7 @@ export default {
     this.getData();
   },
   onActivityLoad() {
+    if (this.overlayshow) return;
     this.currentPage++; // 更新页数
     this.getActivityData();
   },
