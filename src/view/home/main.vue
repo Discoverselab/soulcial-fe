@@ -280,7 +280,6 @@ export default {
     let me = this;
     me.getUserInfo();
     me.getMintedNFTPage(1);
-    // me.db3()
   },
   mounted: async function() {
     // await this.linkethers()

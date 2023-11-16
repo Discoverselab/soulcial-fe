@@ -6,9 +6,6 @@ matters need attention
 ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "../../../http/http";
-import { RuntimeConnector, Extension } from "@dataverse/runtime-connector";
-const runtimeConnector = new RuntimeConnector(Extension);
-const app = "soulcial";
 export default {
   handleShowModal() {
     const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
@@ -59,36 +56,6 @@ export default {
       /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
     );
     return flag;
-  },
-  async updataStream() {
-    //Update stream
-    const encrypted = JSON.stringify({
-      level: false,
-      charisma: false,
-      extroversion: false,
-      energy: false,
-      wisdom: false,
-      art: false,
-      courage: false,
-      soulscore: false,
-    });
-    await runtimeConnector.updateStream({
-      streamId:
-        "kjzl6kcym7w8y9exy11mvicci8yoc4uaiaefslcoew664o3qrypfhh641nwnl2p",
-      streamContent: {
-        level: "88",
-        charisma: 88,
-        extroversion: 88,
-        energy: 88,
-        wisdom: 88,
-        art: 88,
-        courage: 88,
-        soulscore: 88,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        encrypted,
-      },
-    });
   },
   changeTab(id, refresh) {
     // refresh 当TabActive===1 从tabbar切换时刷新数据

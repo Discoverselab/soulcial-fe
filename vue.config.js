@@ -22,7 +22,6 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const webpack = require('webpack')
 const path = require('path')
-// const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
     publicPath: './',
     outputDir: process.env.outputDir || 'dist',

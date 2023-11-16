@@ -6,26 +6,9 @@ matters need attention
 ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get } from "../../../http/http";
-import { RuntimeConnector, Extension } from "@dataverse/runtime-connector";
-const runtimeConnector = new RuntimeConnector(Extension);
 import Clipboard from "clipboard";
 import { Toast } from "vant";
-let dataverse = false;
-import {
-  createRandomAccount,
-  createClient,
-  getCollection,
-  createFromExternal,
-  createFromPrivateKey,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  queryDoc,
-  syncAccountNonce,
-} from "db3.js";
-// import { useNetwork } from 'wagmi'
-//
-//lens
+
 import {
   LensClient,
   development,
@@ -65,42 +48,7 @@ export default {
         this.overlayshow = false;
       });
   },
-  async db3() {
-    try {
-      const account = await createFromExternal();
-      const client = createClient(
-        "https://rollup.cloud.db3.network",
-        "https://index.cloud.db3.network",
-        account
-      );
-      await syncAccountNonce(client);
-      const collection = await getCollection(
-        "0x13fb1131fc3d3093ed8e02edd0bfa63a774df75d",
-        "score",
-        client
-      );
-      console.log(collection);
-      // 新增
-      // const res  = await addDoc(collection, {
-      //     abc: "The Three-Body Problem",
-      //     author: "Cixin-Liu",
-      //     rate: "989898"
-      // });
-      // 修改
-      // const res  = await updateDoc(collection,'15', {
-      //     abc: "The Three-Body Problem",
-      //     author: "Cixin-Liu",
-      //     rate: "4.9"
-      // });
-      // 删除
-      // const res = await deleteDoc(collection, ['15']);
-      // console.log(res);
-      const resultSet = await queryDoc(collection, "/[soulscore=140]");
-      console.log(resultSet);
-    } catch (e) {
-      console.log(e);
-    }
-  },
+
   isUser() {
     return (
       this.UserInfo.address.toLocaleUpperCase() ===
@@ -295,25 +243,6 @@ export default {
       Toast("No content");
     });
   },
-  async getStream(id) {
-    //获取流
-    this.overlayshow = true;
-    // let res = await runtimeConnector.loadStreamsBy({
-    //     modelId:dataverse?'kjzl6hvfrbw6c7bz8dm3olx6u48rc7acu6d5khlbu3yeltho4k3oluq2bsbxvdo':'kjzl6hvfrbw6c5bt9cmvdi2e3v43oei5jst3messykjnkqo2r5n3hhliw7ecy53',
-    //     // pkh: this.pkh
-    // });
-    let res = await runtimeConnector.loadStream(id);
-    console.log(res);
-    // let data = {}
-    // data = res[id].streamContent.content
-    // this.values.push(data.charisma)
-    // this.values.push(data.courage)
-    // this.values.push(data.art)
-    // this.values.push(data.wisdom)
-    // this.values.push(data.energy)
-    // this.values.push(data.extroversion)
-    this.overlayshow = false;
-  },
   goPump() {
     this.$router.push("/");
   },
@@ -371,7 +300,6 @@ export default {
           } else {
             this.$router.push("/welcome");
           }
-          // this.getStream(res.data.streamId)
         }
       })
       .catch((error) => {
@@ -422,7 +350,6 @@ export default {
         if (res.code === 200) {
           this.getUserInfo();
 
-          // this.Updatedb3(res.data)
         } else {
           this.$toast(res.msg);
         }
@@ -432,48 +359,6 @@ export default {
         me.overlayshow = false;
         this.$toast(error);
       });
-  },
-  async Updatedb3(data) {
-    let me = this;
-
-    try {
-      const account = await createFromExternal();
-      const client = createClient(
-        "https://scroll.rollup.testnet.db3.network",
-        "https://scroll.index.testnet.db3.network",
-        account
-      );
-      await syncAccountNonce(client);
-      const collection = await getCollection(
-        "0x85ac512833942dacfe620cccfa84985964edce68",
-        "Soulcast",
-        client
-      );
-      const resultSet = await queryDoc(
-        collection,
-        `/[address="${this.$loginData.Auth_Token}"]`
-      );
-      console.log(resultSet);
-      // 修改
-      const res = await updateDoc(collection, 1, {
-        address: this.$loginData.Auth_Token,
-        level: data.level,
-        charisma: data.charisma || 0,
-        extroversion: data.extroversion || 0,
-        energy: data.energy || 0,
-        wisdom: data.wisdom || 0,
-        art: data.art || 0,
-        courage: data.courage || 0,
-        soulscore: data.levelScore || 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      });
-      me.overlayshow = false;
-    } catch (e) {
-      console.log(e);
-      me.overlayshow = false;
-      // this.$toast(e)
-    }
   },
   getSoulSbtiStyle(soul) {
     const soulLength = String(soul).length;
