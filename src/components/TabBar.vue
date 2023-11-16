@@ -2,6 +2,7 @@
   <!-- tabBar -->
   <div id="barCont" class="barCont">
     <div @click="BarClick(item)" class="bar_list" v-for="(item, index) in BarList" :key="index">
+      <!-- <div v-if="item.name === 'Chat'" class="dot"></div> -->
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
       <img :class="`imgs${index + 1}`" v-else :src="item.img" alt="" />
     </div>
@@ -129,12 +130,23 @@ export default {
   align-items: center;
 
   .bar_list {
+    position: relative;
     height: 100%;
     width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    .dot{
+      width: 12px;
+      height: 12px;
+      background-color: #ea121f;
+      border-radius: 6px;
+      position: absolute;
+      top: 16px;
+      right: 10px;
+    }
 
     .barName {
       font-weight: 900;
