@@ -2,9 +2,15 @@
   <div class="earn">
     <!-- Tab -->
     <div class="TabCont">
-      <div class="Tab_list" :class="{
+      <div
+        class="Tab_list"
+        :class="{
         Tab_list_Active: TabActive == item.id,
-      }" @click="changeTabActive(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
+      }"
+        @click="changeTabActive(item.id)"
+        v-for="(item, index) in TabList"
+        :key="index"
+      >{{ item.name }}</div>
     </div>
     <!-- earnings -->
     <div class="earnings" v-if="TabActive == 1">
@@ -13,8 +19,35 @@
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
       <div @click="$router.push('/epoch_introduce')" class="epoch">
-        <img src="@/assets/banner_epoch.jpg" alt="">
+        <img src="@/assets/banner_epoch.jpg" alt />
       </div>
+      <h1 class="vSoulRank">Epoch Live Leaderboard</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Prize</th>
+            <th>Name</th>
+            <th>Pump vSOUL</th>
+          </tr>
+          <tr  >
+            <td>{{ vSoulRank.rank }}</td>
+            <td >{{ vSoulPriceMap[vSoulRank.rank] || 0 }}</td>
+            <td>{{ "You" }}</td>
+            <td>{{ +vSoulRank.vsoul }}</td>
+          </tr>
+          <tr v-for="item in vSoulRankList" :key="item.rank" >
+            <td>{{ item.rank }}</td>
+            <td>{{ vSoulPriceMap[item.rank] }}</td>
+            <td class="ellipsis username">{{ item.userName }}</td>
+            <td>{{ +item.vsoul }}</td>
+          </tr>
+      
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
       <div>
         <div>
           <div class="earn_list_title">
@@ -26,8 +59,16 @@
               </span>
             </p>
           </div>
-          <van-list v-model="earnLoading" offset="200" loading-text="Loading" :immediate-check="false"
-            :finished="earnFinished" finished-text @load="onEarnLoad" v-if="VSoulHistory.length > 0">
+          <van-list
+            v-model="earnLoading"
+            offset="200"
+            loading-text="Loading"
+            :immediate-check="false"
+            :finished="earnFinished"
+            finished-text
+            @load="onEarnLoad"
+            v-if="VSoulHistory.length > 0"
+          >
             <div class="earn_list" v-for="(item, index) in VSoulHistory" :key="index">
               <div class="list_left">
                 <img src="../../assets/start.png" alt />
@@ -87,8 +128,16 @@
           <div class="earn_list_title earn_list_title_wallet">
             <p class="title">History</p>
           </div>
-          <van-list v-model="walletLoading" offset="200" loading-text="Loading" :immediate-check="false"
-            :finished="walletFinished" finished-text @load="onWalletLoad" v-if="WalletHistory.length > 0">
+          <van-list
+            v-model="walletLoading"
+            offset="200"
+            loading-text="Loading"
+            :immediate-check="false"
+            :finished="walletFinished"
+            finished-text
+            @load="onWalletLoad"
+            v-if="WalletHistory.length > 0"
+          >
             <div class="earn_list" v-for="(item, index) in WalletHistory" :key="index">
               <div class="list_left">
                 <img src="@/assets/pickss.png" alt />
@@ -97,10 +146,13 @@
                   <p class="times">{{ convertToTargetTimeZone(item.createTime) }}</p>
                 </div>
               </div>
-              <button class="list_right" :class="{ list_right_fu: item.type == 3 || item.type == 1 }">
+              <button
+                class="list_right"
+                :class="{ list_right_fu: item.type == 3 || item.type == 1 }"
+              >
                 {{ item.type != 1 &&
-                  item.type != 3
-                  ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
+                item.type != 3
+                ? `+${item.price} ${$network}` : `-${item.price} ${$network}` }}
               </button>
             </div>
           </van-list>
@@ -131,8 +183,13 @@
         <!-- Secondary menu list -->
         <div class="ercont_cont">
           <div class="ercont">
-            <div @click="erIDClick(item)" class="ercont_list" :class="{ ercont_list_active: item.id == erID }"
-              v-for="(item, index) in erList" :key="index">{{ item.name }}</div>
+            <div
+              @click="erIDClick(item)"
+              class="ercont_list"
+              :class="{ ercont_list_active: item.id == erID }"
+              v-for="(item, index) in erList"
+              :key="index"
+            >{{ item.name }}</div>
           </div>
           <div class="Tab_right">
             <img src="../../assets/sift.png" alt />
@@ -140,8 +197,12 @@
         </div>
         <!-- NFT List -->
         <div class="nft_cont" v-if="NftList.length">
-          <div class="nft_list" @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-            v-for="(item, index) in NftList" :key="index">
+          <div
+            class="nft_list"
+            @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
+            v-for="(item, index) in NftList"
+            :key="index"
+          >
             <div class="img_cont">
               <img class="nftUrl" :src="item.squarePictureUrl" alt />
               <div v-if="erID == 1" class="point">
@@ -164,14 +225,18 @@
                 <span v-if="erID == 1">Cost</span>
               </div>
               <div class="price_botm">
-                <span class="bot_price">{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
+                <span
+                  class="bot_price"
+                >{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
                 <span class="bot_price" v-if="erID == 1">{{ item.costPrice || 0 }} {{ $network }}</span>
               </div>
             </div>
             <div class="Launching">
               <div class="LaunchingData" v-if="item.pickStatus > 0">
                 <span v-if="!item.nowPickCount">Pump 0/4</span>
-                <span v-else>{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
+                <span
+                  v-else
+                >{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
               </div>
             </div>
           </div>
@@ -185,8 +250,14 @@
 
     <Overlay :overlayshow="overlayshow"></Overlay>
     <TabBar></TabBar>
-    <Replace @callBack="callBack" @close="ReplaceShow = false" :WalletBalance="WalletBalance" :PoolBalance="PoolBalance"
-      :type="walletType" :ReplaceShow="ReplaceShow"></Replace>
+    <Replace
+      @callBack="callBack"
+      @close="ReplaceShow = false"
+      :WalletBalance="WalletBalance"
+      :PoolBalance="PoolBalance"
+      :type="walletType"
+      :ReplaceShow="ReplaceShow"
+    ></Replace>
   </div>
 </template>
 <script>
@@ -229,6 +300,20 @@ export default {
       Available: 0,
       showNoData: false, // vsoul页面没有历史数据展示图片
       showNoWallet: false, //wallet页面没有历史数据时展示
+      vSoulRankList: [],
+      vSoulRank:{},
+      vSoulPriceMap: {
+        "1": "$800",
+        "2": "$400",
+        "3": "$200",
+        "4": "$100",
+        "5": "$100",
+        "6": "$100",
+        "7": "$100",
+        "8": "$100",
+        "9": "$100",
+        "10": "$100",
+      },
       walletTypeNmae: {
         0: "Deposit",
         1: "Withdraw",
@@ -236,7 +321,7 @@ export default {
         3: "Pump",
         4: "Refund",
         5: "Sell",
-        6: "Creartor Earnings",
+        6: "Creartor Earnings"
       },
       TabList: [
         {
@@ -263,7 +348,8 @@ export default {
           id: 2
         }
       ],
-      NftList: []
+      NftList: [],
+      
     };
   },
   watch: watch,
@@ -290,11 +376,12 @@ export default {
     me.getVSoulHistory();
     me.getVSoulBalance();
     me.getBalance();
+    me.getVSoulRank();
     // me.BalanceOf();
     // me.getMintedNFTPage(1);
     me.getWallectHistory();
   },
-  mounted: async function () {
+  mounted: async function() {
     console.log("this：", this);
     console.log("$route：", this.$route);
 
@@ -313,7 +400,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() { }
+  destroyed() {}
 };
 </script>
 
