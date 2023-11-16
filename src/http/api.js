@@ -57,7 +57,8 @@ export default {
         getNFTPersonality: `${api}pfp/api/admin/nft/getNFTPersonality`, //角色下拉
         getFansRank: `${api}pfp/api/admin/home/getFansRank`, //获取粉丝排行榜
         pictureUpload: `${api}pfp/api/admin/AIGC/pictureUpload`, //上传图片
-        getSearchList: `${api}pfp/api/admin/explor/indexSearch`  // 首页搜索
+        getSearchList: `${api}pfp/api/admin/explor/indexSearch`,  // 首页搜索
+        getVSoulRank: `${api}pfp/api/admin/wallect/getVSoulRank` //vSOUL排行榜
     },
     chat: {
         getUserMessage: `${api}pfp/api/admin/message/getUserMessage`,
