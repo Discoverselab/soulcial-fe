@@ -30,7 +30,7 @@
             <th>Name</th>
             <th>Pump vSOUL</th>
           </tr>
-          <tr  >
+          <tr style="backgroundColor: #51d27bb3;" >
             <td>{{ vSoulRank.rank }}</td>
             <td >{{ vSoulPriceMap[vSoulRank.rank] || 0 }}</td>
             <td>{{ "You" }}</td>
