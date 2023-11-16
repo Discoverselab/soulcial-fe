@@ -2,7 +2,7 @@
   <!-- tabBar -->
   <div id="barCont" class="barCont">
     <div @click="BarClick(item)" class="bar_list" v-for="(item, index) in BarList" :key="index">
-      <div v-if="['Earn', 'Chat'].includes(item.name) && BarActive != item.path && myRules(item)" class="dot"></div>
+      <div v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules()" class="dot"></div>
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
       <img :class="`imgs${index + 1}`" v-else :src="item.img" alt="" />
     </div>
@@ -53,8 +53,10 @@ export default {
     Tags,
   },
   methods: {
-    myRules(v){
-      return true;
+    myRules() {
+      if (this.BarActive !== "/earn" && this.$store.state.eranRedPoint) {
+        return true;
+      }
     },
     tagshos() {
       this.tagShow = true;
@@ -115,6 +117,15 @@ export default {
 @media screen and (min-width: 750px) {
   .barCont {
     height: 60px !important;
+  }
+
+  .dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 5px !important;
+    position: absolute !important;
+    top: 25px !important;
+    right: 104px !important;
   }
 }
 

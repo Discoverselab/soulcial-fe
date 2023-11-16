@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import rem from "./rem";
 import api from "./http/api";
+import store from'./store/index';
 import loginData from "./libs/loginData";
 import VueDragscroll from "vue-dragscroll";
 import AOS from "aos";
@@ -62,6 +63,7 @@ Vue.config.productionTip = false;
 new Vue({
   render: (h) => h(App),
   router,
+  store,
   rem,
   i18n,
   mounted() {
