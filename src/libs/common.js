@@ -247,7 +247,7 @@ export const formatNumber = (number) => {
 
 const handleBalance = (balance) => {
   let etherString = formatNumber(ethers.utils.formatEther(balance));
-  return String(parseFloat(etherString).toFixed(5));
+  return String(parseFloat(etherString).toFixed(5)) || 0;
 };
 // 获取主链币钱包余额
 export const fetchBalance = async () => {
