@@ -11,7 +11,7 @@
       </div>
       <!-- Avatar name and address -->
       <div class="userinfo">
-        <div @click="goTwitter" class="portrait">
+        <div @click="goTwitter(UserInfo)" class="portrait">
           <img :src="UserInfo.avatar" alt />
         </div>
         <div class="nameAddres">

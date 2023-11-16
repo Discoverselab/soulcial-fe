@@ -18,8 +18,10 @@ const provider = window.ethereum
     ? new ethers.providers.Web3Provider(window.ethereum)
     : null;
 export default {
-    goTwitter() {
+    goTwitter(info) {
+        if (info?.twitterStatus == 1) {
         window.open(`https://twitter.com/${this.UserInfo.twitterUserName}`)
+        }
     },
     async init() {
         await this.getUserInfo();

@@ -40,7 +40,7 @@
             <td>{{ item.rank }}</td>
             <td>{{ vSoulPriceMap[item.rank] }}</td>
             <td class="ellipsis username">{{ item.userName }}</td>
-            <td>{{ +item.vsoul }}</td>
+            <td>{{ item.vsoul ? +item.vsoul : 0 }}</td>
           </tr>
       
         </thead>
