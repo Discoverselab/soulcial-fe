@@ -1,10 +1,14 @@
 const state = {
   eranRedPoint: true,
+  chatRedPoint: false,
 }
 
 const actions = {
   async setTitle({ commit }, title) {
     commit('setTitle', title)
+  },
+  async updateChatRedPoint({ commit }, flag) {
+    commit('updateChatRedPoint', flag)
   }
 }
 
@@ -14,6 +18,9 @@ const mutations = {
   },
   updateEranRedPoint(state, payload) {
     state.eranRedPoint = payload
+  },
+  updateChatRedPoint(state, payload) {
+    state.chatRedPoint = payload
   },
 }
 
