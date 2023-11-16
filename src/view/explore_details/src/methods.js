@@ -409,7 +409,7 @@ export default {
     this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
     if (!this.$loginData.Auth_Token) {
       this.walletShow = true;
-    } else if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser){
+    } else if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser&& !this.isUseInviteCode){
       this.$router.push("/welcome")
     } else {
       this.$router.push(
