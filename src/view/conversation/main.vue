@@ -7,8 +7,8 @@
           <img :src="chatDetailDto.avatar" alt="">
         </div>
         <div class="right">
-          <div class="name" v-if="chatDetailDto.type == 0">{{ chatDetailDto.title }}</div>
-          <div class="name" v-else>{{ `SoulCast #${chatDetailDto.tokenId} Group (${chatDetailDto.memberNumber})` }}</div>
+          <div class="name" v-if="chatDetailDto.type == 1">{{ `SoulCast #${chatDetailDto.tokenId} Group (${chatDetailDto.memberNumber})` }}</div>
+          <div class="name" v-else>{{ chatDetailDto.title }}</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
           </div> -->
@@ -216,6 +216,7 @@ export default {
         margin-right: 10px;
         box-sizing: border-box;
         border: 1px solid #000;
+        flex-shrink: 0;
 
         img {
           width: 100%;
