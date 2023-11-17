@@ -12,12 +12,12 @@ export const browser = isPROD ? "https://optimistic.etherscan.io/tx/" : "https:/
 // nft合约地址
 export const nftAddress = isPROD
   ? "0xB39c5896A94287B9c0Bce736e505234b685c0E02"
-  : "0x4508Ca82715A9de9FC3df76F354535B23aFb56Dd";
+  : "0x064cCfc36627c89eaAc61A4a9F4d18f1A4a38bdF";
 
 // 交易所合约地址
 export const marketAddress = isPROD
   ? "0xE575480af98B522BAcac422c9516D64f7492BEE6"
-  : "0x31f9386398b9c310B9F9b2A766DBbEc75Fbb8AA4";
+  : "0xA2a7DBD81B1935e14C3dFBed8D5446FDA815C291";
 
 export const ABIAddress = "0x4200000000000000000000000000000000000006";
 
