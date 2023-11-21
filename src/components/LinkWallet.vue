@@ -94,16 +94,10 @@ import Overlay from "../components/Overlay.vue";
 let version = false;
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
 import Web3 from "web3";
-import {
-  LensClient,
-  development,
-  isRelayerResult
-} from "@lens-protocol/client";
+
 import { ethers } from "ethers";
 import { onParticle } from "@/libs/common.js";
-const client = new LensClient({
-  environment: development
-});
+
 export default {
   props: {
     walletShow: Boolean
@@ -169,24 +163,6 @@ export default {
           this.overlayshow = false;
         });
     },
-
-    async check_lens(data) {
-      // 根据当前连接钱包账户判断是否注册过lens账户
-      const allOwnedProfiles = await client.profile.fetchAll({
-        ownedBy: [this.address],
-        limit: 1
-      });
-      // 判断lens账户List长度
-      if (allOwnedProfiles.items.length) {
-        let item = allOwnedProfiles.items[0];
-        this.login(data.isRegister, data.levelScore, "", item.id, item.handle);
-      } else {
-        this.handle = "";
-        this.userLens = data;
-        this.dialogShow = true;
-      }
-      console.log(allOwnedProfiles);
-    },
     newGroupBefColse(action, done) {
       if (action == "confirm" && !this.handle.trim()) {
         done(false);
@@ -217,50 +193,6 @@ export default {
       }
       this.overlayshow = true;
       this.dialogShow = false;
-      this.CreateUser();
-    },
-    // 创建lens用户
-    async CreateUser() {
-      //签名
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x13881" }]
-      });
-      await window.ethereum.request({
-        method: "eth_requestAccounts"
-      });
-      const r = await client.authentication.generateChallenge(this.address);
-      const provider = window.ethereum
-        ? new ethers.providers.Web3Provider(window.ethereum)
-        : null;
-      const signer = provider.getSigner();
-      const signature = await signer.signMessage(r);
-      const authData = await client.authentication.authenticate(
-        this.address,
-        signature
-      );
-      let res = await client.authentication.isAuthenticated();
-      //创建个人资料
-      const profileCreateResult = await client.profile.create({
-        handle: this.handle,
-        profilePictureUri: null
-        // followModule: {
-        //   revertFollowModule: true,
-        // },
-      });
-      const profileCreateResultValue = profileCreateResult.unwrap();
-      if (!isRelayerResult(profileCreateResultValue)) {
-        this.$toast(`Something went wrong`, profileCreateResultValue);
-        this.overlayshow = false;
-        return;
-      } else {
-        console.log(profileCreateResultValue);
-        // 创建成功
-        let me = this;
-        setTimeout(() => {
-          me.check_lens(this.userLens);
-        }, 7000);
-      }
     },
     login(isRegister, levelScore, streamId, lensId, handle, signParams) {
       this.overlayshow = true;

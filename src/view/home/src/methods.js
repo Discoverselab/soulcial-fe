@@ -9,18 +9,10 @@ import { get } from "../../../http/http";
 import Clipboard from "clipboard";
 import { Toast } from "vant";
 
-import {
-  LensClient,
-  development,
-  isRelayerResult,
-} from "@lens-protocol/client";
+
 import { ethers } from "ethers";
 
 import IStorageProvider from "../../../libs/LocalStorageProvider";
-const client = new LensClient({
-  environment: development,
-  storage: IStorageProvider,
-});
 
 const provider = window.ethereum
   ? new ethers.providers.Web3Provider(window.ethereum)
@@ -55,32 +47,6 @@ export default {
       this.address.toLocaleUpperCase()
     );
   },
-  async linkethers() {
-    //签名
-    const r = await client.authentication.generateChallenge(this.address);
-    console.log(r);
-    const provider = window.ethereum
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : null;
-    const signer = provider.getSigner();
-    const signature = await signer.signMessage(r);
-    console.log(this.address, signature);
-
-    const authData = await client.authentication
-      .authenticate(this.address, signature)
-      .then((res) => {
-        console.log(res);
-      });
-    console.log(authData);
-    const {
-      data: {
-        authenticate: { accessToken },
-      },
-    } = authData;
-    console.log({ accessToken });
-    let res = await client.authentication.isAuthenticated();
-    console.log(res);
-  },
 
   async contect() {
     //连接钱包
@@ -101,117 +67,6 @@ export default {
     } else {
       this.contect();
     }
-  },
-
-  async follow() {
-    // 获取推荐列表
-    const recommendedProfiles = await client.profile.allRecommended();
-    console.log(recommendedProfiles);
-    // Follow
-    const followTypedDataResult = await client.profile.createFollowTypedData({
-      follow: [
-        {
-          profile: recommendedProfiles[0].id,
-        },
-      ],
-    });
-    // 签名信息
-    const data = followTypedDataResult.unwrap();
-    console.log(data);
-    // sign with the wallet
-    const signedTypedData = await provider
-      .getSigner()
-      ._signTypedData(
-        data.typedData.domain,
-        data.typedData.types,
-        data.typedData.value
-      );
-    console.log(signedTypedData);
-    const broadcastResult = await client.transaction.broadcast({
-      id: data.id,
-      signature: signedTypedData,
-    });
-    console.log(broadcastResult);
-    if (broadcastResult.value) {
-      console.log("关注成功");
-      setTimeout(async () => {
-        await this.myFollow();
-      }, 5000);
-    } else {
-      console.log("error：", broadcastResult);
-    }
-  },
-
-  async unFollow() {
-    //取消关注
-    const unfollowTypedDataResult =
-      await client.profile.createUnfollowTypedData({
-        profile: "0x01",
-      });
-
-    const data = unfollowTypedDataResult.unwrap();
-
-    const signedTypedData = await provider
-      .getSigner()
-      ._signTypedData(
-        data.typedData.domain,
-        data.typedData.types,
-        data.typedData.value
-      );
-
-    const broadcastResult = await client.transaction.broadcast({
-      id: data.id,
-      signature: signedTypedData,
-    });
-    if (broadcastResult.value) {
-      console.log("取关成功");
-      setTimeout(async () => {
-        await this.myFollow();
-      }, 5000);
-    } else {
-      console.log("error：", broadcastResult);
-    }
-  },
-  async myFollow() {
-    //获取我的关注
-    let myFollow = await client.profile.allFollowing({
-      address: this.address,
-    });
-    console.log("我的关注：", myFollow.items);
-
-    // 获取关注我的
-    const allOwnedProfiles = await client.profile.fetchAll({
-      ownedBy: [this.address],
-      limit: 1,
-    });
-    if (allOwnedProfiles.items.length) {
-      this.myId = allOwnedProfiles.items[0].id;
-      let followMe = await client.profile.allFollowers({
-        profileId: this.myId,
-      });
-      console.log("关注我的：", followMe.items);
-    }
-  },
-
-  async creatMyInfo() {
-    //创建个人资料
-    const profileCreateResult = await client.profile.create({
-      handle: "lens.hpy",
-      profilePictureUri: null,
-      followModule: {
-        revertFollowModule: true,
-      },
-    });
-    const profileCreateResultValue = profileCreateResult.unwrap();
-
-    if (!isRelayerResult(profileCreateResultValue)) {
-      console.log(`Something went wrong`, profileCreateResultValue);
-      return;
-    }
-
-    console.log(
-      `Transaction was successfuly broadcasted with txId ${profileCreateResultValue.txId}`
-    );
   },
 
   FollList(type) {

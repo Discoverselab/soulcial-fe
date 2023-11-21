@@ -282,7 +282,6 @@ export default {
     me.getMintedNFTPage(1);
   },
   mounted: async function() {
-    // await this.linkethers()
     // await this.creatMyInfo()
     // this.creatMyInfo()
     // this.checkLink()
