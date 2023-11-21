@@ -72,7 +72,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, marketAddress, goParticle, formatNumber } from "../libs/common.js";
+import { nftAddress, onParticle, goParticle, formatNumber } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -84,7 +84,8 @@ export default {
     PicksShow: Boolean,
     pickIndex: Number,
     PoolBalance: String,
-    WalletBalance: String
+    WalletBalance: String,
+    marketAddress: String
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight;
@@ -210,13 +211,13 @@ export default {
     },
     // particle交易
     async particlePay() {
-      const contract = new window.web3.eth.Contract(MarketABI, marketAddress);
+      const contract = new window.web3.eth.Contract(MarketABI, this.marketAddress);
       this.handlePickItem(contract);
     },
     // metatask交易
     async toPay() {
       const web3 = new Web3(window.ethereum);
-      var myContract = new web3.eth.Contract(MarketABI, marketAddress);
+      var myContract = new web3.eth.Contract(MarketABI, this.marketAddress);
       this.handlePickItem(myContract);
     },
     handlePickItem(contract) {

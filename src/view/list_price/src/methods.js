@@ -8,7 +8,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 import { get, post } from "@/http/http";
 import { ethers } from "ethers";
 import NftABI from "@/libs/testEthABI.json";
-import { nftAddress, marketAddress } from "@/libs/common.js";
+import { nftAddress } from "@/libs/common.js";
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
 import Web3 from "web3";
 export default {
@@ -53,7 +53,7 @@ export default {
           .getApproved(this.NFTDetail.realTokenId)
           .call()
           .then((res) => {
-            if (res.toLocaleUpperCase() != marketAddress.toLocaleUpperCase()) {
+            if (res.toLocaleUpperCase() != this.marketAddress.toLocaleUpperCase()) {
               this.particleApproved(contract);
             } else {
               this.listNFTApprove();
@@ -69,7 +69,7 @@ export default {
         );
         if (
           approvedAddress.toLocaleUpperCase() !=
-          marketAddress.toLocaleUpperCase()
+          this.marketAddress.toLocaleUpperCase()
         ) {
           this.Approved(contract);
         } else {
@@ -85,7 +85,7 @@ export default {
   async particleApproved(_contract) {
     try {
       await _contract.methods
-        .approve(marketAddress, this.NFTDetail.realTokenId)
+        .approve(this.marketAddress, this.NFTDetail.realTokenId)
         .send({ from: this.$loginData.Auth_Token })
         .on("transactionHash", (hash) => {
           console.log("🔥🔥🔥🚀 ~ file: methods.js:87 ~ hash:", hash);
@@ -102,7 +102,7 @@ export default {
   async Approved(contract) {
     try {
       const approved = await contract.approve(
-        marketAddress,
+        this.marketAddress,
         this.NFTDetail.realTokenId
       );
       this.listNFTApprove();
@@ -127,20 +127,25 @@ export default {
     // me.overlayshow = false;
   },
 
-  getData() {
-    this.overlayshow = true;
-    let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
-    get(url)
-      .then((res) => {
-        if (res.code === 200) {
-          this.NFTDetail = res.data;
-        }
-        this.overlayshow = false;
-      })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+  async getData() {
+    try {
+      this.overlayshow = true;
+      let url = this.$api.nft.getNFTDetail + `?id=${this.$route.query.id}`;
+      const res = await get(url);
+  
+      if (res.code === 200) {
+        this.NFTDetail = res.data;
+        this.marketAddress = res.data.contractMarketAddress;
+      }
+  
+      this.overlayshow = false;
+    } catch (error) {
+      console.error( error);
+      this.overlayshow = false;
+    }
   },
+
+
   // 计算收益
   getTotalEarn(price) {
     let k =

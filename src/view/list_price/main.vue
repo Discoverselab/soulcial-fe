@@ -117,6 +117,7 @@ export default {
       NFTDetail: {},
       NftList:[],
       UnregisteredList: [], // 未挂单nft 
+      marketAddress: undefined, // 交易所合约地址
     };
   },
   watch: watch,
@@ -135,7 +136,7 @@ export default {
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
-    this.getData();
+    await this.getData();
     AOS.init({
       offset: 200,
       duration: 200, //duration

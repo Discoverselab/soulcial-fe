@@ -12,7 +12,6 @@ import wethABI from "@/libs/weth.json";
 import {
   addChain_Params,
   nftAddress,
-  marketAddress,
   ABIAddress,
   getHeight,
   fetchBalance
@@ -206,7 +205,7 @@ export default {
         params: [
           {
             from: this.$loginData.Auth_Token,
-            to: marketAddress,
+            to: this.marketAddress,
             value: ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex,
           },
         ],
@@ -225,7 +224,7 @@ export default {
         this.NFTDetail.realTokenId
       );
       if (
-        approvedAddress.toLocaleUpperCase() != marketAddress.toLocaleUpperCase()
+        approvedAddress.toLocaleUpperCase() != this.marketAddress.toLocaleUpperCase()
       ) {
         this.$toast("NFT anomaly");
       } else {
@@ -346,38 +345,45 @@ export default {
   //             this.overlayshow = false;
   //         });
   // },
-  getData() {
-    // this.overlayshow = true;
-    let url =
-      this.$api.nft.getNFTDetail +
-      `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
-    get(url)
-      .then((res) => {
-        if (res.code === 200) {
-          this.NFTDetail = res.data;
-          let item = res.data;
-          this.values.push(item.charisma);
-          this.values.push(item.courage);
-          this.values.push(item.art);
-          this.values.push(item.wisdom);
-          this.values.push(item.energy);
-          this.values.push(item.extroversion);
-          const isSame =
-            this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
-              this.$loginData.Auth_Token.toLocaleUpperCase() ||
-            this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
-              this.$loginData.Auth_Token.toLocaleUpperCase();
-          if (isSame) {
-            this.isShareMy = true;
-          }
-          getHeight(this);
-          // this.overlayshow = false;
+  async getData() {
+    try {
+      this.overlayshow = true;
+      let url =
+        this.$api.nft.getNFTDetail +
+        `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
+  
+      const res = await get(url);
+  
+      if (res.code === 200) {
+        this.NFTDetail = res.data;
+        let item = res.data;
+        this.marketAddress = res.data.contractMarketAddress;
+        this.hasMarketAddress = true
+        this.values.push(item.charisma);
+        this.values.push(item.courage);
+        this.values.push(item.art);
+        this.values.push(item.wisdom);
+        this.values.push(item.energy);
+        this.values.push(item.extroversion);
+  
+        const isSame =
+          this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
+            this.$loginData.Auth_Token.toLocaleUpperCase() ||
+          this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
+            this.$loginData.Auth_Token.toLocaleUpperCase();
+  
+        if (isSame) {
+          this.isShareMy = true;
         }
-      })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+         getHeight(this);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.overlayshow = false;
+    }
   },
+  
 
   getNFTHistory() {
     let url =
