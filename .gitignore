@@ -1,6 +1,8 @@
 node_modules
 dist
 dist.zip
+build
+build.zip
 frontend_production
 frontend_production.zip
 frontend_development
