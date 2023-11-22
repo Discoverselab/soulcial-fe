@@ -1,7 +1,6 @@
 # soulcial-前端
 
 ## 技术栈
-
 - vue 2.7.14
 - vant 2.12.54
 - node 14
