@@ -21,6 +21,7 @@ import Meta from "vue-meta";
 import "./registerServiceWorker.js";
 import vConsole from 'vconsole'
 import { isPROD } from "./libs/common.js";
+import { handleError } from "./utils/utils";
 Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
@@ -57,6 +58,7 @@ const i18n = new VueI18n({
 });
 Vue.prototype.$network = "ETH";
 Vue.prototype.$api = api;
+Vue.prototype.$handleErrorImg = handleError;
 Vue.prototype.$loginData = loginData;
 Vue.config.productionTip = false;
 // new WOW().init();

@@ -12,7 +12,7 @@
                   <span :class="{active:activeID==item.id}">{{ item.name }}</span>
                   <div class="cont_right">
                     <div v-for="(data, indexs) in item.sort" :key="indexs">
-                      <img  :src="activeID === item.id?down_sincere:down" alt="" />
+                      <img :src="activeID === item.id?down_sincere:down" alt="" />
                     </div>
                   </div>
                 </div>

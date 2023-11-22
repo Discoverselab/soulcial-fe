@@ -25,7 +25,7 @@
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
             <div @click="goPersonDetail(item)" class="othersImg">
-              <img :src="item.userAvatar" alt="">
+              <img @error="$handleErrorImg"  :src="item.userAvatar" alt="">
             </div>
             <div class="msg othersMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>

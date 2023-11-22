@@ -194,3 +194,8 @@ export const getSoulSbtiStyle = (soul, num) => {
   const k = 0.0052;
   return { fontSize: `${(num / soulLength) * k}rem` };
 };
+
+// img标签默认头像
+export const handleError = (e)=>{
+  e.target.src = require('@/assets/icon_moren.jpg');
+};

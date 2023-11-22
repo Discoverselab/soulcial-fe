@@ -4,7 +4,7 @@
       <img @click="goBack" class="back" src="../../assets/back.png" alt />
       <div class="nav_name hand" @click="linkUser(2)" v-if="NFTDetail.pictureUrl">
         <div class="portrait">
-          <img class="userportrait" :src="NFTDetail.ownerUserAvatar" alt />
+          <img @error="$handleErrorImg" class="userportrait" :src="NFTDetail.ownerUserAvatar" alt />
         </div>
         <p class="name">{{ NFTDetail.ownerUserName }}</p>
       </div>
@@ -112,7 +112,7 @@
       <div class="author">
         <div class="author_list" @click="linkUser(1)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
 
             <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
@@ -121,7 +121,7 @@
         </div>
         <div class="author_list" @click="linkUser(2)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
             <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <div class="Created">{{ 'Owned By' }}</div>
@@ -174,7 +174,7 @@
           <div class="author_list listPicks">
             <div v-if="NFTPickInfo.indexUserId0" @click="PicklinkUser(0)">
               <div class="portrait">
-                <img class="portrait1" :src="NFTPickInfo.indexAvatar0" alt />
+                <img @error="$handleErrorImg" class="portrait1" :src="NFTPickInfo.indexAvatar0" alt />
                 <img class="chat_link" src="../../assets/chat.png" alt />
               </div>
               <p class="Created">Pumped By</p>
@@ -189,7 +189,7 @@
           <div class="author_list listPicks">
             <div v-if="NFTPickInfo.indexUserId1" @click="PicklinkUser(1)">
               <div class="portrait">
-                <img class="portrait1" :src="NFTPickInfo.indexAvatar1" alt />
+                <img @error="$handleErrorImg" class="portrait1" :src="NFTPickInfo.indexAvatar1" alt />
                 <img class="chat_link" src="../../assets/chat.png" alt />
               </div>
               <p class="Created">Pumped By</p>
@@ -204,7 +204,7 @@
           <div class="author_list listPicks">
             <div v-if="NFTPickInfo.indexUserId2" @click="PicklinkUser(2)">
               <div class="portrait">
-                <img class="portrait1" :src="NFTPickInfo.indexAvatar2" alt />
+                <img @error="$handleErrorImg" class="portrait1" :src="NFTPickInfo.indexAvatar2" alt />
                 <img class="chat_link" src="../../assets/chat.png" alt />
               </div>
               <p class="Created">Pumped By</p>
@@ -219,7 +219,7 @@
           <div class="author_list listPicks">
             <div v-if="NFTPickInfo.indexUserId3" @click="PicklinkUser(3)">
               <div class="portrait">
-                <img class="portrait1" :src="NFTPickInfo.indexAvatar3" alt />
+                <img @error="$handleErrorImg" class="portrait1" :src="NFTPickInfo.indexAvatar3" alt />
                 <img class="chat_link" src="../../assets/chat.png" alt />
               </div>
               <p class="Created">Pumped By</p>

@@ -100,7 +100,7 @@
         :immediate-check="false" finished-text="">
         <div class="activity_list" v-for="item in activityList" :key="item.id" @click="linkNftDetail(item.tokenId)">
           <div class="left">
-            <img class="userImg" :src="item.userImg" alt />
+            <img class="userImg" @error="$handleErrorImg" :src="item.userImg" alt />
             <img class="nftImg" :src="item.tokenImg" alt />
           </div>
           <div class="right" :style="item.type === 2 ? { justifyContent: 'center' } : {}">

@@ -61,7 +61,7 @@
       <div class="author">
         <div class="author_list" @click="LinkOwner(1)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
             <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Launched By</p>
@@ -69,7 +69,7 @@
         </div>
         <div class="author_list" @click="LinkOwner(2)">
           <div class="portrait">
-            <img class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
             <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Owned By</p>

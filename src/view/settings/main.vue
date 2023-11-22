@@ -11,7 +11,7 @@
       </div>
       <!-- portrait -->
       <div class="portrait">
-        <img class="avatar" :src="UserInfo.avatar" alt="" />
+        <img @error="$handleErrorImg" class="avatar" :src="UserInfo.avatar" alt="" />
 
         <div class="upImg">
           <img src="../../assets/upImg.png" alt="" />

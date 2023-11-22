@@ -11,7 +11,7 @@
         <div class="list_left">
           <div class="portrait">
             <div class="portrait_img">
-              <img :src="item.avator" alt="" />
+              <img @error="$handleErrorImg" :src="item.avator" alt="" />
               <!-- <img class="online" v-if="!item.isRead" src="../../assets/online.png" alt="" /> -->
             </div>
 
