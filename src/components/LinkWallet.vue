@@ -251,7 +251,7 @@ export default {
           localStorage.removeItem("mintedNFTPage");
           me.$router.push("/");
           window.localStorage.setItem("Sift", "4down");
-        this.closeWebsocket()
+          closeWebsocket()
 
         }
       };
@@ -372,11 +372,6 @@ export default {
     this.isPWA = window.localStorage.getItem("isPWA") == "true";
     console.log("🔥🔥🔥🚀 ~ file: LinkWallet.vue:554 ~ this.isPWA:", this.isPWA);
   },
-  computed:{
-    closeWebsocket(){
-      return closeWebsocket
-    }
-  }
 };
 </script>
 <style lang="scss">

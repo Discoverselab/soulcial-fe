@@ -83,7 +83,7 @@ export default {
         localStorage.removeItem("mintedNFTPage");
         this.$router.push("/");
         window.localStorage.setItem("Sift", "4down");
-        this.closeWebsocket()
+        closeWebsocket()
       }
     },
     IsBar() {
@@ -106,11 +106,7 @@ export default {
     // 监听网络切换
     window.ethereum.on("networkChanged", this.clear);
   },
-  computed:{
-    closeWebsocket(){
-      return closeWebsocket
-    }
-  }
+  
 };
 </script>
 
