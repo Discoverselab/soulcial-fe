@@ -7,6 +7,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get } from "../../../http/http";
 import { connectWebsocket } from "@/socket/socket";
+import loginData from "@/libs/loginData";
 export default {
   getData() {
     let me = this;
@@ -33,7 +34,7 @@ export default {
   },
   connectWS() {
     connectWebsocket(
-      "",
+      loginData.userId,
       {},
       (res) => {
         let resData = JSON.parse(res);
