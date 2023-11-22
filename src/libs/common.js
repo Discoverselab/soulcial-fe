@@ -6,7 +6,7 @@ import Web3 from "web3";
 import loginData from "@/libs/loginData";
 import Clipboard from "clipboard";
 import { ethers } from "ethers";
-
+import { closeWebsocket } from "@/socket/socket";
 export const isPROD = process.env.VUE_APP_BUILD === "production";
 export const browser = isPROD ? "https://optimistic.etherscan.io/tx/" : "https://goerli-optimism.etherscan.io/tx/"
 // nft合约地址
@@ -84,6 +84,7 @@ export const clearInfo = () => {
   localStorage.removeItem("mintedNFTPage");
   router.push("/");
   window.localStorage.setItem("Sift", "4down");
+  closeWebsocket()
 };
 
 // particle 登录

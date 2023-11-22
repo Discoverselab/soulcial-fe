@@ -9,6 +9,7 @@
 
 <script>
 import { get } from "@/http/http";
+import { closeWebsocket } from "@/socket/socket";
 export default {
   name: "app",
   data() {
@@ -82,6 +83,7 @@ export default {
         localStorage.removeItem("mintedNFTPage");
         this.$router.push("/");
         window.localStorage.setItem("Sift", "4down");
+        closeWebsocket()
       }
     },
     IsBar() {
@@ -104,6 +106,11 @@ export default {
     // 监听网络切换
     window.ethereum.on("networkChanged", this.clear);
   },
+  computed:{
+    closeWebsocket(){
+      return closeWebsocket
+    }
+  }
 };
 </script>
 

@@ -7,6 +7,7 @@ ps: https://cn.vuejs.org/v2/api/#methods
 */
 import { get, post } from "../../../http/http";
 import { Toast } from "vant";
+import { closeWebsocket } from "@/socket/socket";
 export default {
   setTwitterUserInfo(val) {
     let url = this.$api.login.setTwitterUserInfo;
@@ -91,6 +92,7 @@ export default {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("mintedNFTPage");
     localStorage.removeItem("isUseInviteCode");
+    closeWebsocket()
     this.$router.replace({
       path: "/",
     });

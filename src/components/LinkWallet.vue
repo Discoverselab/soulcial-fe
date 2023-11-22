@@ -94,7 +94,7 @@ import Overlay from "../components/Overlay.vue";
 let version = false;
 import { addVTNetwork } from "@/libs/addVTNetwork.js";
 import Web3 from "web3";
-
+import { closeWebsocket } from "@/socket/socket";
 import { ethers } from "ethers";
 import { onParticle } from "@/libs/common.js";
 
@@ -251,6 +251,8 @@ export default {
           localStorage.removeItem("mintedNFTPage");
           me.$router.push("/");
           window.localStorage.setItem("Sift", "4down");
+        closeWebsocket()
+
         }
       };
       // 监听账户切换
@@ -369,6 +371,11 @@ export default {
   mounted() {
     this.isPWA = window.localStorage.getItem("isPWA") == "true";
     console.log("🔥🔥🔥🚀 ~ file: LinkWallet.vue:554 ~ this.isPWA:", this.isPWA);
+  },
+  computed:{
+    closeWebsocket(){
+      return closeWebsocket
+    }
   }
 };
 </script>
