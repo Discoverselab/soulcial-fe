@@ -83,7 +83,7 @@ export default {
         localStorage.removeItem("mintedNFTPage");
         this.$router.push("/");
         window.localStorage.setItem("Sift", "4down");
-        closeWebsocket()
+        this.closeWebsocket()
       }
     },
     IsBar() {
