@@ -1,8 +1,8 @@
 // websocket实例
 let wsObj = null
 // ws连接地址
-let wsUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/`;
-
+let baseUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/`;
+let wsUrl = baseUrl
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false
 // 重连定时器
@@ -21,7 +21,7 @@ let agentData = {}
  * @param {function} errCallback ws连接错误的回调函数
  */
 export const connectWebsocket = (userId, data, successCallback, errCallback) => {
-  wsUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/`
+  wsUrl = baseUrl
   userId ? (wsUrl = `${wsUrl}${userId}`) : null
   messageCallback = successCallback
   errorCallback = errCallback
