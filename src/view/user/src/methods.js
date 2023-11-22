@@ -233,7 +233,8 @@ export default {
             return (this.walletShow = true);
         }
         const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-        if (!loginInfo.usedInviteCode && !loginInfo.whiteUser) {
+    const isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
+        if (!loginInfo.usedInviteCode && !loginInfo.whiteUser && !isUseInviteCode) {
             return;
         }
         // this.overlayshow = true

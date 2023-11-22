@@ -19,7 +19,7 @@
             <p class="name noTwitter">{{ UserInfo.userName }}</p>
             <div class="info">
               <div>
-                <img @click="goTwitter" class="twitterBrid" src="@/assets/Twitters.png" alt=""
+                <img @click="goTwitter(UserInfo)" class="twitterBrid" src="@/assets/Twitters.png" alt=""
                   v-if="UserInfo.twitterStatus === 1">
               </div>
               <div class="Connects" v-if="isOwn">
