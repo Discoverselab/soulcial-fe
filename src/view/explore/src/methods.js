@@ -78,16 +78,18 @@ export default {
       this.activityFinished = false
       this.activityList = [];
       this.currentPage = 1;
-      this.getActivityData();
+      this.getActivityData(this.pickStatus);
     }
   },
-  getActivityData() {
+
+  getActivityData(type) {
+    this.pickStatus = type
     if (this.currentPage < 2) {
       this.overlayshow = true;
     }
     let url =
       this.$api.nft.getActivePage +
-      `?current=${this.currentPage}&size=${this.pageSize}`;
+      `?current=${this.currentPage}&size=${this.pageSize}&pickStatus=${this.pickStatus}`;
     get(url)
       .then((res) => {
         const { code, data } = res;
@@ -207,7 +209,7 @@ export default {
   onActivityLoad() {
     if (this.overlayshow) return;
     this.currentPage++; // 更新页数
-    this.getActivityData();
+    this.getActivityData(this.pickStatus);
   },
   getSoulSbtiStyle(soul) {
     const soulLength = String(soul).length;

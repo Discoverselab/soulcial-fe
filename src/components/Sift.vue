@@ -1,23 +1,51 @@
 <template>
   <!-- tabBar -->
   <div class="Sift">
-    <van-action-sheet @close="close" v-model="SiftShow">
+    <van-action-sheet :style="$parent.TabActive === 3 ? { minHeight: '57%' } : {}" class="sheet" @close="close" v-model="SiftShow">
       <div class="content">
         <p class="headLin" @click="close"></p>
         <p class="title">Arrangement</p>
         <div class="nft_infor">
           <div class="Sift_cont">
-            <div v-for="(item, index) in SiftList" :key="index">
-              <div v-if="item.show" class="SiftList_cont">
-                <span :class="{active:activeID.indexOf(item.id)!=-1}">{{ item.name }}</span>
-                <div class="cont_right">
-                  <div v-for="(data, indexs) in item.sort" :key="indexs">
-                    <img v-if="data" @click="SiftClick(item.id,1)" :src="activeID === item.id+'up'?up_sincere:up" alt="" />
-                    <img v-else @click="SiftClick(item.id,0)" :src="activeID === item.id+'down'?down_sincere:down" alt="" />
+            <template v-if="$parent.TabActive===3">
+              <div>
+                <div class="SiftList_cont">
+                  <span class="active">{{ "Only Pumping"}}</span>
+                  <div class="cont_right">
+                    <van-switch
+                      v-model="checked"
+                      size="24px"
+                      active-color="#DFDFCE"
+                      inactive-color="#DFDFCE"
+                      @change="showPumpNft"
+                    />
                   </div>
                 </div>
               </div>
-            </div>
+            </template>
+            <template v-else>
+              <div v-for="(item, index) in SiftList" :key="index">
+                <div v-if="item.show" class="SiftList_cont">
+                  <span :class="{active:activeID.indexOf(item.id)!=-1}">{{ item.name }}</span>
+                  <div class="cont_right">
+                    <div v-for="(data, indexs) in item.sort" :key="indexs">
+                      <img
+                        v-if="data"
+                        @click="SiftClick(item.id,1)"
+                        :src="activeID === item.id+'up'?up_sincere:up"
+                        alt
+                      />
+                      <img
+                        v-else
+                        @click="SiftClick(item.id,0)"
+                        :src="activeID === item.id+'down'?down_sincere:down"
+                        alt
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
           </div>
         </div>
         <div class="cudset_but">
@@ -30,67 +58,79 @@
 <script>
 export default {
   props: {
-    SiftShow: Boolean,
+    SiftShow: Boolean
   },
-  data: function () {
+  data: function() {
     let _clientH = document.documentElement.clientHeight;
-    let Sift = window.localStorage.getItem('Sift')
-    console.log(Sift)
-    let SiftType = Sift?Sift:"4down"
+    let Sift = window.localStorage.getItem("Sift");
+    console.log(Sift);
+    let SiftType = Sift ? Sift : "4down";
     return {
-      activeID:SiftType,
+      activeID: SiftType,
+      checked: false,
       SiftList: [
         {
           name: "SBTI Level",
           show: true,
           id: 0,
-          sort: [true, false],
+          sort: [true, false]
         },
         {
           name: "Price",
           show: true,
           id: 2,
-          sort: [true, false],
+          sort: [true, false]
         },
         {
           name: "Match",
           show: this.$loginData.Auth_Token ? true : false,
           id: 1,
-          sort: [false],
-        },
+          sort: [false]
+        }
       ],
       down: require("../assets/down.png"),
       down_sincere: require("../assets/down_sincere.png"),
       up: require("../assets/up.png"),
-      up_sincere: require("../assets/up_sincere.png"),
+      up_sincere: require("../assets/up_sincere.png")
     };
   },
   computed: {},
   components: {},
   watch: {},
   methods: {
+    showPumpNft() {
+      const switchNode = document.querySelector(".van-switch__node");
+      if (this.checked) {
+        switchNode.style.backgroundColor = "#000000";
+      } else {
+        switchNode.style.backgroundColor = "#93938E";
+      }
+      this.$parent.activityList = [];
+      this.$parent.currentPage = 1;
+      this.$emit("getCanPumpList", this.checked ? 1 : "");
+    },
     close() {
       this.$emit("close", true);
     },
-    SiftClick(id,type){
-        let sift = type==1?'up':'down'
-        if(this.activeID===id+sift){
-            id = 4
-            type = 0
-            sift = "down"
-        }
-        let data = {
-            orderColumn:id,
-            orderType:type
-        }
-        window.localStorage.setItem('Sift',id+sift)
-        this.activeID = id+sift
-        console.log(this.activeID)
-        this.$emit('pass',data)
-    },
+    SiftClick(id, type) {
+      let sift = type == 1 ? "up" : "down";
+      if (this.activeID === id + sift) {
+        id = 4;
+        type = 0;
+        sift = "down";
+      }
+      let data = {
+        orderColumn: id,
+        orderType: type
+      };
+      window.localStorage.setItem("Sift", id + sift);
+      this.activeID = id + sift;
+      console.log(this.activeID);
+      this.$emit("pass", data);
+    }
   },
   created() {},
-  mounted: async function () {},
+  mounted: async function() {}
 };
 </script>
   <style lang="scss">
@@ -103,6 +143,9 @@ export default {
     .van-action-sheet {
       max-height: 80% !important;
     }
+  }
+  .van-switch__node {
+    background-color: #93938e;
   }
   .van-dialog {
     padding: 30px 24px 30px 24px !important;
@@ -148,28 +191,28 @@ export default {
         justify-content: space-between;
         padding-bottom: 10px;
         margin-bottom: 26px;
-        border-bottom: 2px solid #DFDFCE;
+        border-bottom: 2px solid #dfdfce;
         span {
           color: rgba(0, 0, 0, 0.5);
-          font-family: 'Inter';
+          font-family: "Inter";
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
-          &.active{
+          &.active {
             color: #333;
           }
         }
-        .cont_right{
-            display: flex;
-            align-items: center;
+        .cont_right {
+          display: flex;
+          align-items: center;
 
-            img{
-                display: block;
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-                margin-left: 8px;
-            }
+          img {
+            display: block;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+          }
         }
       }
     }
