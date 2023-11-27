@@ -82,7 +82,7 @@ export const clearInfo = () => {
   localStorage.removeItem("isUseInviteCode");
   localStorage.removeItem("userInfo");
   localStorage.removeItem("mintedNFTPage");
-  router.push("/");
+  router.replace("/");
   window.localStorage.setItem("Sift", "4down");
   closeWebsocket()
 };

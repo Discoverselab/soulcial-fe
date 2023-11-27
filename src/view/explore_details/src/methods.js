@@ -436,6 +436,7 @@ export default {
           this.NftList = this.NftList.concat(res.data.records);
           this.getCollectNFTPage();
         }
+        this.overlayshow = false;
       })
       .catch((error) => {
         this.overlayshow = false;
