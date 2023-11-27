@@ -173,7 +173,7 @@
             <img class="nftImg" :src="item.tokenImg" alt />
           </div>
           <div class="right" :style="item.type === 2 ? { justifyContent: 'center' } : {}">
-            <div class="order" :class="{gray: item.checkLotteryStatus === 1}">
+            <div class="order" :class="{gray: item.pickStatus === 1}">
               {{ item.username || item.userAddress.substring(0, 6) }} {{
               item.type === 0 ? 'Listed' :
               item.type === 3 ? "Winned Pump of" :
@@ -259,7 +259,7 @@ export default {
       showBackground: false,
       orderColumn: orderColumn,
       orderType: orderType,
-      pickStatus: undefined,
+      pickStatus: "",
       TabList: [
         {
           name: "For You",

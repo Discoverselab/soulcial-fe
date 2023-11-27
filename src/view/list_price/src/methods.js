@@ -21,9 +21,9 @@ export default {
     post(url, data, true)
       .then((res) => {
         if (res.code === 200) {
-          let path = this.$route.query.path || "";
+          // let path = this.$route.query.path || "";
           this.$router.replace(
-            `/explore_details?id=${this.NFTDetail.realTokenId}&path=${path}`
+            `/explore_details?id=${this.NFTDetail.realTokenId}&path=1`
           );
         }
         this.overlayshow = false;

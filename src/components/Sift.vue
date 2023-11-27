@@ -107,6 +107,7 @@ export default {
       }
       this.$parent.activityList = [];
       this.$parent.currentPage = 1;
+      this.$parent.activityFinished = false
       this.$emit("getCanPumpList", this.checked ? 1 : "");
     },
     close() {
