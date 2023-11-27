@@ -186,6 +186,7 @@ export default {
     //   return Number(this.PoolBalance) > 0;
     // },
     async save() {
+      this.overlayshow = true;
       if (this.$loginData.loginType == 0) {
         await addVTNetwork(this.getApproved, this.getApproved);
       } else {
