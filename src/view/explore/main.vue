@@ -76,7 +76,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{ item.price }}{{ $network }}</p>
+                  >{{Number(item.price).toFixed(5)  }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
 
                   <p
@@ -133,7 +133,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{ item.price }}{{ $network }}</p>
+                  >{{ Number(item.price).toFixed(5) }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
                   <p
                     class="price priceinfp"
@@ -172,15 +172,16 @@
             <img class="userImg" @error="$handleErrorImg" :src="item.userImg" alt />
             <img class="nftImg" :src="item.tokenImg" alt />
           </div>
-          <div class="right" :style="item.type === 2 ? { justifyContent: 'center' } : {}">
-            <div class="order" :class="{gray: item.pickStatus === 1}">
+          <div class="right" :style="item.type === 2 || item.type === 3? { justifyContent: 'center' } : {}">
+            <div class="order" :class="{gray: item.pickStatus === 0}">
               {{ item.username || item.userAddress.substring(0, 6) }} {{
               item.type === 0 ? 'Listed' :
               item.type === 3 ? "Winned Pump of" :
-              item.type === 2 ? 'Canceled' : `Pumped ${item.nftOwnerUser}'s`
+              item.type === 2 ? 'Canceled' : `Pumped ${item.tokenUserName}'s`
               }} SoulCast #{{ item.tokenId }} {{ item.type !== 1  ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ? "listing" :"" }}
+              <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
             </div>
-            <div class="price" v-if="item.type !== 2">{{ item.price }} {{ $network }}</div>
+            <div class="price" v-if="item.type === 0 || item.type === 1">{{ Number(item.price).toFixed(5)  }} {{ $network }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.updateTime)) }}</div>
           </div>
         </div>
