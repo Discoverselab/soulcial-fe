@@ -1,9 +1,9 @@
 
 import axios from 'axios'
 import login_data from "../libs/loginData";
-import router from "../router";
+import router from "../router.js";
 import qs from 'qs'
-
+import { Toast } from 'vant'
 axios.defaults.timeout = 1000000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
@@ -24,10 +24,10 @@ axios.interceptors.response.use(
         if (response.status === 200) {
             if (response.data.code != 200) {
                 // token Invalid jump login page
-                if (response.data.code == 3000 || response.data.code == 4000) {
-                    // Message.error('Token is invalid, please login again.');
+                if (response.data.code == 403) {
+                    Toast('Token is invalid, please login again.');
                     router.replace({
-                        path: '/login',
+                        path: '/',
                     })
                 }
             }
@@ -42,7 +42,7 @@ axios.interceptors.response.use(
         if (error.response.data.code == 3000 || error.response.data.code == 4000) {
             // Message.error('Token is invalid, please login again.');
             router.replace({
-                path: '/login',
+                path: '/',
             })
         }
         if (error.response.status) {
@@ -56,7 +56,7 @@ axios.interceptors.response.use(
                 case 403:
                     // Message.error('Token is invalid, please login again.');
                     router.replace({
-                        path: '/login',
+                        path: '/',
                     })
                     // Clear token
                     break
