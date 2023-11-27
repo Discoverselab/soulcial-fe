@@ -14,7 +14,7 @@
                 <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
                 <p class="TOKENid">#{{ NFTDetail.realTokenId }}</p>
               </div>
-              <p class="grade_right">{{ NFTDetail.price || "--" }} {{ $network }}</p>
+              <p class="grade_right">{{ formatFiveNumber(NFTDetail.price)  || "--" }} {{ $network }}</p>
             </div>
             <div class="right_bot">
               <div class="bot_left">
@@ -72,7 +72,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, goParticle, formatNumber } from "../libs/common.js";
+import { nftAddress, onParticle, goParticle, formatNumber,formatFiveNumber } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -110,6 +110,9 @@ export default {
     formatNumber() {
       return (num) => formatNumber(num);
     },
+    formatFiveNumber(){
+      return formatFiveNumber
+    }
   },
   components: { Overlay },
   watch: {},

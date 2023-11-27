@@ -238,8 +238,8 @@ export const formatNumber = (number) => {
   } else {
     const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到4位小数
     const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-    if (decimalPlaces && decimalPlaces.length > 6) {
-      return roundedNumber.toFixed(6); // 如果小数位超过4位，保留4位小数
+    if (decimalPlaces && decimalPlaces.length > 5) {
+      return roundedNumber.toFixed(5); // 如果小数位超过4位，保留4位小数
     } else {
       return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
     }
@@ -285,3 +285,15 @@ export const fetchBalance = async () => {
   }
   return balanceRemain;
 };
+
+// 最多小数点后5位
+export const formatFiveNumber = (inputNumber) => {
+  // 将数字格式化为字符串，最多保留 5 位小数
+  const formattedNumber = parseFloat(inputNumber).toFixed(5);
+
+  // 去掉尾部多余的 0
+  const trimmedNumber = formattedNumber.replace(/\.?0+$/, '');
+
+  return trimmedNumber;
+}
+

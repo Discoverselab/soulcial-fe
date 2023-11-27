@@ -48,7 +48,7 @@
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ NFTDetail.price || 0 }}{{ $network }}
+            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ formatFiveNumber(NFTDetail.price)  || 0 }}{{ $network }}
             </p>
             <!-- <p class="price priceinfp" v-else> {{ getNFTPersonality[NFTDetail.personality] }}</p> -->
             <p class="price priceinfp" v-else :style="getSoulSbtiStyle(NFTDetail.soul)">{{ NFTDetail.soul || '-' }}</p>
@@ -372,7 +372,7 @@ import Wallet from "../../components/LinkWallet.vue";
 import Hexagon from "../../components/Hexagon.vue";
 import Overlay from "../../components/Overlay.vue";
 import Picks from "../../components/Picks.vue";
-import { copy, formatNumber } from "@/libs/common.js";
+import { copy, formatNumber,formatFiveNumber } from "@/libs/common.js";
 import { calculateSecondsUntil, getLastTimeStr, convertToTargetTimeZone } from "@/utils/convertTime.js"
 import {
   getNFTLevel,
@@ -450,7 +450,10 @@ export default {
     },
     formatNumber() {
       return (num) => formatNumber(num)
-    }
+    },
+    formatFiveNumber(){
+        return formatFiveNumber
+      }
   },
   components: {
     Wallet,

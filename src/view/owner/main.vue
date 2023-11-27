@@ -54,7 +54,7 @@
               </p>
             </div>
             <p class="price">
-              {{ NFTDetail.price || 0 }} {{ $network }}
+              {{ formatFiveNumber(NFTDetail.price)  || 0 }} {{ $network }}
             </p>
           </div>
           <div class="love">
@@ -103,7 +103,7 @@
 <script>
 import watch from "./src/watch";
 import methods from "./src/methods";
-import { linkOpen, formatNumber } from "@/libs/common.js"
+import { linkOpen, formatNumber,formatFiveNumber } from "@/libs/common.js"
 import AOS from "aos";
 import {
   getNFTLevel,
@@ -137,6 +137,9 @@ export default {
     formatNumber() {
       return (num) => formatNumber(num);
     },
+    formatFiveNumber(){
+        return formatFiveNumber
+      }
   },
   components: {},
   async created() {

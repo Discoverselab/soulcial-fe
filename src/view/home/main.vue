@@ -145,7 +145,7 @@
             <span v-if="TabActive == 2">Cost</span>
           </div>
           <div class="price_botm">
-            <span class="bot_price">{{ item.pickStatus == 1 ? item.price + ` ${$network}` : '--' }}</span>
+            <span class="bot_price">{{ item.pickStatus == 1 ? formatFiveNumber(item.price) + ` ${$network}` : '--' }}</span>
             <span class="bot_price" v-if="TabActive == 2">{{ item.lastSale || 0 }} {{ $network }}</span>
           </div>
           
@@ -213,7 +213,7 @@ import TabBar from "../../components/TabBar.vue";
 import Hexagon from "../../components/Hexagon.vue";
 import { getNFTLevel, levelImg } from "../../libs/target";
 import Overlay from "../../components/Overlay.vue";
-import { goParticle } from "@/libs/common.js";
+import { goParticle ,formatFiveNumber} from "@/libs/common.js";
 export default {
   name: "home",
   data() {
@@ -273,7 +273,10 @@ export default {
   computed: {
     goParticle() {
       return goParticle;
-    }
+    },
+    formatFiveNumber(){
+        return formatFiveNumber
+      }
   },
   components: { TabBar, Hexagon, Overlay },
   created() {

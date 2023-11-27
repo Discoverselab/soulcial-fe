@@ -76,7 +76,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{Number(item.price).toFixed(5)  }}{{ $network }}</p>
+                  >{{formatFiveNumber(item.price)  }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
 
                   <p
@@ -133,7 +133,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{ Number(item.price).toFixed(5) }}{{ $network }}</p>
+                  >{{ formatFiveNumber(item.price) }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
                   <p
                     class="price priceinfp"
@@ -181,7 +181,7 @@
               }} SoulCast #{{ item.tokenId }} {{ item.type !== 1  ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ? "listing" :"" }}
               <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
             </div>
-            <div class="price" v-if="item.type === 0 || item.type === 1">{{ Number(item.price).toFixed(5)  }} {{ $network }}</div>
+            <div class="price" v-if="item.type === 0 || item.type === 1">{{ formatFiveNumber(item.price) }} {{ $network }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.updateTime)) }}</div>
           </div>
         </div>
