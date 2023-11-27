@@ -303,7 +303,7 @@ export default {
       this.handleShowModal();
     }, 1000 * 30);
 
-    if (this.$route.meta.from !== "explore_details") {
+    if (this.$route.meta.from !== "explore_details" || this.nftList.length === 0) {
       this.changeTab(1, "refresh");
     }
 
