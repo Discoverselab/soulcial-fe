@@ -39,6 +39,7 @@ export default {
     const isSharePick = this.$route.meta.isSharePick
     let path = this.$route.query.path || "";
     if (path || isSharePick) {
+      this.$route.meta.from = "after_list";
       this.$router.push("/");
     } else {
       this.$router.go(-1);
