@@ -117,7 +117,7 @@ export default {
       NFTDetail: {},
       NftList:[],
       UnregisteredList: [], // 未挂单nft 
-      marketAddress: undefined, // 交易所合约地址
+      marketAddress: '', // 交易所合约地址
     };
   },
   watch: watch,

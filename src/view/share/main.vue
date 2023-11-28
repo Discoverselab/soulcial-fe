@@ -151,11 +151,11 @@ import { website } from "@/http/api.js";
 export default {
   data() {
     return {
-      soulInfo: undefined, // chracter的介绍
+      soulInfo: '', // chracter的介绍
       values: [],
       UserInfo: {},
       TagsList: [],
-      code: undefined, // 长期邀请码
+      code: '', // 长期邀请码
       overlayshow: false,
       showNftPicture: false, // 展示用户持有的最新nft
       NftList: [],
