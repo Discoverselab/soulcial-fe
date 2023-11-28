@@ -103,7 +103,7 @@ export default {
         "ENERGY",
         "CONNECTION"
       ],
-      centerLevelDesc: undefined,
+      centerLevelDesc: '',
       SBTIScoreDetail: SBTIScoreDetail, // SBTI六个维度的描述
       SBTIScoreInfo: [] // SBTI单个维度的描述
     };

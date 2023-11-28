@@ -45,9 +45,9 @@ export default {
     return {
       overlayshow: false,
       UserInfo: {},
-      superInviteCode: undefined,
+      superInviteCode: '',
       website: website,
-      realTokenId: undefined
+      realTokenId: ''
     };
   },
   created() {
