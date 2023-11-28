@@ -76,7 +76,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{formatFiveNumber(item.price)  }}{{ $network }}</p>
+                  >{{item.price | formatNumber }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
 
                   <p
@@ -133,7 +133,7 @@
                   <p
                     class="price"
                     v-if="item.price && item.pickStatus != 0"
-                  >{{ formatFiveNumber(item.price) }}{{ $network }}</p>
+                  >{{ item.price | formatNumber }}{{ $network }}</p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
                   <p
                     class="price priceinfp"
@@ -172,16 +172,23 @@
             <img class="userImg" @error="$handleErrorImg" :src="item.userImg" alt />
             <img class="nftImg" :src="item.tokenImg" alt />
           </div>
-          <div class="right" :style="item.type === 2 || item.type === 3? { justifyContent: 'center' } : {}">
+          <div
+            class="right"
+            :style="item.type === 2 || item.type === 3? { justifyContent: 'center' } : {}"
+          >
             <div class="order" :class="{gray: item.pickStatus === 0}">
-              {{ item.username || item.userAddress.substring(0, 6) }} {{
-              item.type === 0 ? 'Listed' :
-              item.type === 3 ? "Winned Pump of" :
-              item.type === 2 ? 'Canceled' : `Pumped ${item.tokenUserName}'s`
-              }} SoulCast #{{ item.tokenId }} {{ item.type !== 1  ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ? "listing" :"" }}
-              <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
+              {{ item.username || item.userAddress.substring(0, 6) }}
+              {{activityMap[`${item.type}`]}} 
+              <span v-if="item.type === 1">{{ `${item.tokenUserName}'s` }}</span> 
+              SoulCast #{{ item.tokenId }} {{ item.type !== 1 ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ? "listing" :"" }}
+              <span
+                style="color:#000"
+              >{{ item.type === 3 ? "🎉" : "" }}</span>
             </div>
-            <div class="price" v-if="item.type === 0 || item.type === 1">{{ formatFiveNumber(item.price) }} {{ $network }}</div>
+            <div
+              class="price"
+              v-if="item.type === 0 || item.type === 1"
+            >{{ item.price | formatNumber }} {{ $network }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.updateTime)) }}</div>
           </div>
         </div>
@@ -190,7 +197,7 @@
     <Overlay :overlayshow="overlayshow"></Overlay>
     <TabBar ref="tabbar"></TabBar>
     <Sift
-    class="siftShow"
+      class="siftShow"
       @pass="pass"
       @getCanPumpList="getActivityData($event)"
       :SiftShow="SiftShow"
@@ -261,6 +268,12 @@ export default {
       orderColumn: orderColumn,
       orderType: orderType,
       pickStatus: "",
+      activityMap: {
+        "0": "Listed",
+        "1": "Pumped",
+        "2": "Canceled",
+        "3": "Winned Pump of"
+      },
       TabList: [
         {
           name: "For You",
@@ -304,7 +317,10 @@ export default {
       this.handleShowModal();
     }, 1000 * 30);
 
-    if (this.$route.meta.from !== "explore_details" || this.nftList.length === 0) {
+    if (
+      this.$route.meta.from !== "explore_details" ||
+      this.nftList.length === 0
+    ) {
       this.changeTab(1, "refresh");
     }
 

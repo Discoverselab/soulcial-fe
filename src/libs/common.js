@@ -286,14 +286,4 @@ export const fetchBalance = async () => {
   return balanceRemain;
 };
 
-// 最多小数点后5位
-export const formatFiveNumber = (inputNumber) => {
-  // 将数字格式化为字符串，最多保留 5 位小数
-  const formattedNumber = parseFloat(inputNumber).toFixed(5);
-
-  // 去掉尾部多余的 0
-  const trimmedNumber = formattedNumber.replace(/\.?0+$/, '');
-
-  return trimmedNumber;
-}
 

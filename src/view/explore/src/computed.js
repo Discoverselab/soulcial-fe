@@ -5,7 +5,6 @@ matters need attention
 */
 // import ajax from "ajax";
 import { convertToTargetTimeZone,getLastTimeStr } from "@/utils/convertTime";
-import {formatFiveNumber} from "@/libs/common.js"
 export default {
     oddNftList() {
         // 使用计算属性来筛选 nftList
@@ -27,7 +26,4 @@ export default {
       getLastTimeStr(){
         return getLastTimeStr
       },
-      formatFiveNumber(){
-        return formatFiveNumber
-      }
 };

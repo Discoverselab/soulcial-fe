@@ -137,7 +137,7 @@
             <!-- <span> Cost </span> -->
           </div>
           <div class="price_botm">
-            <span class="bot_price">{{ item.pickStatus == 1 ? formatFiveNumber(item.price) + ` ${$network}` : '--' }}</span>
+            <span class="bot_price">{{ item.pickStatus == 1 ? (item.price | formatNumber) + ` ${$network}` : '--' }}</span>
             <!-- <span class="bot_price">{{ item.price || 0 }} {{ $network }}</span> -->
           </div>
         </div>
@@ -173,7 +173,6 @@ import { getNFTLevel, levelImg } from "../../libs/target";
 import Overlay from "../../components/Overlay.vue";
 import Wallet from "@/components/LinkWallet.vue";
 import { isShow } from "@/libs/isShow.js";
-import {formatFiveNumber } from "@/libs/common.js";
 export default {
   name: "home",
   data() {
@@ -218,9 +217,6 @@ export default {
     isShow() {
       return isShow;
     },
-    formatFiveNumber(){
-        return formatFiveNumber
-      }
   },
   created() {
     let inviteCode = "";
