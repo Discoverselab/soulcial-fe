@@ -41,11 +41,11 @@
           </p>
           <p class="walletBalance">
             Potential Compensation (4%) :
-            <span>{{ formatNumber(NFTDetail.price * 0.04) }} {{ $network }}</span>
+            <span>{{ (NFTDetail.price * 0.04) | formatNumber }} {{ $network }}</span>
           </p>
           <p class="walletBalance">
             Next Listing Price :
-            <span>{{ formatNumber(NFTDetail.price * 1.10) }} {{ $network }}</span>
+            <span>{{ (NFTDetail.price * 1.10) | formatNumber }} {{ $network }}</span>
           </p>
         </div>
         <div class="cudset_but">
@@ -72,7 +72,7 @@ import Overlay from "../components/Overlay.vue";
 import Sorl from "../libs/testEthABI.json";
 import MarketABI from "../libs/MarketABI.json";
 import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, goParticle, formatNumber } from "../libs/common.js";
+import { nftAddress, onParticle, goParticle } from "../libs/common.js";
 import { ethers } from "ethers";
 import Web3 from "web3";
 import { get, post } from "@/http/http";
@@ -106,9 +106,6 @@ export default {
   computed: {
     goParticle() {
       return goParticle;
-    },
-    formatNumber() {
-      return (num) => formatNumber(num);
     },
   },
   components: { Overlay },

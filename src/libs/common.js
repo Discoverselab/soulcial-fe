@@ -238,8 +238,8 @@ export const formatNumber = (number) => {
   } else {
     const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到4位小数
     const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-    if (decimalPlaces && decimalPlaces.length > 5) {
-      return roundedNumber.toFixed(5); // 如果小数位超过4位，保留4位小数
+    if (decimalPlaces && decimalPlaces.length > 6) {
+      return roundedNumber.toFixed(6); // 如果小数位超过4位，保留4位小数
     } else {
       return roundedNumber.toString(); // 如果小数位不超过4位，展示实际位数
     }

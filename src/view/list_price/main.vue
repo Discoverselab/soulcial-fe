@@ -67,7 +67,7 @@
       <div class="suggestion">
         <div class="suggestion_list" style="margin: 0">
           <span class="key">Total potential earnings</span>
-          <span class="value">{{ formatNumber(getTotalEarn(NFTDetail.price))  || "--" }} {{$network}}</span>
+          <span class="value">{{ ((getTotalEarn(NFTDetail.price)) | formatNumber) || "--" }} {{$network}}</span>
         </div>
       </div>
       <div class="input_cont" v-if="false">
@@ -123,9 +123,6 @@ export default {
   watch: watch,
   methods: methods,
   computed: {
-    formatNumber() {
-      return (num) => formatNumber(num);
-    }
   },
   components: {
     Overlay,
