@@ -48,7 +48,8 @@
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ formatFiveNumber(NFTDetail.price)  || 0 }}{{ $network }}
+            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ formatFiveNumber(NFTDetail.price) || 0
+            }}{{ $network }}
             </p>
             <!-- <p class="price priceinfp" v-else> {{ getNFTPersonality[NFTDetail.personality] }}</p> -->
             <p class="price priceinfp" v-else :style="getSoulSbtiStyle(NFTDetail.soul)">{{ NFTDetail.soul || '-' }}</p>
@@ -347,9 +348,10 @@
       </div>
     </van-dialog>
     <Overlay :overlayshow="overlayshow"></Overlay>
-    <Wallet :path="pathEx"  @close="walletClose()" :walletShow="walletShow" @getWalletBalance="getWalletBalance"></Wallet>
-    <Picks v-if="hasMarketAddress" :PoolBalance="PoolBalance" :WalletBalance="WalletBalance" :pickIndex="pickIndex" @callBack="callBack" :NFTDetail="NFTDetail"
-      @close="PicksShow = false"  :PicksShow="PicksShow" :marketAddress="marketAddress"></Picks>
+    <Wallet :path="pathEx" @close="walletClose()" :walletShow="walletShow" @getWalletBalance="getWalletBalance"></Wallet>
+    <Picks v-if="hasMarketAddress" :PoolBalance="PoolBalance" :WalletBalance="WalletBalance" :pickIndex="pickIndex"
+      @callBack="callBack" :NFTDetail="NFTDetail" @close="PicksShow = false" :PicksShow="PicksShow"
+      :marketAddress="marketAddress"></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
     <van-dialog v-model="earnVsoulShow" :close-on-click-overlay="true" :z-index="9999999" :show-cancel-button="false"
       :show-confirm-button="false">
@@ -372,7 +374,7 @@ import Wallet from "../../components/LinkWallet.vue";
 import Hexagon from "../../components/Hexagon.vue";
 import Overlay from "../../components/Overlay.vue";
 import Picks from "../../components/Picks.vue";
-import { copy, formatNumber,formatFiveNumber } from "@/libs/common.js";
+import { copy, formatNumber, formatFiveNumber } from "@/libs/common.js";
 import { calculateSecondsUntil, getLastTimeStr, convertToTargetTimeZone } from "@/utils/convertTime.js"
 import {
   getNFTLevel,
@@ -387,7 +389,7 @@ export default {
   name: "explore_details",
   data() {
     return {
-      loginInfo: undefined,
+      loginInfo: '',
       isShareMy: false,
       dialogShow: false,
       cancelShow: false,
@@ -424,10 +426,10 @@ export default {
       NftList: [],
       UnregisteredList: [], // 未挂单nft 
       earnVsoulShow: false,
-      isUseInviteCode:false, // 用户是否使用过邀请码 
+      isUseInviteCode: false, // 用户是否使用过邀请码 
       WalletBalance: "0",
-      marketAddress:undefined,
-      hasMarketAddress:false
+      marketAddress: '',
+      hasMarketAddress: false
     };
   },
   watch: watch,
@@ -451,9 +453,9 @@ export default {
     formatNumber() {
       return (num) => formatNumber(num)
     },
-    formatFiveNumber(){
-        return formatFiveNumber
-      }
+    formatFiveNumber() {
+      return formatFiveNumber
+    }
   },
   components: {
     Wallet,
@@ -471,7 +473,7 @@ export default {
   mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
-      await this.getData();
+    await this.getData();
     this.getNFTHistory();
     this.getNFTPickInfo();
     this.getMintedNFTPage()
