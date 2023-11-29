@@ -2,27 +2,18 @@
   <div class="Nft_list">
     <div class="img_icon">
       <div class="match">
-        <p
-          :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }"
-          class="center"
-        >
+        <p :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }" class="center">
           {{ item.percen }}
         </p>
-        <p
-          :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }"
-          class="name"
-        >
+        <p :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }" class="name">
           match
         </p>
       </div>
       <img :src="item.url" alt="" />
     </div>
     <div class="bottom_infor">
-      <svg-icon
-        :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }"
-        className="svgName"
-        :iconClass="urls()"
-      ></svg-icon>
+      <svg-icon :style="{ color: `hsla(${item.hsla + 120}, 60%, 60%, 1)` }" className="svgName"
+        :iconClass="urls()"></svg-icon>
       <div class="grade_price">
         <div class="grade">
           <img src="../../../../assets/level1.png" alt="" />
@@ -37,7 +28,7 @@
     </div>
   </div>
 </template>
-  <script>
+<script>
 export default {
   props: {},
   computed: {},
@@ -129,6 +120,7 @@ export default {
       font-weight: 500;
       font-size: 14px;
       text-transform: uppercase;
+
       img {
         display: block;
         margin-right: 3px;

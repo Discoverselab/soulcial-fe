@@ -5,80 +5,75 @@ matters need attention
 
 ps: https://cn.vuejs.org/v2/api/#methods
 */
-import { get, post } from "@/http/http";
-import { ethers } from "ethers";
-import Sorl from "@/libs/testEthABI.json";
-import wethABI from "@/libs/weth.json";
-import {
-  addChain_Params,
-  nftAddress,
-  ABIAddress,
-  getHeight,
-  fetchBalance
-} from "@/libs/common.js";
-import { addVTNetwork } from "@/libs/addVTNetwork.js";
-const provider = window.ethereum;
-let signer;
-let providers;
-providers = provider ? new ethers.providers.Web3Provider(provider) : null;
-signer = providers ? providers.getSigner() : null;
-const contract = new ethers.Contract(ABIAddress, wethABI, signer);
-import { Toast } from "vant";
+import { get, post } from '@/http/http'
+import { ethers } from 'ethers'
+import Sorl from '@/libs/testEthABI.json'
+import wethABI from '@/libs/weth.json'
+import { addChain_Params, nftAddress, ABIAddress, getHeight, fetchBalance } from '@/libs/common.js'
+import { addVTNetwork } from '@/libs/addVTNetwork.js'
+const provider = window.ethereum
+let signer
+let providers
+providers = provider ? new ethers.providers.Web3Provider(provider) : null
+signer = providers ? providers.getSigner() : null
+const contract = new ethers.Contract(ABIAddress, wethABI, signer)
+import { Toast } from 'vant'
 export default {
-  getWalletBalance(){
-    if(this.$loginData.Auth_Token){
-      fetchBalance().then((res) => {
-    console.log('this.WalletBalance',this.WalletBalance)
-        
+  getWalletBalance() {
+    if (this.$loginData.Auth_Token) {
+      fetchBalance().then(res => {
+        console.log('this.WalletBalance', this.WalletBalance)
+
         this.WalletBalance = res
       })
     }
-    
-   },
+  },
   goBack() {
     const isSharePick = this.$route.meta.isSharePick
-    let path = this.$route.query.path || "";
+    let path = this.$route.query.path || ''
     if (path || isSharePick) {
-      this.$router.push("/");
+      this.$router.push('/')
     } else {
-      this.$router.go(-1);
+      this.$router.go(-1)
     }
   },
   walletClose() {
-    this.walletShow = false;
+    this.walletShow = false
     // this.BalanceOf();
   },
   // 获取W余额
   async BalanceOf() {
-    let provider = window.ethereum;
+    let provider = window.ethereum
     await provider.request({
-      method: "eth_requestAccounts",
-    });
+      method: 'eth_requestAccounts'
+    })
     try {
-      const BalanceOf = await contract.balanceOf(this.$loginData.Auth_Token);
-      this.PoolBalance = ethers.utils.formatEther(
-        this.formatNumber(parseInt(BalanceOf._hex))
-      );
+      const BalanceOf = await contract.balanceOf(this.$loginData.Auth_Token)
+      this.PoolBalance = ethers.utils.formatEther(this.formatNumber(parseInt(BalanceOf._hex)))
     } catch (error) {
       // this.$toast(error);
     }
   },
   picksTxH(index) {
-    this.isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
-     this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
+    this.isUseInviteCode = JSON.parse(localStorage.getItem('isUseInviteCode'))
+    this.loginInfo = JSON.parse(localStorage.getItem('loginInfo'))
     if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
-      this.walletShow = true;
-    } else  if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser && !this.isUseInviteCode){
-      this.$router.push("/welcome")
+      this.walletShow = true
+    } else if (
+      !this.loginInfo.usedInviteCode &&
+      !this.loginInfo.whiteUser &&
+      !this.isUseInviteCode
+    ) {
+      this.$router.push('/welcome')
     } else {
       if (this.isPick() || this.gray) {
-        return;
+        return
       }
 
-      let me = this;
-      this.pickIndex = index;
-      this.PicksShow = true;
-      me.overlayshow = false;
+      let me = this
+      this.pickIndex = index
+      this.PicksShow = true
+      me.overlayshow = false
 
       // let url = this.$api.nft.prePickNFT;
       // let data = {
@@ -113,7 +108,7 @@ export default {
     }
   },
   dialog_confirm() {
-    console.log(1);
+    console.log(1)
   },
   closeDialog() {},
   isUser(type) {
@@ -121,208 +116,197 @@ export default {
       return (
         this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
         this.$loginData.Auth_Token.toLocaleUpperCase()
-      );
+      )
     } else {
       return (
         this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
         this.$loginData.Auth_Token.toLocaleUpperCase()
-      );
+      )
     }
   },
   linkUser(type) {
     if (this.isUser(type)) {
-      this.$router.push(`/home`);
-      return;
+      this.$router.push(`/home`)
+      return
     }
-    let userId =
-      type == 1 ? this.NFTDetail.mintUserId : this.NFTDetail.ownerUserId;
-    this.$router.push(`/user?id=${userId}`);
+    let userId = type == 1 ? this.NFTDetail.mintUserId : this.NFTDetail.ownerUserId
+    this.$router.push(`/user?id=${userId}`)
   },
   pickIsUser(id) {
     return (
       this.NFTPickInfo[`indexAddress${id}`].toLocaleUpperCase() ===
       this.$loginData.Auth_Token.toLocaleUpperCase()
-    );
+    )
   },
   PicklinkUser(id) {
     if (this.pickIsUser(id)) {
-      this.$router.push(`/home`);
+      this.$router.push(`/home`)
     } else {
-      this.$router.push(`/user?id=${this.NFTPickInfo[`indexUserId${id}`]}`);
+      this.$router.push(`/user?id=${this.NFTPickInfo[`indexUserId${id}`]}`)
     }
   },
   turnShowClick() {
     if (this.turnShow) {
       setTimeout(() => {
-        this.turnShow = !this.turnShow;
-      }, 100);
+        this.turnShow = !this.turnShow
+      }, 100)
     } else {
-      this.turnShow = !this.turnShow;
+      this.turnShow = !this.turnShow
     }
   },
   urls() {
     var urls = [
-      "Label_01",
-      "Label_02",
-      "Label_03",
-      "Label_04",
-      "Label_05",
-      "Label_06",
-      "Label_07",
-      "Label_08",
-      "Label_09",
-      "Label_10",
-    ];
+      'Label_01',
+      'Label_02',
+      'Label_03',
+      'Label_04',
+      'Label_05',
+      'Label_06',
+      'Label_07',
+      'Label_08',
+      'Label_09',
+      'Label_10'
+    ]
     //Randomly get a value from the array
-    return urls[Math.floor(Math.random() * urls.length)];
+    return urls[Math.floor(Math.random() * urls.length)]
   },
   isPick() {
     return (
       this.NFTDetail.ownerAddress.toLocaleUpperCase() ==
       this.$loginData.Auth_Token.toLocaleUpperCase()
-    );
+    )
   },
   // 选择网络链接钱包
   async addVTNetwork() {
     if (!this.$loginData.Auth_Token) {
-      this.walletShow = true;
-      return;
+      this.walletShow = true
+      return
     }
-    let me = this;
+    let me = this
     if (this.$loginData.loginType == 0) {
-      await addVTNetwork(me.getApproved, me.getApproved);
+      await addVTNetwork(me.getApproved, me.getApproved)
     } else {
-      me.getApproved();
+      me.getApproved()
     }
   },
 
   async toPay() {
-    let me = this;
-    let provider = window.ethereum;
+    let me = this
+    let provider = window.ethereum
     provider
       .request({
-        method: "eth_sendTransaction",
+        method: 'eth_sendTransaction',
         params: [
           {
             from: this.$loginData.Auth_Token,
             to: this.marketAddress,
-            value: ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex,
-          },
-        ],
+            value: ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex
+          }
+        ]
       })
-      .then((txHash) => me.collectNFT(txHash))
-      .catch((error) => console.error(error));
+      .then(txHash => me.collectNFT(txHash))
+      .catch(error => console.error(error))
   },
   async getApproved(provider) {
-    let signer;
-    let providers;
-    providers = provider ? new ethers.providers.Web3Provider(provider) : null;
-    signer = providers.getSigner();
-    const contract = new ethers.Contract(nftAddress, Sorl, signer);
+    let signer
+    let providers
+    providers = provider ? new ethers.providers.Web3Provider(provider) : null
+    signer = providers.getSigner()
+    const contract = new ethers.Contract(nftAddress, Sorl, signer)
     try {
-      const approvedAddress = await contract.getApproved(
-        this.NFTDetail.realTokenId
-      );
-      if (
-        approvedAddress.toLocaleUpperCase() != this.marketAddress.toLocaleUpperCase()
-      ) {
-        this.$toast("NFT anomaly");
+      const approvedAddress = await contract.getApproved(this.NFTDetail.realTokenId)
+      if (approvedAddress.toLocaleUpperCase() != this.marketAddress.toLocaleUpperCase()) {
+        this.$toast('NFT anomaly')
       } else {
-        this.toPay();
+        this.toPay()
       }
-      console.log("Approved address:", approvedAddress);
+      console.log('Approved address:', approvedAddress)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   },
   cancelListNFT() {
-    this.overlayshow = true;
-    this.cancelShow = false;
-    let url = this.$api.nft.cancelListNFT;
+    this.overlayshow = true
+    this.cancelShow = false
+    let url = this.$api.nft.cancelListNFT
     let data = {
-      id: this.NFTDetail.realTokenId,
-    };
+      id: this.NFTDetail.realTokenId
+    }
     post(url, data, true)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.getData();
+          this.getData()
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+      .catch(error => {
+        this.overlayshow = false
+      })
   },
   set_click(type) {
     if (!this.$loginData.Auth_Token) {
-      this.walletShow = true;
+      this.walletShow = true
     } else {
       if (type == 1) {
-        this.getApproved();
+        this.getApproved()
       }
     }
   },
   async collectNFT(txn) {
-    console.log(txn);
-    let me = this;
-    this.overlayshow = true;
-    let url = this.$api.nft.collectNFTOnline;
+    console.log(txn)
+    let me = this
+    this.overlayshow = true
+    let url = this.$api.nft.collectNFTOnline
     let data = {
       tokenId: this.NFTDetail.realTokenId,
       payAddress: this.$loginData.Auth_Token,
-      txn: txn,
-    };
+      txn: txn
+    }
     post(url, data, true)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
           setTimeout(() => {
-            me.overlayshow = false;
-            me.$router.replace(
-              `/purchase_success?id=${this.NFTDetail.realTokenId}`
-            );
-          }, 2000);
+            me.overlayshow = false
+            me.$router.replace(`/purchase_success?id=${this.NFTDetail.realTokenId}`)
+          }, 2000)
         } else {
-          me.overlayshow = false;
-          Toast(res.msg);
+          me.overlayshow = false
+          Toast(res.msg)
         }
       })
-      .catch((error) => {
-        me.overlayshow = false;
-        Toast(error.msg);
-      });
+      .catch(error => {
+        me.overlayshow = false
+        Toast(error.msg)
+      })
   },
   getNFTPickInfo() {
     // this.overlayshow = true;
     let url =
       this.$api.nft.getNFTPickInfo +
-      `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`;
+      `?tokenId=${this.$route.query.id || this.$route.params.realTokenId}`
     get(url)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.NFTPickInfo = res.data;
+          this.NFTPickInfo = res.data
         }
-        this.onlyPickOnce();
+        this.onlyPickOnce()
         // this.overlayshow = false;
       })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+      .catch(error => {
+        this.overlayshow = false
+      })
   },
   // 当pick后其余pick位置置灰
   onlyPickOnce() {
-    if (!this.$loginData.Auth_Token) return;
-    const indexAddressList = Object.keys(this.NFTPickInfo).filter((key) =>
-      key.includes("indexAddress")
-    );
-    const addressValueList = indexAddressList.map((key) => {
-      return this.NFTPickInfo[key]
-        ? this.NFTPickInfo[key].toLocaleUpperCase()
-        : "";
-    });
-    if (
-      addressValueList.includes(this.$loginData.Auth_Token.toLocaleUpperCase())
-    ) {
-      this.gray = true;
+    if (!this.$loginData.Auth_Token) return
+    const indexAddressList = Object.keys(this.NFTPickInfo).filter(key =>
+      key.includes('indexAddress')
+    )
+    const addressValueList = indexAddressList.map(key => {
+      return this.NFTPickInfo[key] ? this.NFTPickInfo[key].toLocaleUpperCase() : ''
+    })
+    if (addressValueList.includes(this.$loginData.Auth_Token.toLocaleUpperCase())) {
+      this.gray = true
     }
   },
   // async callBack(txHash) {
@@ -347,130 +331,123 @@ export default {
   // },
   async getData() {
     try {
-      this.overlayshow = true;
+      this.overlayshow = true
       let url =
-        this.$api.nft.getNFTDetail +
-        `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
-  
-      const res = await get(url);
-  
+        this.$api.nft.getNFTDetail + `?id=${this.$route.query.id || this.$route.params.realTokenId}`
+
+      const res = await get(url)
+
       if (res.code === 200) {
-        this.NFTDetail = res.data;
-        let item = res.data;
-        this.marketAddress = res.data.contractMarketAddress;
+        this.NFTDetail = res.data
+        let item = res.data
+        this.marketAddress = res.data.contractMarketAddress
         this.hasMarketAddress = true
-        this.values.push(item.charisma);
-        this.values.push(item.courage);
-        this.values.push(item.art);
-        this.values.push(item.wisdom);
-        this.values.push(item.energy);
-        this.values.push(item.extroversion);
-  
+        this.values.push(item.charisma)
+        this.values.push(item.courage)
+        this.values.push(item.art)
+        this.values.push(item.wisdom)
+        this.values.push(item.energy)
+        this.values.push(item.extroversion)
+
         const isSame =
           this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
             this.$loginData.Auth_Token.toLocaleUpperCase() ||
           this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
-            this.$loginData.Auth_Token.toLocaleUpperCase();
-  
+            this.$loginData.Auth_Token.toLocaleUpperCase()
+
         if (isSame) {
-          this.isShareMy = true;
+          this.isShareMy = true
         }
-         getHeight(this);
+        getHeight(this)
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      this.overlayshow = false;
+      this.overlayshow = false
     }
   },
-  
 
   getNFTHistory() {
     let url =
-      this.$api.nft.getNFTHistory +
-      `?id=${this.$route.query.id || this.$route.params.realTokenId}`;
+      this.$api.nft.getNFTHistory + `?id=${this.$route.query.id || this.$route.params.realTokenId}`
     get(url)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.History_list = res.data;
+          this.History_list = res.data
         }
       })
-      .catch((error) => {});
+      .catch(error => {})
   },
   substring(address) {
-    if (!address) return;
-    return (
-      address.substring(0, 6) +
-      "..." +
-      address.substring(address.length - 5, address.length)
-    );
+    if (!address) return
+    return address.substring(0, 6) + '...' + address.substring(address.length - 5, address.length)
   },
   getSoulSbtiStyle(soul) {
-    const soulLength = String(soul).length;
-    const k = 0.0052;
-    return { fontSize: `${(705 / soulLength) * k}rem` };
+    const soulLength = String(soul).length
+    const k = 0.0052
+    return { fontSize: `${(705 / soulLength) * k}rem` }
   },
   jumpSharePick() {
-    this.isUseInviteCode = JSON.parse(localStorage.getItem("isUseInviteCode"))
-    this.loginInfo = JSON.parse(localStorage.getItem("loginInfo"))
+    this.isUseInviteCode = JSON.parse(localStorage.getItem('isUseInviteCode'))
+    this.loginInfo = JSON.parse(localStorage.getItem('loginInfo'))
     if (!this.$loginData.Auth_Token) {
-      this.walletShow = true;
-    } else if(!this.loginInfo.usedInviteCode && !this.loginInfo.whiteUser&& !this.isUseInviteCode){
-      this.$router.push("/welcome")
+      this.walletShow = true
+    } else if (
+      !this.loginInfo.usedInviteCode &&
+      !this.loginInfo.whiteUser &&
+      !this.isUseInviteCode
+    ) {
+      this.$router.push('/welcome')
     } else {
-      this.$router.push(
-        `/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`
-      );
+      this.$router.push(`/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`)
     }
   },
   getMintedNFTPage() {
-    this.overlayshow = true;
+    this.overlayshow = true
     let data = {
       current: 1,
-      size: 99,
-    };
-    let url = this.$api.infor.getMintedNFTPage;
+      size: 99
+    }
+    let url = this.$api.infor.getMintedNFTPage
     get(url, data)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.NftList = this.NftList.concat(res.data.records);
-          this.getCollectNFTPage();
+          this.NftList = this.NftList.concat(res.data.records)
+          this.getCollectNFTPage()
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+      .catch(error => {
+        this.overlayshow = false
+      })
   },
 
   getCollectNFTPage() {
     let data = {
       current: 1,
-      size: 99,
-    };
-    let url = this.$api.infor.getCollectNFTPage;
+      size: 99
+    }
+    let url = this.$api.infor.getCollectNFTPage
     get(url, data)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.NftList = this.NftList.concat(res.data.records);
-          this.UnregisteredList = this.NftList.filter(
-            (item) => item.pickStatus != 1
-          );
+          this.NftList = this.NftList.concat(res.data.records)
+          this.UnregisteredList = this.NftList.filter(item => item.pickStatus != 1)
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-      });
+      .catch(error => {
+        this.overlayshow = false
+      })
   },
-  jumpToList(){
+  jumpToList() {
     if (this.UnregisteredList.length === 1) {
       this.earnVsoulShow = true
     } else {
       this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}`)
     }
   },
-   continueList() {
+  continueList() {
     this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}`)
-  },
-};
+  }
+}

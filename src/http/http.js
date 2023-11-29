@@ -1,7 +1,6 @@
-
 import axios from 'axios'
-import login_data from "../libs/loginData";
-import router from "../router.js";
+import login_data from '../libs/loginData'
+import router from '../router.js'
 import qs from 'qs'
 import { Toast } from 'vant'
 import { clearInfo } from '../libs/common.js'
@@ -10,63 +9,68 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 // // Request interceptor
 axios.interceptors.request.use(
-    config => {
-        const token = login_data.userId
-        token && (config.headers['satoken'] = token)
-        return config
-    },
-    error => {
-        return Promise.error(error)
-    })
+  config => {
+    const token = login_data.userId
+    token && (config.headers['satoken'] = token)
+    return config
+  },
+  error => {
+    return Promise.error(error)
+  }
+)
 
 // Response interceptor
 axios.interceptors.response.use(
-    response => {
-        if (response.status === 200) {
-            if (response.data.code != 200) {
-                // token Invalid jump login page
-                if (response.data.code == 403 && !response.config.url.includes('getMintedNFTPage') && !response.config.url.includes('chat/list')) {
-                    clearInfo();
-                }
-            }
-            return Promise.resolve(response)
-        } else {
-            return Promise.reject(response)
+  response => {
+    if (response.status === 200) {
+      if (response.data.code != 200) {
+        // token Invalid jump login page
+        if (
+          response.data.code == 403 &&
+          !response.config.url.includes('getMintedNFTPage') &&
+          !response.config.url.includes('chat/list')
+        ) {
+          clearInfo()
         }
-    },
-    // The server status code is not 200.
-    error => {
-        console.log(error)
-        if (error.response.data.code == 3000 || error.response.data.code == 4000) {
-            // Message.error('Token is invalid, please login again.');
-            router.replace({
-                path: '/',
-            })
-        }
-        if (error.response.status) {
-            switch (error.response.status) {
-                case 500:
-                    // login_data.out();
-                    // router.replace({
-                    //     path: '/',
-                    // })
-                    break
-                case 403:
-                    // Message.error('Token is invalid, please login again.');
-                    router.replace({
-                        path: '/',
-                    })
-                    // Clear token
-                    break
-                case 404:
-                    // Message.error("404, the network request does not exist.");
-                    break
-                default:
-                // Message.error(error.response.data.message);
-            }
-            return Promise.reject(error.response)
-        }
+      }
+      return Promise.resolve(response)
+    } else {
+      return Promise.reject(response)
     }
+  },
+  // The server status code is not 200.
+  error => {
+    console.log(error)
+    if (error.response.data.code == 3000 || error.response.data.code == 4000) {
+      // Message.error('Token is invalid, please login again.');
+      router.replace({
+        path: '/'
+      })
+    }
+    if (error.response.status) {
+      switch (error.response.status) {
+        case 500:
+          // login_data.out();
+          // router.replace({
+          //     path: '/',
+          // })
+          break
+        case 403:
+          // Message.error('Token is invalid, please login again.');
+          router.replace({
+            path: '/'
+          })
+          // Clear token
+          break
+        case 404:
+          // Message.error("404, the network request does not exist.");
+          break
+        default:
+        // Message.error(error.response.data.message);
+      }
+      return Promise.reject(error.response)
+    }
+  }
 )
 
 /**
@@ -74,15 +78,18 @@ axios.interceptors.response.use(
  * @param {Object} params [Parameters carried in the request]
  */
 export function get(url, params, loding) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, {
-            params: params
-        }).then(res => {
-            resolve(res.data)
-        }).catch(err => {
-            reject(err.data)
-        })
-    })
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, {
+        params: params
+      })
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
 }
 /**
  * Post method, corresponding to post request.
@@ -90,37 +97,39 @@ export function get(url, params, loding) {
  * @param {Object} params [Parameters carried in the request]
  */
 export function post(url, params, type, contentType) {
-    axios.defaults.headers.post['Content-Type'] = contentType || 'application/x-www-form-urlencoded'
-    return new Promise((resolve, reject) => {
-        let data
-        if (!type) {
-            data = qs.stringify(params, { arrayFormat: 'repeat' })
-        } else {
-            data = params, { arrayFormat: 'repeat' }
-        }
-        axios.post(url, data)
-            .then(res => {
-                resolve(res.data)
-            })
-            .catch(err => {
-                reject(err.data)
-            })
-    })
+  axios.defaults.headers.post['Content-Type'] = contentType || 'application/x-www-form-urlencoded'
+  return new Promise((resolve, reject) => {
+    let data
+    if (!type) {
+      data = qs.stringify(params, { arrayFormat: 'repeat' })
+    } else {
+      ;(data = params), { arrayFormat: 'repeat' }
+    }
+    axios
+      .post(url, data)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
 }
 /**
  * @param url Interface routing
  * @returns {AxiosPromise}
  */
 export function put(url, params, loding) {
-    return new Promise((resolve, reject) => {
-        axios.put(url, params)
-            .then(res => {
-                resolve(res.data)
-            })
-            .catch(err => {
-                reject(err.data)
-            })
-    })
+  return new Promise((resolve, reject) => {
+    axios
+      .put(url, params)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
 }
 
 /**
@@ -129,13 +138,14 @@ export function put(url, params, loding) {
  * @returns {AxiosPromise}
  */
 export function del(url, params, loding) {
-    return new Promise((resolve, reject) => {
-        axios.delete(url, params)
-            .then(res => {
-                resolve(res.data)
-            })
-            .catch(err => {
-                reject(err.data)
-            })
-    })
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(url, params)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
 }

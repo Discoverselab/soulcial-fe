@@ -4,5 +4,4 @@ matters need attention
 2. It cannot be defined by () = > {} arrow function
 */
 // import ajax from "ajax";
-export default {
-};
+export default {}

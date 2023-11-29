@@ -8,7 +8,7 @@
         </div>
         <p class="title">BIO</p>
         <div class="set_right">
-            <button @click="save" :class="{saveNo:name&&name!=$route.query.value}">Save</button>
+          <button @click="save" :class="{ saveNo: name && name != $route.query.value }">Save</button>
         </div>
       </div>
       <div class="put_cont">
@@ -29,19 +29,19 @@ export default {
   name: "home",
   data() {
     return {
-      overlayshow:false,
-      name:"",
+      overlayshow: false,
+      name: "",
       UserInfo: {},
     };
   },
   watch: watch,
   methods: methods,
   computed: computed,
-  components: {Overlay },
+  components: { Overlay },
   created() {
     let me = this;
     this.name = this.$route.query.value
-    me.getUserInfo();
+    me.getUserInfo()
   },
   mounted: async function () {
     console.log("this：", this);
@@ -60,7 +60,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {},
+  destroyed() { },
 };
 </script>
 
