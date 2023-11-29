@@ -62,20 +62,22 @@ Vue.prototype.$handleErrorImg = handleError;
 Vue.prototype.$loginData = loginData;
 Vue.config.productionTip = false;
 Vue.filter('formatNumber',(value) => {
-  const number = Number(value)
-  if(Number.isInteger(number)){
-    return number.toString(); // 如果是整数，直接返回
-  } else if(isNaN(number)){
+  if(isNaN(value)){
     return '--'
   } else {
-    const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到6位小数
-    const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
-    if (decimalPlaces && decimalPlaces.length > 5) {
-      // 如果小数位超过5位，保留5位小数
-      return parseFloat(roundedNumber.toFixed(5)).toString();
-    } else {
-      // 如果小数位不超过5位，展示实际位数
-      return roundedNumber.toString();
+    const number = Number(value)
+    if(Number.isInteger(number)){
+      return number.toString(); // 如果是整数，直接返回
+    }  else {
+      const roundedNumber = Math.round(number * 1000000) / 1000000; // 四舍五入到6位小数
+      const decimalPlaces = roundedNumber.toString().split(".")[1]; // 获取小数部分
+      if (decimalPlaces && decimalPlaces.length > 5) {
+        // 如果小数位超过5位，保留5位小数
+        return parseFloat(roundedNumber.toFixed(5)).toString();
+      } else {
+        // 如果小数位不超过5位，展示实际位数
+        return roundedNumber.toString();
+      }
     }
   }
   })

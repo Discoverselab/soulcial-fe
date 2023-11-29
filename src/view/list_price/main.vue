@@ -42,11 +42,11 @@
       <div class="suggestion">
         <div class="suggestion_list">
           <span class="key">last sale</span>
-          <span class="value" style="color: #62625F;">{{ NFTDetail.lastSale || "--" }} {{$network}}</span>
+          <span class="value" style="color: #62625F;">{{ NFTDetail.lastSale | formatNumber }} {{$network}}</span>
         </div>
         <div class="suggestion_list" style="margin: 0">
           <span class="key">List Price</span>
-          <span class="value" style="color: #62625F;">{{ NFTDetail.price || "--" }} {{$network}}</span>
+          <span class="value" style="color: #62625F;">{{ NFTDetail.price | formatNumber}} {{$network}}</span>
         </div>
       </div>
       <p class="Fees">Fees</p>
@@ -67,7 +67,7 @@
       <div class="suggestion">
         <div class="suggestion_list" style="margin: 0">
           <span class="key">Total potential earnings</span>
-          <span class="value">{{ ((getTotalEarn(NFTDetail.price)) | formatNumber) || "--" }} {{$network}}</span>
+          <span class="value">{{ (getTotalEarn(NFTDetail.price)) | formatNumber }} {{$network}}</span>
         </div>
       </div>
       <div class="input_cont" v-if="false">
