@@ -44,7 +44,7 @@
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p class="price">{{ (NFTDetail.price | formatNumber)  || 0 }} {{ $network }}</p>
+            <p class="price">{{ NFTDetail.price | formatNumber }} {{ $network }}</p>
           </div>
           <div class="love">#{{ NFTDetail.realTokenId }}</div>
         </div>

@@ -14,7 +14,7 @@
                 <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
                 <p class="TOKENid">#{{ NFTDetail.realTokenId }}</p>
               </div>
-              <p class="grade_right">{{ (NFTDetail.price | formatNumber)  || "--" }} {{ $network }}</p>
+              <p class="grade_right">{{ NFTDetail.price | formatNumber  }} {{ $network }}</p>
             </div>
             <div class="right_bot">
               <div class="bot_left">
