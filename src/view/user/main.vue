@@ -137,7 +137,11 @@
             <!-- <span> Cost </span> -->
           </div>
           <div class="price_botm">
-            <span class="bot_price">{{ item.pickStatus == 1 ? (item.price | formatNumber) + ` ${$network}` : '--' }}</span>
+            <!-- <span class="bot_price">{{ item.pickStatus == 1 ? (item.price | formatNumber) + ` ${$network}` : '--' }}</span> -->
+            <span class="bot_price">
+              <span v-if="item.pickStatus == 1">{{item.price | formatNumber}} {{ $network }}</span>
+              <span v-else>{{'--'}}</span>
+            </span>
             <!-- <span class="bot_price">{{ item.price || 0 }} {{ $network }}</span> -->
           </div>
         </div>

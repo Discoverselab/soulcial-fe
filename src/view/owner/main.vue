@@ -54,7 +54,7 @@
               </p>
             </div>
             <p class="price">
-              {{ (NFTDetail.price | formatNumber)  || 0 }} {{ $network }}
+              {{ NFTDetail.price | formatNumber }} {{ $network }}
             </p>
           </div>
           <div class="love">
