@@ -174,7 +174,10 @@ export default {
         if (code === 200 && data.records && data.records.length > 0) {
           if (this.orderColumn == 4) {
             let randomNftList = data.records;
-            this.shuffleArray(randomNftList);
+            if(this.pageType === 1){
+              // connected页面随机排序
+              this.shuffleArray(randomNftList);
+            }
             this.nftList = this.nftList.concat(randomNftList);
           } else {
             this.nftList = this.nftList.concat(data.records);

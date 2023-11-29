@@ -62,7 +62,9 @@ Vue.prototype.$handleErrorImg = handleError;
 Vue.prototype.$loginData = loginData;
 Vue.config.productionTip = false;
 Vue.filter('formatNumber',(value) => {
-  if(isNaN(value)){
+  if(value === 0 || value === "0") {
+    return "0"
+  } else if(!value || isNaN(value)) {
     return '--'
   } else {
     const number = Number(value)
