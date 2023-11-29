@@ -64,7 +64,7 @@ export default {
         .then((res) => {
           if (res.code === 200) {
             res.data.forEach(ele => {
-              if(ele.unreadNum){
+              if (ele.unreadNum) {
                 this.$store.commit("updateChatRedPoint", true);
               }
             });
@@ -106,7 +106,6 @@ export default {
     // 监听网络切换
     window.ethereum.on("networkChanged", this.clear);
   },
-  
 };
 </script>
 
