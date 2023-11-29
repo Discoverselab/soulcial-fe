@@ -8,13 +8,11 @@ function setRem() {
     if (clientWidth <= 1280) {
         scale = document.documentElement.clientWidth / 1245
     }
-    if (clientWidth <= 750) {
+    if (clientWidth < 750) {
         scale = document.documentElement.clientWidth / 390
     }
     document.documentElement.style.fontSize = baseSize * scale + 'px'
 }
 
 setRem()
-window.onresize = function (e) {
-    setRem()
-}
+window.onresize = setRem
