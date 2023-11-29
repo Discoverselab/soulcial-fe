@@ -4,7 +4,10 @@ export const website =
   process.env.VUE_APP_BUILD === 'production'
     ? 'https://app.soulcial.network'
     : 'https://api-test.soulcial.network'
-
+const pwaWebsite =
+  process.env.VUE_APP_BUILD === 'production'
+    ? 'https://api.soulcial.network'
+    : 'https://api-test.soulcial.network'
 const commonApi = process.env.VUE_APP_BASE_API + '/pfp/api/admin'
 
 export default {
@@ -73,6 +76,6 @@ export default {
     fetchUpload: `${commonApi}/message/chat/upload`
   },
   pwa: {
-    fetchSubscribe: `${website}/pfp/api/notification/subscribe`
+    fetchSubscribe: `${pwaWebsite}/pfp/api/notification/subscribe`
   }
 }
