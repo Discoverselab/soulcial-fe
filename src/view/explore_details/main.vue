@@ -48,7 +48,8 @@
                 {{ NFTDetail.soul }}
               </p>
             </div>
-            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{  NFTDetail.price | formatNumber }}{{ $network }}
+            <p class="price" v-if="NFTDetail.price && NFTDetail.pickStatus != 0">{{ NFTDetail.price | formatNumber }}{{
+              $network }}
             </p>
             <!-- <p class="price priceinfp" v-else> {{ getNFTPersonality[NFTDetail.personality] }}</p> -->
             <p class="price priceinfp" v-else :style="getSoulSbtiStyle(NFTDetail.soul)">{{ NFTDetail.soul || '-' }}</p>

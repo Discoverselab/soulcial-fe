@@ -4,6 +4,7 @@
     .hand {
         cursor: pointer;
     }
+
     .navigate {
         display: flex;
         align-items: center;
@@ -25,7 +26,7 @@
             display: block;
             width: 16px;
             height: 16px;
-        cursor: pointer;
+            cursor: pointer;
         }
 
         .nav_name {
@@ -334,6 +335,7 @@
                     color: #000;
                     font-family: "Inter";
                     font-style: normal;
+
                     .pump {
                         font-size: 24px;
                         font-weight: 700;
@@ -341,26 +343,27 @@
                 }
 
                 .title_right {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 5px 8px 5px 8px;
-                        height: 25px;
-                        background-color: #5cd685;
-                        border-radius: 28px;
-                        border: 2px solid #000;
-                        cursor: pointer;
-                        img {
-                            width: 12px;
-                            height: 12px;
-                            margin-right: 4px;
-                        }
-    
-                        .invite_earn {
-                            font-family: Inter;
-                            font-size: 12px;
-                            font-weight: 700;
-                        }
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 5px 8px 5px 8px;
+                    height: 25px;
+                    background-color: #5cd685;
+                    border-radius: 28px;
+                    border: 2px solid #000;
+                    cursor: pointer;
+
+                    img {
+                        width: 12px;
+                        height: 12px;
+                        margin-right: 4px;
+                    }
+
+                    .invite_earn {
+                        font-family: Inter;
+                        font-size: 12px;
+                        font-weight: 700;
+                    }
                 }
 
                 .point_out {
@@ -508,6 +511,7 @@
                 border: 2px solid #dfdfce;
                 padding: 20px 15px 24px 15px;
                 cursor: pointer;
+
                 &.listPicks {
                     height: 162px;
                     box-sizing: border-box;
@@ -519,6 +523,7 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
+
                         button {
                             border-radius: 45px;
                             border: 2px solid #000;
@@ -529,7 +534,8 @@
                             font-style: normal;
                             font-weight: 600;
                             padding: 8px 26px;
-                        cursor: pointer;
+                            cursor: pointer;
+
                             &:active {
                                 opacity: 0.6;
                             }
@@ -682,7 +688,8 @@
                 font-weight: 600;
                 margin-bottom: 28px;
 
-                &.cancelPick,&.earnVsoul {
+                &.cancelPick,
+                &.earnVsoul {
                     color: #000;
                     text-align: center;
                     font-family: "Inter";
@@ -693,27 +700,32 @@
                     margin-bottom: 29px;
                     padding: 0;
                 }
+
                 &.earnVsoul {
                     text-align: left;
                 }
             }
+
             .introduce_title {
                 font-size: 16px;
                 border: none;
                 margin-bottom: 0px;
                 padding-bottom: 6px;
             }
+
             .content {
                 margin-bottom: 0;
                 border: none;
                 padding-bottom: 6px;
                 font-weight: 400;
             }
+
             .end {
                 border-bottom: 1px solid #dfdfce;
                 margin-bottom: 10px;
                 padding-bottom: 6px;
             }
+
             .canserImg {
                 display: block;
                 width: 160px;
@@ -723,7 +735,7 @@
 
             .setBut {
                 margin-top: 8px;
-                
+
                 button {
                     display: block;
                     width: 100%;
@@ -739,9 +751,11 @@
                     font-weight: 700;
                     text-transform: uppercase;
                     cursor: pointer;
-                    &.backBtn{
+
+                    &.backBtn {
                         margin-top: 20px;
                     }
+
                     &:active {
                         opacity: 0.8;
                     }

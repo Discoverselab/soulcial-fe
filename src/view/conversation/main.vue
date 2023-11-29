@@ -7,7 +7,8 @@
           <img :src="chatDetailDto.avatar" alt="">
         </div>
         <div class="right">
-          <div class="name" v-if="chatDetailDto.type == 1">{{ `SoulCast #${chatDetailDto.tokenId} Group (${chatDetailDto.memberNumber})` }}</div>
+          <div class="name" v-if="chatDetailDto.type == 1">{{ `SoulCast #${chatDetailDto.tokenId} Group
+                      (${chatDetailDto.memberNumber})` }}</div>
           <div class="name" v-else>{{ chatDetailDto.title }}</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
@@ -25,7 +26,7 @@
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
             <div @click="goPersonDetail(item)" class="othersImg">
-              <img @error="$handleErrorImg"  :src="item.userAvatar" alt="">
+              <img @error="$handleErrorImg" :src="item.userAvatar" alt="">
             </div>
             <div class="msg othersMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>

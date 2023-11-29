@@ -4,22 +4,20 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-    'eslint-config-prettier'
-  ],
+  extends: ['eslint:recommended', '@vue/prettier', 'plugin:vue/essential'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module'
+    ecmaVersion: 13,
+    parser: 'babel-eslint',
+    sourceType: 'module',
   },
   plugins: ['vue', 'prettier'],
+
   rules: {
-    semi: ['error', 'always'], // 禁止尾部使用分号
+    semi: ['error', 'never'], // 禁止尾部使用分号
     'no-console': 'warn', // 禁止出现console
     'no-debugger': 'warn', // 禁止出现debugger
     'no-duplicate-case': 'warn', // 禁止出现重复case

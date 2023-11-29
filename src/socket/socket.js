@@ -1,7 +1,9 @@
 // websocket实例
 let wsObj = null
 // ws连接地址
-let baseUrl = `${process.env.VUE_APP_BASE_API.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_API.split('://')[1]}/pfp/websocket/`;
+let baseUrl = `${process.env.VUE_APP_BASE_API.includes('192') ? 'ws' : 'wss'}://${
+  process.env.VUE_APP_BASE_API.split('://')[1]
+}/pfp/websocket/`
 let wsUrl = baseUrl
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false
@@ -29,7 +31,7 @@ export const connectWebsocket = (userId, data, successCallback, errCallback) => 
   createWebSoket()
 }
 
-export const changeMessageCallback = (callback) => {
+export const changeMessageCallback = callback => {
   messageCallback = callback
 }
 
@@ -48,8 +50,8 @@ export const closeWebsocket = () => {
 }
 
 // 创建ws函数
-const createWebSoket = (callback) => {
-  if (typeof (WebSocket) === 'undefined') {
+const createWebSoket = callback => {
+  if (typeof WebSocket === 'undefined') {
     writeToScreen('您的浏览器不支持WebSocket，无法获取数据')
     return false
   }
@@ -63,26 +65,26 @@ const createWebSoket = (callback) => {
   }
 }
 
-const initWsEventHandle = (callback) => {
+const initWsEventHandle = callback => {
   try {
     // 连接成功
-    wsObj.onopen = (event) => {
+    wsObj.onopen = event => {
       onWsOpen(event, callback)
       heartCheck.start()
     }
 
     // 监听服务器端返回的信息
-    wsObj.onmessage = (event) => {
+    wsObj.onmessage = event => {
       onWsMessage(event)
       // heartCheck.start()
     }
 
-    wsObj.onclose = (event) => {
+    wsObj.onclose = event => {
       writeToScreen('onclose执行关闭事件')
       onWsClose(event)
     }
 
-    wsObj.onerror = (event) => {
+    wsObj.onerror = event => {
       writeToScreen('onerror执行error事件，开始重连')
       onWsError(event)
       reconnect()
@@ -94,37 +96,42 @@ const initWsEventHandle = (callback) => {
 }
 
 // 发送消息
-export const sendMessage = (message) => {
-  if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
+export const sendMessage = message => {
+  if (wsObj?.readyState === wsObj?.OPEN) {
+    // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     wsObj?.send(JSON.stringify(message))
     console.log('发送标识', message)
   }
-  if (!wsObj) { 
-    reconnect(()=>{wsObj.send(JSON.stringify(message))})
+  if (!wsObj) {
+    reconnect(() => {
+      wsObj.send(JSON.stringify(message))
+    })
   }
 }
 
 const onWsOpen = (event, callback) => {
   writeToScreen('CONNECT! ! ! ! ! ! !')
-  if (wsObj?.readyState === wsObj?.OPEN) { // wsObj.OPEN = 1
+  if (wsObj?.readyState === wsObj?.OPEN) {
+    // wsObj.OPEN = 1
     // 发给后端的数据需要字符串化
     // wsObj.send(JSON.stringify(agentData))
     // console.log('发送标识', agentData)
     callback && callback()
   }
-  if (wsObj?.readyState === wsObj?.CLOSED) { // wsObj.CLOSED = 3
+  if (wsObj?.readyState === wsObj?.CLOSED) {
+    // wsObj.CLOSED = 3
     writeToScreen('wsObj.readyState=3, ws连接异常，开始重连')
     reconnect()
     errorCallback()
   }
 }
-const onWsMessage = (event) => {
+const onWsMessage = event => {
   const jsonStr = event.data
   writeToScreen('onWsMessage接收到服务器的数据: ', jsonStr)
   messageCallback(jsonStr)
 }
-const onWsClose = (event) => {
+const onWsClose = event => {
   writeToScreen('DISCONNECT')
   // e.code === 1000  表示正常关闭。 无论为何目的而创建, 该链接都已成功完成任务。
   // e.code !== 1000  表示非正常关闭。
@@ -136,17 +143,17 @@ const onWsClose = (event) => {
     reconnect()
   }
 }
-const onWsError = (event) => {
+const onWsError = event => {
   writeToScreen('onWsError: ', event.data)
   errorCallback()
 }
 
-const writeToScreen = (massage) => {
+const writeToScreen = massage => {
   console.log(massage)
 }
 
 // 重连函数
-const reconnect = (callback) => {
+const reconnect = callback => {
   if (lockReconnect) {
     return
   }
@@ -163,7 +170,7 @@ const reconnect = (callback) => {
 }
 
 // 从浏览器地址中获取对应参数
-const GetQueryString = (name) => {
+const GetQueryString = name => {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
   // 获取url中 ? 符后的字符串并正则匹配
   let r = window.location.search.substr(1).match(reg)
@@ -200,7 +207,7 @@ const heartCheck = {
       try {
         const datas = { type: 999 }
         wsObj.send(JSON.stringify(datas))
-        console.log("🔥🔥🔥🚀 ~ file: socket.js:201 ~ datas:", datas);
+        console.log('🔥🔥🔥🚀 ~ file: socket.js:201 ~ datas:', datas)
       } catch (err) {
         writeToScreen('发送ping异常')
         console.log('内嵌定时器this.serverTimeoutObj: ', this.serverTimeoutObj)
@@ -213,4 +220,3 @@ const heartCheck = {
     }, this.timeout)
   }
 }
-

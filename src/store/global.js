@@ -1,6 +1,6 @@
 const state = {
   eranRedPoint: true,
-  chatRedPoint: false,
+  chatRedPoint: false
 }
 
 const actions = {
@@ -21,7 +21,7 @@ const mutations = {
   },
   updateChatRedPoint(state, payload) {
     state.chatRedPoint = payload
-  },
+  }
 }
 
 export default {
