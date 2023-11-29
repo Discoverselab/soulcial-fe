@@ -1,7 +1,7 @@
 // websocket实例
 let wsObj = null
 // ws连接地址
-let baseUrl = `${process.env.VUE_APP_BASE_IP.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_IP}/pfp/websocket/`;
+let baseUrl = `${process.env.VUE_APP_BASE_API.includes('192')? 'ws' : 'wss'}://${process.env.VUE_APP_BASE_API.split('://')[1]}/pfp/websocket/`;
 let wsUrl = baseUrl
 // 是否执行重连 true/不执行 ； false/执行
 let lockReconnect = false

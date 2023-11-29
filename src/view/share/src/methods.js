@@ -78,7 +78,7 @@ export default {
     },
 
     shareTiwtter() {
-        const url = `${website}#/t/${this.code}\n`;
+        const url = `${website}/#/t/${this.code}\n`;
         const text = `My SOUL in Web3 is ${this.UserInfo.personality} ${this.UserInfo.chracter}\n\nCome and Connect to me on @SoulcialGlobal\n${url}\n`;
         const hashtags = "Soulcial #SocialFi #Web3";
         const intentUrl =
@@ -90,7 +90,7 @@ export default {
     },
     creatQrCode() {
         new QRCode(this.$refs.qrCodeUrl, {
-            text: `${website}#/t/${this.code}`, // 需要转换为二维码的内容
+            text: `${website}/#/t/${this.code}`, // 需要转换为二维码的内容
             width: 100,
             height: 100,
             colorDark: "#000000",
@@ -100,7 +100,7 @@ export default {
     },
     copy() {
         const clipboard = new Clipboard(".copy", {
-            text: () => `${website}#/t/${this.code}`,
+            text: () => `${website}/#/t/${this.code}`,
         });
         clipboard.on("success", (e) => {
             Toast("Copy successfully");

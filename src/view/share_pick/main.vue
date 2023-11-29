@@ -30,7 +30,7 @@
       </div>
     </div>
     <button class="link copy-button2" @click="copyLink" >
-      <span class="link_content">{{`${website}#/${realTokenId}/${superInviteCode}`}}</span>
+      <span class="link_content">{{`${website}/#/${realTokenId}/${superInviteCode}`}}</span>
       <img class="copy_img" src="@/assets/copy1.png" alt />
     </button>
     <Overlay :overlayshow="overlayshow"></Overlay>

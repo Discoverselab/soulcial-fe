@@ -55,7 +55,7 @@
 //               subscription
 //             );
 //             // 提交endpoint
-//             let url = `${website}pfp/api/notification/subscribe`;
+//             let url = `${website}/pfp/api/notification/subscribe`;
 //             let data = {
 //               endpoint: subscription.endpoint,
 //               keys: {

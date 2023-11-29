@@ -136,7 +136,7 @@
       </div>
     </div>
     <div class="btn copy" style="text-transform: none;" @click="copy">
-      <div>{{ `${website}#/t/${this.code}` }}</div>
+      <div>{{ `${website}/#/t/${this.code}` }}</div>
       <img  round src="../../assets//copy1.png" alt />
     </div>
     <Overlay :overlayshow="overlayshow"></Overlay>

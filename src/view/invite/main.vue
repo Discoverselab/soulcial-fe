@@ -60,7 +60,7 @@ export default {
 
     const data = JSON.parse(localStorage.getItem("userInfo"));
     this.code = data.superInviteCode.split("-")[1];
-    this.inviteLink = `${website}#/t/${this.code}`;
+    this.inviteLink = `${website}/#/t/${this.code}`;
 
     this.getInviteCodeList();
   },
