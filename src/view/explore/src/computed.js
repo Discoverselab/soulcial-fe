@@ -6,6 +6,9 @@ matters need attention
 // import ajax from "ajax";
 import { convertToTargetTimeZone,getLastTimeStr } from "@/utils/convertTime";
 export default {
+  loginStatus() {
+    return this.$store.state.loginStatus;
+  },
     oddNftList() {
         // 使用计算属性来筛选 nftList
         return this.nftList.filter((nft,index) => {

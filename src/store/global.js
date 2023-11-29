@@ -1,6 +1,7 @@
 const state = {
   eranRedPoint: true,
   chatRedPoint: false,
+  loginStatus:false
 }
 
 const actions = {
@@ -21,6 +22,9 @@ const mutations = {
   },
   updateChatRedPoint(state, payload) {
     state.chatRedPoint = payload
+  },
+  updateLoginStatus(state, payload) {
+    state.loginStatus = payload
   },
 }
 

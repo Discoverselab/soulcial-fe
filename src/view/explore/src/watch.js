@@ -8,4 +8,11 @@ export default {
             console.log(to,from)
         }
     },
+    loginStatus(newVal) {
+        if (newVal) {
+          // 执行刷新操作
+          this.changeTab(1, "refresh");
+          this.$store.commit('updateLoginStatus', false);
+        }
+      },
 };

@@ -227,6 +227,9 @@ export default {
             if (!res.data.usedInviteCode && !res.data.whiteUser) {
               this.$router.push("/welcome");
             } else {
+              if(this.$route.fullPath === '/') {
+                this.$store.commit('updateLoginStatus', true);
+              }
               // if (localStorage.getItem("routers")) {
               //   this.$router.push(localStorage.getItem("routers"));
               // }
