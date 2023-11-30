@@ -168,12 +168,16 @@ export default {
     get(url, data)
       .then(res => {
         const { data, code } = res
-        if (data?.total === 0 || code !==200) {
+        if (data?.total === 0 || code !== 200) {
           this.showBackground = true
         }
         if (code === 200 && data.records && data.records.length > 0) {
           if (this.orderColumn == 4) {
             let randomNftList = data.records
+            if (this.pageType === 0) {
+              // forYou页面每五个随机排序
+              randomNftList = this.getFiveRandomData(randomNftList)
+            }
             if (this.pageType === 1) {
               // connected页面随机排序
               this.shuffleArray(randomNftList)
@@ -199,11 +203,22 @@ export default {
       })
   },
   shuffleArray(array) {
-    // 随机排序数组
+    // 数据随机排序数组
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[array[i], array[j]] = [array[j], array[i]]
     }
+  },
+  // 按照1-5、6-10、11-15、16-20的规则拆分数组
+  getFiveRandomData(data) {
+    let FiveRandomList = []
+    for (let i = 0; i < data.length; i += 5) {
+      const chunk = data.slice(i, i + 5)
+      // 数据随机排序切割的数组
+      this.shuffleArray(chunk)
+      FiveRandomList.push(...chunk)
+    }
+    return FiveRandomList
   },
   onLoad() {
     this.currentPage++ // 更新页数

@@ -192,13 +192,19 @@
       <div class="more" v-if="NFTDetail.pickStatus != 0">
         <p class="pikesTitle">
           <span class="title_left">
-            <span class="pump">Pump</span>
-            <img class="point_out" @click="dialogShow = true" src="../../assets/point_out.png" alt />
+            <span class="pump">Pump Game</span>
+            <!-- <img class="point_out" @click="dialogShow = true" src="../../assets/point_out.png" alt /> -->
           </span>
           <span class="title_right" @click="jumpSharePick">
             <img src="@/assets/diamond.png" alt />
             <span class="invite_earn">Invite & Earn</span>
           </span>
+        </p>
+        <p class="pumpGame">
+          One Pumper will be randomly chosen as the winner, collecting SoulCast NFT.
+          <br />The other three Pumpers will receive a full refund plus an additional 4% as compensation.
+          <br />
+          <span @click="dialogShow = true">Learn more about Pump</span>
         </p>
         <div class="author authorPicks">
           <!-- #1 -->
