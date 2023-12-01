@@ -17,7 +17,7 @@
         <img class="market2" src="@/assets/market2.png" alt />
       </div>
     </div>
-    <div class="content">Discover the unique features of {{ this.$route.query.isShareMy=== "true" ? "my" : "the" }} SoulCast NFT :) Visit @SoulcialGlobal via {{`${website}#/${realTokenId}/${superInviteCode}`}} to Pump and receive crypto rewards. Use my invite code: soul-{{ superInviteCode }}</div>
+    <div class="content">Discover the unique features of {{ this.$route.query.isShareMy=== "true" ? "my" : "the" }} SoulCast NFT :) Visit @SoulcialGlobal via {{`${website}/#/${realTokenId}/${superInviteCode}`}} to Pump and receive crypto rewards. Use my invite code: soul-{{ superInviteCode }}</div>
 
     <div class="operate">
       <div @click="shareTiwtter" class="btn">
