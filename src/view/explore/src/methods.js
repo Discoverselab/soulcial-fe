@@ -177,6 +177,7 @@ export default {
             if (this.pageType === 0) {
               // forYou页面每五个随机排序
               randomNftList = this.getFiveRandomData(randomNftList)
+              localStorage.setItem('NFT', JSON.stringify(randomNftList[0]))
             }
             if (this.pageType === 1) {
               // connected页面随机排序

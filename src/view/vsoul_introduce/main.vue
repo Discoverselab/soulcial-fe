@@ -17,9 +17,11 @@
       <div class="content" style="border: none;">
         <p>1. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
         <p>2. You can earn vSOUL by joining a Pump game, inviting friends to join a Pump game, and inviting friends to register:</p>
-        <p>· 20 vSOUL for each invited friend</p>
-        <p>· 100 vSOUL for each invited Pump game</p>
-        <p>· Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.</p>
+        <p class="everySec">· 20 vSOUL for each invited friend</p>
+        <p class="everySec">· 100 vSOUL for each invited Pump game</p>
+        <p
+          class="everySec"
+        >· Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.</p>
       </div>
     </div>
     <table>
@@ -134,6 +136,9 @@
       margin-bottom: 10px;
       padding-bottom: 10px;
     }
+  }
+  .everySec {
+    margin-left: 1em;
   }
   table {
     border-collapse: collapse;

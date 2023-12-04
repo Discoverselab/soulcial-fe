@@ -5,34 +5,30 @@ matters need attention
 
 ps: https://cn.vuejs.org/v2/api/#methods
 */
-import { get, post } from "../../../http/http";
-import { Toast } from "vant";
-import { closeWebsocket } from "@/socket/socket";
+import { get, post } from '../../../http/http'
+import { Toast } from 'vant'
+import { closeWebsocket } from '@/socket/socket'
 export default {
   setTwitterUserInfo(val) {
-    let url = this.$api.login.setTwitterUserInfo;
+    let url = this.$api.login.setTwitterUserInfo
     let data = {
-      oauthVerifier: val,
-    };
+      oauthVerifier: val
+    }
     post(url, data)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.$toast("bind successfully");
+          this.$toast('bind successfully')
           var clean_uri =
-            location.protocol +
-            "//" +
-            location.host +
-            location.pathname +
-            location.hash;
-          window.history.replaceState({}, document.title, clean_uri);
-          this.getUserInfo();
+            location.protocol + '//' + location.host + location.pathname + location.hash
+          window.history.replaceState({}, document.title, clean_uri)
+          this.getUserInfo()
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-        console.log(error);
-      });
+      .catch(error => {
+        this.overlayshow = false
+        console.log(error)
+      })
   },
   onInput(checked) {
     if (!checked) {
@@ -49,91 +45,92 @@ export default {
       //         console.log(error);
       //     });
     } else {
-      this.overlayshow = true;
-      this.checked = checked;
-      let url = this.$api.login.twitterRedirect + "?source=1";
+      this.overlayshow = true
+      this.checked = checked
+      let url = this.$api.login.twitterRedirect + '?source=1'
       post(url)
-        .then((res) => {
+        .then(res => {
           if (res.code === 200) {
-            if (window.localStorage.getItem("isPWA") == "true") {
-              window.open(res.data, '_blank');
+            if (window.localStorage.getItem('isPWA') == 'true') {
+              window.open(res.data, '_blank')
             } else {
-              window.open(res.data, "_self");
+              window.open(res.data, '_self')
             }
           }
-          this.overlayshow = false;
+          this.overlayshow = false
         })
-        .catch((error) => {
-          this.overlayshow = false;
-          console.log("🔥🔥🔥🚀 ~ file: methods.js:19 ~ error:", error);
-        });
+        .catch(error => {
+          this.overlayshow = false
+          console.log('🔥🔥🔥🚀 ~ file: methods.js:19 ~ error:', error)
+        })
     }
   },
   getUserInfo() {
-    this.overlayshow = true;
-    let url = this.$api.infor.getUserInfo;
+    this.overlayshow = true
+    let url = this.$api.infor.getUserInfo
     get(url)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.UserInfo = res.data;
-          this.checked = Boolean(res.data.twitterStatus);
+          this.UserInfo = res.data
+          this.checked = Boolean(res.data.twitterStatus)
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-        console.log(error);
-      });
+      .catch(error => {
+        this.overlayshow = false
+        console.log(error)
+      })
   },
   quit() {
-    this.$loginData.out();
-    window.particle && window.particle.auth.logout();
-    localStorage.removeItem("loginInfo");
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("mintedNFTPage");
-    localStorage.removeItem("isUseInviteCode");
+    this.$loginData.out()
+    window.particle && window.particle.auth.logout()
+    localStorage.removeItem('loginInfo')
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('mintedNFTPage')
+    localStorage.removeItem('isUseInviteCode')
+    localStorage.removeItem('NFT')
     closeWebsocket()
     this.$router.replace({
-      path: "/",
-    });
+      path: '/'
+    })
   },
   afterRead(file) {
-    this.overlayshow = true;
-    let url = this.$api.infor.pictureUpload;
-    const formData = new FormData();
-    formData.append("file", file.file);
-    let data = formData;
+    this.overlayshow = true
+    let url = this.$api.infor.pictureUpload
+    const formData = new FormData()
+    formData.append('file', file.file)
+    let data = formData
     post(url, data, true)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.save(res.data);
+          this.save(res.data)
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-        console.log(error);
-      });
+      .catch(error => {
+        this.overlayshow = false
+        console.log(error)
+      })
   },
   save(avatar) {
-    this.overlayshow = true;
-    let url = this.$api.infor.setUserInfo;
+    this.overlayshow = true
+    let url = this.$api.infor.setUserInfo
     let data = {
-      avatar: avatar,
-    };
+      avatar: avatar
+    }
     post(url, data, true)
-      .then((res) => {
+      .then(res => {
         if (res.code === 200) {
-          this.getUserInfo();
+          this.getUserInfo()
         }
-        this.overlayshow = false;
+        this.overlayshow = false
       })
-      .catch((error) => {
-        this.overlayshow = false;
-        console.log(error);
-      });
+      .catch(error => {
+        this.overlayshow = false
+        console.log(error)
+      })
   },
   onOversize() {
-    Toast("The size of image limited to 5M.");
-  },
-};
+    Toast('The size of image limited to 5M.')
+  }
+}

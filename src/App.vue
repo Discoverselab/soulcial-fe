@@ -8,30 +8,29 @@
 </template>
 
 <script>
-import { get } from "@/http/http";
-import { closeWebsocket } from "@/socket/socket";
+import { get } from '@/http/http'
+import { closeWebsocket } from '@/socket/socket'
 export default {
-  name: "app",
+  name: 'app',
   data() {
     return {
-      BarList: ["/", "/earn", "/chat", "/home"],
-    };
+      BarList: ['/', '/earn', '/chat', '/home']
+    }
   },
-  components: {
-  },
+  components: {},
   created() {
     // 获取聊天未读数
-    this.getChatData();
+    this.getChatData()
 
     // 记录进入时间戳
-    window.localStorage.setItem("firstApptime", new Date().getTime());
+    window.localStorage.setItem('firstApptime', new Date().getTime())
 
     // 时区检测
-    const token = "a47c446ea7f061";
+    const token = 'a47c446ea7f061'
     fetch(`https://ipinfo.io/json?token=${token}`)
       .then(response => response.json())
       .then(data => {
-        window.localStorage.setItem("timezone", data.timezone);
+        window.localStorage.setItem('timezone', data.timezone)
       })
       .catch(error => {
         // window.localStorage.removeItem("timezone");
@@ -39,74 +38,75 @@ export default {
       })
 
     // PWA环境检测
-    const isSafari = window.navigator.vendor === "Apple Computer, Inc.";
+    const isSafari = window.navigator.vendor === 'Apple Computer, Inc.'
     if (this._isMobile()) {
       //移动设备
       if (isSafari) {
         // ios safari 浏览器
         if (window.navigator.standalone) {
-          window.localStorage.setItem("isPWA", true);
+          window.localStorage.setItem('isPWA', true)
         }
       } else {
         // 其他浏览器
-        if (window.matchMedia("(display-mode: standalone)").matches) {
-          window.localStorage.setItem("isPWA", true);
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+          window.localStorage.setItem('isPWA', true)
         }
       }
     } else {
-      window.localStorage.setItem("isPWA", false);
+      window.localStorage.setItem('isPWA', false)
     }
   },
   methods: {
     getChatData() {
-      let url = this.$api.chat.getChatList;
+      let url = this.$api.chat.getChatList
       get(url)
-        .then((res) => {
+        .then(res => {
           if (res.code === 200) {
             res.data.forEach(ele => {
               if (ele.unreadNum) {
-                this.$store.commit("updateChatRedPoint", true);
+                this.$store.commit('updateChatRedPoint', true)
               }
-            });
+            })
           }
         })
-        .catch((error) => {
-          console.log("🔥🔥🔥🚀 ~ file: App.vue:71 ~ error:", error);
-        });
+        .catch(error => {
+          console.log('🔥🔥🔥🚀 ~ file: App.vue:71 ~ error:', error)
+        })
     },
     clear() {
       if (this.$loginData.Auth_Token) {
-        this.$loginData.out();
-        window.localStorage.removeItem("loginInfo");
-        localStorage.removeItem("isUseInviteCode");
-        localStorage.removeItem("userInfo");
-        localStorage.removeItem("mintedNFTPage");
-        this.$router.push("/");
-        window.localStorage.setItem("Sift", "4down");
+        this.$loginData.out()
+        window.localStorage.removeItem('loginInfo')
+        localStorage.removeItem('isUseInviteCode')
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('mintedNFTPage')
+        localStorage.removeItem('NFT')
+        this.$router.push('/')
+        window.localStorage.setItem('Sift', '4down')
         closeWebsocket()
       }
     },
     IsBar() {
       if (this.BarList.indexOf(this.$route.path) === -1) {
-        return false;
+        return false
       } else {
-        return true;
+        return true
       }
     },
     _isMobile() {
       let flag = navigator.userAgent.match(
         /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-      );
-      return flag;
-    },
+      )
+      return flag
+    }
   },
   mounted() {
     // 监听账户切换
-    window.ethereum.on("accountsChanged", this.clear);
+    window.ethereum.on('accountsChanged', this.clear)
     // 监听网络切换
-    window.ethereum.on("networkChanged", this.clear);
-  },
-};
+    window.ethereum.on('networkChanged', this.clear)
+  }
+}
 </script>
 
 <style lang="scss">
@@ -138,12 +138,12 @@ a:focus {
   display: none !important;
 }
 
-#app>div {
+#app > div {
   min-height: 100vh;
   box-sizing: border-box;
 }
 
-img[lazy="loading"] {
+img[lazy='loading'] {
   display: block;
   width: 50px !important;
   height: 50px !important;
@@ -207,14 +207,13 @@ body {
   scrollbar-width: none;
   /* Firefox */
 
-
   @media screen and (min-width: 750px) {
     #app {
       padding: 0px 430px;
       box-sizing: border-box;
     }
 
-    #app>div {
+    #app > div {
       box-shadow: 0.5px 5px 5px 0px #888888;
     }
   }

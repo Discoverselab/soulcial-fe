@@ -53,15 +53,33 @@
         </template>
       </div>
     </van-action-sheet>
-    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
-      :before-close="newGroupBefColse" confirmButtonText="CONFIRM" @confirm="dialog_confirm">
-      <input placeholder="Please enter" onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')" maxlength="10"
-        type="text" @input="restrictInput" v-model="handle" />
+    <van-dialog
+      v-model="dialogShow"
+      :close-on-click-overlay="true"
+      :z-index="9999999"
+      title="Create Lens Handle"
+      :before-close="newGroupBefColse"
+      confirmButtonText="CONFIRM"
+      @confirm="dialog_confirm"
+    >
+      <input
+        placeholder="Please enter"
+        onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')"
+        maxlength="10"
+        type="text"
+        @input="restrictInput"
+        v-model="handle"
+      />
       <p class="point_out">Handle must be minimum of 5 length and maximum of 31 length</p>
     </van-dialog>
     <!-- 白名单弹窗 -->
-    <van-dialog v-model="whiteShow" :close-on-click-overlay="false" :z-index="99999999"
-      confirmButtonText="Join the waitlist" @confirm="white_confirm">
+    <van-dialog
+      v-model="whiteShow"
+      :close-on-click-overlay="false"
+      :z-index="99999999"
+      confirmButtonText="Join the waitlist"
+      @confirm="white_confirm"
+    >
       <p class="fee_dint">
         Sorry, Soulcial is now in beta stage. It seems that you are not eligible
         temporally. Please join the waitlist first.
@@ -71,291 +89,276 @@
   </div>
 </template>
 <script>
-import { post, get } from "../http/http";
-import Overlay from "../components/Overlay.vue";
-let version = false;
-import { addVTNetwork } from "@/libs/addVTNetwork.js";
-import Web3 from "web3";
-import { closeWebsocket } from "@/socket/socket";
-import { ethers } from "ethers";
-import { onParticle } from "@/libs/common.js";
+import { post, get } from '../http/http'
+import Overlay from '../components/Overlay.vue'
+let version = false
+import { addVTNetwork } from '@/libs/addVTNetwork.js'
+import Web3 from 'web3'
+import { closeWebsocket } from '@/socket/socket'
+import { ethers } from 'ethers'
+import { onParticle } from '@/libs/common.js'
 
 export default {
   props: {
     walletShow: Boolean
   },
   data: function () {
-    let _clientH = document.documentElement.clientHeight;
+    let _clientH = document.documentElement.clientHeight
     return {
       userLens: {},
       dialogShow: false,
       whiteShow: false,
-      wallet: "",
-      address: "",
+      wallet: '',
+      address: '',
       loginType: 0,
       isPWA: false,
       overlayshow: false,
-      preferredAuthType: "",
-      handle: ""
-    };
+      preferredAuthType: '',
+      handle: ''
+    }
   },
   components: { Overlay },
   methods: {
     restrictInput(event) {
-      const pattern = /^[a-zA-Z0-9]*$/;
-      const inputValue = event.target.value;
+      const pattern = /^[a-zA-Z0-9]*$/
+      const inputValue = event.target.value
       if (!pattern.test(inputValue)) {
-        event.preventDefault();
+        event.preventDefault()
       }
     },
 
     close() {
-      this.$emit("close", true);
+      this.$emit('close', true)
     },
     // 查询是否已生成steam_id
     async checkSteamId(address, signParams) {
-      this.overlayshow = true;
-      this.address = address;
+      this.overlayshow = true
+      this.address = address
       let data = {
         loginType: this.loginType,
         address: address,
         particleType: this.preferredAuthType,
         refreshScore: version ? 1 : 0
-      };
-      let url = this.$api.login.checkSteamId;
+      }
+      let url = this.$api.login.checkSteamId
       get(url, data)
         .then(res => {
           if (res.code === 200) {
-            this.login(
-              res.data.isRegister,
-              res.data.levelScore,
-              "",
-              "",
-              "",
-              signParams
-            );
-
+            this.login(res.data.isRegister, res.data.levelScore, '', '', '', signParams)
           } else if (res.code === 400) {
             // this.whiteShow = true
-            this.$router.push("/welcome");
+            this.$router.push('/welcome')
           }
-          this.overlayshow = false;
+          this.overlayshow = false
         })
         .catch(error => {
-          this.overlayshow = false;
-        });
+          this.overlayshow = false
+        })
     },
     newGroupBefColse(action, done) {
-      if (action == "confirm" && !this.handle.trim()) {
-        done(false);
-      } else if (
-        (action == "confirm" && this.handle.length < 5) ||
-        this.handle.length > 30
-      ) {
-        done(false);
+      if (action == 'confirm' && !this.handle.trim()) {
+        done(false)
+      } else if ((action == 'confirm' && this.handle.length < 5) || this.handle.length > 30) {
+        done(false)
       } else {
-        done(true);
+        done(true)
       }
     },
     white_confirm() {
       window.open(
-        "https://docs.google.com/forms/d/e/1FAIpQLScCRviofrSM0VY3IG8g3PhfQPKunJ15xWGsWq_ofZgRoIi-lw/viewform"
-      );
+        'https://docs.google.com/forms/d/e/1FAIpQLScCRviofrSM0VY3IG8g3PhfQPKunJ15xWGsWq_ofZgRoIi-lw/viewform'
+      )
     },
     dialog_confirm() {
       if (!this.handle) {
-        this.$toast("Please enter");
-        return;
+        this.$toast('Please enter')
+        return
       }
       if (this.handle.length < 5 || this.handle.length > 30) {
-        this.$toast(
-          "Not less than 5 characters and not more than 30 characters"
-        );
-        return;
+        this.$toast('Not less than 5 characters and not more than 30 characters')
+        return
       }
-      this.overlayshow = true;
-      this.dialogShow = false;
+      this.overlayshow = true
+      this.dialogShow = false
     },
     login(isRegister, levelScore, streamId, lensId, handle, signParams) {
-      this.overlayshow = true;
-      let streamID = streamId ? streamId : Date.parse(new Date());
-      let prefix = this.$api.login.login;
-      let params = `?address=${this.address}&&loginType=${this.loginType
-        }&&particleType=${this.preferredAuthType
-        }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message ||
-        ""}&&signature=${signParams?.signature || ""}`;
+      this.overlayshow = true
+      let streamID = streamId ? streamId : Date.parse(new Date())
+      let prefix = this.$api.login.login
+      let params = `?address=${this.address}&&loginType=${this.loginType}&&particleType=${
+        this.preferredAuthType
+      }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${
+        signParams?.message || ''
+      }&&signature=${signParams?.signature || ''}`
       post(prefix + params)
         .then(res => {
           if (res.code === 200) {
             const loginInfo = {
               usedInviteCode: res.data.usedInviteCode,
               whiteUser: res.data.whiteUser
-            };
-            localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+            }
+            localStorage.setItem('loginInfo', JSON.stringify(loginInfo))
             this.$loginData.in({
               authToken: this.address,
               login_type: this.loginType,
               id: res.data.tokenValue,
               userid: res.data.userId
-            });
-            this.$emit("getWalletBalance");
-            this.$emit("init"); // 分享页登录后重新获取user页面数据
-            this.close();
+            })
+            this.$emit('getWalletBalance')
+            this.$emit('init') // 分享页登录后重新获取user页面数据
+            this.close()
             // if (isRegister && !levelScore) {
             //   this.$router.push("/welcome");
             // }
             if (!res.data.usedInviteCode && !res.data.whiteUser) {
-              this.$router.push("/welcome");
+              this.$router.push('/welcome')
             } else {
-              if(this.$route.fullPath === '/') {
-                this.$store.commit('updateLoginStatus', true);
+              if (this.$route.fullPath === '/') {
+                this.$store.commit('updateLoginStatus', true)
               }
               // if (localStorage.getItem("routers")) {
               //   this.$router.push(localStorage.getItem("routers"));
               // }
             }
           } else {
-            this.$toast(res.msg);
+            this.$toast(res.msg)
           }
-          this.overlayshow = false;
+          this.overlayshow = false
         })
         .catch(error => {
-          this.overlayshow = false;
-        });
+          this.overlayshow = false
+        })
     },
     metamaskChack() {
-      let me = this;
+      let me = this
       const clear = function () {
         if (me.$loginData.Auth_Token) {
-          me.$loginData.out();
-          window.localStorage.removeItem("loginInfo");
-          localStorage.removeItem("isUseInviteCode");
-          localStorage.removeItem("userInfo");
-          localStorage.removeItem("mintedNFTPage");
-          me.$router.push("/");
-          window.localStorage.setItem("Sift", "4down");
+          me.$loginData.out()
+          window.localStorage.removeItem('loginInfo')
+          localStorage.removeItem('isUseInviteCode')
+          localStorage.removeItem('userInfo')
+          localStorage.removeItem('mintedNFTPage')
+          localStorage.removeItem('NFT')
+          me.$router.push('/')
+          window.localStorage.setItem('Sift', '4down')
           closeWebsocket()
-
         }
-      };
+      }
       // 监听账户切换
-      window.ethereum.on("accountsChanged", clear);
+      window.ethereum.on('accountsChanged', clear)
       // 监听网络切换
-      window.ethereum.on("networkChanged", clear);
+      window.ethereum.on('networkChanged', clear)
     },
 
     async handleSign(provider, accounts) {
       // 签名操作
       //Get Metamask web3 provider
-      var web3 = new Web3(Web3.givenProvider);
+      var web3 = new Web3(Web3.givenProvider)
 
       //Connect to Metamask (not sure how to do like web3.eth.connect)
-      await provider.enable();
-      let unit = "\n";
-      let timestamp = String(+new Date()).slice(-6);
+      await provider.enable()
+      let unit = '\n'
+      let timestamp = String(+new Date()).slice(-6)
 
       //TO-DO: Message should be generated on server side with a nonce
-      let message = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`;
+      let message = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`
 
       //Sign message with Metamask (private key)
 
       try {
-        const signedMessage = await web3.eth.personal.sign(
-          message,
-          accounts[0]
-        );
+        const signedMessage = await web3.eth.personal.sign(message, accounts[0])
 
         if (signedMessage) {
           let signParams = {
             message: encodeURIComponent(message),
             signature: signedMessage
-          };
-          this.loginType = 0;
-          this.preferredAuthType = "";
-          this.checkSteamId(accounts[0], signParams);
+          }
+          this.loginType = 0
+          this.preferredAuthType = ''
+          this.checkSteamId(accounts[0], signParams)
         } else {
           // 异常
-          this.$toast("Wrong signature");
+          this.$toast('Wrong signature')
         }
       } catch (error) {
-        this.overlayshow = false;
+        this.overlayshow = false
       }
     },
     handleAddCatch(provider, accounts) {
-      this.loginType = 0;
-      this.preferredAuthType = "";
-      this.checkSteamId(accounts[0]);
+      this.loginType = 0
+      this.preferredAuthType = ''
+      this.checkSteamId(accounts[0])
     },
 
     // Link metamask wallet
     async metamask() {
-      if (typeof window.ethereum !== "undefined") {
+      if (typeof window.ethereum !== 'undefined') {
         //选择网络链接钱包
         try {
-          this.overlayshow = true;
-          await addVTNetwork(this.handleSign, this.handleAddCatch);
+          this.overlayshow = true
+          await addVTNetwork(this.handleSign, this.handleAddCatch)
         } catch (error) {
-          console.log("error", error, "error");
-          this.overlayshow = false;
+          console.log('error', error, 'error')
+          this.overlayshow = false
         }
         //  this.overlayshow = false
       } else {
-        window.open("https://metamask.io/");
+        window.open('https://metamask.io/')
       }
     },
     disconnect(provider) {
       // Monitor wallet exit status
-      provider.on("disconnect", (code, reason) => {
-        this.$loginData.out();
-        location.href = "/";
-      });
+      provider.on('disconnect', (code, reason) => {
+        this.$loginData.out()
+        location.href = '/'
+      })
     },
     async particleCallback() {
-      this.overlayshow = false;
-      this.close();
-      const accounts = await window.web3.eth.getAccounts();
+      this.overlayshow = false
+      this.close()
+      const accounts = await window.web3.eth.getAccounts()
       // particle签名
-      let unit = "\n";
-      let timestamp = String(+new Date()).slice(-6);
+      let unit = '\n'
+      let timestamp = String(+new Date()).slice(-6)
 
-      let msg = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`;
+      let msg = `Welcome to Soulcial!${unit}\nWallet address:${unit}${accounts[0]}${unit}\nNonce:${unit}${timestamp}`
       window.web3.eth.personal
         .sign(msg, accounts[0])
         .then(result => {
-          console.log("personal_sign", result);
+          console.log('personal_sign', result)
           let signParams = {
             message: encodeURIComponent(msg),
             signature: result
-          };
-          this.loginType = 1;
-          this.checkSteamId(accounts[0], signParams);
+          }
+          this.loginType = 1
+          this.checkSteamId(accounts[0], signParams)
         })
         .catch(error => {
-          console.error("personal_sign err", error);
+          console.error('personal_sign err', error)
           if (error.code === 10005) {
             // 10005,登录过期
             // 4001, message: 'The user rejected the request'
           } else {
             // this.$toast("Wrong signature");
           }
-        });
+        })
     },
     async particle(preferredAuthType, type) {
-      this.preferredAuthType = type;
-      this.overlayshow = true;
+      this.preferredAuthType = type
+      this.overlayshow = true
       onParticle(this.particleCallback, preferredAuthType, () => {
-        this.overlayshow = false;
-      });
+        this.overlayshow = false
+      })
     }
   },
   created() {
-    this.metamaskChack();
+    this.metamaskChack()
   },
   mounted() {
-    this.isPWA = window.localStorage.getItem("isPWA") == "true";
-    console.log("🔥🔥🔥🚀 ~ file: LinkWallet.vue:554 ~ this.isPWA:", this.isPWA);
-  },
-};
+    this.isPWA = window.localStorage.getItem('isPWA') == 'true'
+    console.log('🔥🔥🔥🚀 ~ file: LinkWallet.vue:554 ~ this.isPWA:', this.isPWA)
+  }
+}
 </script>
 <style lang="scss">
 .wallet {
@@ -391,7 +394,7 @@ export default {
     }
 
     .title {
-      font-family: "Inter";
+      font-family: 'Inter';
       font-style: normal;
       font-weight: 900;
       font-size: 20px;
@@ -432,7 +435,7 @@ export default {
         }
 
         p {
-          font-family: "Inter";
+          font-family: 'Inter';
           font-style: normal;
           font-weight: 600;
           font-size: 16px;
@@ -453,7 +456,7 @@ export default {
         margin-left: 15px;
 
         .attention_title {
-          font-family: "Inter";
+          font-family: 'Inter';
           font-style: normal;
           font-weight: 600;
           font-size: 14px;
@@ -462,7 +465,7 @@ export default {
         }
 
         .title_one {
-          font-family: "Inter";
+          font-family: 'Inter';
           font-style: normal;
           font-weight: 600;
           font-size: 12px;
@@ -471,7 +474,7 @@ export default {
         }
 
         .text {
-          font-family: "Inter";
+          font-family: 'Inter';
           font-style: normal;
           font-weight: 500;
           font-size: 12px;
@@ -494,7 +497,7 @@ export default {
       }
 
       .lin_text {
-        font-family: "Inter";
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 600;
         font-size: 10px;
@@ -538,7 +541,7 @@ export default {
   .van-dialog__header {
     text-align: center;
     font-size: 20px;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
     text-transform: uppercase;
@@ -557,7 +560,7 @@ export default {
       box-sizing: border-box;
       color: #000;
       font-size: 18px;
-      font-family: "Inter";
+      font-family: 'Inter';
       font-style: normal;
       font-weight: 600;
     }
@@ -565,7 +568,7 @@ export default {
     .point_out {
       color: rgba(0, 0, 0, 0.5);
       font-size: 16px;
-      font-family: "Inter";
+      font-family: 'Inter';
       font-style: normal;
       margin-top: 10px;
     }
@@ -584,7 +587,7 @@ export default {
         color: #000;
         text-align: center;
         font-size: 18px;
-        font-family: "Inter";
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 700;
         text-transform: uppercase;
@@ -595,7 +598,7 @@ export default {
   .fee_dint {
     color: #333;
     font-size: 16px;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 600;
     font-style: normal;
     margin-bottom: 20px;

@@ -82,6 +82,7 @@ export const clearInfo = () => {
   localStorage.removeItem('isUseInviteCode')
   localStorage.removeItem('userInfo')
   localStorage.removeItem('mintedNFTPage')
+  localStorage.removeItem('NFT')
   router.replace('/')
   window.localStorage.setItem('Sift', '4down')
   closeWebsocket()
