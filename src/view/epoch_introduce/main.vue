@@ -2,40 +2,102 @@
   <div class="vsoul_introduce">
     <div class="navigate">
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" />
-      <div class="nav_name">
-        PUMP Epoch Rules
-      </div>
+      <div class="nav_name">Soul King da Moon</div>
     </div>
     <div class="banner">
-      <img src="../../assets/banner_epoch.jpg" alt="">
+      <img src="../../assets/weekly.png" alt />
     </div>
     <div class="introduce">
-      <div class="title">PUMP Epoch</div>
       <div class="content">
-        <p>Nov 15 - Nov 30</p>
+        Start Soulcial Journey and earn vSOUL, Top 10 on weekly leaderboard share
+        <span
+          class="bold"
+        >$170</span> rewards pool.
       </div>
-      <div class="title">Double vSOUL</div>
+      <div class="title">Weekly Leaderboard</div>
       <div class="content">
-        <p>1. PUMP SoulCast NFT, and win double vSOUL rewards.</p>
-        <p>2. Top 10 Pumpers on leaderboard share <span class="bold">$2100</span> rewards pool.</p>
-        <p class="sec"> · 1st: <span class="bold">$800</span></p>
-        <p class="sec"> · 2nd: <span class="bold">$400</span></p>
-        <p class="sec"> · 3rd: <span class="bold">$200</span></p>
-        <p class="sec"> · 4th-10th: <span class="bold">$100</span></p>
+        <p>Mon 00:00 - Sun 23:59 UTC</p>
+        <p>The leaderboard will be reset and re-calculated every Monday.</p>
+      </div>
+      <div class="title">Rewards</div>
+      <div class="content">
+        <p>
+          Top 10 on weekly leaderboard share
+          <span class="bold">$170</span> rewards pool.
+        </p>
+        <p class="sec">
+          · 1st:
+          <span class="bold">$50</span>
+        </p>
+        <p class="sec">
+          · 2nd:
+          <span class="bold">$30</span>
+        </p>
+        <p class="sec">
+          · 3rd:
+          <span class="bold">$20</span>
+        </p>
+        <p class="sec">
+          · 4th-10th:
+          <span class="bold">$10</span>
+        </p>
       </div>
 
-      <div class="title">Lucky 3-in-a-row</div>
+      <div class="title">What is vSOUL</div>
       <div class="content">
-        <p>If you win 3 Pump in a row, you can receive a full refund in the form of ETH.</p>
+        <p>1. vSOUL represents the reward points in Soulcial.</p>
+        <p>2. vSOUL could be converted into Soulcial tokens in the future airdrop.</p>
       </div>
 
-      <div class="title">Get OG Badge</div>
+      <div class="title">How to earn vSOUL</div>
       <div class="content" style="border: none;">
-        <p>1. Participants in PUMP in the Epoch will be rewarded OG Badge. </p>
-        <p>2. OG Badge holders have early access to future features, exclusive content, and more. </p>
+        <p>1. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
+        <p>2. You can earn vSOUL by joining a Pump game, inviting friends to join a Pump game, and inviting friends to register:</p>
+        <p class="sec">· 20 vSOUL for each invited friend</p>
+        <p class="sec">· 100 vSOUL for each invited Pump game</p>
+        <p
+          class="everySec"
+        >· Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.</p>
       </div>
     </div>
-    <div @click="$router.push('/vsoul_introduce')" class="btn">Learn more about vSOUL</div>
+    <table>
+      <thead>
+        <tr>
+          <th>SoulCast Level</th>
+          <th>Lv 1 ORIGIN</th>
+          <th>Lv 2 VITALITY</th>
+          <th>Lv 3 EUREKA</th>
+          <th>Lv 4 SPARK</th>
+          <th>Lv 5 FLOW</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Win Pump Base</td>
+          <td>400</td>
+          <td>2000</td>
+          <td>10000</td>
+          <td>20000</td>
+          <td>40000</td>
+        </tr>
+        <tr>
+          <td>Not Win Pump Base</td>
+          <td>100</td>
+          <td>500</td>
+          <td>2500</td>
+          <td>5000</td>
+          <td>10000</td>
+        </tr>
+        <tr>
+          <td>Holding SoulCast Bonus</td>
+          <td>5%</td>
+          <td>10%</td>
+          <td>15%</td>
+          <td>20%</td>
+          <td>25%</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -55,7 +117,7 @@
   }
 
   .banner {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     img {
       width: 100%;
@@ -76,7 +138,7 @@
     .nav_name {
       justify-content: center;
       flex: 1;
-      font-family: "Inter";
+      font-family: 'Inter';
       font-style: normal;
       font-weight: 700;
       font-size: 24px;
@@ -96,31 +158,39 @@
       border-bottom: 1px solid #dfdfce;
       margin-bottom: 10px;
       padding-bottom: 10px;
-      .bold{
+      .bold {
         font-weight: 600;
       }
     }
   }
-
-  .btn {
+  table {
+    border-collapse: collapse;
     width: 100%;
-    height: 48px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 2px solid #000;
-    background: #dadac6;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 26px;
-    border-radius: 45px;
-    font-family: "Inter";
+  }
+
+  th,
+  td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 8px;
+    &:first-child {
+      text-align: left; /* 设置第一列文本左对齐 */
+    }
+  }
+  th {
+    font-weight: 700;
+    text-align: center;
+    &:nth-child(1) {
+      text-align: left;
+    }
   }
 
   .sec {
     text-indent: 1em;
+  }
+  .everySec {
+    margin-left: 1em;
   }
 }
 </style>

@@ -19,34 +19,31 @@
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
       </div>
       <div @click="$router.push('/epoch_introduce')" class="epoch">
-        <img src="@/assets/banner_epoch.jpg" alt />
+        <img src="@/assets/weekly_leaderboard.png" alt />
       </div>
-      <h1 class="vSoulRank">Epoch Live Leaderboard</h1>
+      <h1 class="vSoulRank">Weekly Leaderboard</h1>
       <table>
         <thead>
           <tr>
             <th>Rank</th>
             <th>Prize</th>
             <th>Name</th>
-            <th>Pump vSOUL</th>
+            <th>vSOUL</th>
           </tr>
-          <tr style="backgroundColor: #51d27bb3;" >
+          <tr style="backgroundColor: #51d27bb3;">
             <td>{{ vSoulRank.rank }}</td>
-            <td >{{ vSoulPriceMap[vSoulRank.rank] || 0 }}</td>
+            <td>{{ vSoulPriceMap[vSoulRank.rank] || 0 }}</td>
             <td>{{ "You" }}</td>
-            <td>{{ +vSoulRank.vsoul }}</td>
+            <td>{{ vSoulRank.vsoul ? +vSoulRank.vsoul : 0 }}</td>
           </tr>
-          <tr v-for="item in vSoulRankList" :key="item.rank" >
+          <tr v-for="item in vSoulRankList" :key="item.rank">
             <td>{{ item.rank }}</td>
             <td>{{ vSoulPriceMap[item.rank] }}</td>
             <td class="ellipsis username">{{ item.userName }}</td>
             <td>{{ item.vsoul ? +item.vsoul : 0 }}</td>
           </tr>
-      
         </thead>
-        <tbody>
-
-        </tbody>
+        <tbody></tbody>
       </table>
       <div>
         <div>
@@ -261,17 +258,17 @@
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import AOS from "aos";
-import { getNFTLevel, levelImg, earnType } from "../../libs/target";
-import TabBar from "../../components/TabBar.vue";
-import Overlay from "../../components/Overlay.vue";
-import Replace from "../../components/Replace.vue";
-import { isShow } from "@/libs/isShow.js";
-import { convertToTargetTimeZone } from "@/utils/convertTime";
+import watch from './src/watch'
+import methods from './src/methods'
+import AOS from 'aos'
+import { getNFTLevel, levelImg, earnType } from '../../libs/target'
+import TabBar from '../../components/TabBar.vue'
+import Overlay from '../../components/Overlay.vue'
+import Replace from '../../components/Replace.vue'
+import { isShow } from '@/libs/isShow.js'
+import { convertToTargetTimeZone } from '@/utils/convertTime'
 export default {
-  name: "",
+  name: '',
   data() {
     return {
       getNFTLevel: getNFTLevel,
@@ -290,45 +287,45 @@ export default {
       WalletHistory: [],
       walletType: true,
       overlayshow: false,
-      WalletBalance: "",
-      PoolBalance: "",
+      WalletBalance: '',
+      PoolBalance: '',
       ReplaceShow: false,
-      VSoulBalance: "",
+      VSoulBalance: '',
       erID: 1,
       isPWA: false,
       Available: 0,
       showNoData: false, // vsoul页面没有历史数据展示图片
       showNoWallet: false, //wallet页面没有历史数据时展示
       vSoulRankList: [],
-      vSoulRank:{},
+      vSoulRank: {},
       vSoulPriceMap: {
-        "1": "$800",
-        "2": "$400",
-        "3": "$200",
-        "4": "$100",
-        "5": "$100",
-        "6": "$100",
-        "7": "$100",
-        "8": "$100",
-        "9": "$100",
-        "10": "$100",
+        1: '$50',
+        2: '$30',
+        3: '$20',
+        4: '$10',
+        5: '$10',
+        6: '$10',
+        7: '$10',
+        8: '$10',
+        9: '$10',
+        10: '$10'
       },
       walletTypeNmae: {
-        0: "Deposit",
-        1: "Withdraw",
-        2: "Compensation",
-        3: "Pump",
-        4: "Refund",
-        5: "Sell",
-        6: "Creartor Earnings"
+        0: 'Deposit',
+        1: 'Withdraw',
+        2: 'Compensation',
+        3: 'Pump',
+        4: 'Refund',
+        5: 'Sell',
+        6: 'Creartor Earnings'
       },
       TabList: [
         {
-          name: "vSOUL",
+          name: 'vSOUL',
           id: 1
         },
         {
-          name: "WALLET",
+          name: 'WALLET',
           id: 2
         }
 
@@ -339,26 +336,25 @@ export default {
       ],
       erList: [
         {
-          name: "Inventory",
+          name: 'Inventory',
           id: 1
         },
         {
-          name: "Pump",
+          name: 'Pump',
           id: 2
         }
       ],
-      NftList: [],
-      
-    };
+      NftList: []
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     isShow() {
-      return isShow;
+      return isShow
     },
     convertToTargetTimeZone() {
-      return convertToTargetTimeZone;
+      return convertToTargetTimeZone
     }
   },
   components: {
@@ -367,42 +363,42 @@ export default {
     Replace
   },
   created() {
-    let me = this;
+    let me = this
     if (this.$route.query.type == 1) {
-      this.TabActive = 1;
+      this.TabActive = 1
     }
-    this.updateEranRedPoint(false);
-    me.getVSoulHistory();
-    me.getVSoulBalance();
-    me.getBalance();
-    me.getVSoulRank();
+    this.updateEranRedPoint(false)
+    me.getVSoulHistory()
+    me.getVSoulBalance()
+    me.getBalance()
+    me.getVSoulRank()
     // me.BalanceOf();
     // me.getMintedNFTPage(1);
-    me.getWallectHistory();
+    me.getWallectHistory()
   },
-  mounted: async function() {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
+  mounted: async function () {
+    console.log('this：', this)
+    console.log('$route：', this.$route)
 
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
+      easing: 'ease-in-sine',
       delay: 100
-    });
-    console.log(this.$loginData);
-    this.isPWA = window.localStorage.getItem("isPWA") == "true";
-    window.addEventListener("scroll", this.scrollToTop);
+    })
+    console.log(this.$loginData)
+    this.isPWA = window.localStorage.getItem('isPWA') == 'true'
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
   },
   destroyed() {}
-};
+}
 </script>
 
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 </style>
