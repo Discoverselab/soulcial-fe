@@ -78,6 +78,7 @@
         </tr>
       </tbody>
     </table>
+    <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
 <script>
