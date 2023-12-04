@@ -17,11 +17,27 @@
       <div class="content" style="border: none;">
         <p>1. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
         <p>2. You can earn vSOUL by joining a Pump game, inviting friends to join a Pump game, and inviting friends to register:</p>
-        <p class="everySec">· 20 vSOUL for each invited friend</p>
-        <p class="everySec">· 100 vSOUL for each invited Pump game</p>
-        <p
-          class="everySec"
-        >· Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.</p>
+        <p class="everySec">
+          · 20 vSOUL for each invited friend
+          <span
+            class="canJump bold"
+            @click="jumpToInviteRegister"
+          >{{"Go to Invite->"}}</span>
+        </p>
+        <p class="everySec">
+          · 100 vSOUL for each invited Pump game
+          <span
+            class="canJump bold"
+            @click="jumpToInviteFriend"
+          >{{"Go to Invite->"}}</span>
+        </p>
+        <p class="everySec">
+          · Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.
+          <span
+            class="canJump bold"
+            @click="jumpToPumpGame"
+          >{{"Go to Pump->"}}</span>
+        </p>
       </div>
     </div>
     <table>
@@ -64,7 +80,79 @@
     </table>
   </div>
 </template>
-
+<script>
+import { get } from '@/http/http'
+import Overlay from '@/components/Overlay.vue'
+export default {
+  data() {
+    return {
+      NFT: null,
+      NFTDetail: null,
+      isShareMy: false,
+      UserInfo: null,
+      overlayshow: false
+    }
+  },
+  methods: {
+    jumpToPumpGame() {
+      this.$router.push(`/explore_details?id=${this.NFT.realTokenId}&path=`)
+    },
+    jumpToInviteFriend() {
+      this.$router.push(`/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`)
+    },
+    jumpToInviteRegister() {
+      this.$router.push(`invite`)
+    },
+    async getData() {
+      try {
+        this.overlayshow = true
+        let url = this.$api.nft.getNFTDetail + `?id=${this.NFT.realTokenId}`
+        const res = await get(url)
+        if (res.code === 200) {
+          this.NFTDetail = res.data
+          const isSame =
+            this.NFTDetail.mintUserAddress.toLocaleUpperCase() ===
+              this.$loginData.Auth_Token.toLocaleUpperCase() ||
+            this.NFTDetail.ownerAddress.toLocaleUpperCase() ===
+              this.$loginData.Auth_Token.toLocaleUpperCase()
+          if (isSame) {
+            this.isShareMy = true
+          }
+        }
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.overlayshow = false
+      }
+    },
+    getUserInfo() {
+      this.overlayshow = true
+      let url = this.$api.infor.getUserInfo
+      get(url)
+        .then(res => {
+          if (res.code === 200) {
+            this.UserInfo = res.data
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        .finally(() => {
+          this.overlayshow = false
+        })
+    }
+  },
+  created() {
+    this.NFT = JSON.parse(localStorage.getItem('NFT'))
+    this.getData()
+    this.getUserInfo()
+  },
+  components: {
+    Overlay
+  }
+}
+</script>
   <style lang="scss">
 * {
   box-sizing: border-box;
