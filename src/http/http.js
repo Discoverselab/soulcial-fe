@@ -28,6 +28,7 @@ axios.interceptors.response.use(
         if (
           response.data.code == 403 &&
           !response.config.url.includes('getMintedNFTPage') &&
+          !response.config.url.includes('connect/list') &&
           !response.config.url.includes('chat/list')
         ) {
           clearInfo()
