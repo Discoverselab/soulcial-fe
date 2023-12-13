@@ -176,14 +176,27 @@
       }
     }
   }
-  .bridge {
+  .earned_money {
+    display: inline-block;
     background: #dfdfce;
-    border: none;
-    font-size: 16px;
     padding: 10px 8px;
-    font-weight: 700;
     border-radius: 4px;
     cursor: pointer;
+    .name {
+      width: 48px;
+      color: #000;
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 600;
+      margin-right: 24px;
+    }
+    .num {
+      color: #000;
+      text-align: right;
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 700;
+    }
   }
   .earn_list_title {
     padding-bottom: 10px;

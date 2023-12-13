@@ -98,8 +98,11 @@
           <p class="list_name" style="color:#62625F">Balance</p>
           <p class="er_balance">{{ WalletBalance }} {{ $network }}</p>
         </div>
-        <div style="text-align: right;" v-if="!isPWA">
-          <button @click="jumpOP" class="bridge">Bridge</button>
+        <div style="text-align: right;">
+          <div class="earned_money" style="text-align: right;">
+            <span class="name">earned</span>
+            <span class="num">{{ earnedMoney | formatNumber }} {{ $network }}</span>
+          </div>
         </div>
 
         <!-- <div class="earned">
@@ -298,6 +301,7 @@ export default {
       showNoWallet: false, //wallet页面没有历史数据时展示
       vSoulRankList: [],
       vSoulRank: {},
+      earnedMoney: null,
       vSoulPriceMap: {
         1: '$50',
         2: '$30',
@@ -373,6 +377,7 @@ export default {
     me.getVSoulBalance()
     me.getBalance()
     me.getVSoulRank()
+    me.getEarnMoney()
     // me.BalanceOf();
     // me.getMintedNFTPage(1);
     me.getWallectHistory()

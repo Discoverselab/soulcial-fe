@@ -63,7 +63,8 @@ export default {
     getFansRank: `${commonApi}/home/getFansRank`, //获取粉丝排行榜
     pictureUpload: `${commonApi}/AIGC/pictureUpload`, //上传图片
     getSearchList: `${commonApi}/explor/indexSearch`, // 首页搜索
-    getVSoulRank: `${commonApi}/wallect/getVSoulRank` //vSOUL排行榜
+    getVSoulRank: `${commonApi}/wallect/getVSoulRank`, //vSOUL排行榜
+    getEarnedMoney: `${commonApi}/wallect/getCurrentUserEarnings` // 获取用户当前赚取的钱
   },
   chat: {
     getUserMessage: `${commonApi}/message/getUserMessage`,
