@@ -85,6 +85,11 @@
                     :style="getSoulSbtiStyle(item.soul)"
                   >{{ item.soul || '-' }}</p>
                 </div>
+                <!-- pump进度 -->
+                <div class="schedule">
+                  <img class="love" src="@/assets/love.png" alt />
+                  <div class="num">{{ `${item.pickCount}/4`}}</div>
+                </div>
                 <!-- <div class="love">
               <img src="../../assets/love.png" alt="" />
               {{ item.likes }}
@@ -140,6 +145,11 @@
                     :style="getSoulSbtiStyle(item.soul)"
                     v-else
                   >{{ item.soul || '-' }}</p>
+                </div>
+                <!-- pump进度 -->
+                <div class="schedule">
+                  <img class="love" src="@/assets/love.png" alt />
+                  <div class="num">{{ `${item.pickCount}/4`}}</div>
                 </div>
                 <!-- <div class="love">
               <img src="../../assets/love.png" alt="" />

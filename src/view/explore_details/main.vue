@@ -202,7 +202,8 @@
         </p>
         <p class="pumpGame">
           One Pumper will be randomly chosen as the winner, collecting SoulCast NFT.
-          <br />The other three Pumpers will receive a full refund plus an additional 4% as compensation.
+          <br />
+          The other three Pumpers will receive a full refund plus an additional Current Compensation: {{`${refundNum}%`}} as compensation
           <br />
           <span @click="dialogShow = true">Learn more about Pump</span>
         </p>
@@ -218,7 +219,10 @@
               <p class="name">{{ pickIsUser(0) ? 'You' : NFTPickInfo.indexUserName0 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(0)">
-              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">
+                Pump
+                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+              </button>
             </div>
             <span class="number">#0</span>
           </div>
@@ -233,7 +237,10 @@
               <p class="name">{{ pickIsUser(1) ? 'You' : NFTPickInfo.indexUserName1 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(1)">
-              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">
+                Pump
+                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+              </button>
             </div>
             <span class="number">#1</span>
           </div>
@@ -248,7 +255,10 @@
               <p class="name">{{ pickIsUser(2) ? 'You' : NFTPickInfo.indexUserName2 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(2)">
-              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">
+                Pump
+                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+              </button>
             </div>
             <span class="number">#2</span>
           </div>
@@ -263,7 +273,10 @@
               <p class="name">{{ pickIsUser(3) ? 'You' : NFTPickInfo.indexUserName3 }}</p>
             </div>
             <div class="pick" v-else @click="picksTxH(3)">
-              <button :class="{ disabledBUtton: isPick() || gray }">Pump</button>
+              <button :class="{ disabledBUtton: isPick() || gray }">
+                Pump
+                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+              </button>
             </div>
             <span class="number">#3</span>
           </div>
@@ -387,15 +400,19 @@
         <p class="content end">The Pump game lets you collect SoulCast NFTs and earn vSOULs.</p>
         <p class="introduce_title">How to Pump</p>
         <p class="content">1. Choose a slot from #0, #1, #2, and #3.</p>
-        <p class="content">2. Confirm your Pump, and the payment will be deducted from your wallet.</p>
+        <p
+          class="content"
+        >2. Confirm your Pump, and the payment (at least 0.01 ETH) will be deducted from your wallet.</p>
         <p class="content">
           3. Once all four slots are filled, one Pumper will be randomly chosen as the winner, collecting
           the SoulCast NFT.
         </p>
-        <p class="content end">
-          4. The other three Pumpers will receive a full refund plus an additional 4% in ETH as
-          compensation.
-        </p>
+        <p
+          class="content"
+        >4. The other three Pumpers will receive a full refund plus an additional ETH as compensation. The 1st Pumper will get 10%, the 2nd Pumper will get 6%, the 3rd and 4th Pumper will get 4%.</p>
+        <p
+          class="content end"
+        >5. If you win 3 Pump in a row, you can receive a full refund in the form of ETH.</p>
         <p class="introduce_title">Features</p>
         <p
           class="content"
@@ -444,6 +461,7 @@
       @close="PicksShow = false"
       :PicksShow="PicksShow"
       :marketAddress="marketAddress"
+      :refundNum="refundNum"
     ></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
     <van-dialog
@@ -497,6 +515,7 @@ export default {
   name: 'explore_details',
   data() {
     return {
+      refundNum: null,
       loginInfo: '',
       isShareMy: false,
       dialogShow: false,

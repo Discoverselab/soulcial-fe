@@ -274,3 +274,17 @@ export const fetchBalance = async () => {
   }
   return balanceRemain
 }
+// 是否是旧的交易所合约地址
+export const isOldMarketAddress = marketAddress => {
+  const oldMarketAddress = [
+    '0xA2a7DBD81B1935e14C3dFBed8D5446FDA815C291',
+    '0x1aa7171e9add41f0313ce09308cef70c07a58c87'
+  ]
+  const upperOldMarketAddress = oldMarketAddress.map(item => item.toLocaleUpperCase())
+  const num = upperOldMarketAddress.indexOf(marketAddress.toLocaleUpperCase())
+  if (num > -1) {
+    return true
+  } else {
+    return false
+  }
+}

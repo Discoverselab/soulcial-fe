@@ -1,243 +1,243 @@
 .explore {
-    min-height: 100vh;
-    padding: 26px 20px 100px 20px;
-    box-sizing: border-box;
+  min-height: 100vh;
+  padding: 26px 20px 100px 20px;
+  box-sizing: border-box;
 
-    img[lazy="loading"] {
-        width: 164px !important;
-        height: 218px !important;
+  img[lazy='loading'] {
+    width: 164px !important;
+    height: 218px !important;
+  }
+
+  .TabCont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .Tab_left {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      justify-content: space-between;
+      .Tab_list {
+        font-family: 'DINCond-Bold';
+        font-weight: 500;
+        height: 30px;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: rgba($color: #000000, $alpha: 0.2);
+        line-height: 30px;
+        cursor: pointer;
+        &:nth-child(1) {
+          letter-spacing: -1.2px;
+        }
+        &:nth-child(2),
+        &:nth-child(3) {
+          letter-spacing: -0.96px;
+        }
+
+        &.Tab_list_Active {
+          font-size: 30px;
+          color: #000;
+        }
+      }
     }
 
-    .TabCont {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
+    .Tab_right {
+      margin-left: 39px;
+      width: 52px;
+      display: flex;
+      img {
+        cursor: pointer;
+        display: inline-block;
+        width: 20px;
+        &.searchImg {
+          margin-left: 12px;
+        }
+      }
+    }
+  }
 
-        .Tab_left {
+  .nft_cont {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .cont_cnet {
+      width: 50%;
+
+      &.cont_left {
+        .Nft_list {
+          margin-bottom: 46px;
+          cursor: pointer;
+        }
+      }
+
+      &.cont_right {
+        padding-top: 60px;
+
+        .Nft_list {
+          cursor: pointer;
+          margin-bottom: 40px;
+        }
+      }
+
+      .img_icon {
+        width: 164px;
+        // height: 218.66px;
+        text-align: center;
+        position: relative;
+
+        img {
+          max-height: 218px;
+          max-width: 164px;
+          // height: 100%;
+          object-fit: fill;
+        }
+
+        .match {
+          position: absolute;
+          right: 0;
+          top: 0;
+          text-align: right;
+
+          .center {
+            font-family: 'DINCond-Bold';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 35px;
+          }
+
+          .name {
+            font-family: 'DINCond-Bold';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .bottom_infor {
+        position: relative;
+        width: 165px;
+        height: 80px;
+        margin-top: -40px;
+
+        .grade_price {
+          position: absolute;
+          top: 5px;
+          left: 0;
+
+          .grade {
             display: flex;
             align-items: center;
-            flex: 1;
-            justify-content: space-between;
-            .Tab_list {
-                font-family: "DINCond-Bold";
+
+            img {
+              display: block;
+              margin-right: 3px;
+              height: auto;
+              width: 12px;
+            }
+
+            .grade_name {
+              font-family: 'DINCond-Bold';
+              font-weight: 500;
+              font-size: 14px;
+              text-transform: uppercase;
+              color: #000000;
+              span {
+                font-family: 'DINCond-Bold';
                 font-weight: 500;
-                height: 30px;
-                font-size: 24px;
-                text-transform: uppercase;
-                color: rgba($color: #000000, $alpha: 0.2);
-                line-height: 30px;
-                cursor: pointer;
-                &:nth-child(1) {
-                    letter-spacing: -1.2px;
-                }
-                &:nth-child(2),&:nth-child(3) {
-                    letter-spacing: -0.96px;
-                }
-
-                &.Tab_list_Active {
-                    font-size: 30px;
-                    color: #000;
-                }
+                font-size: 14px;
+                text-transform: none;
+              }
             }
+          }
+
+          .price {
+            font-family: 'DINCond-Bold';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 32px;
+            text-transform: uppercase;
+
+            &.priceinfp {
+              font-size: 28px;
+            }
+          }
         }
-
-        .Tab_right {
-            margin-left: 39px;
-            width: 52px;
-            display: flex;
-            img {
-                cursor: pointer;
-                display: inline-block;
-                width: 20px;
-                &.searchImg {
-                    margin-left: 12px;
-                }
-            }
-        }
-    }
-
-    .nft_cont {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-
-        .cont_cnet {
-            width: 50%;
-
-            &.cont_left {
-                .Nft_list {
-                    margin-bottom: 46px;
-                    cursor: pointer;
-                }
-            }
-
-            &.cont_right {
-                padding-top: 60px;
-
-                .Nft_list {
-                    cursor: pointer;
-                    margin-bottom: 40px;
-                }
-            }
-
-            .img_icon {
-                width: 164px;
-                // height: 218.66px;
-                text-align: center;
-                position: relative;
-
-                img {
-                    max-height: 218px;
-                    max-width: 164px;
-                    // height: 100%;
-                    object-fit: fill;
-                }
-
-                .match {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    text-align: right;
-
-                    .center {
-                        font-family: "DINCond-Bold";
-                        font-style: normal;
-                        font-weight: 700;
-                        font-size: 35px;
-                    }
-
-                    .name {
-                        font-family: "DINCond-Bold";
-                        font-style: normal;
-                        font-weight: 700;
-                        font-size: 16px;
-                        text-transform: uppercase;
-                    }
-                }
-            }
-
-            .bottom_infor {
-                position: relative;
-                width: 165px;
-                height: 80px;
-                margin-top: -40px;
-
-                .grade_price {
-                    position: absolute;
-                    top: 5px;
-                    left: 0;
-
-                    .grade {
-                        display: flex;
-                        align-items: center;
-
-                        img {
-                            display: block;
-                            margin-right: 3px;
-                            height: auto;
-                            width: 12px;
-                        }
-
-                        .grade_name {
-                            font-family: "DINCond-Bold";
-                            font-weight: 500;
-                            font-size: 14px;
-                            text-transform: uppercase;
-                            color: #000000;
-                            span {
-                                font-family: "DINCond-Bold";
-                                font-weight: 500;
-                                font-size: 14px;
-                            text-transform: none;
-
-                            }
-                        }
-                    }
-
-                    .price {
-                        font-family: "DINCond-Bold";
-                        font-style: normal;
-                        font-weight: 500;
-                        font-size: 32px;
-                        text-transform: uppercase;
-
-                        &.priceinfp {
-                            font-size: 28px;
-                        }
-                    }
-                }
-
-                .love {
-                    display: flex;
-                    align-items: center;
-                    position: absolute;
-                    right: 5px;
-                    bottom: 10px;
-                    font-family: "DINCond-Bold";
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 14px;
-                    text-transform: uppercase;
-
-                    img {
-                        display: block;
-                        width: 12.25px;
-                        margin-right: 3px;
-                        margin-top: 3px;
-                    }
-                }
-            }
-        }
-    }
-    .activity_list {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 24px;
-        cursor: pointer;
-        .left {
-            img {
-                width: 44px;
-                height: 44px;
-            }
-            .nftImg {
-                border: 1px solid #DFDFCE;
-            }
-            .userImg {
-                border: 1px solid #000;
-                border-radius: 50%;
-            }
-        }
-        .right {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 240px;
-            font-family: Inter;
+        // pump进度
+        .schedule {
+          display: flex;
+          position: absolute;
+          right: 5px;
+          bottom: 8px;
+          .love {
+            width: 14px;
+            height: 14px;
+            margin-right: 5px;
+          }
+          .num {
             color: #000;
+            font-family: DINCond-Bold;
             font-size: 14px;
-            .gray {
-                color: rgba(0, 0, 0, .6);
-            }
-            .order {
-                font-weight: 600;
-            }
-            .price {
-                color: #5cd685;
-                font-weight: 700;
-            }
-            .time {
-                font-size: 10px;
-                font-weight: 500;
-                opacity: 0.6;
-            }
+            font-weight: 500;
+            letter-spacing: -0.28px;
+            text-transform: uppercase;
+          }
         }
+      }
     }
+  }
+  .activity_list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    cursor: pointer;
+    .left {
+      img {
+        width: 44px;
+        height: 44px;
+      }
+      .nftImg {
+        border: 1px solid #dfdfce;
+      }
+      .userImg {
+        border: 1px solid #000;
+        border-radius: 50%;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 240px;
+      font-family: Inter;
+      color: #000;
+      font-size: 14px;
+      .gray {
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .order {
+        font-weight: 600;
+      }
+      .price {
+        color: #5cd685;
+        font-weight: 700;
+      }
+      .time {
+        font-size: 10px;
+        font-weight: 500;
+        opacity: 0.6;
+      }
+    }
+  }
 }
 
 .background {
-    background-image: url("../../assets/nft_background.png");
-    background-size: 100% auto; /* 100% 宽度，高度自适应 */
-    background-position: center bottom; /* 图片水平居中，垂直底部对齐 */
-    background-repeat: no-repeat; /* 不重复平铺背景图片 */
+  background-image: url('../../assets/nft_background.png');
+  background-size: 100% auto; /* 100% 宽度，高度自适应 */
+  background-position: center bottom; /* 图片水平居中，垂直底部对齐 */
+  background-repeat: no-repeat; /* 不重复平铺背景图片 */
 }

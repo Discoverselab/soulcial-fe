@@ -317,7 +317,8 @@ export default {
         3: 'Pump',
         4: 'Refund',
         5: 'Sell',
-        6: 'Creartor Earnings'
+        6: 'Creartor Earnings',
+        7: 'Referral Reward'
       },
       TabList: [
         {

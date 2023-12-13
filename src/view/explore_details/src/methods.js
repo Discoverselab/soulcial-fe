@@ -334,13 +334,12 @@ export default {
       this.overlayshow = true
       let url =
         this.$api.nft.getNFTDetail + `?id=${this.$route.query.id || this.$route.params.realTokenId}`
-
       const res = await get(url)
-
       if (res.code === 200) {
         this.NFTDetail = res.data
         let item = res.data
         this.marketAddress = res.data.contractMarketAddress
+        this.refundNum = res.data.nextPumpRate
         this.hasMarketAddress = true
         this.values.push(item.charisma)
         this.values.push(item.courage)

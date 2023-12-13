@@ -14,7 +14,13 @@
           <div class="number">{{ i + 1 }}</div>
           <div class="code" :class="{ disabled: item.used === 1 }">{{ item.inviteCode }}</div>
           <div class="copy" :class="{ disabled: item.used === 1 }">
-            <img @click="copy(item.inviteCode, '.copy-button')" class="copy-button" round src="../../assets//copy1.png" alt />
+            <img
+              @click="copy(item.inviteCode, '.copy-button')"
+              class="copy-button"
+              round
+              src="../../assets//copy1.png"
+              alt
+            />
           </div>
         </div>
       </van-skeleton>
@@ -26,7 +32,13 @@
         <div class="code_nubmer">
           <div class="code linkcode">{{ inviteLink }}</div>
           <div class="copy">
-            <img @click="copy(inviteLink, '.copy-link')" class="copy-button copy-link" round src="../../assets//copy1.png" alt />
+            <img
+              @click="copy(inviteLink, '.copy-link')"
+              class="copy-button copy-link"
+              round
+              src="../../assets//copy1.png"
+              alt
+            />
           </div>
         </div>
       </van-skeleton>
@@ -38,35 +50,46 @@
       </div>
       <div class="lay">
         <div class="point"></div>
-        <div class="desc">If you hold SoulCast NFT, both you and your friend will earn 20 vSOUL as reference reward.</div>
+        <div class="desc">
+          You will get
+          <span class="keynote">0.5%</span>
+          in ETH each time your friend Pumps SoulCast NFT.
+        </div>
+      </div>
+      <div class="lay">
+        <div class="point"></div>
+        <div class="desc">
+          If you hold SoulCast NFT, both you and your friend will earn
+          <span class="keynote">20 vSOUL</span>
+          as referral reward.
+        </div>
       </div>
     </div>
     <button class="check" @click="jumpEarn">check your earnings</button>
   </div>
 </template>
 <script>
-import methods from "./src/methods";
-import { website } from "@/http/api.js";
+import methods from './src/methods'
+import { website } from '@/http/api.js'
 export default {
   data() {
     return {
       overlayshow: false,
       inviteCodeList: [],
       code: '',
-      inviteLink: '',
-    };
+      inviteLink: ''
+    }
   },
   created() {
+    const data = JSON.parse(localStorage.getItem('userInfo'))
+    this.code = data.superInviteCode.split('-')[1]
+    this.inviteLink = `${website}/#/t/${this.code}`
 
-    const data = JSON.parse(localStorage.getItem("userInfo"));
-    this.code = data.superInviteCode.split("-")[1];
-    this.inviteLink = `${website}/#/t/${this.code}`;
-
-    this.getInviteCodeList();
+    this.getInviteCodeList()
   },
   methods: methods
-};
+}
 </script>
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 </style>

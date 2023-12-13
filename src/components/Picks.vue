@@ -14,7 +14,7 @@
                 <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
                 <p class="TOKENid">#{{ NFTDetail.realTokenId }}</p>
               </div>
-              <p class="grade_right">{{ NFTDetail.price | formatNumber  }} {{ $network }}</p>
+              <p class="grade_right">{{ NFTDetail.price | formatNumber }} {{ $network }}</p>
             </div>
             <div class="right_bot">
               <div class="bot_left">
@@ -26,8 +26,14 @@
         </div>
         <div class="EnterPrice">
           <div class="input_cont">
-            <input readonly oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
-              @blur="price = $event.target.value" class="cont_input" v-model="NFTDetail.price" type="text" />
+            <input
+              readonly
+              oninput="value=value.replace(/^([0-9-]\d*\.?\d{0,10})?.*$/,'$1')"
+              @blur="price = $event.target.value"
+              class="cont_input"
+              v-model="NFTDetail.price"
+              type="text"
+            />
             <p class="unit">
               <img :src="require(`../assets/${$network}.png`)" alt />
               {{ $network }}
@@ -35,17 +41,15 @@
           </div>
           <p class="walletBalance" style="color: #e03131;" v-if="WalletBalance < NFTDetail.price">
             Insufficient {{ $network }} balance.
-            <span class="link" @click="jump">
-              Go to Deposit
-            </span>
+            <span class="link" @click="jump">Go to Deposit</span>
           </p>
           <p class="walletBalance">
-            Potential Compensation (4%) :
-            <span>{{ (NFTDetail.price * 0.04) | formatNumber }} {{ $network }}</span>
+            Current Potential Compensation ({{ `${refundNum}%` }}) :
+            <span>{{ (NFTDetail.price * convertPercentToFloat(refundNum)) | formatNumber }} {{ $network }}</span>
           </p>
           <p class="walletBalance">
             Next Listing Price :
-            <span>{{ (NFTDetail.price * 1.10) | formatNumber }} {{ $network }}</span>
+            <span>{{ (NFTDetail.price * 1.15) | formatNumber }} {{ $network }}</span>
           </p>
         </div>
         <div class="cudset_but">
@@ -68,16 +72,16 @@
   </div>
 </template>
 <script>
-import Overlay from "../components/Overlay.vue";
-import Sorl from "../libs/testEthABI.json";
-import MarketABI from "../libs/MarketABI.json";
-import wethABI from "../libs/weth.json";
-import { nftAddress, onParticle, goParticle } from "../libs/common.js";
-import { ethers } from "ethers";
-import Web3 from "web3";
-import { get, post } from "@/http/http";
-import { levelImg, getNFTLevel } from "../libs/target";
-import { addVTNetwork } from "@/libs/addVTNetwork.js";
+import Overlay from '../components/Overlay.vue'
+import Sorl from '../libs/testEthABI.json'
+import MarketABI from '../libs/MarketABI.json'
+import wethABI from '../libs/weth.json'
+import { nftAddress, onParticle, goParticle } from '../libs/common.js'
+import { ethers } from 'ethers'
+import Web3 from 'web3'
+import { get, post } from '@/http/http'
+import { levelImg, getNFTLevel } from '../libs/target'
+import { addVTNetwork } from '@/libs/addVTNetwork.js'
 export default {
   props: {
     NFTDetail: Object,
@@ -85,174 +89,172 @@ export default {
     pickIndex: Number,
     PoolBalance: String,
     WalletBalance: String,
-    marketAddress: String
+    marketAddress: String,
+    refundNum: String
   },
   data: function () {
-    let _clientH = document.documentElement.clientHeight;
+    let _clientH = document.documentElement.clientHeight
     return {
       overlayshow: false,
       // dialogShow: false,
-      price: "",
+      price: '',
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
-      isSharePick: false,
-    };
+      isSharePick: false
+    }
   },
   mounted() {
     if (this.$route.meta.isSharePick) {
-      this.isSharePick = true;
+      this.isSharePick = true
     }
   },
   computed: {
     goParticle() {
-      return goParticle;
-    },
+      return goParticle
+    }
   },
   components: { Overlay },
   watch: {},
   methods: {
-   
-    
+    convertPercentToFloat(refundNum) {
+      const percentNumber = parseFloat(refundNum) / 100
+      return percentNumber
+    },
     dialog_confirm() {
-      this.$router.push("/earn");
+      this.$router.push('/earn')
     },
     close() {
-      this.$emit("close", true);
+      this.$emit('close', true)
     },
     getPickInfo() {
-      let url =
-        this.$api.nft.getNFTPickInfo + `?tokenId=${this.NFTDetail.realTokenId}`;
-      let me = this;
+      let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.NFTDetail.realTokenId}`
+      let me = this
       get(url)
         .then(res => {
           if (res.code === 200) {
             if (res.data[`indexUserName${me.pickIndex}`]) {
-              this.$parent.NFTPickInfo = res.data;
-              this.$parent.onlyPickOnce();
-              me.close();
-              me.overlayshow = false;
+              this.$parent.NFTPickInfo = res.data
+              this.$parent.onlyPickOnce()
+              me.close()
+              me.overlayshow = false
             } else {
               setTimeout(() => {
-                me.getPickInfo();
-              }, 3000);
+                me.getPickInfo()
+              }, 3000)
             }
           }
         })
         .catch(error => {
-          console.error(error);
-          this.$toast("getPickInfo error");
-          this.overlayshow = false;
-        });
+          console.error(error)
+          this.$toast('getPickInfo error')
+          this.overlayshow = false
+        })
     },
     async jcHash(txHash) {
-      const web3 =
-        this.$loginData.loginType == 0
-          ? new Web3(window.ethereum)
-          : window.web3;
+      const web3 = this.$loginData.loginType == 0 ? new Web3(window.ethereum) : window.web3
       web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
         if (error) {
-          console.log("🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:", error);
-          this.overlayshow = false;
+          console.log('🔥🔥🔥🚀 ~ file: Picks.vue:142 ~ error:', error)
+          this.overlayshow = false
         } else if (receipt && receipt.status === true) {
-          console.log("链上交易已执行完毕");
-          this.getPickInfo();
+          console.log('链上交易已执行完毕')
+          this.getPickInfo()
           if (this.isSharePick) {
-            this.pickByInviteCode();
+            this.pickByInviteCode()
           }
         } else {
           setTimeout(() => {
-            this.jcHash(txHash);
-            console.log("链上交易未执行完毕");
-          }, 3000);
+            this.jcHash(txHash)
+            console.log('链上交易未执行完毕')
+          }, 3000)
         }
-      });
+      })
     },
     // 使用邀请码pick
     pickByInviteCode() {
-      const superInviteCode = this.$route.params.code;
-      let url = this.$api.infor.pickByInviteCode;
+      const superInviteCode = this.$route.params.code
+      let url = this.$api.infor.pickByInviteCode
       let data = {
         inviteCode: superInviteCode
-      };
+      }
       post(url, data, true)
-        .then(res => { })
-        .catch(error => { })
-        .finally(() => { });
+        .then(res => {})
+        .catch(error => {})
+        .finally(() => {})
     },
     // IFBalance() {
     //   return Number(this.PoolBalance) > 0;
     // },
     async save() {
-      this.overlayshow = true;
+      this.overlayshow = true
       if (this.$loginData.loginType == 0) {
-        await addVTNetwork(this.getApproved, this.getApproved);
+        await addVTNetwork(this.getApproved, this.getApproved)
       } else {
         if (window.particle) {
-          this.getApproved();
+          this.getApproved()
         } else {
-          const curParticle = JSON.parse(window.sessionStorage.getItem("particle"));
+          const curParticle = JSON.parse(window.sessionStorage.getItem('particle'))
           if (curParticle) {
-            onParticle(this.getApproved);
+            onParticle(this.getApproved)
           }
         }
       }
     },
     async getApproved() {
-      this.overlayshow = true;
+      this.overlayshow = true
       try {
-        this.$loginData.loginType == 1 ? this.particlePay() : this.toPay();
+        this.$loginData.loginType == 1 ? this.particlePay() : this.toPay()
       } catch (error) {
-        this.overlayshow = false;
-        this.$toast(error);
-        console.error(error);
+        this.overlayshow = false
+        this.$toast(error)
+        console.error(error)
       }
     },
     // particle交易
     async particlePay() {
-      const contract = new window.web3.eth.Contract(MarketABI, this.marketAddress);
-      this.handlePickItem(contract);
+      const contract = new window.web3.eth.Contract(MarketABI, this.marketAddress)
+      this.handlePickItem(contract)
     },
     // metatask交易
     async toPay() {
-      const web3 = new Web3(window.ethereum);
-      var myContract = new web3.eth.Contract(MarketABI, this.marketAddress);
-      this.handlePickItem(myContract);
+      const web3 = new Web3(window.ethereum)
+      var myContract = new web3.eth.Contract(MarketABI, this.marketAddress)
+      this.handlePickItem(myContract)
     },
     handlePickItem(contract) {
-      let me = this;
-      const tokenId = this.NFTDetail.realTokenId;
-      const value = ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex;
+      let me = this
+      const tokenId = this.NFTDetail.realTokenId
+      const value = ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex
       contract.methods
         .pickItem(nftAddress, tokenId, this.pickIndex)
         .send({ from: this.$loginData.Auth_Token, value: value })
-        .on("transactionHash", function (hash) {
-          console.log("🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:", hash);
+        .on('transactionHash', function (hash) {
+          console.log('🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:', hash)
           // 交易已发送，可以显示交易哈希或执行其他操作
-          me.jcHash(hash);
+          me.jcHash(hash)
         })
-        .on("error", function (error) {
-          console.error("🔥🔥🔥🚀 ~ file: Picks.vue:218 ~ error:", error);
+        .on('error', function (error) {
+          console.error('🔥🔥🔥🚀 ~ file: Picks.vue:218 ~ error:', error)
           if (me.$loginData.loginType == 1) {
             // onParticle(me.getApproved)
           }
-          me.overlayshow = false;
+          me.overlayshow = false
           if (error.code === 4001) {
-            me.$toast("Signature denied");
+            me.$toast('Signature denied')
           } else {
-            me.$toast("Transaction failed");
+            me.$toast('Transaction failed')
           }
-        });
+        })
     },
     jump() {
       if (this.$loginData.loginType == 0) {
-        window.open('https://app.optimism.io/bridge/deposit', '_blank');
+        window.open('https://app.optimism.io/bridge/deposit', '_blank')
       } else {
         this.goParticle()
       }
-
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .Picks {
@@ -274,7 +276,7 @@ export default {
   .fee_dint {
     color: #333;
     font-size: 16px;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 600;
     font-style: normal;
     margin-bottom: 20px;
@@ -301,7 +303,7 @@ export default {
     .title {
       color: #000;
       text-align: center;
-      font-family: "Inter";
+      font-family: 'Inter';
       font-size: 20px;
       font-style: normal;
       font-weight: 900;
@@ -367,7 +369,7 @@ export default {
             }
 
             .grade_name {
-              font-family: "Inter";
+              font-family: 'Inter';
               font-weight: 600;
               font-size: 16px;
               text-transform: uppercase;
@@ -430,7 +432,7 @@ export default {
           border-radius: 10px;
           border: 2px solid #dfdfce;
           background: #fff;
-          font-family: "Inter";
+          font-family: 'Inter';
           font-size: 18px;
           font-style: normal;
           font-weight: 600;
@@ -448,7 +450,7 @@ export default {
           background: #000;
           display: flex;
           align-items: center;
-          font-family: "Inter";
+          font-family: 'Inter';
           font-size: 14px;
           font-style: normal;
           font-weight: 600;
@@ -466,14 +468,14 @@ export default {
       .walletBalance {
         margin-top: 5px;
         color: #62625f;
-        font-family: "Inter";
+        font-family: 'Inter';
         font-size: 12px;
         font-weight: 600;
 
         &:first-of-type {
           margin-top: 15px;
         }
-        
+
         .link {
           color: #e03131;
           text-decoration: underline;
@@ -484,7 +486,6 @@ export default {
           // margin-top: 15px;
           color: #000;
         }
-
       }
     }
 
@@ -526,7 +527,7 @@ export default {
         text-transform: uppercase;
         border: 2px solid #000000;
         border-radius: 45px;
-        font-family: "Inter";
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 700;
         font-size: 18px;
@@ -537,7 +538,7 @@ export default {
         color: #000;
         text-align: center;
         font-size: 12px;
-        font-family: "Inter";
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 600;
         margin-top: 20px;
@@ -618,7 +619,7 @@ export default {
   .van-dialog__header {
     text-align: center;
     font-size: 20px;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
     text-transform: uppercase;
