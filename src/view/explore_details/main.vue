@@ -203,7 +203,8 @@
         <p class="pumpGame">
           One Pumper will be randomly chosen as the winner, collecting SoulCast NFT.
           <br />
-          The other three Pumpers will receive a full refund plus an additional Current Compensation: {{`${refundNum}%`}} as compensation
+          The other three Pumpers will receive a full refund plus an additional compensation.
+          Current Compensation: {{`${refundNum}%`}}
           <br />
           <span @click="dialogShow = true">Learn more about Pump</span>
         </p>
@@ -221,7 +222,7 @@
             <div class="pick" v-else @click="picksTxH(0)">
               <button :class="{ disabledBUtton: isPick() || gray }">
                 Pump
-                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+                <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
             <span class="number">#0</span>
@@ -239,7 +240,7 @@
             <div class="pick" v-else @click="picksTxH(1)">
               <button :class="{ disabledBUtton: isPick() || gray }">
                 Pump
-                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+                <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
             <span class="number">#1</span>
@@ -257,7 +258,7 @@
             <div class="pick" v-else @click="picksTxH(2)">
               <button :class="{ disabledBUtton: isPick() || gray }">
                 Pump
-                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+                <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
             <span class="number">#2</span>
@@ -275,7 +276,7 @@
             <div class="pick" v-else @click="picksTxH(3)">
               <button :class="{ disabledBUtton: isPick() || gray }">
                 Pump
-                <span class="refundNum">{{ `+ ${refundNum}%` }}</span>
+                <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
             <span class="number">#3</span>

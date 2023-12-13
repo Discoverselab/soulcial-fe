@@ -48,7 +48,7 @@
             <span>{{ (NFTDetail.price * convertPercentToFloat(refundNum)) | formatNumber }} {{ $network }}</span>
           </p>
           <p class="walletBalance">
-            Next Listing Price :
+            Next Listing Price (15%):
             <span>{{ (NFTDetail.price * 1.15) | formatNumber }} {{ $network }}</span>
           </p>
         </div>
