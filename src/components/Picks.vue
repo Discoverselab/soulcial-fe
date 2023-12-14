@@ -92,7 +92,8 @@ export default {
     WalletBalance: String,
     marketAddress: String,
     refundNum: String,
-    contractMarketVersion: String
+    contractMarketVersion: String,
+    inviteAdress: String
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight
@@ -166,7 +167,7 @@ export default {
           console.log('链上交易已执行完毕')
           this.getPickInfo()
           if (this.isSharePick) {
-            this.pickByInviteCode()
+            // this.pickByInviteCode() // 通过邀请码赚取100积分
           }
         } else {
           setTimeout(() => {
@@ -232,7 +233,7 @@ export default {
       const tokenId = this.NFTDetail.realTokenId
       const value = ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex
       contract.methods
-        .pickItem(nftAddress, tokenId, this.pickIndex)
+        .pickItem(nftAddress, tokenId, this.pickIndex, this.inviteAdress)
         .send({ from: this.$loginData.Auth_Token, value: value })
         .on('transactionHash', function (hash) {
           console.log('🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:', hash)

@@ -125,6 +125,7 @@ export default {
 
       if (res.code === 200) {
         this.NFTDetail = res.data
+        this.isOld = res.data.contractVersion === '3' ? false : true
         this.marketAddress = res.data.contractMarketAddress
       }
 

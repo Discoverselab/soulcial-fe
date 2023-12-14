@@ -100,7 +100,7 @@
         </div>
         <div style="text-align: right;">
           <div class="earned_money" style="text-align: right;">
-            <span class="name">earned</span>
+            <span class="name">Earned</span>
             <span class="num">{{ earnedMoney | formatNumber }} {{ $network }}</span>
           </div>
         </div>

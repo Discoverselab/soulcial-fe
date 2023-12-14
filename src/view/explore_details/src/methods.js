@@ -341,6 +341,7 @@ export default {
         this.marketAddress = res.data.contractMarketAddress
         this.refundNum = res.data.nextPumpRate
         this.contractMarketVersion = res.data.contractVersion
+        this.inviteAdress = res.data.inviteAdress
         this.hasMarketAddress = true
         this.values.push(item.charisma)
         this.values.push(item.courage)

@@ -134,7 +134,6 @@ import {
   Weather,
   levelImg
 } from '../../libs/target'
-import { isOldMarketAddress } from '@/libs/common.js'
 export default {
   name: '',
   data() {
@@ -167,7 +166,6 @@ export default {
     console.log('this：', this)
     console.log('$route：', this.$route)
     await this.getData()
-    this.isOld = isOldMarketAddress(this.marketAddress)
     AOS.init({
       offset: 200,
       duration: 200, //duration
