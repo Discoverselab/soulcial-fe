@@ -75,6 +75,7 @@
 import Overlay from '../components/Overlay.vue'
 import Sorl from '../libs/testEthABI.json'
 import MarketABI from '../libs/MarketABI.json'
+import MarketABI3 from '../libs/MarketABI3.0.json'
 import wethABI from '../libs/weth.json'
 import { nftAddress, onParticle, goParticle } from '../libs/common.js'
 import { ethers } from 'ethers'
@@ -90,7 +91,8 @@ export default {
     PoolBalance: String,
     WalletBalance: String,
     marketAddress: String,
-    refundNum: String
+    refundNum: String,
+    contractMarketVersion: String
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight
@@ -100,8 +102,12 @@ export default {
       price: '',
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
-      isSharePick: false
+      isSharePick: false,
+      MarketABI: null
     }
+  },
+  created() {
+    this.MarketABI = this.contractMarketVersion === '3' ? MarketABI3 : MarketABI
   },
   mounted() {
     if (this.$route.meta.isSharePick) {
@@ -212,13 +218,13 @@ export default {
     },
     // particle交易
     async particlePay() {
-      const contract = new window.web3.eth.Contract(MarketABI, this.marketAddress)
+      const contract = new window.web3.eth.Contract(this.MarketABI, this.marketAddress)
       this.handlePickItem(contract)
     },
     // metatask交易
     async toPay() {
       const web3 = new Web3(window.ethereum)
-      var myContract = new web3.eth.Contract(MarketABI, this.marketAddress)
+      var myContract = new web3.eth.Contract(this.MarketABI, this.marketAddress)
       this.handlePickItem(myContract)
     },
     handlePickItem(contract) {

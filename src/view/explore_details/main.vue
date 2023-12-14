@@ -463,6 +463,7 @@
       :PicksShow="PicksShow"
       :marketAddress="marketAddress"
       :refundNum="refundNum"
+      :contractMarketVersion="contractMarketVersion"
     ></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
     <van-dialog
@@ -557,7 +558,8 @@ export default {
       isUseInviteCode: false, // 用户是否使用过邀请码
       WalletBalance: '0',
       marketAddress: '',
-      hasMarketAddress: false
+      hasMarketAddress: false,
+      contractMarketVersion: null
     }
   },
   watch: watch,

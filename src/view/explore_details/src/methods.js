@@ -340,6 +340,7 @@ export default {
         let item = res.data
         this.marketAddress = res.data.contractMarketAddress
         this.refundNum = res.data.nextPumpRate
+        this.contractMarketVersion = res.data.contractVersion
         this.hasMarketAddress = true
         this.values.push(item.charisma)
         this.values.push(item.courage)
