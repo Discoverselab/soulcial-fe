@@ -45,6 +45,7 @@
         </thead>
         <tbody></tbody>
       </table>
+      <div class="lastWeek" @click="showLastWeek">Last Week Leaderboard</div>
       <div>
         <div>
           <div class="earn_list_title">

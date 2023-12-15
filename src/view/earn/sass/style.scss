@@ -5,6 +5,11 @@
 
   .earnings {
     margin-top: 54px;
+    .lastWeek {
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
   .TabCont {

@@ -104,11 +104,14 @@ export default {
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
       isSharePick: false,
-      MarketABI: null
+      MarketABI: null,
+      isOld: false // 是否是旧交易所合约
     }
   },
   created() {
-    this.MarketABI = this.contractMarketVersion === '3' ? MarketABI3 : MarketABI
+    this.isOld = this.contractMarketVersion === '3' ? false : true
+    console.log(this.isOld, 'this.isOld ')
+    this.MarketABI = this.isOld ? MarketABI : MarketABI3
   },
   mounted() {
     if (this.$route.meta.isSharePick) {
@@ -232,9 +235,15 @@ export default {
       let me = this
       const tokenId = this.NFTDetail.realTokenId
       const value = ethers.utils.parseUnits(this.NFTDetail.price, 18)._hex
-      contract.methods
-        .pickItem(nftAddress, tokenId, this.pickIndex, this.inviteAdress)
-        .send({ from: this.$loginData.Auth_Token, value: value })
+
+      let result = null
+      if (this.isOld) {
+        result = contract.methods.pickItem(nftAddress, tokenId, this.pickIndex)
+      } else {
+        result = contract.methods.pickItem(nftAddress, tokenId, this.pickIndex, this.inviteAdress)
+      }
+      result
+        ?.send({ from: this.$loginData.Auth_Token, value: value })
         .on('transactionHash', function (hash) {
           console.log('🔥🔥🔥🚀 ~ file: Picks.vue:179 ~ hash:', hash)
           // 交易已发送，可以显示交易哈希或执行其他操作

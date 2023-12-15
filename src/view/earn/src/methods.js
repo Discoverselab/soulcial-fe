@@ -10,7 +10,7 @@ import wethABI from '@/libs/weth.json'
 import { ABIAddress, formatNumber, fetchBalance } from '@/libs/common.js'
 import { ethers } from 'ethers'
 import { mapMutations } from 'vuex'
-
+import { getLastWeekTime } from '@/utils/convertTime.js'
 const provider = window.ethereum ? window.ethereum : null
 let signer
 let providers
@@ -19,9 +19,19 @@ signer = providers ? providers.getSigner() : null
 const contract = new ethers.Contract(ABIAddress, wethABI, signer)
 export default {
   ...mapMutations(['updateEranRedPoint']),
+  // 获取上周的排行榜数据
+  showLastWeek() {
+    const { lastWeek, currentWeek } = getLastWeekTime()
+    const formatLastWeek = lastWeek.format('YYYY-MM-DD hh:mm:ss')
+    const formatCurrentWeek = currentWeek.format('YYYY-MM-DD hh:mm:ss')
+    this.getVSoulRank(formatLastWeek, formatCurrentWeek)
+  },
   // 获取排行榜
-  getVSoulRank() {
+  getVSoulRank(formatLastWeek, formatCurrentWeek) {
     let url = this.$api.infor.getVSoulRank
+    if (formatLastWeek) {
+      url = `${this.$api.infor.getVSoulRank}?requestThisMonday=${formatLastWeek}&&requestNextMonday=${formatCurrentWeek}`
+    }
     get(url)
       .then(res => {
         if (res.code === 200) {
