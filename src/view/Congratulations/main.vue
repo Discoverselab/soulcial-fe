@@ -9,14 +9,16 @@
     </div>
     <div class="success">
       <p class="success_title">Congratulations!</p>
-        <p class="content">
-          Pump Winner of SoulCast #{{ NFTDetail.realTokenId }}!
-        </p>
-        <p class="content">
-        You have successfully collected SoulCast and gained access to private chat with the creator {{NFTDetail.mintUserName }}.
-        </p>
+      <p class="content">Pump Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
+      <p
+        class="content"
+      >You have successfully collected SoulCast and gained access to private chat with the creator {{NFTDetail.mintUserName }}.</p>
       <p class="content">
-        Check transaction  <span style="text-transform: lowercase;" @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
+        Check transaction
+        <span
+          style="text-transform: lowercase;"
+          @click="linkOpen(1, hiess.rewardBlockHash)"
+        >{{substring(hiess.rewardBlockHash) }}</span>
       </p>
     </div>
     <div class="details_cont">
@@ -79,11 +81,12 @@
       <!-- Selected picture -->
       <!-- operation -->
       <div class="shapset_but">
-        <button @click="$router.push(`/chat`)">
-          Go to Chat
-        </button>
+        <button @click="$router.push(`/chat`)">Go to Chat</button>
         <div v-if="isShow">
-          <button style="background-color: #DFDFCE;" @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)">
+          <button
+            style="background-color: #DFDFCE;"
+            @click="$router.push(`/list_price?id=${NFTDetail.realTokenId}`)"
+          >
             List for
             {{ formatNumber(hiess.pfpTokenDetailVo.nextListPrice) }} {{ $network }}
           </button>
@@ -99,20 +102,14 @@
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import { linkOpen, formatNumber } from "@/libs/common.js";
-import AOS from "aos";
-import {
-  getNFTLevel,
-  getNFTPersonality,
-  NFTColor,
-  getNFTMood,
-  Weather
-} from "../../libs/target";
-import { isShow } from "@/libs/isShow.js";
+import watch from './src/watch'
+import methods from './src/methods'
+import { linkOpen, formatNumber } from '@/libs/common.js'
+import AOS from 'aos'
+import { getNFTLevel, getNFTPersonality, NFTColor, getNFTMood, Weather } from '../../libs/target'
+import { isShow } from '@/libs/isShow.js'
 export default {
-  name: "",
+  name: '',
   data() {
     return {
       hiess: {
@@ -125,48 +122,48 @@ export default {
       NFTColor: NFTColor,
       getNFTMood: getNFTMood,
       Weather: Weather
-    };
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     isShow() {
-      return isShow;
+      return isShow
     },
     linkOpen() {
-      return (type, has) => linkOpen(type, has);
+      return (type, has) => linkOpen(type, has)
     },
     formatNumber() {
-      return (num) => formatNumber(num);
-    },
+      return num => formatNumber(num)
+    }
   },
   components: {},
   async created() {
-    let me = this;
-    await me.getData();
-    me.getNFTPickInfo();
+    let me = this
+    await me.getData()
+    me.getNFTPickInfo()
   },
-  mounted: async function() {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
+  mounted: async function () {
+    console.log('this：', this)
+    console.log('$route：', this.$route)
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
+      easing: 'ease-in-sine',
       delay: 100
-    });
-    console.log(this.$loginData);
-    window.addEventListener("scroll", this.scrollToTop);
+    })
+    console.log(this.$loginData)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
   },
   destroyed() {}
-};
+}
 </script>
 
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 </style>

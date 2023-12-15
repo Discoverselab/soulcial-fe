@@ -12,7 +12,7 @@
       <div class="success_infor">
         <p
           class="content"
-        >Pumper {{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
+        >Pumper {{hiess.rewardIndex + 1}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
         <p
           class="content"
           v-if="this.$route.query.creator"

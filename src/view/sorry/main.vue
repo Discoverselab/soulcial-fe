@@ -14,7 +14,7 @@
       </p>-->
       <p
         class="content"
-      >Pumper {{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
+      >Pumper {{hiess.rewardIndex + 1}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
       <p
         class="content"
       >You will receive a full refund plus an additional {{hiess.rewardPirce}}{{ $network }} as compensation.</p>
