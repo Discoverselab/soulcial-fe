@@ -453,7 +453,7 @@
       @getWalletBalance="getWalletBalance"
     ></Wallet>
     <Picks
-      v-if="hasMarketAddress"
+      v-if="hasMarketAddress && hasInviteAdress"
       :PoolBalance="PoolBalance"
       :WalletBalance="WalletBalance"
       :pickIndex="pickIndex"
@@ -560,6 +560,7 @@ export default {
       WalletBalance: '0',
       marketAddress: '',
       hasMarketAddress: false,
+      hasInviteAdress: false,
       contractMarketVersion: null, // 3.0 交易所合约
       inviteAdress: null
     }

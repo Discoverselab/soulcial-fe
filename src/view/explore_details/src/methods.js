@@ -342,7 +342,8 @@ export default {
         this.refundNum = res.data.nextPumpRate
         this.contractMarketVersion = res.data.contractVersion
         this.inviteAdress = res.data.inviteAdress
-        this.hasMarketAddress = true
+        this.hasInviteAdress = true // 确保赋值成功再传递给picks组件
+        this.hasMarketAddress = true // 确保赋值成功再传递给picks组件
         this.values.push(item.charisma)
         this.values.push(item.courage)
         this.values.push(item.art)
