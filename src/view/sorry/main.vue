@@ -1,12 +1,7 @@
 <template>
   <div class="purchase_success">
     <div class="navigate">
-      <img
-        @click="$router.go(-1)"
-        class="back"
-        src="../../assets/back.png"
-        alt=""
-      />
+      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="nav_name">
         <p class="name"></p>
       </div>
@@ -16,85 +11,88 @@
       <p class="success_title">sorry!</p>
       <!-- <p class="success_infor" style="margin-bottom:20px;">
         According to <span @click="linkOpen(1,hiess.rewardBlockHeight)">{{ 'BNB Chain' }} Block #{{ hiess.rewardBlockHeight}}</span> <br>  with Hash <span @click="linkOpen(2,hiess.rewardBlockHash)">{{ substring(hiess.rewardBlockHash) }}</span>, <br> Slot #{{hiess.rewardIndex}} {{hiess.userName}} is the winner!
-      </p> -->
-      <p class="content">Pumper #{{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}! </p>
+      </p>-->
+      <p
+        class="content"
+      >Pumper {{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
+      <p
+        class="content"
+      >You will receive a full refund plus an additional {{hiess.rewardPirce}}{{ $network }} as compensation.</p>
       <p class="content">
-        You will receive a full refund plus an additional {{hiess.rewardPirce}}{{ $network }} as compensation.
+        Check transaction
+        <span
+          @click="linkOpen(1, hiess.rewardBlockHash)"
+        >{{substring(hiess.rewardBlockHash) }}</span>
       </p>
-      <p class="content">Check transaction <span @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span></p>
       <!-- <p class="success_infor">
         Sorry, You did not get SoulCast #{{NFTDetail.realTokenId }}.<br />
         But you earned {{ hiess.rewardPirce }} {{ $network }} launch <br> reward and {{hiess.vsoulPrice}} $vSoul.
-      </p> -->
+      </p>-->
     </div>
     <div class="details_cont">
-      <img class="sorry" src="../../assets/sorry.png" alt="">
+      <img class="sorry" src="../../assets/sorry.png" alt />
       <div class="shapset_but">
         <button @click="$router.push('/earn')">check earnings</button>
-        <p class="check_infors">If you  do not receive earnings, please wait for the transcation processing, which can take a few minutes.</p>
+        <p
+          class="check_infors"
+        >If you do not receive earnings, please wait for the transcation processing, which can take a few minutes.</p>
       </div>
     </div>
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import { linkOpen } from "@/libs/common.js"
-import AOS from "aos";
-import {
-  getNFTLevel,
-  getNFTPersonality,
-  NFTColor,
-  getNFTMood,
-  Weather,
-} from "../../libs/target";
+import watch from './src/watch'
+import methods from './src/methods'
+import { linkOpen } from '@/libs/common.js'
+import AOS from 'aos'
+import { getNFTLevel, getNFTPersonality, NFTColor, getNFTMood, Weather } from '../../libs/target'
 export default {
-  name: "",
+  name: '',
   data() {
     return {
-      hiess:{},
-      NFTPickInfo:{},
+      hiess: {},
+      NFTPickInfo: {},
       NFTDetail: {},
       getNFTLevel: getNFTLevel,
       getNFTPersonality: getNFTPersonality,
       NFTColor: NFTColor,
       getNFTMood: getNFTMood,
-      Weather: Weather,
-    };
+      Weather: Weather
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     linkOpen() {
-      return (type, has) => linkOpen(type, has);
-    },
+      return (type, has) => linkOpen(type, has)
+    }
   },
   components: {},
   created() {
-    let me = this;
-    me.getData();
+    let me = this
+    me.getData()
   },
   mounted: async function () {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
+    console.log('this：', this)
+    console.log('$route：', this.$route)
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    console.log(this.$loginData);
-    window.addEventListener("scroll", this.scrollToTop);
+      easing: 'ease-in-sine',
+      delay: 100
+    })
+    console.log(this.$loginData)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
   },
-  destroyed() {},
-};
+  destroyed() {}
+}
 </script>
 
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 </style>

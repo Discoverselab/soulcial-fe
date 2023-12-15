@@ -7,10 +7,6 @@
       </div>
       <div class="back"></div>
     </div>
-    <div class="income">1. Invite your friends to Pump the SoulCast, and you can earn <b style="color: #FFC23D;">100 vSOUL</b> once they participate.</div>
-    <div
-      class="makesure"
-    >2. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</div>
     <div class="decoration">
       <div class="layout">
         <img class="market1" src="@/assets/market1.png" alt />

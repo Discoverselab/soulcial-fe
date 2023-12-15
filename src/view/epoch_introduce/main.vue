@@ -60,13 +60,6 @@
             @click="jumpToInviteRegister"
           >{{"Go to Invite->"}}</span>
         </p>
-        <p class="sec">
-          · 100 vSOUL for each invited Pump game
-          <span
-            class="canJump bold"
-            @click="jumpToInviteFriend"
-          >{{"Go to Invite->"}}</span>
-        </p>
         <p class="everySec">
           · Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.
           <span

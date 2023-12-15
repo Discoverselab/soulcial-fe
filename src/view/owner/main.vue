@@ -1,12 +1,7 @@
 <template>
   <div class="Congratulations">
     <div class="navigate">
-      <img
-        @click="$router.go(-1)"
-        class="back"
-        src="../../assets/back.png"
-        alt=""
-      />
+      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="nav_name">
         <p class="name"></p>
       </div>
@@ -14,18 +9,21 @@
     </div>
     <div class="success">
       <p class="success_title">Congratulations!</p>
-      <div class="success_infor" >
+      <div class="success_infor">
+        <p
+          class="content"
+        >Pumper {{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}!</p>
+        <p
+          class="content"
+          v-if="this.$route.query.creator"
+        >You will receive {{hiess.rewardPirce}}{{ $network }} as creator earnings.</p>
+        <p class="content" v-else>You will receive {{hiess.rewardPirce}}{{ $network }} as earnings.</p>
         <p class="content">
-          Pumper #{{hiess.rewardIndex}} {{ hiess.userName }} is the Winner of SoulCast #{{ NFTDetail.realTokenId }}! 
-        </p>
-        <p class="content" v-if="this.$route.query.creator">
-          You will receive {{hiess.rewardPirce}}{{ $network }} as creator earnings. 
-        </p>
-        <p class="content" v-else>
-          You will receive {{hiess.rewardPirce}}{{ $network }} as earnings. 
-        </p>
-        <p class="content">
-          Check transaction <span style="text-transform: lowercase;" @click="linkOpen(1, hiess.rewardBlockHash)">{{substring(hiess.rewardBlockHash) }}</span>
+          Check transaction
+          <span
+            style="text-transform: lowercase;"
+            @click="linkOpen(1, hiess.rewardBlockHash)"
+          >{{substring(hiess.rewardBlockHash) }}</span>
         </p>
       </div>
     </div>
@@ -34,7 +32,7 @@
         <!-- NFT -->
         <div class="box">
           <div class="img_icon">
-            <img :src="NFTDetail.pictureUrl" alt="" />
+            <img :src="NFTDetail.pictureUrl" alt />
           </div>
         </div>
         <div class="bottom_infor" v-if="NFTDetail.pictureUrl">
@@ -42,24 +40,18 @@
             :style="{
               color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
             }"
-            className="svgName"
+            class="svgName"
             iconClass="Vector1"
           ></svg-icon>
           <div class="grade_price">
             <div class="grade">
-              <img src="../../assets/level1.png" alt="" />
+              <img src="../../assets/level1.png" alt />
               <p class="grade_name">{{ getNFTLevel[NFTDetail.level] }}</p>
-              <p class="Personality_name">
-                {{ NFTDetail.soul }}
-              </p>
+              <p class="Personality_name">{{ NFTDetail.soul }}</p>
             </div>
-            <p class="price">
-              {{ NFTDetail.price | formatNumber }} {{ $network }}
-            </p>
+            <p class="price">{{ NFTDetail.price | formatNumber }} {{ $network }}</p>
           </div>
-          <div class="love">
-            #{{ NFTDetail.realTokenId }}
-          </div>
+          <div class="love">#{{ NFTDetail.realTokenId }}</div>
         </div>
         <!-- User label -->
         <div class="label_cont">
@@ -70,23 +62,23 @@
           </div>
         </div>
       </div>
-            <!-- The author has something. -->
+      <!-- The author has something. -->
       <div class="author">
         <div class="author_list" @click="LinkOwner(1)">
           <div class="portrait">
-            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.mintUserAvatar" alt="" />
-            <img class="chat_link" src="../../assets/chat.png" alt="" />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.mintUserAvatar" alt />
+            <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Launched By</p>
           <p class="name">{{NFTDetail.isMineMint==1?'You':NFTDetail.mintUserName }}</p>
         </div>
         <div class="author_list" @click="LinkOwner(2)">
           <div class="portrait">
-            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.ownerUserAvatar" alt="" />
-            <img class="chat_link" src="../../assets/chat.png" alt="" />
+            <img @error="$handleErrorImg" class="portrait1" :src="NFTDetail.ownerUserAvatar" alt />
+            <img class="chat_link" src="../../assets/chat.png" alt />
           </div>
           <p class="Created">Owned By</p>
-          <p class="name">{{ NFTDetail.isMineOwner==1?'You':NFTDetail.ownerUserName }} </p>
+          <p class="name">{{ NFTDetail.isMineOwner==1?'You':NFTDetail.ownerUserName }}</p>
         </div>
       </div>
       <!-- Selected picture -->
@@ -96,76 +88,72 @@
         <button @click="$router.push('/earn?type=1')">Check Earnings</button>
         <!-- <button class="prohibit">SHARE</button> -->
       </div>
-      <p class="lations">If you  do not receive earnings, please wait for the transcation processing, which can take a few minutes.</p>
+      <p
+        class="lations"
+      >If you do not receive earnings, please wait for the transcation processing, which can take a few minutes.</p>
     </div>
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import { linkOpen, formatNumber } from "@/libs/common.js"
-import AOS from "aos";
-import {
-  getNFTLevel,
-  getNFTPersonality,
-  NFTColor,
-  getNFTMood,
-  Weather,
-} from "../../libs/target";
+import watch from './src/watch'
+import methods from './src/methods'
+import { linkOpen, formatNumber } from '@/libs/common.js'
+import AOS from 'aos'
+import { getNFTLevel, getNFTPersonality, NFTColor, getNFTMood, Weather } from '../../libs/target'
 export default {
-  name: "",
+  name: '',
   data() {
     return {
-      hiess:{
-        pfpTokenDetailVo:{}
+      hiess: {
+        pfpTokenDetailVo: {}
       },
-      NFTPickInfo:{},
+      NFTPickInfo: {},
       NFTDetail: {},
       getNFTLevel: getNFTLevel,
       getNFTPersonality: getNFTPersonality,
       NFTColor: NFTColor,
       getNFTMood: getNFTMood,
-      Weather: Weather,
-    };
+      Weather: Weather
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     linkOpen() {
-      return (type, has) => linkOpen(type, has);
+      return (type, has) => linkOpen(type, has)
     },
     formatNumber() {
-      return (num) => formatNumber(num);
-    },
+      return num => formatNumber(num)
+    }
   },
   components: {},
   async created() {
-    let me = this;
-    await me.getData();
+    let me = this
+    await me.getData()
     me.getNFTPickInfo()
   },
   mounted: async function () {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
-    console.log("this.$route.creator",this.$route.query.creator)
+    console.log('this：', this)
+    console.log('$route：', this.$route)
+    console.log('this.$route.creator', this.$route.query.creator)
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    console.log(this.$loginData);
-    window.addEventListener("scroll", this.scrollToTop);
+      easing: 'ease-in-sine',
+      delay: 100
+    })
+    console.log(this.$loginData)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
   },
-  destroyed() {},
-};
+  destroyed() {}
+}
 </script>
 
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 </style>
