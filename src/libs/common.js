@@ -12,9 +12,12 @@ export const browser = isPROD
   ? 'https://optimistic.etherscan.io/tx/'
   : 'https://goerli-optimism.etherscan.io/tx/'
 // nft合约地址
+// export const nftAddress = isPROD
+//   ? '0xB39c5896A94287B9c0Bce736e505234b685c0E02'
+//   : '0x064cCfc36627c89eaAc61A4a9F4d18f1A4a38bdF'
 export const nftAddress = isPROD
   ? '0xB39c5896A94287B9c0Bce736e505234b685c0E02'
-  : '0x064cCfc36627c89eaAc61A4a9F4d18f1A4a38bdF'
+  : '0x1aa7171e9ADd41f0313CE09308CEF70c07a58C87'
 
 export const ABIAddress = '0x4200000000000000000000000000000000000006'
 
@@ -30,7 +33,7 @@ export const chainList = isPROD
       { id: 5, name: 'Ethereum' }
     ]
   : [
-      { id: 420, name: 'optimism' },
+      { id: 11155420, name: 'OP Sepolia' },
       { id: 10, name: 'optimism' },
       { id: 1, name: 'Ethereum' },
       { id: 5, name: 'Ethereum' }
@@ -62,7 +65,9 @@ const CHAIN_NAME = isPROD ? 'Optimism' : 'OP Sepolia'
 
 const CHAIN_SYMBOL = 'ETH'
 
-const RPC_URL = isPROD ? 'https://mainnet.optimism.io' : 'https://sepolia.optimism.io'
+const RPC_URL = isPROD
+  ? 'https://mainnet.optimism.io'
+  : 'https://opt-sepolia.g.alchemy.com/v2/Bb98Tm7L3ZqnrP65JF-eQ30adaTLV2to'
 
 const blockExplorerUrls = isPROD
   ? 'https://explorer.optimism.io'
