@@ -15,14 +15,6 @@ export const browser = isPROD
 export const nftAddress = isPROD
   ? '0xB39c5896A94287B9c0Bce736e505234b685c0E02'
   : '0x064cCfc36627c89eaAc61A4a9F4d18f1A4a38bdF'
-// 用来判断是否是旧的交易所合约地址
-const oldMarketAddress = isPROD
-  ? []
-  : ['0xA2a7DBD81B1935e14C3dFBed8D5446FDA815C291', '0x1aa7171e9add41f0313ce09308cef70c07a58c87']
-// // 交易所合约地址
-// export const marketAddress = isPROD
-//   ? "0xE575480af98B522BAcac422c9516D64f7492BEE6"
-//   : "0xA2a7DBD81B1935e14C3dFBed8D5446FDA815C291";
 
 export const ABIAddress = '0x4200000000000000000000000000000000000006'
 

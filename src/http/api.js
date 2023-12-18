@@ -3,7 +3,7 @@
 export const website =
   process.env.VUE_APP_BUILD === 'production'
     ? 'https://app.soulcial.network'
-    : 'https://api-test.soulcial.network'
+    : 'https://test2bsc.soulcial.network'
 const pwaWebsite = process.env.VUE_APP_BASE_API
 const commonApi = process.env.VUE_APP_BASE_API + '/pfp/api/admin'
 
