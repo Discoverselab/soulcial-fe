@@ -144,19 +144,51 @@ export function calculateSecondsUntil(targetDate) {
 // 获取上周的时间
 export function getLastWeekTime() {
   const today = dayjs()
-  // 获取上周一的日期
-  const lastWeekMonday = today.subtract(1, 'week').startOf('week').add(1, 'day')
-  // 将时间调整为上午 7:59:59
-  const lastWeekMondayAdjusted = lastWeekMonday.set('hour', 7).set('minute', 59).set('second', 59)
-  // 获取本周一的日期
-  const currentWeekMonday = today.startOf('week').add(1, 'day') // 添加1天以从周一开始
-  // 将时间调整为上午 7:59:59
-  const currentWeekMondayAdjusted = currentWeekMonday
-    .set('hour', 7)
-    .set('minute', 59)
-    .set('second', 59)
-  return {
-    lastWeek: lastWeekMondayAdjusted,
-    currentWeek: currentWeekMondayAdjusted
+  // 如果今天是周一且时间在早于 7:59:59 之前
+  if (
+    today.day() === 1 &&
+    today.isBefore(dayjs().set('hour', 7).set('minute', 59).set('second', 59))
+  ) {
+    // 获取上上周一的日期
+    const lastLastWeekMonday = today.subtract(2, 'week').startOf('week').add(1, 'day')
+
+    // 将时间调整为上午 7:59:59
+    const lastLastWeekMondayAdjusted = lastLastWeekMonday
+      .set('hour', 7)
+      .set('minute', 59)
+      .set('second', 59)
+
+    // 获取上周一的日期
+    const lastWeekMonday = today.subtract(1, 'week').startOf('week').add(1, 'day')
+
+    // 将时间调整为上午 7:59:59
+    const lastWeekMondayAdjusted = lastWeekMonday.set('hour', 7).set('minute', 59).set('second', 59)
+    // 返回上上周和上周的时间范围
+    return {
+      lastWeek: lastLastWeekMondayAdjusted,
+      currentWeek: lastWeekMondayAdjusted
+    }
+  } else {
+    // 如果今天不是周一或时间已经在 7:59:59 之后
+    // 获取上周一的日期
+    const lastWeekMonday = today.subtract(1, 'week').startOf('week').add(1, 'day')
+
+    // 将时间调整为上午 7:59:59
+    const lastWeekMondayAdjusted = lastWeekMonday.set('hour', 7).set('minute', 59).set('second', 59)
+
+    // 获取本周一的日期
+    const currentWeekMonday = today.startOf('week').add(1, 'day') // 添加1天以从周一开始
+
+    // 将时间调整为上午 7:59:59
+    const currentWeekMondayAdjusted = currentWeekMonday
+      .set('hour', 7)
+      .set('minute', 59)
+      .set('second', 59)
+
+    // 返回上周和本周的时间范围
+    return {
+      lastWeek: lastWeekMondayAdjusted,
+      currentWeek: currentWeekMondayAdjusted
+    }
   }
 }
