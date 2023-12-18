@@ -121,6 +121,13 @@ export default {
   computed: {
     goParticle() {
       return goParticle
+    },
+    defaInviteAdress() {
+      if (!this.inviteAdress) {
+        return '0x0000000000000000000000000000000000000000'
+      } else {
+        return this.inviteAdress
+      }
     }
   },
   components: { Overlay },
@@ -240,7 +247,12 @@ export default {
       if (this.isOld) {
         result = contract.methods.pickItem(nftAddress, tokenId, this.pickIndex)
       } else {
-        result = contract.methods.pickItem(nftAddress, tokenId, this.pickIndex, this.inviteAdress)
+        result = contract.methods.pickItem(
+          nftAddress,
+          tokenId,
+          this.pickIndex,
+          this.defaInviteAdress
+        )
       }
       result
         ?.send({ from: this.$loginData.Auth_Token, value: value })
