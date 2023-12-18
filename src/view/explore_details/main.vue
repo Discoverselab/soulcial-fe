@@ -225,7 +225,7 @@
                 <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
-            <span class="number">1</span>
+            <span class="number">#1</span>
           </div>
           <!-- #2 -->
           <div class="author_list listPicks">
@@ -243,7 +243,7 @@
                 <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
-            <span class="number">2</span>
+            <span class="number">#2</span>
           </div>
           <!-- #3 -->
           <div class="author_list listPicks">
@@ -261,7 +261,7 @@
                 <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
-            <span class="number">3</span>
+            <span class="number">#3</span>
           </div>
           <!-- #4 -->
           <div class="author_list listPicks">
@@ -279,7 +279,7 @@
                 <span class="refundNum">{{ `+${refundNum}%` }}</span>
               </button>
             </div>
-            <span class="number">4</span>
+            <span class="number">#4</span>
           </div>
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
@@ -400,7 +400,7 @@
         <p class="introduce_title">What is Pump</p>
         <p class="content end">The Pump game lets you collect SoulCast NFTs and earn vSOULs.</p>
         <p class="introduce_title">How to Pump</p>
-        <p class="content">1. Choose a slot from 1, 2, 3, and 4.</p>
+        <p class="content">1. Choose a slot from #1, #2, #3, and #4.</p>
         <p
           class="content"
         >2. Confirm your Pump, and the payment (at least 0.01 ETH) will be deducted from your wallet.</p>
