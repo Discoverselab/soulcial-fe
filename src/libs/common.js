@@ -44,18 +44,29 @@ export const linkOpen = (type, has) => {
 const _10to16 = num => '0x' + Number(num).toString(16)
 const _16to10 = num => parseInt(num, 10)
 const handleChainId = n => (n.includes('0x') ? n : _10to16(n))
+// const CHAINID = isPROD ? '0xa' : '0x1a4'
 
-const CHAINID = isPROD ? '0xa' : '0x1a4'
+// const CHAIN_NAME = isPROD ? 'Optimism' : 'Optimism Goerli'
 
-const CHAIN_NAME = isPROD ? 'Optimism' : 'Optimism Goerli'
+// const CHAIN_SYMBOL = 'ETH'
+
+// const RPC_URL = isPROD ? 'https://mainnet.optimism.io' : 'https://goerli.optimism.io'
+
+// const blockExplorerUrls = isPROD
+//   ? 'https://explorer.optimism.io'
+//   : 'https://goerli-explorer.optimism.io'
+
+const CHAINID = isPROD ? '0xa' : '0xaa37dc'
+
+const CHAIN_NAME = isPROD ? 'Optimism' : 'OP Sepolia'
 
 const CHAIN_SYMBOL = 'ETH'
 
-const RPC_URL = isPROD ? 'https://mainnet.optimism.io' : 'https://goerli.optimism.io'
+const RPC_URL = isPROD ? 'https://mainnet.optimism.io' : 'https://sepolia.optimism.io'
 
 const blockExplorerUrls = isPROD
   ? 'https://explorer.optimism.io'
-  : 'https://goerli-explorer.optimism.io'
+  : 'https://sepolia-optimistic.etherscan.io'
 
 export const addChain_Params = {
   chainId: handleChainId(CHAINID),
