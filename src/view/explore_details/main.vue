@@ -451,6 +451,7 @@
       @close="walletClose()"
       :walletShow="walletShow"
       @getWalletBalance="getWalletBalance"
+      @getInviteAddress="getData"
     ></Wallet>
     <Picks
       v-if="hasMarketAddress && hasInviteAdress"

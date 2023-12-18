@@ -205,6 +205,7 @@ export default {
               userid: res.data.userId
             })
             this.$emit('getWalletBalance')
+            this.$emit('getInviteAddress') // 详情页登录后需要获取邀请人钱包地址
             this.$emit('init') // 分享页登录后重新获取user页面数据
             this.close()
             // if (isRegister && !levelScore) {
