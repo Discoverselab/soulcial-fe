@@ -1,18 +1,20 @@
 <template>
   <div class="conversation">
     <div class="navigate">
-      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt="" />
+      <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="info">
         <div @click="goPersonDetail(chatDetailDto)" class="left">
-          <img :src="chatDetailDto.avatar" alt="">
+          <img @error="$handleErrorImg" :src="chatDetailDto.avatar" alt />
         </div>
         <div class="right">
-          <div class="name" v-if="chatDetailDto.type == 1">{{ `SoulCast #${chatDetailDto.tokenId} Group
-                      (${chatDetailDto.memberNumber})` }}</div>
+          <div class="name" v-if="chatDetailDto.type == 1">
+            {{ `SoulCast #${chatDetailDto.tokenId} Group
+            (${chatDetailDto.memberNumber})` }}
+          </div>
           <div class="name" v-else>{{ chatDetailDto.title }}</div>
           <!-- <div class="address">asdfasdfasdfasf
             <img @click="copy('asdfasdfasdfasf')" class="mycopy" round src="../../assets/copy1.png" alt />
-          </div> -->
+          </div>-->
         </div>
       </div>
     </div>
@@ -21,17 +23,26 @@
         <van-loading color="#efa92c" />
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
-        <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
+        <div
+          v-if="handleShowTime(item.time, index)"
+          class="timeTip"
+        >{{ handleShowTime(item.time, index) }}</div>
         <div class="timeTip" v-if="item.type == 99">{{ `${item.userName} ${item.content}` }}</div>
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
             <div @click="goPersonDetail(item)" class="othersImg">
-              <img @error="$handleErrorImg" :src="item.userAvatar" alt="">
+              <img @error="$handleErrorImg" :src="item.userAvatar" alt />
             </div>
             <div class="msg othersMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
-                :src="`${item.content}?x-oss-process=image-resize,w_180`">
+              <van-image
+                v-else
+                @click="onPreview(item.content)"
+                width="180"
+                fit="cover"
+                height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`"
+              >
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
@@ -41,8 +52,14 @@
           <div v-else class="me">
             <div class="msg meMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
-                :src="`${item.content}?x-oss-process=image-resize,w_180`">
+              <van-image
+                v-else
+                @click="onPreview(item.content)"
+                width="180"
+                fit="cover"
+                height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`"
+              >
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
@@ -53,8 +70,15 @@
       </div>
     </div>
     <div class="footer">
-      <van-search v-model="inputContent" placeholder="Tap a message..." :disabled="chatDetailDto.status != 1"
-        background="transparent" :clearable="false" shape="round" left-icon>
+      <van-search
+        v-model="inputContent"
+        placeholder="Tap a message..."
+        :disabled="chatDetailDto.status != 1"
+        background="transparent"
+        :clearable="false"
+        shape="round"
+        left-icon
+      >
         <template #right-icon>
           <div @click="submit" class="btn">
             <div class="searchImg">
@@ -72,92 +96,92 @@
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import { linkOpen } from "@/libs/common.js"
-import { closeWebsocket, sendMessage, changeMessageCallback } from "@/socket/socket.js"
-import { formatTimeToDateMinuteSecond } from "@/utils/format.js";
-import AOS from "aos";
+import watch from './src/watch'
+import methods from './src/methods'
+import { linkOpen } from '@/libs/common.js'
+import { closeWebsocket, sendMessage, changeMessageCallback } from '@/socket/socket.js'
+import { formatTimeToDateMinuteSecond } from '@/utils/format.js'
+import AOS from 'aos'
 export default {
-  name: "conversation",
+  name: 'conversation',
   data() {
     return {
       messageList: [],
-      inputContent: "",
+      inputContent: '',
       chatDetailDto: {},
       chatBoxOldHeight: 0,
       isSubmiting: false,
       isGettingMessage: false,
       userId: this.$loginData.userId
-    };
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     linkOpen() {
-      return (type, has) => linkOpen(type, has);
-    },
+      return (type, has) => linkOpen(type, has)
+    }
   },
   components: {},
   async created() {
-    changeMessageCallback(this.onWsMessage);
-    document.onkeydown = (e) => {
-      let _key = window.event.keyCode;
+    changeMessageCallback(this.onWsMessage)
+    document.onkeydown = e => {
+      let _key = window.event.keyCode
       if (_key === 13) {
-        this.submit();
+        this.submit()
       }
     }
     let agentData = {
       type: 888,
       chatId: this.$route.query?.id, //聊天id
       userId: this.$loginData.user_id, //用户id
-      startTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
-    };
-    sendMessage(agentData);
-    await this.getMessageList();
-    this.gotoNewMessage();
+      startTime: formatTimeToDateMinuteSecond(+new Date() / 1000)
+    }
+    sendMessage(agentData)
+    await this.getMessageList()
+    this.gotoNewMessage()
   },
   async beforeDestroy() {
     // closeWebsocket();
   },
   mounted: async function () {
-    console.log("this：", this);
-    console.log("$route：", this.$route);
+    console.log('this：', this)
+    console.log('$route：', this.$route)
 
-    let chatBox = document.querySelector('.chatBox');
-    chatBox.addEventListener('scroll', (e) => {
+    let chatBox = document.querySelector('.chatBox')
+    chatBox.addEventListener('scroll', e => {
       if (chatBox.scrollTop < 1) {
         // 获取更多记录
-        this.isGettingMessage ? null : this.getMessageList(this.messageList[0].messageId);
+        this.isGettingMessage ? null : this.getMessageList(this.messageList[0].messageId)
       }
     })
 
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    console.log(this.$loginData);
-    window.addEventListener("scroll", this.scrollToTop);
+      easing: 'ease-in-sine',
+      delay: 100
+    })
+    console.log(this.$loginData)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     let agentData = {
       type: 888,
       userId: this.$loginData.user_id, //用户id
       chatId: this.$route.query?.id, //聊天id
-      endTime: formatTimeToDateMinuteSecond(+new Date() / 1000),
-    };
-    sendMessage(agentData);
+      endTime: formatTimeToDateMinuteSecond(+new Date() / 1000)
+    }
+    sendMessage(agentData)
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
-  },
-};
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
->>>.van-cell__value {
+>>> .van-cell__value {
   display: flex;
   align-items: center;
 
@@ -166,12 +190,12 @@ export default {
   }
 }
 
->>>.van-search__content {
-  border: 2px solid #DFDFCE;
+>>> .van-search__content {
+  border: 2px solid #dfdfce;
   background-color: #fff;
 }
 
->>>.van-field__control {
+>>> .van-field__control {
   color: rgba($color: #000000, $alpha: 0.6);
 
   &::placeholder {
@@ -179,16 +203,15 @@ export default {
   }
 }
 
->>>.van-search {
+>>> .van-search {
   flex: 1;
 }
 
->>>.van-search__content {
+>>> .van-search__content {
   height: 44px;
 }
 
 .conversation {
-
   .navigate {
     display: flex;
     align-items: center;
@@ -239,7 +262,7 @@ export default {
           font-family: Inter;
           font-size: 12px;
           font-weight: 500;
-          color: #62625F;
+          color: #62625f;
 
           img {
             margin-left: 8px;
@@ -250,7 +273,6 @@ export default {
         }
       }
     }
-
   }
 
   .chatBox {
@@ -259,7 +281,7 @@ export default {
     box-sizing: border-box;
     overflow: auto;
     padding: 0px 24px 24px;
-    border-top: 2px solid #DFDFCE;
+    border-top: 2px solid #dfdfce;
     background-color: #f3f4ea;
 
     .loading {
@@ -304,7 +326,7 @@ export default {
         padding: 12px;
         border-radius: 10px;
         max-width: 275px;
-        background: #DFDFCE;
+        background: #dfdfce;
         overflow-wrap: break-word;
       }
     }
@@ -318,7 +340,7 @@ export default {
         padding: 12px;
         max-width: 280px;
         border-radius: 10px;
-        background: #F2B229;
+        background: #f2b229;
         overflow-wrap: break-word;
       }
     }
@@ -334,7 +356,7 @@ export default {
     height: 108px;
     padding: 0px 12px;
     box-sizing: border-box;
-    border-top: 2px solid #DFDFCE;
+    border-top: 2px solid #dfdfce;
     background-color: #fff;
 
     .btn {
@@ -352,8 +374,6 @@ export default {
         }
       }
     }
-
-
   }
 }
 </style>
