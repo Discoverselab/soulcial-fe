@@ -300,7 +300,9 @@ export default {
           await addVTNetwork(this.handleSign, this.handleAddCatch)
         } catch (error) {
           console.log('error', error, 'error')
-          this.overlayshow = false
+          setTimeout(() => {
+            this.overlayshow = false
+          }, 10000)
         }
         //  this.overlayshow = false
       } else {
