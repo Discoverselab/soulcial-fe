@@ -252,6 +252,7 @@ export default {
     },
 
     async handleSign(provider, accounts) {
+      this.overlayshow = true
       // 签名操作
       //Get Metamask web3 provider
       var web3 = new Web3(Web3.givenProvider)
@@ -286,6 +287,7 @@ export default {
       }
     },
     handleAddCatch(provider, accounts) {
+      this.overlayshow = true
       this.loginType = 0
       this.preferredAuthType = ''
       this.checkSteamId(accounts[0])
