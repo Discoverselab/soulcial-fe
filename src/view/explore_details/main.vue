@@ -26,13 +26,13 @@
                 color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
               }"
                 class="center"
-              >{{ NFTDetail.match || "0" }}%</p>
+              >{{ refundNum || NFTDetail.match || "0" }}%</p>
               <p
                 :style="{
                 color: `hsla(${NFTDetail.colorAttribute + 120}, 60%, 60%, 1)`,
               }"
                 class="name"
-              >match</p>
+              >{{refundNum ? 'earn' : 'match'}}</p>
             </div>
             <a :href="NFTDetail.squarePictureUrl" target="_blank">
               <img id="pfpNft" :src="NFTDetail.pictureUrl" alt />

@@ -47,14 +47,11 @@
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="center"
-                  >
-                    {{ item.match ||
-                    "0" }}%
-                  </p>
+                  >{{ item.pumpRate || item.match || "0" }}%</p>
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="name"
-                  >match</p>
+                  >{{item.pumpRate ? `earn` : 'match'}}</p>
                 </div>
                 <!-- <img  :src="item.pictureUrl" alt="" /> -->
                 <img v-lazy="item.pictureUrl" alt />
@@ -109,14 +106,11 @@
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="center"
-                  >
-                    {{ item.match ||
-                    "0" }}%
-                  </p>
+                  >{{ item.pumpRate || item.match || "0"}}%</p>
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="name"
-                  >match</p>
+                  >{{ item.pumpRate ? `earn` : 'match' }}</p>
                 </div>
                 <!-- <img :src="item.pictureUrl" alt="" /> -->
                 <img v-lazy="item.pictureUrl" alt />
