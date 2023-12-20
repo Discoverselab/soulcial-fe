@@ -43,7 +43,7 @@
               :key="item.id"
             >
               <div class="img_icon">
-                <div class="match" v-if="item.pictureUrl && $loginData.Auth_Token">
+                <div class="match" v-if="item.pictureUrl ">
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="center"
@@ -102,7 +102,7 @@
               :key="item.id"
             >
               <div class="img_icon">
-                <div class="match" v-if="item.pictureUrl && $loginData.Auth_Token">
+                <div class="match" v-if="item.pictureUrl ">
                   <p
                     :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
                     class="center"
