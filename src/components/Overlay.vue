@@ -3,10 +3,10 @@
     <van-overlay
       class-name="ovrlay"
       :lock-scroll="true"
-      z-index="9999"
+      z-index="9999999999999999999999999999999999"
       :show="overlayshow"
     >
-      <img src="../assets/soulcial-loading.gif" alt="" />
+      <img src="../assets/soulcial-loading.gif" alt />
     </van-overlay>
   </div>
 </template>
@@ -15,17 +15,17 @@
 export default {
   props: {
     overlayshow: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
     
 <style lang="scss" scoped>
@@ -33,8 +33,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0,0.3);
-  img{
+  background-color: rgba(0, 0, 0, 0.3);
+  img {
     transform: scale(0.5); /* scaling */
   }
 }

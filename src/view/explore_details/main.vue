@@ -392,7 +392,7 @@
     <van-dialog
       v-model="dialogShow"
       :close-on-click-overlay="true"
-      :z-index="999999"
+      :z-index="999999999"
       :show-confirm-button="false"
       @confirm="dialog_confirm"
     >
