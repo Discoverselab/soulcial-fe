@@ -88,12 +88,14 @@ export default {
     NFTDetail: Object,
     PicksShow: Boolean,
     pickIndex: Number,
+    cancelPumpIndex: Number,
     PoolBalance: String,
     WalletBalance: String,
     marketAddress: String,
     refundNum: String,
     contractMarketVersion: String,
-    inviteAdress: String
+    inviteAdress: String,
+    isClickPump: Boolean
   },
   data: function () {
     let _clientH = document.documentElement.clientHeight
@@ -110,7 +112,6 @@ export default {
   },
   created() {
     this.isOld = this.contractMarketVersion === '3' ? false : true
-    console.log(this.isOld, 'this.isOld ')
     this.MarketABI = this.isOld ? MarketABI : MarketABI3
   },
   mounted() {
@@ -143,30 +144,50 @@ export default {
     close() {
       this.$emit('close', true)
     },
-    getPickInfo() {
-      let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.NFTDetail.realTokenId}`
-      let me = this
-      get(url)
-        .then(res => {
-          if (res.code === 200) {
+    async getPickInfo() {
+      try {
+        let url = this.$api.nft.getNFTPickInfo + `?tokenId=${this.NFTDetail.realTokenId}`
+        let me = this
+        const res = await get(url)
+
+        if (res.code === 200) {
+          // 取消pump完成关闭loading
+          if (this.isClickPump) {
+            if (!res.data[`indexUserName${this.cancelPumpIndex}`]) {
+              this.$parent.NFTPickInfo = res.data
+              this.$parent.canCancelPumpShow = false
+              this.$parent.gray = false
+
+              // 使用 await 等待 getData 完成
+              await this.$parent.getData()
+              this.overlayshow = false
+              this.$emit('changeIsClickPump')
+            } else {
+              // 使用 await 等待 setTimeout 完成
+              await new Promise(resolve => setTimeout(resolve, 3000))
+              me.getPickInfo()
+            }
+          } else {
+            // pump完成关闭loading
             if (res.data[`indexUserName${me.pickIndex}`]) {
               this.$parent.NFTPickInfo = res.data
               this.$parent.onlyPickOnce()
               me.close()
               me.overlayshow = false
             } else {
-              setTimeout(() => {
-                me.getPickInfo()
-              }, 3000)
+              // 使用 await 等待 setTimeout 完成
+              await new Promise(resolve => setTimeout(resolve, 3000))
+              me.getPickInfo()
             }
           }
-        })
-        .catch(error => {
-          console.error(error)
-          this.$toast('getPickInfo error')
-          this.overlayshow = false
-        })
+        }
+      } catch (error) {
+        console.error(error)
+        this.$toast('getPickInfo error')
+        this.overlayshow = false
+      }
     },
+
     async jcHash(txHash) {
       const web3 = this.$loginData.loginType == 0 ? new Web3(window.ethereum) : window.web3
       web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
@@ -272,6 +293,26 @@ export default {
           } else {
             me.$toast('Transaction failed')
           }
+        })
+    },
+    handleCancelPickItem() {
+      this.overlayshow = true
+      const web3 = new Web3(window.ethereum)
+      let contract = new web3.eth.Contract(this.MarketABI, this.marketAddress)
+      const index = this.cancelPumpIndex
+      const tokenId = this.NFTDetail.realTokenId
+      contract.methods
+        .cancelPick(nftAddress, tokenId, index)
+        .send({
+          from: this.$loginData.Auth_Token,
+          value: 0
+        })
+        .then(() => {
+          this.getPickInfo()
+        })
+        .catch(() => {
+          this.$toast('something wrong')
+          this.overlayshow = false
         })
     },
     jump() {

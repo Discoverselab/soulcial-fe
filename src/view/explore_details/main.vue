@@ -226,6 +226,11 @@
               </button>
             </div>
             <span class="number">#1</span>
+            <button
+              class="cancelPump"
+              :class="{disabledBUtton: !canCancelPump}"
+              @click="showCancelPump(0)"
+            >Cancel</button>
           </div>
           <!-- #2 -->
           <div class="author_list listPicks">
@@ -244,6 +249,11 @@
               </button>
             </div>
             <span class="number">#2</span>
+            <button
+              class="cancelPump"
+              :class="{disabledBUtton: !canCancelPump}"
+              @click="showCancelPump(1)"
+            >Cancel</button>
           </div>
           <!-- #3 -->
           <div class="author_list listPicks">
@@ -262,6 +272,11 @@
               </button>
             </div>
             <span class="number">#3</span>
+            <button
+              class="cancelPump"
+              :class="{disabledBUtton: !canCancelPump}"
+              @click="showCancelPump(2)"
+            >Cancel</button>
           </div>
           <!-- #4 -->
           <div class="author_list listPicks">
@@ -280,6 +295,11 @@
               </button>
             </div>
             <span class="number">#4</span>
+            <button
+              class="cancelPump"
+              :class="{disabledBUtton: !canCancelPump}"
+              @click="showCancelPump(3)"
+            >Cancel</button>
           </div>
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
@@ -445,6 +465,38 @@
         </div>
       </div>
     </van-dialog>
+    <!-- 取消PUMP弹窗 -->
+    <!-- 七天内不能取消 -->
+    <van-dialog
+      v-model="noCancelPumpShow"
+      :close-on-click-overlay="true"
+      :z-index="99999999999999999999"
+      :show-cancel-button="false"
+      :show-confirm-button="false"
+    >
+      <div class="introduce">
+        <p class="cancelPick">Cancellation can be made after 7 days of Pump</p>
+        <div class="setBut">
+          <button class="backBtn" @click="noCancelPumpShow = false">back</button>
+        </div>
+      </div>
+    </van-dialog>
+    <!-- 七天后可以取消 -->
+    <van-dialog
+      v-model="canCancelPumpShow"
+      :close-on-click-overlay="true"
+      :z-index="9999"
+      :show-cancel-button="false"
+      :show-confirm-button="false"
+    >
+      <div class="introduce">
+        <p class="cancelPick">Confirm to Cancle Pump?</p>
+        <div class="setBut">
+          <button class="cancel" @click="cancelPump">cancel</button>
+          <button class="backBtn" @click="canCancelPumpShow = false">back</button>
+        </div>
+      </div>
+    </van-dialog>
     <Overlay :overlayshow="overlayshow"></Overlay>
     <Wallet
       :path="pathEx"
@@ -458,6 +510,7 @@
       :PoolBalance="PoolBalance"
       :WalletBalance="WalletBalance"
       :pickIndex="pickIndex"
+      :cancelPumpIndex="cancelPumpIndex"
       @callBack="callBack"
       :NFTDetail="NFTDetail"
       @close="PicksShow = false"
@@ -466,6 +519,9 @@
       :refundNum="refundNum"
       :contractMarketVersion="contractMarketVersion"
       :inviteAdress="inviteAdress"
+      :isClickPump="isClickPump"
+      @changeIsClickPump="changeIsClickPump"
+      ref="pick"
     ></Picks>
     <!-- 未挂单nft需要大于1才能赚取积分 -->
     <van-dialog
@@ -531,6 +587,7 @@ export default {
       gray: false,
       flippedShow: false,
       pickIndex: 0,
+      cancelPumpIndex: 0,
       overlayshow: false,
       turnShow: false,
       levelImg: levelImg,
@@ -563,7 +620,11 @@ export default {
       hasMarketAddress: false,
       hasInviteAdress: false,
       contractMarketVersion: null, // 3.0 交易所合约
-      inviteAdress: null
+      inviteAdress: null,
+      noCancelPumpShow: false, // 是否展示七天内不能取消pump弹窗
+      canCancelPumpShow: false, // 是否展示七天后可以取消pump弹窗
+      canCancelPump: false, // 是否可以取消pump
+      isClickPump: false // 点击了取消pump按钮
     }
   },
   watch: watch,
@@ -616,7 +677,6 @@ export default {
     this.getNFTPickInfo()
     this.getMintedNFTPage()
     this.getWalletBalance()
-
     AOS.init({
       offset: 200,
       duration: 200, //duration

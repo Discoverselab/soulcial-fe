@@ -288,6 +288,9 @@ export default {
       .then(res => {
         if (res.code === 200) {
           this.NFTPickInfo = res.data
+          // 是否可以取消pump
+          const cancel = res.data.isRefundPick === '1' ? true : false
+          this.canCancelPump = cancel
         }
         this.onlyPickOnce()
         // this.overlayshow = false;
@@ -416,8 +419,11 @@ export default {
         if (res.code === 200) {
           this.NftList = this.NftList.concat(res.data.records)
           this.getCollectNFTPage()
+          // 不能关闭loading，等待getCollectNFTPage调用完成关闭,这两个接口一起判断了用户当前持有的nft是否为1
+          // this.overlayshow = false
+        } else if (res.code === 403) {
+          this.overlayshow = false
         }
-        this.overlayshow = false
       })
       .catch(error => {
         this.overlayshow = false
@@ -451,5 +457,25 @@ export default {
   },
   continueList() {
     this.$router.push(`/list_price?id=${this.NFTDetail.realTokenId}`)
+  },
+  showCancelPump(index) {
+    this.cancelPumpIndex = index
+    if (this.canCancelPump) {
+      // 展示七天后可以取消PUMP弹窗
+      this.canCancelPumpShow = true
+    } else {
+      // 展示七天内不能取消PUMP弹窗
+      this.noCancelPumpShow = true
+    }
+  },
+  // 取消pump
+  cancelPump() {
+    // 点击了cancel
+    this.isClickPump = true
+    this.$refs.pick.handleCancelPickItem()
+  },
+  // 取消pump完成以后重置isClickPump
+  changeIsClickPump() {
+    this.isClickPump = false
   }
 }
