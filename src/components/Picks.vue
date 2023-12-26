@@ -170,6 +170,8 @@ export default {
             if (res.data[`indexUserName${me.pickIndex}`]) {
               this.$parent.NFTPickInfo = res.data
               this.$parent.onlyPickOnce()
+              // 使用 await 等待 getData 完成
+              await this.$parent.getData()
               me.close()
               me.overlayshow = false
             } else {

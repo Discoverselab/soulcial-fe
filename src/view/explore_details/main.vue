@@ -226,11 +226,14 @@
               </button>
             </div>
             <span class="number">#1</span>
-            <button
-              class="cancelPump"
-              :class="{disabledBUtton: !canCancelPump}"
-              @click="showCancelPump(0)"
-            >Cancel</button>
+            <template v-if="NFTPickInfo.indexUserId0">
+              <button
+                v-if="pickIsUser(0)"
+                class="cancelPump"
+                :class="{disabledBUtton: !canCancelPump}"
+                @click="showCancelPump(0)"
+              >Cancel</button>
+            </template>
           </div>
           <!-- #2 -->
           <div class="author_list listPicks">
@@ -249,11 +252,14 @@
               </button>
             </div>
             <span class="number">#2</span>
-            <button
-              class="cancelPump"
-              :class="{disabledBUtton: !canCancelPump}"
-              @click="showCancelPump(1)"
-            >Cancel</button>
+            <template v-if="NFTPickInfo.indexUserId1">
+              <button
+                v-if="pickIsUser(1)"
+                class="cancelPump"
+                :class="{disabledBUtton: !canCancelPump}"
+                @click="showCancelPump(1)"
+              >Cancel</button>
+            </template>
           </div>
           <!-- #3 -->
           <div class="author_list listPicks">
@@ -272,11 +278,14 @@
               </button>
             </div>
             <span class="number">#3</span>
-            <button
-              class="cancelPump"
-              :class="{disabledBUtton: !canCancelPump}"
-              @click="showCancelPump(2)"
-            >Cancel</button>
+            <template v-if="NFTPickInfo.indexUserId2">
+              <button
+                v-if="pickIsUser(2)"
+                class="cancelPump"
+                :class="{disabledBUtton: !canCancelPump}"
+                @click="showCancelPump(2)"
+              >Cancel</button>
+            </template>
           </div>
           <!-- #4 -->
           <div class="author_list listPicks">
@@ -295,11 +304,14 @@
               </button>
             </div>
             <span class="number">#4</span>
-            <button
-              class="cancelPump"
-              :class="{disabledBUtton: !canCancelPump}"
-              @click="showCancelPump(3)"
-            >Cancel</button>
+            <template v-if="NFTPickInfo.indexUserId3">
+              <button
+                v-if="pickIsUser(3)"
+                class="cancelPump"
+                :class="{disabledBUtton: !canCancelPump}"
+                @click="showCancelPump(3)"
+              >Cancel</button>
+            </template>
           </div>
         </div>
         <!-- v-if="NFTPickInfo.rewardTimeStr" -->
