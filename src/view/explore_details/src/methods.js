@@ -49,7 +49,6 @@ export default {
     })
     try {
       const BalanceOf = await contract.balanceOf(this.$loginData.Auth_Token)
-      this.PoolBalance = ethers.utils.formatEther(this.formatNumber(parseInt(BalanceOf._hex)))
     } catch (error) {
       // this.$toast(error);
     }

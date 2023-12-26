@@ -53,7 +53,6 @@
           </p>
         </div>
         <div class="cudset_but">
-          <!-- <button @click="$router.push('/earn')" v-if="!IFBalance()">Go to add {{$network}}</button> -->
           <button @click="save">PUMP</button>
           <button class="Cancel" @click="close()">CANCEL</button>
         </div>
@@ -89,7 +88,6 @@ export default {
     PicksShow: Boolean,
     pickIndex: Number,
     cancelPumpIndex: Number,
-    PoolBalance: String,
     WalletBalance: String,
     marketAddress: String,
     refundNum: String,
@@ -220,9 +218,6 @@ export default {
         .catch(error => {})
         .finally(() => {})
     },
-    // IFBalance() {
-    //   return Number(this.PoolBalance) > 0;
-    // },
     async save() {
       this.overlayshow = true
       if (this.$loginData.loginType == 0) {

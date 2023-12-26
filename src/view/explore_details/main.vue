@@ -507,7 +507,6 @@
     ></Wallet>
     <Picks
       v-if="hasMarketAddress && hasInviteAdress"
-      :PoolBalance="PoolBalance"
       :WalletBalance="WalletBalance"
       :pickIndex="pickIndex"
       :cancelPumpIndex="cancelPumpIndex"
@@ -580,7 +579,6 @@ export default {
       isShareMy: false,
       dialogShow: false,
       cancelShow: false,
-      PoolBalance: '',
       PicksShow: false,
       pathEx: true,
       History_list: [],
