@@ -228,7 +228,7 @@
             <span class="number">#1</span>
             <template v-if="NFTPickInfo.indexUserId0">
               <button
-                v-if="pickIsUser(0)"
+                v-if="pickIsUser(0)&&NFTPickInfo.nowPickCount !== 4"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(0)"
@@ -254,7 +254,7 @@
             <span class="number">#2</span>
             <template v-if="NFTPickInfo.indexUserId1">
               <button
-                v-if="pickIsUser(1)"
+                v-if="pickIsUser(1)&&NFTPickInfo.nowPickCount !== 4"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(1)"
@@ -280,7 +280,7 @@
             <span class="number">#3</span>
             <template v-if="NFTPickInfo.indexUserId2">
               <button
-                v-if="pickIsUser(2)"
+                v-if="pickIsUser(2)&&NFTPickInfo.nowPickCount !== 4"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(2)"
@@ -306,7 +306,7 @@
             <span class="number">#4</span>
             <template v-if="NFTPickInfo.indexUserId3">
               <button
-                v-if="pickIsUser(3)"
+                v-if="pickIsUser(3)&&NFTPickInfo.nowPickCount !== 4"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(3)"
@@ -478,7 +478,7 @@
       </div>
     </van-dialog>
     <!-- 取消PUMP弹窗 -->
-    <!-- 七天内不能取消 -->
+    <!-- 3天内不能取消 -->
     <van-dialog
       v-model="noCancelPumpShow"
       :close-on-click-overlay="true"
@@ -487,13 +487,13 @@
       :show-confirm-button="false"
     >
       <div class="introduce">
-        <p class="cancelPick">Cancellation can be made after 7 days of Pump</p>
+        <p class="cancelPick">Cancellation can be made after 3 days of Pump</p>
         <div class="setBut">
           <button class="backBtn" @click="noCancelPumpShow = false">back</button>
         </div>
       </div>
     </van-dialog>
-    <!-- 七天后可以取消 -->
+    <!-- 3天后可以取消 -->
     <van-dialog
       v-model="canCancelPumpShow"
       :close-on-click-overlay="true"

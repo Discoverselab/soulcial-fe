@@ -460,10 +460,10 @@ export default {
   showCancelPump(index) {
     this.cancelPumpIndex = index
     if (this.canCancelPump) {
-      // 展示七天后可以取消PUMP弹窗
+      // 展示3天后可以取消PUMP弹窗
       this.canCancelPumpShow = true
     } else {
-      // 展示七天内不能取消PUMP弹窗
+      // 展示3天内不能取消PUMP弹窗
       this.noCancelPumpShow = true
     }
   },
