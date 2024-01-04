@@ -228,7 +228,7 @@
             <span class="number">#1</span>
             <template v-if="NFTPickInfo.indexUserId0">
               <button
-                v-if="pickIsUser(0)&&NFTPickInfo.nowPickCount !== 4"
+                v-if="pickIsUser(0)&&NFTPickInfo.nowPickCount !== 4&&contractMarketVersion === '3'"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(0)"
@@ -254,7 +254,7 @@
             <span class="number">#2</span>
             <template v-if="NFTPickInfo.indexUserId1">
               <button
-                v-if="pickIsUser(1)&&NFTPickInfo.nowPickCount !== 4"
+                v-if="pickIsUser(1)&&NFTPickInfo.nowPickCount !== 4&&contractMarketVersion === '3'"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(1)"
@@ -280,7 +280,7 @@
             <span class="number">#3</span>
             <template v-if="NFTPickInfo.indexUserId2">
               <button
-                v-if="pickIsUser(2)&&NFTPickInfo.nowPickCount !== 4"
+                v-if="pickIsUser(2)&&NFTPickInfo.nowPickCount !== 4&&contractMarketVersion === '3'"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(2)"
@@ -306,7 +306,7 @@
             <span class="number">#4</span>
             <template v-if="NFTPickInfo.indexUserId3">
               <button
-                v-if="pickIsUser(3)&&NFTPickInfo.nowPickCount !== 4"
+                v-if="pickIsUser(3)&&NFTPickInfo.nowPickCount !== 4&&contractMarketVersion === '3'"
                 class="cancelPump"
                 :class="{disabledBUtton: !canCancelPump}"
                 @click="showCancelPump(3)"
