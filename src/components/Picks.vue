@@ -307,8 +307,12 @@ export default {
         .then(() => {
           this.getPickInfo()
         })
-        .catch(() => {
-          this.$toast('something wrong')
+        .catch(error => {
+          if (error.code === 4001) {
+            this.$toast('Signature denied')
+          } else {
+            this.$toast('something wrong')
+          }
           this.overlayshow = false
         })
     },
