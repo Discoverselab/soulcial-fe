@@ -34,7 +34,7 @@
           1.
           <span class="bold">vSOUL = Base * Booster</span>
         </p>
-        <p>2. Booster=Alpha Boost+Sum(Beta Boost), Alpha Boost is the Highest Level of your holding SoulCast NFT, Beta Boost is the sum of your other holding NFT.</p>
+        <p>2. Booster = Alpha Boost+Sum(Beta Boost), Alpha Boost is the Highest Level of your holding SoulCast NFT, Beta Boost is the sum of your other holding NFT.</p>
         <p>3. If you do not have SoulCast, Booster = 1</p>
         <p>4. About Base vSOUL</p>
         <p class="everySec">· Referral Base: 2 vSOUL</p>
@@ -72,7 +72,7 @@
       </tbody>
     </table>
     <div class="introduce">
-      <div class="content" style="border: none;">
+      <div class="content" style="border: none;margin-bottom:0px">
         <p class="everySec mt10">· 10% vSOUL of your referral earned in PUMP Game</p>
         <p>5. About Booster</p>
         <p class="everySec">
