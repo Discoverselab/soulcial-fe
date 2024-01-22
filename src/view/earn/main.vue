@@ -12,11 +12,26 @@
         :key="index"
       >{{ item.name }}</div>
     </div>
+
     <!-- earnings -->
     <div class="earnings" v-if="TabActive == 1">
       <div class="earn_list earn_list_one">
         <p class="list_name" style="color:#62625F">Balance</p>
         <p class="balance">{{ VSoulBalance }} vSOUL</p>
+      </div>
+      <!-- Booster系数 -->
+      <div style="text-align: right;">
+        <div class="earned_money" @click="$router.push(`/vsoul_introduce?booster=${booster}`)">
+          <span class="name">Booster</span>
+          <span class="num">{{ `${booster}x` }}</span>
+        </div>
+      </div>
+      <div
+        @click="$router.push(`/vsoul_introduce?booster=${booster}`)"
+        class="epoch"
+        style="margin-bottom: 0;"
+      >
+        <img src="@/assets/poster.png" alt />
       </div>
       <div @click="$router.push('/epoch_introduce')" class="epoch">
         <img src="@/assets/weekly_leaderboard.png" alt />
@@ -51,7 +66,10 @@
           <div class="earn_list_title">
             <p class="title">
               History
-              <span class="title_right" @click="$router.push('/vsoul_introduce')">
+              <span
+                class="title_right"
+                @click="$router.push(`/vsoul_introduce?booster=${booster}`)"
+              >
                 <img src="@/assets/diamond.png" alt />
                 <span class="invite_earn">Earn vSOUL</span>
               </span>
@@ -100,7 +118,7 @@
           <p class="er_balance">{{ WalletBalance }} {{ $network }}</p>
         </div>
         <div style="text-align: right;">
-          <div class="earned_money" style="text-align: right;">
+          <div class="earned_money">
             <span class="name">Earned</span>
             <span class="num">{{ earnedMoney | formatNumber }} {{ $network }}</span>
           </div>
@@ -303,6 +321,7 @@ export default {
       vSoulRankList: [],
       vSoulRank: {},
       earnedMoney: null,
+      booster: null, // 系数
       vSoulPriceMap: {
         1: '$50',
         2: '$30',

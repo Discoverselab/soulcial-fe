@@ -123,7 +123,8 @@
   }
 
   .reward {
-    width: 304px;
+    padding-right: 15px;
+    // width: 304px;
     // height: 36px;
     color: rgba(0, 0, 0, 0.5);
     margin: 10px 0;
@@ -145,11 +146,18 @@
         font-family: Inter;
         font-size: 12px;
         font-weight: 500;
-        line-height: 18px;
+        line-height: 19px;
         letter-spacing: 0em;
         .keynote {
           font-weight: 700;
           color: #000;
+        }
+        .canJump {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .bold {
+          font-weight: 600;
         }
       }
     }

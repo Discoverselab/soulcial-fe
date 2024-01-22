@@ -108,6 +108,7 @@ export default {
       .then(res => {
         if (res.code === 200) {
           this.VSoulBalance = res.data.vsoulPrice
+          this.booster = res.data.booster
         }
       })
       .catch(error => {})

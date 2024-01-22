@@ -46,24 +46,43 @@
     <div class="reward">
       <div class="lay">
         <div class="point"></div>
-        <div class="desc">Invite your friend with your code or link, and increase your SBTI.</div>
+        <div class="desc">
+          Invite your friend with your code or link, and both you and your friend will earn
+          <span
+            class="keynote"
+          >2 vSOUL</span>
+          as referral reward.
+        </div>
       </div>
       <div class="lay">
         <div class="point"></div>
         <div class="desc">
-          You will get
-          <span class="keynote">0.5%</span>
-          in ETH each time your friend Pumps SoulCast NFT.
+          With SoulCast NFT, you can boost your vSOUL earning from
+          <span class="keynote">{{"10x! "}}</span>
+          <span
+            class="canJump bold"
+            style="color: #000;"
+            @click="jumpToEarn"
+          >{{ "Check my Booster->" }}</span>
         </div>
       </div>
       <div class="lay">
+        <div class="point"></div>
+        <div class="desc">
+          Each time your friend joins the Pump Game, you can get
+          <span class="keynote">0.5% ETH</span>
+          of the amount he Pumped and
+          <span class="keynote">10% vSOUL</span> of amount he rewarded.
+        </div>
+      </div>
+      <!-- <div class="lay">
         <div class="point"></div>
         <div class="desc">
           If you hold SoulCast NFT, both you and your friend will earn
           <span class="keynote">20 vSOUL</span>
           as referral reward.
         </div>
-      </div>
+      </div>-->
     </div>
     <button class="check" @click="jumpEarn">check your earnings</button>
   </div>

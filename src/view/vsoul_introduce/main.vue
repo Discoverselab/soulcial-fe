@@ -7,36 +7,44 @@
       </div>
       <div class="back"></div>
     </div>
+    <div class="poster">
+      <img src="@/assets/poster1.png" alt />
+    </div>
     <div class="introduce">
       <div class="title">What is vSOUL</div>
       <div class="content">
         <p>1. vSOUL represents the reward points in Soulcial.</p>
-        <p>2. vSOUL could be converted into Soulcial tokens in the future airdrop.</p>
+        <p>
+          2. vSOUL could be converted into Soulcial tokens in the future
+          <span
+            class="bold"
+          >100% airdrop</span>.
+        </p>
+        <p>
+          3.
+          <span
+            @click="jumpTokenomics"
+            class="canJump bold"
+          >{{ "Learn more about our tokenomics->" }}</span>
+        </p>
       </div>
       <div class="title">How to earn vSOUL</div>
-      <div class="content" style="border: none;">
-        <p>1. To earn vSOUL, make sure to hold least one SoulCast NFT. Without a SoulCast, vSOUL rewards cannot be granted.</p>
-        <p>2. You can earn vSOUL by joining a Pump game, inviting friends to join a Pump game, and inviting friends to register:</p>
-        <p class="everySec">
-          · 20 vSOUL for each invited friend
-          <span
-            class="canJump bold"
-            @click="jumpToInviteRegister"
-          >{{"Go to Invite->"}}</span>
+      <div class="content" style="border: none;margin-bottom:0px">
+        <p>
+          1.
+          <span class="bold">vSOUL = Base * Booster</span>
         </p>
-        <p class="everySec">
-          · Pump vSOUL is calculated as Base * (1 + sum(Bonus)), with the Bonus amount varying based on your SoulCast NFT holding.
-          <span
-            class="canJump bold"
-            @click="jumpToPumpGame"
-          >{{"Go to Pump->"}}</span>
-        </p>
+        <p>2. Booster=Alpha Boost+Sum(Beta Boost), Alpha Boost is the Highest Level of your holding SoulCast NFT, Beta Boost is the sum of your other holding NFT.</p>
+        <p>3. If you do not have SoulCast, Booster = 1</p>
+        <p>4. About Base vSOUL</p>
+        <p class="everySec">· Referral Base: 2 vSOUL</p>
+        <p class="everySec">· Pump Base:</p>
       </div>
     </div>
     <table>
       <thead>
         <tr>
-          <th>SoulCast Level</th>
+          <th>Pump SoulCast Level</th>
           <th>Lv 1 ORIGIN</th>
           <th>Lv 2 VITALITY</th>
           <th>Lv 3 EUREKA</th>
@@ -47,30 +55,64 @@
       <tbody>
         <tr>
           <td>Win Pump Base</td>
-          <td>400</td>
+          <td>40</td>
+          <td>200</td>
+          <td>1000</td>
           <td>2000</td>
-          <td>10000</td>
-          <td>20000</td>
-          <td>40000</td>
+          <td>4000</td>
         </tr>
         <tr>
           <td>Not Win Pump Base</td>
-          <td>100</td>
+          <td>10</td>
+          <td>50</td>
+          <td>250</td>
           <td>500</td>
-          <td>2500</td>
-          <td>5000</td>
-          <td>10000</td>
-        </tr>
-        <tr>
-          <td>Holding SoulCast Bonus</td>
-          <td>5%</td>
-          <td>10%</td>
-          <td>15%</td>
-          <td>20%</td>
-          <td>25%</td>
+          <td>1000</td>
         </tr>
       </tbody>
     </table>
+    <div class="introduce">
+      <div class="content" style="border: none;">
+        <p class="everySec mt10">· 10% vSOUL of your referral earned in PUMP Game</p>
+        <p>5. About Booster</p>
+        <p class="everySec">
+          · Now Your Booster =
+          <span class="bold">{{ `${booster}x` }}</span>
+        </p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Holding SoulCast Level</th>
+          <th>Lv 1 ORIGIN</th>
+          <th>Lv 2 VITALITY</th>
+          <th>Lv 3 EUREKA</th>
+          <th>Lv 4 SPARK</th>
+          <th>Lv 5 FLOW</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alpha Boost</td>
+          <td>10x</td>
+          <td>11x</td>
+          <td>12x</td>
+          <td>13x</td>
+          <td>15x</td>
+        </tr>
+        <tr>
+          <td>Beta Boost</td>
+          <td>0.5x</td>
+          <td>1x</td>
+          <td>1.5x</td>
+          <td>2x</td>
+          <td>2.5x</td>
+        </tr>
+      </tbody>
+    </table>
+
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
@@ -84,19 +126,24 @@ export default {
       NFTDetail: null,
       isShareMy: false,
       UserInfo: null,
-      overlayshow: false
+      overlayshow: false,
+      booster: null
     }
   },
   methods: {
+    jumpTokenomics() {
+      window.open(
+        'https://soulcial-network.gitbook.io/soulcial-litepaper/litepaper/tokenomics-fairness-is-our-commitment-to-all-souls',
+        '_blank'
+      )
+    },
     jumpToPumpGame() {
       this.$router.push(`/explore_details?id=${this.NFT.realTokenId}&path=`)
     },
     jumpToInviteFriend() {
       this.$router.push(`/share_pick?id=${this.NFTDetail.realTokenId}&isShareMy=${this.isShareMy}`)
     },
-    jumpToInviteRegister() {
-      this.$router.push(`invite`)
-    },
+
     async getData() {
       try {
         this.overlayshow = true
@@ -138,6 +185,8 @@ export default {
     }
   },
   created() {
+    this.booster = this.$route.query.booster
+    console.log('this.booster', this.booster)
     this.NFT = JSON.parse(localStorage.getItem('NFT'))
     this.getData()
     this.getUserInfo()
@@ -154,7 +203,14 @@ export default {
 
 .vsoul_introduce {
   padding: 20px 24px 0 24px;
-
+  .poster {
+    margin-bottom: 20px;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
   .back {
     display: block;
     width: 16px;
@@ -221,6 +277,12 @@ export default {
   }
   .everySec {
     margin-left: 1em;
+  }
+  .mt10 {
+    margin-top: 10px;
+  }
+  .bold {
+    font-weight: 600;
   }
   table {
     border-collapse: collapse;
