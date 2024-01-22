@@ -11,7 +11,13 @@
       </div>
       <!-- Avatar name and address -->
       <div class="userinfo">
-        <img @click="goTwitter(UserInfo)" class="portrait" :src="UserInfo.avatar" alt />
+        <img
+          @click="goTwitter(UserInfo)"
+          class="portrait"
+          @error="$handleErrorImg"
+          :src="UserInfo.avatar"
+          alt
+        />
         <!--  -->
         <div class="nameAddres" v-if="UserInfo.userName">
           <p class="name">{{ UserInfo.userName }}</p>
@@ -21,7 +27,11 @@
           </p>
         </div>
       </div>
-      <div class="bio" :class="{noBio: !UserInfo.bio}" @click="jumpSettingBio(UserInfo.bio)">{{ UserInfo.bio || "Edit Bio" }}</div>
+      <div
+        class="bio"
+        :class="{noBio: !UserInfo.bio}"
+        @click="jumpSettingBio(UserInfo.bio)"
+      >{{ UserInfo.bio || "Edit Bio" }}</div>
       <!-- User label -->
       <div class="label_cont">
         <div
@@ -149,18 +159,18 @@
               <span v-if="item.pickStatus == 1">{{item.price | formatNumber}} {{ $network }}</span>
               <span v-else>{{'--'}}</span>
             </span>
-            <span class="bot_price" v-if="TabActive == 2">{{ item.lastSale| formatNumber}} {{ $network }}</span>
+            <span
+              class="bot_price"
+              v-if="TabActive == 2"
+            >{{ item.lastSale| formatNumber}} {{ $network }}</span>
           </div>
-          
         </div>
         <div class="Launching" v-if="TabActive === 3">
-              <div class="LaunchingData" v-if="item.pickStatus > 0">
-                <span v-if="!item.nowPickCount">Pump 0/4</span>
-                <span
-                  v-else
-                >{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
-              </div>
-            </div>
+          <div class="LaunchingData" v-if="item.pickStatus > 0">
+            <span v-if="!item.nowPickCount">Pump 0/4</span>
+            <span v-else>{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="Save" v-else>
@@ -208,22 +218,22 @@
   </div>
 </template>
 <script>
-import watch from "./src/watch";
-import methods from "./src/methods";
-import computed from "./src/computed";
-import AOS from "aos";
-import TabBar from "../../components/TabBar.vue";
-import Hexagon from "../../components/Hexagon.vue";
-import { getNFTLevel, levelImg } from "../../libs/target";
-import Overlay from "../../components/Overlay.vue";
-import { goParticle } from "@/libs/common.js";
+import watch from './src/watch'
+import methods from './src/methods'
+import computed from './src/computed'
+import AOS from 'aos'
+import TabBar from '../../components/TabBar.vue'
+import Hexagon from '../../components/Hexagon.vue'
+import { getNFTLevel, levelImg } from '../../libs/target'
+import Overlay from '../../components/Overlay.vue'
+import { goParticle } from '@/libs/common.js'
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
       TagsList: [],
       overlayshow: false,
-      address: "",
+      address: '',
       levelImg: levelImg,
       getNFTLevel: getNFTLevel,
       UserInfo: {},
@@ -233,15 +243,15 @@ export default {
       bindTwitterShow: false, // 去绑定twitter弹窗
       TabList: [
         {
-          name: "Launched",
+          name: 'Launched',
           id: 1
         },
         {
-          name: "collected",
+          name: 'collected',
           id: 2
         },
         {
-          name: "pumping",
+          name: 'pumping',
           id: 3
         }
         // {
@@ -269,47 +279,47 @@ export default {
         //   img: require("../../assets/Frame2.png"),
         // },
       ]
-    };
+    }
   },
   watch: watch,
   methods: methods,
   computed: {
     goParticle() {
-      return goParticle;
-    },
+      return goParticle
+    }
   },
   components: { TabBar, Hexagon, Overlay },
   created() {
-    let me = this;
-    me.getUserInfo();
-    me.getMintedNFTPage(1);
+    let me = this
+    me.getUserInfo()
+    me.getMintedNFTPage(1)
   },
-  mounted: async function() {
+  mounted: async function () {
     // await this.creatMyInfo()
     // this.creatMyInfo()
     // this.checkLink()
-    console.log("this：", this);
-    console.log("$route：", this.$route);
+    console.log('this：', this)
+    console.log('$route：', this.$route)
     AOS.init({
       offset: 200,
       duration: 200, //duration
-      easing: "ease-in-sine",
+      easing: 'ease-in-sine',
       delay: 100
-    });
-    console.log(this.$loginData);
-    window.addEventListener("scroll", this.scrollToTop);
+    })
+    console.log(this.$loginData)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   beforeRouteLeave(to, form, next) {
     // Leave the route to remove the scrolling event
-    window.removeEventListener("scroll", this.scrollToTop);
-    next();
+    window.removeEventListener('scroll', this.scrollToTop)
+    next()
   },
   destroyed() {}
-};
+}
 </script>
 
 <style lang="scss">
-@import "./sass/style.scss";
+@import './sass/style.scss';
 .home {
   .van-dialog {
     width: 342px;
