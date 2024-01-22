@@ -108,7 +108,7 @@ export default {
       .then(res => {
         if (res.code === 200) {
           this.VSoulBalance = res.data.vsoulPrice
-          this.booster = res.data.booster
+          this.booster = res.data.booster.toString().replace(/\.0+$/, '')
         }
       })
       .catch(error => {})
