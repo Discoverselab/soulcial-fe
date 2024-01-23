@@ -33,52 +33,49 @@
         <p>
           1.
           <span class="bold">vSOUL = Base * Booster</span>
+          , Your Booster =
+          <span class="bold">{{ `${booster}x` }}</span>
         </p>
-        <p>2. Booster = Alpha Boost+Sum(Beta Boost), Alpha Boost is the Highest Level of your holding SoulCast NFT, Beta Boost is the sum of your other holding NFT.</p>
-        <p>3. If you do not have SoulCast, Booster = 1</p>
-        <p>4. About Base vSOUL</p>
+        <p>2. Holding SoulCast NFT can boost your vSOUL earning.</p>
+        <p>3. Booster=Alpha Boost+Sum(Beta Boost), Alpha Boost is the Highest Level of your holding SoulCast NFT, Beta Boost is the sum of your other holding NFT.</p>
+        <p>4. If you do not have SoulCast, Booster = 1</p>
+        <p>5. About Base vSOUL</p>
         <p class="everySec">· Referral Base: 2 vSOUL</p>
         <p class="everySec">· Pump Base:</p>
       </div>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Pump SoulCast Level</th>
-          <th>Lv 1 ORIGIN</th>
-          <th>Lv 2 VITALITY</th>
-          <th>Lv 3 EUREKA</th>
-          <th>Lv 4 SPARK</th>
-          <th>Lv 5 FLOW</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Win Pump Base</td>
-          <td>40</td>
-          <td>200</td>
-          <td>1000</td>
-          <td>2000</td>
-          <td>4000</td>
-        </tr>
-        <tr>
-          <td>Not Win Pump Base</td>
-          <td>10</td>
-          <td>50</td>
-          <td>250</td>
-          <td>500</td>
-          <td>1000</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="introduce">
+      <table>
+        <thead>
+          <tr>
+            <th>Pump SoulCast Level</th>
+            <th>Lv 1 ORIGIN</th>
+            <th>Lv 2 VITALITY</th>
+            <th>Lv 3 EUREKA</th>
+            <th>Lv 4 SPARK</th>
+            <th>Lv 5 FLOW</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Win Pump Base</td>
+            <td>40</td>
+            <td>200</td>
+            <td>1000</td>
+            <td>2000</td>
+            <td>4000</td>
+          </tr>
+          <tr>
+            <td>Not Win Pump Base</td>
+            <td>10</td>
+            <td>50</td>
+            <td>250</td>
+            <td>500</td>
+            <td>1000</td>
+          </tr>
+        </tbody>
+      </table>
       <div class="content" style="border: none;margin-bottom:0px">
         <p class="everySec mt10">· 10% vSOUL of your referral earned in PUMP Game</p>
-        <p>5. About Booster</p>
-        <p class="everySec">
-          · Now Your Booster =
-          <span class="bold">{{ `${booster}x` }}</span>
-        </p>
+        <p>6. About Booster</p>
       </div>
     </div>
 
