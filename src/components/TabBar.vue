@@ -138,7 +138,7 @@ export default {
     border-radius: 5px !important;
     position: absolute !important;
     top: 25px !important;
-    right: 104px !important;
+    right: 74px !important;
   }
 }
 
@@ -172,7 +172,7 @@ export default {
       border-radius: 4px;
       position: absolute;
       top: 38px;
-      right: 6px;
+      right: 0px;
     }
 
     .barName {
@@ -201,9 +201,9 @@ export default {
       &.imgs4 {
         width: 27px;
       }
-      &.imgs5 {
-        width: 27px;
-      }
+      // &.imgs5 {
+      //   width: 27px;
+      // }
     }
   }
 }
