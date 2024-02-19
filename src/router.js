@@ -34,6 +34,7 @@ import share_pick from '@/view/share_pick/main'
 import vsoul_introduce from '@/view/vsoul_introduce/main'
 import epoch_introduce from '@/view/epoch_introduce/main'
 import earn_lastweek from '@/view/earn_lastweek/main'
+import event from '@/view/event/main'
 Vue.use(Router)
 const router = new Router({
   mode: 'hash',
@@ -47,6 +48,11 @@ const router = new Router({
         keepAlive: true,
         from: ''
       }
+    },
+    {
+      path: '/event',
+      name: 'event',
+      component: event
     },
     {
       path: '/earn',
