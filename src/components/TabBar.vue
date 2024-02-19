@@ -2,124 +2,129 @@
   <!-- tabBar -->
   <div id="barCont" class="barCont">
     <div @click="BarClick(item)" class="bar_list" v-for="(item, index) in BarList" :key="index">
-      <div v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules(item.name)" class="dot"></div>
+      <div
+        v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules(item.name)"
+        class="dot"
+      ></div>
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
-      <img :class="`imgs${index + 1}`" v-else :src="item.img" alt="" />
+      <img :class="`imgs${index + 1}`" v-else :src="item.img" alt />
     </div>
     <Wallet v-if="$route.path == '/'" @close="walletShow = false" :walletShow="walletShow"></Wallet>
     <Tags @close="tagShow = false" @save="save" :userTags="userTags" :tagShow="tagShow"></Tags>
   </div>
 </template>
 <script>
-import Wallet from "../components/LinkWallet.vue";
-import Tags from "../components/Tags.vue";
+import Wallet from '../components/LinkWallet.vue'
+import Tags from '../components/Tags.vue'
 export default {
   props: {
-    userTags: String,
+    userTags: String
   },
   data: function () {
-    let _clientH = document.documentElement.clientHeight;
+    let _clientH = document.documentElement.clientHeight
     return {
       tagShow: false,
       BarActive: this.$route.path,
       walletShow: false,
       BarList: [
         {
-          name: "Explore",
-          img: require("../assets/ExploreBar.png"),
-          path: "/",
+          name: 'Explore',
+          img: require('../assets/ExploreBar.png'),
+          path: '/'
         },
         {
-          name: "Earn",
-          img: require("../assets/EarnBar.png"),
-          path: "/earn",
+          name: 'Event',
+          img: require('../assets/Event.png'),
+          path: '/event'
         },
         {
-          name: "Chat",
-          img: require("../assets/ChatBar.png"),
-          path: "/chat",
+          name: 'Earn',
+          img: require('../assets/EarnBar.png'),
+          path: '/earn'
         },
         {
-          name: "Home",
-          img: require("../assets/HomeBar.png"),
-          path: "/home",
+          name: 'Chat',
+          img: require('../assets/ChatBar.png'),
+          path: '/chat'
         },
-      ],
-    };
+        {
+          name: 'Home',
+          img: require('../assets/HomeBar.png'),
+          path: '/home'
+        }
+      ]
+    }
   },
   computed: {},
   components: {
     Wallet,
-    Tags,
+    Tags
   },
   methods: {
     myRules(name) {
-      if (name === "Chat") {
-        if (this.BarActive !== "/chat" && this.$store.state.chatRedPoint) {
-          return true;
+      if (name === 'Chat') {
+        if (this.BarActive !== '/chat' && this.$store.state.chatRedPoint) {
+          return true
         }
       }
-      if (name === "Earn") {
-        if (this.BarActive !== "/earn" && this.$store.state.eranRedPoint) {
-          return true;
+      if (name === 'Earn') {
+        if (this.BarActive !== '/earn' && this.$store.state.eranRedPoint) {
+          return true
         }
       }
-
     },
     tagshos() {
-      this.tagShow = true;
+      this.tagShow = true
     },
     save() {
-      this.$emit("save", true)
+      this.$emit('save', true)
     },
     BarClick(data) {
       if (this.BarActive != data.path) {
-        if (data.name == "Explore") {
+        if (data.name == 'Explore') {
           // 首页
-          this.walletShow = false;
-          localStorage.setItem("routers", "");
-          this.BarActive = data.path;
-          this.$router.push(data.path);
+          this.walletShow = false
+          localStorage.setItem('routers', '')
+          this.BarActive = data.path
+          this.$router.push(data.path)
         } else {
           // 其他tabbar
 
           // 未登录
           if (!this.$loginData.Auth_Token) {
-            localStorage.setItem("routers", data.path);
-            this.walletShow = true;
-            this.$router.push('/');
+            localStorage.setItem('routers', data.path)
+            this.walletShow = true
+            this.$router.push('/')
             return
           }
           // 小狐狸登录
           if (this.$loginData.loginType == 0) {
-            this.BarActive = data.path;
-            this.$router.push(data.path);
+            this.BarActive = data.path
+            this.$router.push(data.path)
             return
           }
 
           // particle登录
-          const particle = window.sessionStorage.getItem("particle");
+          const particle = window.sessionStorage.getItem('particle')
           if (this.$loginData.loginType == 1) {
-
             if (!window?.web3?.eth && !particle) {
-              localStorage.setItem("routers", data.path);
-              this.walletShow = true;
-              this.$router.push('/');
+              localStorage.setItem('routers', data.path)
+              this.walletShow = true
+              this.$router.push('/')
             } else {
-              this.BarActive = data.path;
-              this.$router.push(data.path);
+              this.BarActive = data.path
+              this.$router.push(data.path)
             }
-
           }
         }
       }
-    },
+    }
   },
   mounted: async function () {
-    this.BarActive = this.$route.path;
-    console.log(this.$route.path);
-  },
-};
+    this.BarActive = this.$route.path
+    console.log(this.$route.path)
+  }
+}
 </script>
 <style lang="scss">
 @media screen and (min-width: 750px) {
@@ -154,7 +159,7 @@ export default {
   .bar_list {
     position: relative;
     height: 100%;
-    width: 25%;
+    width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,7 +177,7 @@ export default {
 
     .barName {
       font-weight: 900;
-      font-family: "Inter";
+      font-family: 'Inter';
       font-style: normal;
       font-size: 20px;
       color: #fff;
@@ -194,6 +199,9 @@ export default {
       }
 
       &.imgs4 {
+        width: 27px;
+      }
+      &.imgs5 {
         width: 27px;
       }
     }
