@@ -48,13 +48,53 @@
         </div>
         <!-- 按钮 -->
         <div class="footerBtn">
-            <div class="btn">
+            <div class="btn" @click="check">
                 <div class="earn_diamond">
                     <img src="@/assets/diamond.png" alt />
                     <span>Earn</span>
                 </div>Check in and claim airdrop
             </div>
         </div>
+        <!-- 成功弹窗 -->
+        <van-dialog v-model="successCheckShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+            :show-cancel-button="false" :show-confirm-button="false">
+            <div class="introduce">
+                <p class="title">
+                    Checked in!
+                </p>
+                <p class="earnVsoul">
+                    You Earned 500 vSOUL
+                </p>
+                <div>
+                    <img class="vsImg" src="@/assets/successCheck.png" alt />
+                </div>
+                <div class="setBut">
+                    <button>GO TO CHAT and Connect</button>
+                    <button class="backBtn" @click="successCheckShow = false">back</button>
+                </div>
+            </div>
+        </van-dialog>
+        <!-- 失败弹窗 -->
+        <van-dialog v-model="failCheckShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+            :show-cancel-button="false" :show-confirm-button="false">
+            <div class="introduce">
+                <p class="title">
+                    SOrry!
+                </p>
+                <p class="detail">
+                    Check in failed.
+                </p>
+                <p class="detail">
+                    It seems you are too far away from the event.
+                </p>
+                <div>
+                    <img class="vsImg" src="@/assets/sorry.png" alt />
+                </div>
+                <div class="setBut">
+                    <button class="backBtn" @click="failCheckShow = false">back</button>
+                </div>
+            </div>
+        </van-dialog>
         <TabBar ref="tabbar"></TabBar>
     </div>
 </template>
@@ -65,7 +105,8 @@ import methods from './src/methods'
 export default {
     data() {
         return {
-
+            successCheckShow: false,
+            failCheckShow: false
         }
     },
     methods: methods,

@@ -28,5 +28,12 @@ export default {
         // do something
         console.log(e)
       })
+  },
+  check() {
+    // if () {
+    // this.successCheckShow = true
+    // } else {
+    this.failCheckShow = true
+    // }
   }
 }
