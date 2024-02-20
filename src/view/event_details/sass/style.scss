@@ -76,4 +76,26 @@
             }
         }
     }
+
+    .banner {
+        width: 100%;
+    }
+
+    .detail {
+        .title {
+            font-family: Inter;
+            font-weight: 700;
+            color: #000;
+            font-size: 22px;
+            margin-top: 7px;
+        }
+
+        .time {
+            margin-top: 7px;
+        }
+
+        .desc {
+            margin-top: 7px;
+        }
+    }
 }

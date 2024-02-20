@@ -13,6 +13,12 @@
                 <img class="label" src="@/assets/label.png" alt />
             </div>
         </div>
+        <img class="banner" src="@/assets/eventActive1.png" alt />
+        <div class="detail">
+            <h1 class="title">HongKong Web3 Festival</h1>
+            <p class="time">Apr 7 at 10:00 (UTC+8)</p>
+            <p class="desc">HKCEC HALL3FG</p>
+        </div>
     </div>
 </template>
 <style lang="scss">
