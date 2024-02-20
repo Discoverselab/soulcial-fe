@@ -7,8 +7,8 @@
           class="Tab_list"
           @click="changeTab(item.id)"
           :class="{
-          Tab_list_Active: TabActive == item.id,
-        }"
+                        Tab_list_Active: TabActive == item.id,
+                      }"
           v-for="(item, index) in TabList"
           :key="index"
         >{{ item.name }}</div>
