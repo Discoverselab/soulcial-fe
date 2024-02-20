@@ -42,7 +42,8 @@
             <div class="fw500 detail">
                 The inaugural Web3 Festival, co-hosted by Wanxiang Blockchain Labs and HashKey Group and partnering with
                 OKX, will take place on April 12-15, 2023 in Hong Kong Convention and Exhibition Center (HKCEC). This
-                four-day event will see over 300 industry speakers, over 100 up-and-coming Web3 projects, esteemed venture
+                four-day event will see over 300 industry speakers, over 100 up-and-coming Web3 projects, esteemed
+                venture
                 capitalist entities, and representatives from the Hong Kong government.
             </div>
         </div>
