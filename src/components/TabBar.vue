@@ -2,10 +2,7 @@
   <!-- tabBar -->
   <div id="barCont" class="barCont">
     <div @click="BarClick(item)" class="bar_list" v-for="(item, index) in BarList" :key="index">
-      <div
-        v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules(item.name)"
-        class="dot"
-      ></div>
+      <div v-if="['Earn'].includes(item.name) && BarActive != item.path && myRules(item.name)" class="dot"></div>
       <p v-if="BarActive != item.path" class="barName">{{ item.name }}</p>
       <img :class="`imgs${index + 1}`" v-else :src="item.img" alt />
     </div>
@@ -201,9 +198,10 @@ export default {
       &.imgs4 {
         width: 27px;
       }
-      // &.imgs5 {
-      //   width: 27px;
-      // }
+
+      &.imgs5 {
+        width: 27px;
+      }
     }
   }
 }
