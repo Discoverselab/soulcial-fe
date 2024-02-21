@@ -44,7 +44,7 @@
         <!-- 未走算分流程从活动进入时 -->
         <div class="noScore">
           <p class="role">What's Your Web3 SOUL?</p>
-          <button class="reveal">reveal my SOUl</button>
+          <button class="reveal" @click="$router.push('/twitterAuth')">reveal my SOUl</button>
         </div>
         <!-- 走完算分流程 -->
         <div class="soul" @click="$router.push('/share')">
