@@ -56,15 +56,17 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
                 .nameAddres_cont {
                     width: 100%;
+
                     .name {
                         font-family: "Inter";
                         font-style: normal;
                         font-weight: 700;
                         color: #000;
                         margin-bottom: 6px;
-                         
+
                         font-size: 20px;
                         letter-spacing: -0.4px;
                         // text-transform: capitalize;
@@ -74,25 +76,29 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+
                         .twitterBrid {
                             margin-left: 0;
                             cursor: pointer;
                         }
+
                         .address {
                             display: flex;
                             align-items: center;
                             line-height: 24px;
+
                             span {
                                 font-family: "Inter";
-                            font-style: normal;
-                            font-weight: 500;
-                            color: #000;
-                            font-size: 14px;
-                            opacity: 0.6;
-                            
+                                font-style: normal;
+                                font-weight: 500;
+                                color: #000;
+                                font-size: 14px;
+                                opacity: 0.6;
+
                             }
-                            
+
                         }
+
                         img {
                             display: inline-block;
                             width: 16px;
@@ -104,6 +110,7 @@
                         .Connects {
                             // width: 80px;
                             opacity: 1;
+
                             .userBtn {
                                 display: flex;
                                 padding: 2px 12px;
@@ -127,7 +134,8 @@
                                     margin-left: 0;
                                 }
                             }
-                            .connect{
+
+                            .connect {
                                 border: 2px solid #000;
                             }
                         }
@@ -263,7 +271,31 @@
             position: relative;
             z-index: 1;
 
-            // border-bottom: 2px solid #F5F5ED;
+            //  未走算分流程从活动进入时 
+            .noScore {
+                opacity: .9;
+                position: absolute;
+                top: 0;
+                left: -10px;
+                width: calc(100% + 20px);
+                height: calc(100% - 60px);
+                background-color: #fff;
+                z-index: 999;
+                text-align: center;
+                text-transform: uppercase;
+
+                .role {
+                    margin-top: 100px;
+                    font-family: DINCond-Bold;
+                    font-size: 60px;
+                    font-weight: 500;
+                    letter-spacing: -0.02em;
+                }
+
+
+            }
+
+            // 走完算分流程 
             .soul {
                 top: 0;
                 left: 0;
@@ -638,6 +670,7 @@
         align-items: center;
         justify-content: center;
     }
+
     .introduce {
         .cancelConnect {
             color: #000;

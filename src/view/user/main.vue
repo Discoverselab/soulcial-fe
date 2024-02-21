@@ -50,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="bio" >{{ UserInfo.bio }}</div>
+      <div class="bio">{{ UserInfo.bio }}</div>
       <!-- User label -->
       <div class="label_cont">
         <div class="label_left">
@@ -61,6 +61,11 @@
       </div>
       <!-- Calculate points -->
       <div class="Calculate">
+        <!-- 未走算分流程从活动进入时 -->
+        <div class="noScore">
+          <p class="role">Not revealed</p>
+        </div>
+        <!-- 走完算分流程 -->
         <div class="soul">
           <span :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)">{{ `${UserInfo.personality}
                       ${UserInfo.chracter}` || '-' }}</span>
@@ -114,8 +119,8 @@
     </div>
     <!-- NFT list -->
     <div class="nft_cont" v-if="NftList.length">
-      <div class="nft_list" v-for="(item, index) in NftList" @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-        :key="index">
+      <div class="nft_list" v-for="(item, index) in NftList"
+        @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)" :key="index">
         <div class="img_cont">
           <img class="nftUrl" :src="item.squarePictureUrl" alt />
           <div v-if="TabActive == 1 || TabActive == 2" class="point">
@@ -139,8 +144,8 @@
           <div class="price_botm">
             <!-- <span class="bot_price">{{ item.pickStatus == 1 ? (item.price | formatNumber) + ` ${$network}` : '--' }}</span> -->
             <span class="bot_price">
-              <span v-if="item.pickStatus == 1">{{item.price | formatNumber}} {{ $network }}</span>
-              <span v-else>{{'--'}}</span>
+              <span v-if="item.pickStatus == 1">{{ item.price | formatNumber }} {{ $network }}</span>
+              <span v-else>{{ '--' }}</span>
             </span>
             <!-- <span class="bot_price">{{ item.price || 0 }} {{ $network }}</span> -->
           </div>
@@ -224,7 +229,7 @@ export default {
   },
   created() {
     let inviteCode = "";
-    if(window.location.href.indexOf("/t/") > -1){
+    if (window.location.href.indexOf("/t/") > -1) {
       inviteCode = window.location.href.split("/t/")[1];
       window.sessionStorage.setItem("inviteCode", inviteCode);
     }

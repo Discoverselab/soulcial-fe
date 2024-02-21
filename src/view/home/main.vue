@@ -11,13 +11,7 @@
       </div>
       <!-- Avatar name and address -->
       <div class="userinfo">
-        <img
-          @click="goTwitter(UserInfo)"
-          class="portrait"
-          @error="$handleErrorImg"
-          :src="UserInfo.avatar"
-          alt
-        />
+        <img @click="goTwitter(UserInfo)" class="portrait" @error="$handleErrorImg" :src="UserInfo.avatar" alt />
         <!--  -->
         <div class="nameAddres" v-if="UserInfo.userName">
           <p class="name">{{ UserInfo.userName }}</p>
@@ -27,52 +21,45 @@
           </p>
         </div>
       </div>
-      <div
-        class="bio"
-        :class="{noBio: !UserInfo.bio}"
-        @click="jumpSettingBio(UserInfo.bio)"
-      >{{ UserInfo.bio || "Edit Bio" }}</div>
+      <div class="bio" :class="{ noBio: !UserInfo.bio }" @click="jumpSettingBio(UserInfo.bio)">
+        {{ UserInfo.bio || 'Edit Bio' }}
+      </div>
       <!-- User label -->
       <div class="label_cont">
-        <div
-          v-if="TagsList.length"
-          style="display: flex;align-items: center;justify-content: space-between;"
-        >
+        <div v-if="TagsList.length" style="display: flex; align-items: center; justify-content: space-between">
           <div class="label_left">
-            <svg-icon
-              v-for="(item, index) in TagsList"
-              :key="index"
-              :className="`svgName${item}`"
-              :iconClass="`tag${item}`"
-            ></svg-icon>
+            <svg-icon v-for="(item, index) in TagsList" :key="index" :className="`svgName${item}`"
+              :iconClass="`tag${item}`"></svg-icon>
           </div>
           <img class="edit" @click="tagShow" src="../../assets/edit.png" alt />
         </div>
         <div class="set_but" v-else>
-          <button style="margin-top: 0;" class="Cancel" @click="tagShow">Select your interest tags</button>
+          <button style="margin-top: 0" class="Cancel" @click="tagShow">
+            Select your interest tags
+          </button>
         </div>
       </div>
       <!-- Calculate points -->
       <div class="Calculate">
+        <!-- 未走算分流程从活动进入时 -->
+        <div class="noScore">
+          <p class="role">What's Your Web3 SOUL?</p>
+          <button class="reveal">reveal my SOUl</button>
+        </div>
+        <!-- 走完算分流程 -->
         <div class="soul" @click="$router.push('/share')">
-          <span
-            :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)"
-          >{{ `${UserInfo.personality} ${UserInfo.chracter}` || '-' }}</span>
+          <span :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)">{{
+            `${UserInfo.personality}
+                      ${UserInfo.chracter}` || '-'
+          }}</span>
           <img src="@/assets/sbti.png" alt />
         </div>
         <button class="Update" @click="Update">
           <img src="../../assets/time.png" class="time" alt />
           Update
         </button>
-        <Hexagon
-          ref="radar"
-          :clickable="true"
-          v-if="this.values.length > 5"
-          :type="true"
-          :level="UserInfo.level"
-          :levelScore="UserInfo.levelScore"
-          :values="values"
-        />
+        <Hexagon ref="radar" :clickable="true" v-if="this.values.length > 5" :type="true" :level="UserInfo.level"
+          :levelScore="UserInfo.levelScore" :values="values" />
         <!-- Ranking data information -->
         <div class="rank_cont">
           <!-- <div @click="FollList(1)" class="rank_list">
@@ -103,37 +90,28 @@
           <div class="earn_diamond">
             <img src="@/assets/diamond.png" alt />
             <span>Earn</span>
-          </div>invite friend
+          </div>
+          invite friend
         </div>
       </div>
     </div>
     <!-- Tab -->
     <div class="TabCont">
-      <div
-        class="Tab_list"
-        :class="{
-        Tab_list_Active: TabActive == item.id,
-      }"
-        @click="TabClick(item.id)"
-        v-for="(item, index) in TabList"
-        :key="index"
-      >{{ item.name }}</div>
+      <div class="Tab_list" :class="{
+        Tab_list_Active: TabActive == item.id
+      }" @click="TabClick(item.id)" v-for="(item, index) in TabList" :key="index">
+        {{ item.name }}
+      </div>
     </div>
-    <div class="set_but" v-if="TabActive == 1 ">
-      <button
-        @click="showLaunch"
-        :disabled="!UserInfo.mintStatus"
-        :class="{disabled: !UserInfo.mintStatus}"
-      >Launch SoulCast</button>
+    <div class="set_but" v-if="TabActive == 1">
+      <button @click="showLaunch" :disabled="!UserInfo.mintStatus" :class="{ disabled: !UserInfo.mintStatus }">
+        Launch SoulCast
+      </button>
     </div>
     <!-- NFT list -->
     <div class="nft_cont" v-if="NftList.length">
-      <div
-        class="nft_list"
-        v-for="(item, index) in NftList"
-        @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-        :key="index"
-      >
+      <div class="nft_list" v-for="(item, index) in NftList"
+        @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)" :key="index">
         <div class="img_cont">
           <img class="nftUrl" :src="item.squarePictureUrl" alt />
           <div v-if="TabActive == 1 || TabActive == 2" class="point">
@@ -156,19 +134,18 @@
           </div>
           <div class="price_botm">
             <span class="bot_price">
-              <span v-if="item.pickStatus == 1">{{item.price | formatNumber}} {{ $network }}</span>
-              <span v-else>{{'--'}}</span>
+              <span v-if="item.pickStatus == 1">{{ item.price | formatNumber }} {{ $network }}</span>
+              <span v-else>{{ '--' }}</span>
             </span>
-            <span
-              class="bot_price"
-              v-if="TabActive == 2"
-            >{{ item.lastSale| formatNumber}} {{ $network }}</span>
+            <span class="bot_price" v-if="TabActive == 2">{{ item.lastSale | formatNumber }} {{ $network }}</span>
           </div>
         </div>
         <div class="Launching" v-if="TabActive === 3">
           <div class="LaunchingData" v-if="item.pickStatus > 0">
             <span v-if="!item.nowPickCount">Pump 0/4</span>
-            <span v-else>{{ item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4` }}</span>
+            <span v-else>{{
+              item.nowPickCount >= 4 ? 'PUMPING' : `Pump ${item.nowPickCount}/4`
+            }}</span>
           </div>
         </div>
       </div>
@@ -180,17 +157,12 @@
     <!-- <button @click="checkLink">12312312</button> -->
     <Overlay :overlayshow="overlayshow"></Overlay>
     <!-- launch次数弹窗 -->
-    <van-dialog
-      v-model="launchShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
+    <van-dialog v-model="launchShow" :close-on-click-overlay="true" :z-index="9999999" :show-cancel-button="false"
+      :show-confirm-button="false">
       <div class="introduce">
         <p class>Want to Free Launch Your Own SoulCast NFT？</p>
         <p class>PUMP 3 Different SoulCast to Unlock!</p>
-        <p class>{{`（Pumped ${UserInfo.pickCount >= 3 ? 3 :UserInfo.pickCount }/3）`}}</p>
+        <p class>{{ `（Pumped ${UserInfo.pickCount >= 3 ? 3 : UserInfo.pickCount}/3）` }}</p>
         <div class="setBut">
           <button @click="goPump" v-if="UserInfo.pickCount < 3">Go to PUMP</button>
           <button @click="goLaunch" v-else>Free Launch SoulCast</button>
@@ -199,18 +171,13 @@
       </div>
     </van-dialog>
     <!-- 没有绑定twitter时展示 -->
-    <van-dialog
-      v-model="bindTwitterShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      :show-cancel-button="false"
-      :show-confirm-button="false"
-    >
+    <van-dialog v-model="bindTwitterShow" :close-on-click-overlay="true" :z-index="9999999" :show-cancel-button="false"
+      :show-confirm-button="false">
       <div class="introduce">
         <p class>You should link your Twitter account before launch your SoulCast NFT.</p>
         <div class="setBut">
           <button @click="$router.push('/twitterAuth')">Go to link</button>
-          <button style="background-color: #DFDFCE;" @click=" bindTwitterShow = false">Cancel</button>
+          <button style="background-color: #dfdfce" @click="bindTwitterShow = false">Cancel</button>
         </div>
       </div>
     </van-dialog>
@@ -314,12 +281,13 @@ export default {
     window.removeEventListener('scroll', this.scrollToTop)
     next()
   },
-  destroyed() {}
+  destroyed() { }
 }
 </script>
 
 <style lang="scss">
 @import './sass/style.scss';
+
 .home {
   .van-dialog {
     width: 342px;
