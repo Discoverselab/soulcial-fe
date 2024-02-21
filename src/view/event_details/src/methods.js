@@ -2,7 +2,8 @@ import { Loader } from '@googlemaps/js-api-loader' //引入
 const loader = new Loader({
   apiKey: 'AIzaSyAgiV_tJwsbjj3twMIIQZ87f6Sz3SHWBg8', //之前的key
   version: 'weekly', //版本
-  libraries: ['places']
+  libraries: ['places'],
+  language: 'en' // 设置地图显示的语言为英文
 })
 
 export default {
