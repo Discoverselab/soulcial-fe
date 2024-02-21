@@ -48,7 +48,7 @@
             </div>
         </div>
         <!-- 按钮 -->
-        <div class="footerBtn">
+        <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }">
             <div class="btn" @click="check">
                 <div class="earn_diamond">
                     <img src="@/assets/diamond.png" alt />
@@ -113,6 +113,7 @@ export default {
     methods: methods,
     created() {
         this.initMap()
+        console.log(this._isPhoneMobile(), '111')
     },
     components: {
         TabBar,

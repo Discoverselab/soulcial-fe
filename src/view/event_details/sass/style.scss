@@ -1,5 +1,5 @@
 .eventDetails {
-    padding: 20px 24px 100px 24px;
+    padding: 20px 24px 180px 24px;
 
     .fw500 {
         font-weight: 500;
@@ -196,6 +196,13 @@
                 }
             }
         }
+    }
+
+    // 按钮在 /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/的情况下悬浮
+    .suspension {
+        position: fixed;
+        bottom: 100px;
+        width: calc(100% - 48px);
     }
 
     // 弹窗

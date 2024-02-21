@@ -6,6 +6,13 @@ const loader = new Loader({
 })
 
 export default {
+  // 是否是手机类型
+  _isPhoneMobile() {
+    let flag = navigator.userAgent.match(
+      /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    )
+    return flag
+  },
   initMap() {
     let center = { lat: 40.7128, lng: -74.006 } //地图中心店
     const mapOptions = {
