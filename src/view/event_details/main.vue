@@ -9,7 +9,8 @@
                 <p class="name">Event Details</p>
             </div>
             <div class="operate">
-                <img class="collect" src="@/assets/collect.png" alt />
+                <img v-if="collectSuccess" class="collect" src="@/assets/collectActive.png" @click="collectToggle" alt="">
+                <img v-else class="collect" src="@/assets/collect.png" @click="collectToggle" alt />
                 <img class="label" src="@/assets/label.png" alt />
             </div>
         </div>
@@ -107,7 +108,8 @@ export default {
     data() {
         return {
             successCheckShow: false,
-            failCheckShow: false
+            failCheckShow: false,
+            collectSuccess: false
         }
     },
     methods: methods,

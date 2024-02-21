@@ -2,7 +2,9 @@
   min-height: 100vh;
   padding: 26px 20px 100px 20px;
   box-sizing: border-box;
-
+  .fw500 {
+    font-weight: 500;
+}
   .TabCont {
     display: flex;
     align-items: center;

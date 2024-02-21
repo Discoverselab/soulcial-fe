@@ -15,7 +15,7 @@ export default {
     return flag
   },
   initMap() {
-    let center = { lat: 40.7128, lng: -74.006 } //地图中心店
+    let center = { lat: 40.7128, lng: -74.006 } //地图中心点
     const mapOptions = {
       center: center,
       zoom: 12,
@@ -31,12 +31,34 @@ export default {
           position: center,
           map: map
         })
+
+        // 添加点击事件监听器
+        map.addListener('click', function (event) {
+          // 获取点击位置的经纬度
+          const lat = event.latLng.lat()
+          const lng = event.latLng.lng()
+
+          // 构建 Google 地图 URL
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+
+          // 使用 <a> 标签在新标签页中打开 Google 地图
+          const googleMapsLink = document.createElement('a')
+          googleMapsLink.href = googleMapsUrl
+          googleMapsLink.target = '_blank'
+          document.body.appendChild(googleMapsLink)
+          googleMapsLink.click()
+        })
       })
       .catch(e => {
-        // do something
+        // 处理加载地图失败的情况
         console.log(e)
       })
   },
+  // 收藏
+  collectToggle() {
+    this.collectSuccess = !this.collectSuccess
+  },
+  // 签到
   check() {
     // if () {
     // this.successCheckShow = true
