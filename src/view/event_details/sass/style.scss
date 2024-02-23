@@ -120,6 +120,11 @@
         background-color: #fff;
         padding: 16px;
 
+        // 隐藏谷歌地图右下角工具栏
+        .gm-style-cc {
+            display: none !important;
+        }
+
         .mapHeader {
             display: flex;
             justify-content: space-between;
