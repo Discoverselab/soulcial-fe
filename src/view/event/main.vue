@@ -3,37 +3,34 @@
     <!-- Tab -->
     <div class="TabCont">
       <div class="Tab_left">
-        <div class="Tab_list" @click="changeTab(item.id)" :class="{
+        <div class="Tab_list" @click="changeTab(item)" :class="{
           Tab_list_Active: TabActive == item.id,
         }" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
-      </div>
-      <div class="Tab_right">
-        <img src="../../assets/sift.png" @click="SiftShow = true" alt />
-        <img class="searchImg" src="@/assets/search.png" @click="$router.push('/search')" alt />
       </div>
     </div>
     <div>
       <!-- all下显示banner -->
-      <div v-if="TabActive === 1">
-        <img class="banner" src="@/assets/eventActive1.png" alt />
+      <div v-if="TabActive === 1 && eventList[0]" @click="jumpToEventDetail(eventList[0].eventId)"
+        style="cursor: pointer;">
+        <img class="banner" :src="eventList[0].eventBannerUrl" alt />
         <div class="detail">
-          <h1 class="title">HongKong Web3 Festival</h1>
-          <p class="time fw500">Apr 7 at 10:00 (UTC+8)</p>
-          <p class="desc fw500">HKCEC HALL3FG</p>
+          <h1 class="title">{{ eventList[0].eventName }}</h1>
+          <p class="time fw500">{{ eventList[0].eventDate }}</p>
+          <p class="desc fw500">{{ eventList[0].eventAddress }}</p>
         </div>
       </div>
 
       <!-- 活动列表 -->
-      <van-list v-model="allLoading" offset="200" :finished="allFinished" loading-text="Loading" finished-text
-        :immediate-check="true" @load="allOnLoad">
-        <van-cell :center="true" v-for="item in allList" :key="item.id" @click="jumpToEventDetail">
+      <van-list v-model="eventLoading" offset="200" :finished="eventFinished" loading-text="Loading" finished-text
+        :immediate-check="true" @load="eventOnLoad">
+        <van-cell :center="true" v-for="item in eventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
           <template #title>
-            <img class="img" src="@/assets/eventActive1.png" alt />
+            <img class="img" :src="item.eventBannerUrl" alt />
           </template>
           <template #default>
-            <div class="title">{{ item.title }}</div>
-            <div class="time fw500">{{ item.time }}</div>
-            <div class="desc fw500">{{ item.desc }}</div>
+            <div class="title">{{ item.eventName }}</div>
+            <div class="time fw500">{{ item.eventDate }}</div>
+            <div class="desc fw500">{{ item.eventAddress }}</div>
           </template>
         </van-cell>
       </van-list>
@@ -53,31 +50,13 @@ export default {
     return {
       SiftShow: false,
       TabActive: 1,
-      allLoading: false,
-      allFinished: false,
+      eventLoading: false,
+      eventFinished: false,
       overlayshow: false,
       currentPage: 1,
       pageSize: 20,
-      allList: [
-        {
-          id: 1,
-          title: 'HongKong Web3 Festival',
-          time: 'Apr 7 at 10:00 (UTC+8)',
-          desc: 'Cyberport, HongKong'
-        },
-        {
-          id: 2,
-          title: 'HongKong Web3 Festival',
-          time: 'Apr 7 at 10:00 (UTC+8)',
-          desc: 'Cyberport, HongKong'
-        },
-        {
-          id: 3,
-          title: 'HongKong Web3 Festival',
-          time: 'Apr 7 at 10:00 (UTC+8)',
-          desc: 'Cyberport, HongKong'
-        }
-      ],
+      type: 0, // 0 All， 1 Star， 2 Joined
+      eventList: [],
       TabList: [
         {
           name: 'All',
@@ -96,6 +75,9 @@ export default {
     }
   },
   methods: methods,
+  created() {
+    this.getEventList()
+  },
   components: {
     Sift,
     TabBar,

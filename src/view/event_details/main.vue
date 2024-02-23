@@ -11,23 +11,21 @@
             <div class="operate">
                 <img v-if="collectSuccess" class="collect" src="@/assets/collectActive.png" @click="collectToggle" alt="">
                 <img v-else class="collect" src="@/assets/collect.png" @click="collectToggle" alt />
-                <img class="label" src="@/assets/label.png" alt />
+                <img class="label" src="@/assets/label.png" @click="forward" alt />
             </div>
         </div>
-        <img class="banner" src="@/assets/eventActive1.png" alt />
+        <img class="banner" :src="eventDetail.eventBanner" alt />
         <div class="detail">
-            <h1 class="title">HongKong Web3 Festival</h1>
-            <p class="time fw500">Apr 7 at 10:00 (UTC+8)</p>
-            <p class="desc fw500">HKCEC HALL3FG</p>
+            <h1 class="title">{{ eventDetail.eventName }}</h1>
+            <p class="time fw500">{{ eventDetail.eventDateDetail }}</p>
         </div>
         <!-- 谷歌地图 -->
         <div class="map">
             <div class="mapHeader">
                 <div class="desc fw500">
-                    Hong Kong Convention and Exhibition Centre,
-                    Expo Drive, Wan Chai, Hong Kong
+                   {{ eventDetail.eventAddress }}
                 </div>
-                <div class="copy">
+                <div class="copyAddress" @click="copyAddress">
                     <img src="@/assets/copyWhite.png" alt="">
                 </div>
             </div>
@@ -41,11 +39,7 @@
                 Info
             </div>
             <div class="fw500 detail">
-                The inaugural Web3 Festival, co-hosted by Wanxiang Blockchain Labs and HashKey Group and partnering with
-                OKX, will take place on April 12-15, 2023 in Hong Kong Convention and Exhibition Center (HKCEC). This
-                four-day event will see over 300 industry speakers, over 100 up-and-coming Web3 projects, esteemed
-                venture
-                capitalist entities, and representatives from the Hong Kong government.
+                {{ eventDetail.intro }}
             </div>
         </div>
         <!-- 按钮 -->
@@ -98,27 +92,39 @@
             </div>
         </van-dialog>
         <TabBar ref="tabbar"></TabBar>
+        <Overlay :overlayshow="overlayshow"></Overlay>
     </div>
 </template>
 <script>
 import TabBar from '@/components/TabBar.vue'
 import methods from './src/methods'
+import Overlay from '@/components/Overlay.vue'
 
 export default {
     data() {
         return {
             successCheckShow: false,
             failCheckShow: false,
-            collectSuccess: false
+            collectSuccess: false,
+            eventId: null,
+            eventDetail: {},
+            overlayshow: false
         }
     },
     methods: methods,
-    created() {
+    async created() {
+        if (this.$route.query && this.$route.query.eventId) {
+            this.eventId = this.$route.query.eventId;
+        } else if (this.$route.params && this.$route.params.id) {
+            this.eventId = this.$route.params.id;
+        }
+
+        await this.getEventDetail()
         this.initMap()
-        console.log(this._isPhoneMobile(), '111')
     },
     components: {
         TabBar,
+        Overlay
     }
 }
 </script>

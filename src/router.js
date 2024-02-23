@@ -35,7 +35,7 @@ import vsoul_introduce from '@/view/vsoul_introduce/main'
 import epoch_introduce from '@/view/epoch_introduce/main'
 import earn_lastweek from '@/view/earn_lastweek/main'
 import event from '@/view/event/main'
-import event_details from "@/view/event_details/main"
+import event_details from '@/view/event_details/main'
 Vue.use(Router)
 const router = new Router({
   mode: 'hash',
@@ -161,6 +161,16 @@ const router = new Router({
       component: user
     },
     {
+      path: '/event_details',
+      name: 'event_details',
+      component: event_details
+    },
+    {
+      path: '/e/:id',
+      name: 'event_details_id',
+      component: event_details
+    },
+    {
       path: '/:realTokenId/:code',
       name: 'share_pick',
       component: explore_details,
@@ -247,13 +257,7 @@ const router = new Router({
       path: '/earn_lastweek',
       name: 'earn_lastweek',
       component: earn_lastweek
-    },
-    {
-      path: '/event_details',
-      name: 'event_details',
-      component: event_details
-    },
-    
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

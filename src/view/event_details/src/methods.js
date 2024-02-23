@@ -1,4 +1,8 @@
+import { get } from '@/http/http.js'
 import { Loader } from '@googlemaps/js-api-loader' //引入
+import Clipboard from 'clipboard'
+import { website } from '@/http/api.js'
+import { Toast } from 'vant'
 const loader = new Loader({
   apiKey: 'AIzaSyAgiV_tJwsbjj3twMIIQZ87f6Sz3SHWBg8', //之前的key
   version: 'weekly', //版本
@@ -7,6 +11,48 @@ const loader = new Loader({
 })
 
 export default {
+  // 复制活动地址
+  copyAddress() {
+    const clipboard = new Clipboard('.copyAddress', {
+      text: () => this.eventDetail.eventAddress
+    })
+    clipboard.on('success', e => {
+      Toast('Copy successfully')
+    })
+    clipboard.on('error', e => {
+      Toast('No content')
+    })
+  },
+  //  获取活动详情
+  async getEventDetail() {
+    try {
+      this.overlayshow = true
+      let url = this.$api.infor.getEventDetail + `?eventId=${this.eventId}`
+      const res = await get(url)
+      const { code, data } = res
+      if (code === 200) {
+        this.eventDetail = data
+        this.collectSuccess = this.eventDetail.isStar
+      }
+      this.overlayshow = false
+    } catch (error) {
+      // 错误处理
+      console.error(error)
+      this.overlayshow = false
+    }
+  },
+  // 转发
+  forward() {
+    const clipboard = new Clipboard('.label', {
+      text: () => `${website}/#/e/${this.eventId}`
+    })
+    clipboard.on('success', e => {
+      Toast('Copy successfully')
+    })
+    clipboard.on('error', e => {
+      Toast('No content')
+    })
+  },
   // 是否是手机类型
   _isPhoneMobile() {
     let flag = navigator.userAgent.match(
@@ -15,7 +61,9 @@ export default {
     return flag
   },
   initMap() {
-    let center = { lat: 40.7128, lng: -74.006 } //地图中心点
+    const lat = Number(this.eventDetail.latitude)
+    const lng = Number(this.eventDetail.longitude)
+    let center = { lat: lat, lng: lng } //地图中心点
     const mapOptions = {
       center: center,
       zoom: 12,
@@ -57,13 +105,45 @@ export default {
   // 收藏
   collectToggle() {
     this.collectSuccess = !this.collectSuccess
+    if (this.collectSuccess) {
+      // 收藏活动
+      let url = this.$api.infor.getCollect + `?eventId=${this.eventId}`
+      get(url)
+        .then(res => {
+          Toast('collect successfully')
+        })
+        .catch(error => {
+          Toast('something wrong')
+        })
+    } else {
+      // 取消收藏
+      let url = this.$api.infor.getUnCollect + `?eventId=${this.eventId}`
+      get(url)
+        .then(res => {
+          Toast('unCollect successfully')
+        })
+        .catch(error => {
+          Toast('something wrong')
+        })
+    }
   },
   // 签到
   check() {
+    let url =
+      this.$api.infor.getCheck +
+      `?eventId=${this.eventId}&latitude=${Number(this.eventDetail.latitude)}&longitude=${Number(
+        this.eventDetail.longitude
+      )}`
+    get(url)
+      .then(res => {
+        const { code, data } = res
+        console.log(res, 'res')
+      })
+      .catch(error => {})
     // if () {
     // this.successCheckShow = true
     // } else {
-    this.failCheckShow = true
+    // this.failCheckShow = true
     // }
   }
 }

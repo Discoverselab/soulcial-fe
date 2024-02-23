@@ -13,6 +13,9 @@
             display: block;
             width: 16px;
             height: 16px;
+        }
+
+        .empty {
             margin-left: 10px;
         }
 
@@ -125,7 +128,7 @@
                 width: 270px;
             }
 
-            .copy {
+            .copyAddress {
 
                 img {
                     cursor: pointer;
@@ -144,6 +147,8 @@
     }
 
     .info {
+        margin-top: 20px;
+
         .detail {
             line-height: 20px;
         }

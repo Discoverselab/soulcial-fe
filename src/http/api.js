@@ -64,7 +64,12 @@ export default {
     pictureUpload: `${commonApi}/AIGC/pictureUpload`, //上传图片
     getSearchList: `${commonApi}/explor/indexSearch`, // 首页搜索
     getVSoulRank: `${commonApi}/wallect/getVSoulRank`, //vSOUL排行榜
-    getEarnedMoney: `${commonApi}/wallect/getCurrentUserEarnings` // 获取用户当前赚取的钱
+    getEarnedMoney: `${commonApi}/wallect/getCurrentUserEarnings`, // 获取用户当前赚取的钱
+    getEventList: `${commonApi}/event/getEventList`, // 获取活动列表
+    getEventDetail: `${commonApi}/event/getEventDetail`, //获取活动详情
+    getCheck: `${commonApi}/event/eventCheckIn`, //活动签到
+    getCollect: `${commonApi}/event/eventStar`, // 活动收藏
+    getUnCollect: `${commonApi}/event/eventUnStar` // 活动取消收藏
   },
   chat: {
     getUserMessage: `${commonApi}/message/getUserMessage`,
