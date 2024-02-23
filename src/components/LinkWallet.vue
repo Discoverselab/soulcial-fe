@@ -6,7 +6,7 @@
         <p class="headLin" @click="close"></p>
         <P class="title">Connect Wallet</P>
         <img class="wallet_img" src="../assets/wellat_img.png" alt />
-        <div v-if="!isPWA" :class="{ noBottom: !isPWA }" class="wallet_list" @click="metamask">
+        <div v-if="!isPWA && !_isPhoneMobile()" :class="{ noBottom: !isPWA }" class="wallet_list" @click="metamask">
           <div class="list_left">
             <img src="../assets/metamask.png" alt />
             <p>MetaMask</p>
@@ -38,48 +38,68 @@
         </template>
 
         <template v-if="!isPWA">
-          <div class="lins">
-            <p class="lin"></p>
-            <p class="lin_text">Or connect with</p>
-            <p class="lin"></p>
+          <!-- 非手机端显示开始 -->
+          <div v-if="!_isPhoneMobile()">
+            <div class="lins">
+              <p class="lin"></p>
+              <p class="lin_text">Or connect with</p>
+              <p class="lin"></p>
+            </div>
+            <div class="img_list">
+              <img @click="particle('phone', 1)" src="../assets/Subtract1.png" alt />
+              <img @click="particle('email', 2)" src="../assets/Exclude.png" alt />
+              <!-- <img @click="particle('apple', 3)" src="../assets/phones.png" alt="" /> -->
+              <img @click="particle('google', 4)" src="../assets/gogo.png" alt />
+              <!-- <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" /> -->
+            </div>
           </div>
-          <div class="img_list">
-            <img @click="particle('phone', 1)" src="../assets/Subtract1.png" alt />
-            <img @click="particle('email', 2)" src="../assets/Exclude.png" alt />
-            <!-- <img @click="particle('apple', 3)" src="../assets/phones.png" alt="" /> -->
-            <img @click="particle('google', 4)" src="../assets/gogo.png" alt />
-            <!-- <img @click="particle('google', 5)" src="../assets/Twitters.png" alt="" /> -->
+          <!-- 非手机端显示结束 -->
+
+          <!-- 手机端开始 -->
+          <div v-else>
+            <div class="wallet_list" @click="particle('phone', 1)">
+              <div class="list_left">
+                <img src="../assets/Subtract1.png" alt />
+                <p>Phone</p>
+              </div>
+              <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
+            </div>
+            <div class="wallet_list" @click="particle('email', 2)">
+              <div class="list_left">
+                <img src="../assets/Exclude.png" alt />
+                <p>Email</p>
+              </div>
+              <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
+            </div>
+            <div class="wallet_list" @click="particle('google', 4)">
+              <div class="list_left">
+                <img src="../assets/gogo.png" alt />
+                <p>Google</p>
+              </div>
+              <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
+            </div>
+            <div class="wallet_list" @click="metamask">
+              <div class="list_left">
+                <img src="../assets/metamask.png" alt />
+                <p>MetaMask</p>
+              </div>
+              <svg-icon class="Polygon" iconClass="Polygon"></svg-icon>
+            </div>
           </div>
+
+          <!-- 手机端结束 -->
         </template>
       </div>
     </van-action-sheet>
-    <van-dialog
-      v-model="dialogShow"
-      :close-on-click-overlay="true"
-      :z-index="9999999"
-      title="Create Lens Handle"
-      :before-close="newGroupBefColse"
-      confirmButtonText="CONFIRM"
-      @confirm="dialog_confirm"
-    >
-      <input
-        placeholder="Please enter"
-        onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')"
-        maxlength="10"
-        type="text"
-        @input="restrictInput"
-        v-model="handle"
-      />
+    <van-dialog v-model="dialogShow" :close-on-click-overlay="true" :z-index="9999999" title="Create Lens Handle"
+      :before-close="newGroupBefColse" confirmButtonText="CONFIRM" @confirm="dialog_confirm">
+      <input placeholder="Please enter" onkeyup="this.value = this.value.replace(/[^A-z0-9]/, '')" maxlength="10"
+        type="text" @input="restrictInput" v-model="handle" />
       <p class="point_out">Handle must be minimum of 5 length and maximum of 31 length</p>
     </van-dialog>
     <!-- 白名单弹窗 -->
-    <van-dialog
-      v-model="whiteShow"
-      :close-on-click-overlay="false"
-      :z-index="99999999"
-      confirmButtonText="Join the waitlist"
-      @confirm="white_confirm"
-    >
+    <van-dialog v-model="whiteShow" :close-on-click-overlay="false" :z-index="99999999"
+      confirmButtonText="Join the waitlist" @confirm="white_confirm">
       <p class="fee_dint">
         Sorry, Soulcial is now in beta stage. It seems that you are not eligible
         temporally. Please join the waitlist first.
@@ -119,6 +139,13 @@ export default {
   },
   components: { Overlay },
   methods: {
+    // 是否是手机类型
+    _isPhoneMobile() {
+      let flag = navigator.userAgent.match(
+        /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      )
+      return flag
+    },
     restrictInput(event) {
       const pattern = /^[a-zA-Z0-9]*$/
       const inputValue = event.target.value
@@ -185,11 +212,9 @@ export default {
       this.overlayshow = true
       let streamID = streamId ? streamId : Date.parse(new Date())
       let prefix = this.$api.login.login
-      let params = `?address=${this.address}&&loginType=${this.loginType}&&particleType=${
-        this.preferredAuthType
-      }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${
-        signParams?.message || ''
-      }&&signature=${signParams?.signature || ''}`
+      let params = `?address=${this.address}&&loginType=${this.loginType}&&particleType=${this.preferredAuthType
+        }&&dataverse-streamId=streamId${streamID}&&lensProfile=${lensId}&&userName=${handle}&&message=${signParams?.message || ''
+        }&&signature=${signParams?.signature || ''}`
       post(prefix + params)
         .then(res => {
           if (res.code === 200) {
