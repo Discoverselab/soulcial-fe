@@ -43,14 +43,30 @@
             </div>
         </div>
         <!-- 按钮 -->
-        <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }">
-            <div class="btn" @click="check">
-                <div class="earn_diamond">
-                    <img src="@/assets/diamond.png" alt />
-                    <span>Earn</span>
-                </div>Check in and claim airdrop
+        <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="eventDetail.link && !showCheck">
+            <div class="btn" @click="jumpToOutside">
+                Join Now
             </div>
         </div>
+        <template v-if="showCheck">
+            <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="!eventDetail.isCheckIn">
+                <div class="btn" @click="check">
+                    <div class="earn_diamond">
+                        <img src="@/assets/diamond.png" alt />
+                        <span>Earn</span>
+                    </div>Check in and claim airdrop
+                </div>
+            </div>
+            <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-else>
+                <div class="btn" @click="$router.push('/earn')">
+                    <div class="earn_diamond">
+                        <img src="@/assets/diamond.png" alt />
+                        <span>Earn</span>
+                    </div>Check in & earn vsoul
+                </div>
+            </div>
+        </template>
+
         <!-- 成功弹窗 -->
         <van-dialog v-model="successCheckShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
             :show-cancel-button="false" :show-confirm-button="false">
@@ -108,7 +124,8 @@ export default {
             collectSuccess: false,
             eventId: null,
             eventDetail: {},
-            overlayshow: false
+            overlayshow: false,
+            showCheck: false, // 是否显示在活动时间的按钮
         }
     },
     methods: methods,
@@ -120,6 +137,7 @@ export default {
         }
 
         await this.getEventDetail()
+        this.isEventTime()
         this.initMap()
     },
     components: {

@@ -3,6 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader' //引入
 import Clipboard from 'clipboard'
 import { website } from '@/http/api.js'
 import { Toast } from 'vant'
+import dayjs from 'dayjs'
 const loader = new Loader({
   apiKey: 'AIzaSyAgiV_tJwsbjj3twMIIQZ87f6Sz3SHWBg8', //之前的key
   version: 'weekly', //版本
@@ -11,6 +12,24 @@ const loader = new Loader({
 })
 
 export default {
+  // 是否是活动时间
+  isEventTime() {
+    // 获取当前时间
+    const currentTime = dayjs()
+    // 活动开始时间
+    const startTime = dayjs(this.eventDetail.startTime)
+    // 活动结束时间
+    const endTime = dayjs(this.eventDetail.endTime)
+    // 活动结束的下一天的午夜
+    const nextDayMidnight = endTime.add(1, 'day').startOf('day')
+    startTime.startOf('day')
+    // 如果当前时间晚于活动开始的当天的午夜，且早于活动结束的下一天的午夜，则设置 showCheck 为 true
+    if (currentTime.isAfter(startTime.startOf('day')) && currentTime.isBefore(nextDayMidnight)) {
+      this.showCheck = true
+    } else {
+      this.showCheck = false
+    }
+  },
   // 复制活动地址
   copyAddress() {
     const clipboard = new Clipboard('.copyAddress', {
@@ -137,13 +156,18 @@ export default {
     get(url)
       .then(res => {
         const { code, data } = res
-        console.log(res, 'res')
+        if (code === 200) {
+          this.successCheckShow = true
+        } else {
+          this.failCheckShow = true
+        }
       })
-      .catch(error => {})
-    // if () {
-    // this.successCheckShow = true
-    // } else {
-    // this.failCheckShow = true
-    // }
+      .catch(error => {
+        Toast('something wrong')
+      })
+  },
+  // 跳往外部链接
+  jumpToOutside() {
+    window.open(`https://${this.eventDetail.link}`, '_blank')
   }
 }
