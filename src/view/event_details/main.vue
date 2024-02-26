@@ -81,7 +81,7 @@
                     <img class="vsImg" src="@/assets/successCheck.png" alt />
                 </div>
                 <div class="setBut">
-                    <button>GO TO CHAT and Connect</button>
+                    <button @click="jumpToChat">GO TO CHAT and Connect</button>
                     <button class="backBtn" @click="successCheckShow = false">back</button>
                 </div>
             </div>

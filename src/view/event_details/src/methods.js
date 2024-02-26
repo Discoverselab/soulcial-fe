@@ -12,6 +12,9 @@ const loader = new Loader({
 })
 
 export default {
+  jumpToChat() {
+    this.$router.push('/chat')
+  },
   getUserPos() {
     var _this = this
     if (navigator.geolocation) {
