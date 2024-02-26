@@ -62,7 +62,7 @@
       <!-- Calculate points -->
       <div class="Calculate">
         <!-- 未走算分流程从活动进入时 -->
-        <div class="noScore">
+        <div class="noScore" v-if="!UserInfo.levelScore">
           <p class="role">Not revealed</p>
         </div>
         <!-- 走完算分流程 -->
