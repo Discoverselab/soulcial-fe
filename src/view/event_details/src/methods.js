@@ -12,6 +12,22 @@ const loader = new Loader({
 })
 
 export default {
+  getUserPos() {
+    var _this = this
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        //locationSuccess 获取成功的话
+        function (position) {
+          _this.userLon = position.coords.longitude
+          _this.userLat = position.coords.latitude
+        },
+        //locationError  获取失败的话
+        function (error) {
+          console.log(error)
+        }
+      )
+    }
+  },
   // 是否是活动时间
   isEventTime() {
     // 获取当前时间
@@ -150,9 +166,7 @@ export default {
   check() {
     let url =
       this.$api.infor.getCheck +
-      `?eventId=${this.eventId}&latitude=${Number(this.eventDetail.latitude)}&longitude=${Number(
-        this.eventDetail.longitude
-      )}`
+      `?eventId=${this.eventId}&latitude=${Number(this.userLat)}&longitude=${Number(this.userLon)}`
     get(url)
       .then(res => {
         const { code, data } = res

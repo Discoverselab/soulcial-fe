@@ -23,7 +23,7 @@
         <div class="map">
             <div class="mapHeader">
                 <div class="desc fw500">
-                   {{ eventDetail.eventAddress }}
+                    {{ eventDetail.eventAddress }}
                 </div>
                 <div class="copyAddress" @click="copyAddress">
                     <img src="@/assets/copyWhite.png" alt="">
@@ -126,6 +126,8 @@ export default {
             eventDetail: {},
             overlayshow: false,
             showCheck: false, // 是否显示在活动时间的按钮
+            userLon: null,
+            userLat: null
         }
     },
     methods: methods,
@@ -139,6 +141,9 @@ export default {
         await this.getEventDetail()
         this.isEventTime()
         this.initMap()
+    },
+    mounted() {
+        this.getUserPos()
     },
     components: {
         TabBar,
