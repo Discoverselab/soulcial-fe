@@ -111,8 +111,12 @@ export default {
         this.overlayshow = false
       })
   },
-  linkNftDetail(id) {
-    this.$router.push(`/explore_details?id=${id}&path=`)
+  linkNftDetail(item) {
+    if (item.eventId) {
+      this.$router.push(`/event_details?eventId=${item.eventId}`)
+    } else {
+      this.$router.push(`/explore_details?id=${item.tokenId}&path=`)
+    }
   },
   urls() {
     var urls = [

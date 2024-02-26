@@ -1,20 +1,11 @@
 <template>
-  <div
-    class="explore"
-    :class="{ background: showBackground && (TabActive == 1 || TabActive == 2) }"
-  >
+  <div class="explore" :class="{ background: showBackground && (TabActive == 1 || TabActive == 2) }">
     <!-- Tab -->
     <div class="TabCont">
       <div class="Tab_left">
-        <div
-          class="Tab_list"
-          :class="{
+        <div class="Tab_list" :class="{
           Tab_list_Active: TabActive == item.id,
-        }"
-          @click="changeTab(item.id)"
-          v-for="(item, index) in TabList"
-          :key="index"
-        >{{ item.name }}</div>
+        }" @click="changeTab(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
       </div>
       <div class="Tab_right">
         <img src="../../assets/sift.png" @click="SiftShow = true" alt />
@@ -24,44 +15,25 @@
     <!-- NFT List -->
     <!-- FOR YOU -->
     <div class="for_you" v-if="TabActive === 1 || TabActive === 2">
-      <van-list
-        v-model="loading"
-        offset="200"
-        loading-text="Loading"
-        :immediate-check="false"
-        :finished="finished"
-        finished-text
-        @load="onLoad"
-        v-if="nftList.length > 0"
-      >
+      <van-list v-model="loading" offset="200" loading-text="Loading" :immediate-check="false" :finished="finished"
+        finished-text @load="onLoad" v-if="nftList.length > 0">
         <div class="nft_cont">
           <div class="cont_cnet cont_left">
-            <div
-              @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-              class="Nft_list"
-              v-for="item in evenNftList"
-              :key="item.id"
-            >
+            <div @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)" class="Nft_list"
+              v-for="item in evenNftList" :key="item.id">
               <div class="img_icon">
-                <div class="match" v-if="item.pictureUrl ">
-                  <p
-                    :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                    class="center"
-                  >{{ item.pumpRate || item.match || "0" }}%</p>
-                  <p
-                    :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                    class="name"
-                  >{{item.pumpRate ? `earn` : 'match'}}</p>
+                <div class="match" v-if="item.pictureUrl">
+                  <p :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="center">{{ item.pumpRate
+                    || item.match || "0" }}%</p>
+                  <p :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="name">{{ item.pumpRate ?
+                    `earn` : 'match' }}</p>
                 </div>
                 <!-- <img  :src="item.pictureUrl" alt="" /> -->
                 <img v-lazy="item.pictureUrl" alt />
               </div>
               <div class="bottom_infor" v-if="item.pictureUrl">
-                <svg-icon
-                  :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                  class="svgName"
-                  :iconClass="urls()"
-                ></svg-icon>
+                <svg-icon :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="svgName"
+                  :iconClass="urls()"></svg-icon>
                 <div class="grade_price">
                   <div class="grade">
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
@@ -70,22 +42,16 @@
                       {{ getNFTLevel[item.level] }}
                     </p>
                   </div>
-                  <p
-                    class="price"
-                    v-if="item.price && item.pickStatus != 0"
-                  >{{ item.price | formatNumber }}{{ $network }}</p>
+                  <p class="price" v-if="item.price && item.pickStatus != 0">{{ item.price | formatNumber }}{{ $network }}
+                  </p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
 
-                  <p
-                    class="price priceinfp"
-                    v-else
-                    :style="getSoulSbtiStyle(item.soul)"
-                  >{{ item.soul || '-' }}</p>
+                  <p class="price priceinfp" v-else :style="getSoulSbtiStyle(item.soul)">{{ item.soul || '-' }}</p>
                 </div>
                 <!-- pump进度 -->
                 <div class="schedule">
                   <img class="love" src="@/assets/love.png" alt />
-                  <div class="num">{{ `${item.pickCount}/4`}}</div>
+                  <div class="num">{{ `${item.pickCount}/4` }}</div>
                 </div>
                 <!-- <div class="love">
               <img src="../../assets/love.png" alt="" />
@@ -95,32 +61,21 @@
             </div>
           </div>
           <div class="cont_cnet cont_right">
-            <div
-              @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)"
-              class="Nft_list"
-              v-for="item in oddNftList"
-              :key="item.id"
-            >
+            <div @click="$router.push(`/explore_details?id=${item.realTokenId}&path=`)" class="Nft_list"
+              v-for="item in oddNftList" :key="item.id">
               <div class="img_icon">
-                <div class="match" v-if="item.pictureUrl ">
-                  <p
-                    :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                    class="center"
-                  >{{ item.pumpRate || item.match || "0"}}%</p>
-                  <p
-                    :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                    class="name"
-                  >{{ item.pumpRate ? `earn` : 'match' }}</p>
+                <div class="match" v-if="item.pictureUrl">
+                  <p :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="center">{{ item.pumpRate
+                    || item.match || "0" }}%</p>
+                  <p :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="name">{{ item.pumpRate ?
+                    `earn` : 'match' }}</p>
                 </div>
                 <!-- <img :src="item.pictureUrl" alt="" /> -->
                 <img v-lazy="item.pictureUrl" alt />
               </div>
               <div class="bottom_infor" v-if="item.pictureUrl">
-                <svg-icon
-                  :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }"
-                  class="svgName"
-                  :iconClass="urls()"
-                ></svg-icon>
+                <svg-icon :style="{ color: `hsla(${item.colorAttribute + 120}, 60%, 60%, 1)` }" class="svgName"
+                  :iconClass="urls()"></svg-icon>
                 <div class="grade_price">
                   <div class="grade">
                     <img :class="`level${item.level}`" :src="levelImg[item.level]" alt />
@@ -129,21 +84,15 @@
                       {{ getNFTLevel[item.level] }}
                     </p>
                   </div>
-                  <p
-                    class="price"
-                    v-if="item.price && item.pickStatus != 0"
-                  >{{ item.price | formatNumber }}{{ $network }}</p>
+                  <p class="price" v-if="item.price && item.pickStatus != 0">{{ item.price | formatNumber }}{{ $network }}
+                  </p>
                   <!-- <p class="price priceinfp" v-else>{{ getNFTPersonality[item.personality] }}</p> -->
-                  <p
-                    class="price priceinfp"
-                    :style="getSoulSbtiStyle(item.soul)"
-                    v-else
-                  >{{ item.soul || '-' }}</p>
+                  <p class="price priceinfp" :style="getSoulSbtiStyle(item.soul)" v-else>{{ item.soul || '-' }}</p>
                 </div>
                 <!-- pump进度 -->
                 <div class="schedule">
                   <img class="love" src="@/assets/love.png" alt />
-                  <div class="num">{{ `${item.pickCount}/4`}}</div>
+                  <div class="num">{{ `${item.pickCount}/4` }}</div>
                 </div>
                 <!-- <div class="love">
               <img src="../../assets/love.png" alt="" />
@@ -158,44 +107,26 @@
 
     <!-- Activity -->
     <div class="activity" v-if="TabActive === 3">
-      <van-list
-        v-model="activityLoading"
-        :finished="activityFinished"
-        loading-text="Loading"
-        @load="onActivityLoad"
-        :immediate-check="false"
-        finished-text
-      >
-        <div
-          class="activity_list"
-          v-for="item in activityList"
-          :key="item.id"
-          @click="linkNftDetail(item.tokenId)"
-        >
+      <van-list v-model="activityLoading" :finished="activityFinished" loading-text="Loading" @load="onActivityLoad"
+        :immediate-check="false" finished-text>
+        <div class="activity_list" v-for="item in activityList" :key="item.id" @click="linkNftDetail(item)">
           <div class="left">
             <img class="userImg" @error="$handleErrorImg" :src="item.userImg" alt />
-            <img class="nftImg" :src="item.tokenImg" alt />
+            <img class="nftImg" :src="item.tokenImg || item.eventBannerUrl" alt />
           </div>
-          <div
-            class="right"
-            :style="item.type === 2 || item.type === 3 ? { justifyContent: 'center' } : {}"
-          >
+          <div class="right" :style="item.type === 2 || item.type === 3 ? { justifyContent: 'center' } : {}">
             <div class="order" :class="{ gray: item.pickStatus === 0 }">
               {{ item.username || item.userAddress.substring(0, 6) }}
               {{ activityMap[`${item.type}`] }}
-              <span
-                v-if="item.type === 1"
-              >{{ `${item.tokenUserName}'s` }}</span>
-              SoulCast #{{ item.tokenId }} {{ item.type !== 1 ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ?
-              "listing" : "" }}
-              <span
-                style="color:#000"
-              >{{ item.type === 3 ? "🎉" : "" }}</span>
+              <span v-if="item.type === 1">{{ `${item.tokenUserName}'s` }}</span>
+              <span v-if="item.type !== 4">SoulCast #</span>
+              {{ item.tokenId }} {{ item.type !== 1 ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ?
+                "listing" : "" }}
+              <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
             </div>
-            <div
-              class="price"
-              v-if="item.type === 0 || item.type === 1"
-            >{{ item.price | formatNumber }} {{ $network }}</div>
+            <div class="price" v-if="item.type === 0 || item.type === 1">{{ item.price | formatNumber }} {{ $network }}
+            </div>
+            <div class="price" v-if="item.type === 4">{{ item.eventName }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.updateTime)) }}</div>
           </div>
         </div>
@@ -203,24 +134,12 @@
     </div>
     <Overlay :overlayshow="overlayshow"></Overlay>
     <TabBar ref="tabbar"></TabBar>
-    <Sift
-      class="siftShow"
-      @pass="pass"
-      @getCanPumpList="getActivityData($event)"
-      :SiftShow="SiftShow"
-      @close="SiftShow = false"
-    ></Sift>
+    <Sift class="siftShow" @pass="pass" @getCanPumpList="getActivityData($event)" :SiftShow="SiftShow"
+      @close="SiftShow = false"></Sift>
     <!-- pwa弹窗 -->
-    <van-dialog
-      v-model="pwaModalShow"
-      :close-on-click-overlay="false"
-      confirmButtonText="BACK"
-      :z-index="99999"
-    >
+    <van-dialog v-model="pwaModalShow" :close-on-click-overlay="false" confirmButtonText="BACK" :z-index="99999">
       <div class="title level_desc">
-        <span
-          style="text-transform: none;"
-        >For a smoother experience, add Soulcial to your Home Screen</span>
+        <span style="text-transform: none;">For a smoother experience, add Soulcial to your Home Screen</span>
       </div>
       <div class="fee_dint">
         1.Open your browser
@@ -279,7 +198,8 @@ export default {
         0: 'Listed',
         1: 'Pumped',
         2: 'Canceled',
-        3: 'Winned Pump of'
+        3: 'Winned Pump of',
+        4: "Joined in the Event"
       },
       TabList: [
         {
@@ -309,7 +229,7 @@ export default {
     Overlay,
     Sift
   },
-  created() {},
+  created() { },
   mounted: async function () {
     AOS.init({
       offset: 200,
