@@ -7,9 +7,9 @@
           <img @error="$handleErrorImg" :src="chatDetailDto.avatar" alt />
         </div>
         <div class="right">
-          <div class="name" v-if="chatDetailDto.type == 1">
+          <div class="name" v-if="chatDetailDto.type == 1 && chatDetailDto.tokenId">
             {{ `SoulCast #${chatDetailDto.tokenId} Group
-            (${chatDetailDto.memberNumber})` }}
+                        (${chatDetailDto.memberNumber})` }}
           </div>
           <div class="name" v-else>{{ chatDetailDto.title }}</div>
           <!-- <div class="address">asdfasdfasdfasf
@@ -23,10 +23,7 @@
         <van-loading color="#efa92c" />
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
-        <div
-          v-if="handleShowTime(item.time, index)"
-          class="timeTip"
-        >{{ handleShowTime(item.time, index) }}</div>
+        <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
         <div class="timeTip" v-if="item.type == 99">{{ `${item.userName} ${item.content}` }}</div>
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
@@ -35,14 +32,8 @@
             </div>
             <div class="msg othersMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image
-                v-else
-                @click="onPreview(item.content)"
-                width="180"
-                fit="cover"
-                height="180"
-                :src="`${item.content}?x-oss-process=image-resize,w_180`"
-              >
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`">
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
@@ -52,14 +43,8 @@
           <div v-else class="me">
             <div class="msg meMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image
-                v-else
-                @click="onPreview(item.content)"
-                width="180"
-                fit="cover"
-                height="180"
-                :src="`${item.content}?x-oss-process=image-resize,w_180`"
-              >
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+                :src="`${item.content}?x-oss-process=image-resize,w_180`">
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
@@ -70,15 +55,8 @@
       </div>
     </div>
     <div class="footer">
-      <van-search
-        v-model="inputContent"
-        placeholder="Tap a message..."
-        :disabled="chatDetailDto.status != 1"
-        background="transparent"
-        :clearable="false"
-        shape="round"
-        left-icon
-      >
+      <van-search v-model="inputContent" placeholder="Tap a message..." :disabled="chatDetailDto.status != 1"
+        background="transparent" :clearable="false" shape="round" left-icon>
         <template #right-icon>
           <div @click="submit" class="btn">
             <div class="searchImg">
@@ -181,7 +159,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-cell__value {
+>>>.van-cell__value {
   display: flex;
   align-items: center;
 
@@ -190,12 +168,12 @@ export default {
   }
 }
 
->>> .van-search__content {
+>>>.van-search__content {
   border: 2px solid #dfdfce;
   background-color: #fff;
 }
 
->>> .van-field__control {
+>>>.van-field__control {
   color: rgba($color: #000000, $alpha: 0.6);
 
   &::placeholder {
@@ -203,11 +181,11 @@ export default {
   }
 }
 
->>> .van-search {
+>>>.van-search {
   flex: 1;
 }
 
->>> .van-search__content {
+>>>.van-search__content {
   height: 44px;
 }
 
@@ -254,6 +232,13 @@ export default {
           color: #000;
           font-weight: 600;
           margin-bottom: 3px;
+          max-width: 220px;
+          white-space: nowrap;
+          /* 让文本在一行中显示 */
+          overflow: hidden;
+          /* 隐藏超出容器的内容 */
+          text-overflow: ellipsis;
+          /* 当文本溢出时显示省略号 */
         }
 
         .address {
