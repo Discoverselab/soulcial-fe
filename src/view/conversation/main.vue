@@ -7,9 +7,14 @@
           <img @error="$handleErrorImg" :src="chatDetailDto.avatar" alt />
         </div>
         <div class="right">
-          <div class="name" v-if="chatDetailDto.type == 1 && chatDetailDto.tokenId">
-            {{ `SoulCast #${chatDetailDto.tokenId} Group
-                        (${chatDetailDto.memberNumber})` }}
+          <div class="name" v-if="chatDetailDto.type == 1">
+            <p v-if="!chatDetailDto.tokenId">{{ `${chatDetailDto.title} Group
+                          (${chatDetailDto.memberNumber})` }}</p>
+            <p v-else>
+              {{ `SoulCast #${chatDetailDto.tokenId} Group
+                            (${chatDetailDto.memberNumber})` }}
+            </p>
+
           </div>
           <div class="name" v-else>{{ chatDetailDto.title }}</div>
           <!-- <div class="address">asdfasdfasdfasf
