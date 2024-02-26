@@ -5,22 +5,8 @@ import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
 export default {
-  // 获取邀请码
-  async getUserInfo() {
-    try {
-      this.overlayshow = true
-      let url = this.$api.infor.getUserInfo
-      const res = await get(url)
-      if (res.code === 200) {
-        const str = res.data.superInviteCode
-        this.inviteCode = str.substring(str.length - 6)
-      }
-
-      this.overlayshow = false
-    } catch (error) {
-      this.overlayshow = false
-      console.log(error)
-    }
+  walletClose() {
+    this.walletShow = false
   },
   createLoader() {
     if (this.googleMapsKey) {
@@ -118,8 +104,9 @@ export default {
   },
   // 转发
   forward() {
+    const inviteCode = window.sessionStorage.getItem('inviteCode')
     const clipboard = new Clipboard('.label', {
-      text: () => `${website}/#/e/${this.inviteCode}/${this.eventId}`
+      text: () => `${website}/#/e/${inviteCode}/${this.eventId}`
     })
     clipboard.on('success', e => {
       Toast('Copy successfully')
@@ -204,6 +191,9 @@ export default {
   },
   // 签到
   check() {
+    if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
+      return (this.walletShow = true)
+    }
     let url =
       this.$api.infor.getCheck +
       `?eventId=${this.eventId}&latitude=${Number(this.userLat)}&longitude=${Number(this.userLon)}`

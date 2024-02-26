@@ -107,15 +107,16 @@
                 </div>
             </div>
         </van-dialog>
-        <TabBar ref="tabbar"></TabBar>
+        <TabBar class="tabbar" ref="tabbar"></TabBar>
         <Overlay :overlayshow="overlayshow"></Overlay>
+        <Wallet :path="pathEx" @close="walletClose()" :walletShow="walletShow"></Wallet>
     </div>
 </template>
 <script>
 import TabBar from '@/components/TabBar.vue'
 import methods from './src/methods'
 import Overlay from '@/components/Overlay.vue'
-
+import Wallet from '@/components/LinkWallet.vue'
 export default {
     data() {
         return {
@@ -130,7 +131,7 @@ export default {
             userLat: null,
             googleMapsKey: null,
             loader: null,
-            inviteCode: null // 邀请码
+            walletShow: false,
         }
     },
     methods: methods,
@@ -148,7 +149,6 @@ export default {
         }
         await this.getGoogleMapsKey()
         await this.getEventDetail()
-        await this.getUserInfo()
         this.createLoader()
         this.isEventTime()
         this.initMap()
@@ -158,7 +158,8 @@ export default {
     },
     components: {
         TabBar,
-        Overlay
+        Overlay,
+        Wallet
     }
 }
 </script>

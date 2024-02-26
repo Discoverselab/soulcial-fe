@@ -218,6 +218,7 @@ export default {
       post(prefix + params)
         .then(res => {
           if (res.code === 200) {
+            this.getUserInfo()
             const loginInfo = {
               usedInviteCode: res.data.usedInviteCode,
               whiteUser: res.data.whiteUser
@@ -254,6 +255,24 @@ export default {
         .catch(error => {
           this.overlayshow = false
         })
+    },
+    // 获取用户信息
+    async getUserInfo() {
+      try {
+        this.overlayshow = true
+        let url = this.$api.infor.getUserInfo
+        const res = await get(url)
+        if (res.code === 200) {
+          // 存储邀请码
+          const str = res.data.superInviteCode
+          window.sessionStorage.setItem("inviteCode", str.substring(str.length - 6));
+        }
+
+        this.overlayshow = false
+      } catch (error) {
+        this.overlayshow = false
+        console.log(error)
+      }
     },
     metamaskChack() {
       let me = this

@@ -1,6 +1,10 @@
 .eventDetails {
     padding: 20px 24px 180px 24px;
 
+    .tabbar {
+        z-index: 1;
+    }
+
     .fw500 {
         font-weight: 500;
     }

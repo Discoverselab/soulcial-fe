@@ -17,20 +17,14 @@
     <img class="link_img link_img3" src="../../assets/link3.png" alt />
 
     <div style class="my_soul">
-      <input
-        class="invite_code"
-        v-model="inviteCode"
-        v-if="!UserInfo.levelScore && !usedInviteCode && !whiteUser&& !UserInfo.isUseInviteCode"
-        type="text"
-        placeholder="invite code"
-      />
+      <input class="invite_code" v-model="inviteCode"
+        v-if="!UserInfo.levelScore && !usedInviteCode && !whiteUser && !UserInfo.isUseInviteCode" type="text"
+        placeholder="invite code" />
 
       <div class="cudset_but">
-        <button
-          @click="nuxt"
-          :disabled="!inviteCode && !usedInviteCode && !whiteUser&& !UserInfo.isUseInviteCode"
-          :class="{ disabled: !inviteCode && !usedInviteCode && !whiteUser && !UserInfo.isUseInviteCode}"
-        >reveal my SOUL</button>
+        <button @click="nuxt" :disabled="!inviteCode && !usedInviteCode && !whiteUser && !UserInfo.isUseInviteCode"
+          :class="{ disabled: !inviteCode && !usedInviteCode && !whiteUser && !UserInfo.isUseInviteCode }">reveal my
+          SOUL</button>
         <!-- <button @click="nuxt">reveal my SOUL</button> -->
         <!-- <p class="skip" @click="$router.push('/')">
 <span>Skip</span> and <span>Explore</span> other souls
@@ -38,12 +32,8 @@
       </div>
     </div>
     <!-- 邀请码被使用了的弹窗 -->
-    <van-dialog
-      v-model="inviteShow"
-      :close-on-click-overlay="false"
-      confirmButtonText="ok"
-      :z-index="99999999999999999999"
-    >
+    <van-dialog v-model="inviteShow" :close-on-click-overlay="false" confirmButtonText="ok"
+      :z-index="99999999999999999999">
       <p class="fee_dint">{{ errmsg + '.' || 'please try again later' }}</p>
     </van-dialog>
 
@@ -82,7 +72,7 @@ export default {
     let me = this;
     me.getUserInfo();
   },
-  mounted: async function() {
+  mounted: async function () {
     console.log("this：", this);
     console.log("$route：", this.$route);
     AOS.init({
@@ -99,7 +89,7 @@ export default {
     window.removeEventListener("scroll", this.scrollToTop);
     next();
   },
-  destroyed() {}
+  destroyed() { }
 };
 </script>
 
