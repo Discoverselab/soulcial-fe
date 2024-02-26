@@ -4,14 +4,34 @@ import Clipboard from 'clipboard'
 import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
-const loader = new Loader({
-  apiKey: 'AIzaSyAgiV_tJwsbjj3twMIIQZ87f6Sz3SHWBg8', //之前的key
-  version: 'weekly', //版本
-  libraries: ['places'],
-  language: 'en' // 设置地图显示的语言为英文
-})
-
 export default {
+  createLoader() {
+    if (this.googleMapsKey) {
+      this.loader = new Loader({
+        apiKey: this.googleMapsKey,
+        version: 'weekly',
+        libraries: ['places'],
+        language: 'en'
+      })
+    }
+  },
+  // 获取谷歌地图key
+  async getGoogleMapsKey() {
+    try {
+      this.overlayshow = true
+      let url = this.$api.infor.getGoogleMapsKey
+      const res = await get(url)
+      const { code, data } = res
+      if (code === 200) {
+        this.googleMapsKey = data
+      }
+      this.overlayshow = false
+    } catch (error) {
+      // 错误处理
+      console.error(error)
+      this.overlayshow = false
+    }
+  },
   jumpToChat() {
     this.$router.push('/chat')
   },
@@ -108,7 +128,7 @@ export default {
       disableDefaultUI: true
     }
 
-    loader
+    this.loader
       .load()
       .then(google => {
         const map = new google.maps.Map(document.getElementById('mapBox'), mapOptions)

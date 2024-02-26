@@ -69,7 +69,8 @@ export default {
     getEventDetail: `${commonApi}/event/getEventDetail`, //获取活动详情
     getCheck: `${commonApi}/event/eventCheckIn`, //活动签到
     getCollect: `${commonApi}/event/eventStar`, // 活动收藏
-    getUnCollect: `${commonApi}/event/eventUnStar` // 活动取消收藏
+    getUnCollect: `${commonApi}/event/eventUnStar`, // 活动取消收藏
+    getGoogleMapsKey: `${commonApi}/event/getGoogleMapsKey` // 获取谷歌地图key
   },
   chat: {
     getUserMessage: `${commonApi}/message/getUserMessage`,

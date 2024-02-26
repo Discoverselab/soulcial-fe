@@ -127,7 +127,9 @@ export default {
             overlayshow: false,
             showCheck: false, // 是否显示在活动时间的按钮
             userLon: null,
-            userLat: null
+            userLat: null,
+            googleMapsKey: null,
+            loader: null
         }
     },
     methods: methods,
@@ -137,8 +139,9 @@ export default {
         } else if (this.$route.params && this.$route.params.id) {
             this.eventId = this.$route.params.id;
         }
-
+        await this.getGoogleMapsKey()
         await this.getEventDetail()
+        this.createLoader()
         this.isEventTime()
         this.initMap()
     },
