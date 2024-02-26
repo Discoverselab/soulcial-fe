@@ -1,5 +1,6 @@
 import { ParticleNetwork, WalletEntryPosition } from '@particle-network/auth'
 import { ParticleProvider } from '@particle-network/provider'
+import { OptimismSepolia } from '@particle-network/chains'
 import { customStyle } from './customstyle.js'
 import router from '@/router'
 import Web3 from 'web3'
@@ -33,7 +34,7 @@ export const chainList = isPROD
       { id: 5, name: 'Ethereum' }
     ]
   : [
-      { id: 11155420, name: 'OP Sepolia' },
+      { id: OptimismSepolia.id, name: OptimismSepolia.name },
       { id: 10, name: 'optimism' },
       { id: 1, name: 'Ethereum' },
       { id: 5, name: 'Ethereum' }
