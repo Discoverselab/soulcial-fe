@@ -5,6 +5,23 @@ import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
 export default {
+  // 获取邀请码
+  async getUserInfo() {
+    try {
+      this.overlayshow = true
+      let url = this.$api.infor.getUserInfo
+      const res = await get(url)
+      if (res.code === 200) {
+        const str = res.data.superInviteCode
+        this.inviteCode = str.substring(str.length - 6)
+      }
+
+      this.overlayshow = false
+    } catch (error) {
+      this.overlayshow = false
+      console.log(error)
+    }
+  },
   createLoader() {
     if (this.googleMapsKey) {
       this.loader = new Loader({
@@ -102,7 +119,7 @@ export default {
   // 转发
   forward() {
     const clipboard = new Clipboard('.label', {
-      text: () => `${website}/#/e/${this.eventId}`
+      text: () => `${website}/#/e/${this.inviteCode}/${this.eventId}`
     })
     clipboard.on('success', e => {
       Toast('Copy successfully')

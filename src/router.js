@@ -166,7 +166,7 @@ const router = new Router({
       component: event_details
     },
     {
-      path: '/e/:id',
+      path: '/e/:code/:id',
       name: 'event_details_id',
       component: event_details
     },

@@ -129,7 +129,8 @@ export default {
             userLon: null,
             userLat: null,
             googleMapsKey: null,
-            loader: null
+            loader: null,
+            inviteCode: null // 邀请码
         }
     },
     methods: methods,
@@ -139,8 +140,15 @@ export default {
         } else if (this.$route.params && this.$route.params.id) {
             this.eventId = this.$route.params.id;
         }
+        if (window.location.href.indexOf("/e/") > -1) {
+            const parts = window.location.href.split("/e/");
+            const lastPart = parts[parts.length - 1];
+            const inviteCode = lastPart.split("/")[0];
+            window.sessionStorage.setItem("inviteCode", inviteCode);
+        }
         await this.getGoogleMapsKey()
         await this.getEventDetail()
+        await this.getUserInfo()
         this.createLoader()
         this.isEventTime()
         this.initMap()
