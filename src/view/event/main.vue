@@ -23,7 +23,7 @@
       <!-- 活动列表 -->
       <van-list v-model="eventLoading" offset="200" :finished="eventFinished" loading-text="Loading" finished-text
         :immediate-check="true" @load="eventOnLoad" v-if="eventList.length > 0">
-        <van-cell :center="true" v-for="item in eventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
+        <van-cell v-for="item in eventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
           <template #title>
             <img class="img" :src="item.eventBannerUrl" alt />
           </template>

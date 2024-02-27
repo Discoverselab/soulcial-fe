@@ -95,6 +95,10 @@
       margin-bottom: 10px;
       cursor: pointer;
 
+      &::after {
+        border-bottom-color: transparent;
+      }
+
       // 左侧图片
       .van-cell__title {
         width: 140px;
