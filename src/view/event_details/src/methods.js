@@ -58,10 +58,11 @@ export default {
         },
         //locationError  获取失败的话
         function (error) {
-          console.log(error)
+          alert(error)
         }
       )
     }
+    console.log('获取用户当前位置')
   },
   // 是否是活动时间
   isEventTime() {
