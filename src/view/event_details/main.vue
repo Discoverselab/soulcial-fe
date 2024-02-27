@@ -43,31 +43,35 @@
             </div>
         </div>
         <!-- 按钮 -->
-        <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="eventDetail.link && !showCheck">
-            <div class="btn" @click="jumpToOutside">
-                Join Now
+        <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="checkIn">
+            <div class="btn" @click="jumpToChat(eventDetail)">
+                <div class="earn_diamond">
+                    <img src="@/assets/diamond.png" alt />
+                    <span>Earn</span>
+                </div>
+                GO TO CHAT and Connect
             </div>
         </div>
-        <template v-if="showCheck">
-            <!-- suspension类使按钮悬浮 -->
-            <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="!eventDetail.isCheckIn">
-                <div class="btn" @click="check">
-                    <div class="earn_diamond">
-                        <img src="@/assets/diamond.png" alt />
-                        <span>Earn</span>
-                    </div>Check in and claim airdrop
+        <template v-else>
+            <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="eventDetail.link && !showCheck">
+                <div class="btn" @click="jumpToOutside">
+                    Join Now
                 </div>
             </div>
-            <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-else>
-                <div class="btn" @click="jumpToChat(eventDetail)">
-                    <div class="earn_diamond">
-                        <img src="@/assets/diamond.png" alt />
-                        <span>Earn</span>
+            <template v-if="showCheck">
+                <!-- suspension类使按钮悬浮 -->
+                <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="!eventDetail.isCheckIn">
+                    <div class="btn" @click="check">
+                        <div class="earn_diamond">
+                            <img src="@/assets/diamond.png" alt />
+                            <span>Earn</span>
+                        </div>Check in and claim airdrop
                     </div>
-                    GO TO CHAT and Connect
                 </div>
-            </div>
+            </template>
         </template>
+
+
 
         <!-- 成功弹窗 -->
         <van-dialog v-model="successCheckShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
@@ -129,6 +133,7 @@ export default {
             eventDetail: {},
             overlayshow: false,
             showCheck: false, // 是否显示在活动时间的按钮
+            checkIn: false, // 是否签到成功
             userLon: null,
             userLat: null,
             googleMapsKey: null,

@@ -120,8 +120,6 @@
               {{ activityMap[`${item.type}`] }}
               <span v-if="item.type === 1">{{ `${item.tokenUserName}'s` }}</span>
               <span v-if="item.type !== 4">SoulCast #</span>
-              <!-- 活动名称 -->
-              <span v-if="item.type === 4">{{ item.eventName }}</span>
               {{ item.tokenId }} {{ item.type !== 1 ? '' : `(${item.pickCount}/4)` }} {{ item.type === 2 ?
                 "listing" : "" }}
               <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
@@ -201,7 +199,7 @@ export default {
         1: 'Pumped',
         2: 'Canceled',
         3: 'Winned Pump of',
-        4: "Joined in the Event"
+        4: "Joins the Event"
       },
       TabList: [
         {

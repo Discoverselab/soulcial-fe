@@ -104,6 +104,7 @@ export default {
       if (code === 200) {
         this.eventDetail = data
         this.collectSuccess = this.eventDetail.isStar
+        this.checkIn = this.eventDetail.isCheckIn
       }
       this.overlayshow = false
     } catch (error) {
