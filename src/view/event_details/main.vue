@@ -2,7 +2,7 @@
     <div class="eventDetails">
         <div class="navigate">
             <div class="layout">
-                <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
+                <img @click="back" class="back" src="../../assets/back.png" alt />
                 <div class="empty"></div>
             </div>
             <div class="nav_name">
@@ -11,7 +11,7 @@
             <div class="operate">
                 <img v-if="collectSuccess" class="collect" src="@/assets/collectActive.png" @click="collectToggle" alt="">
                 <img v-else class="collect" src="@/assets/collect.png" @click="collectToggle" alt />
-                <img class="label" src="@/assets/label.png" @click="forward" alt />
+                <img class="labelEvent" src="@/assets/label.png" @click="forward" alt />
             </div>
         </div>
         <img class="banner" :src="eventDetail.eventBanner" alt />

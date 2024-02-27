@@ -38,12 +38,6 @@
         z-index: 9;
         margin-bottom: 18px;
 
-        .label {
-            display: block;
-            width: 16px;
-            height: 16px;
-        }
-
         .nav_name {
             display: flex;
             align-items: center;
@@ -64,25 +58,20 @@
                 color: #000;
             }
 
-            .label {
-                display: block;
-                width: 16px;
-                height: 16px;
-            }
         }
 
         .operate {
             display: flex;
 
             .collect,
-            .label {
+            .labelEvent {
                 display: block;
                 width: 16px;
                 height: 16px;
                 cursor: pointer;
             }
 
-            .label {
+            .labelEvent {
                 margin-left: 10px;
             }
         }

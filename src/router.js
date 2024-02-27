@@ -168,7 +168,10 @@ const router = new Router({
     {
       path: '/e/:code/:id',
       name: 'event_details_id',
-      component: event_details
+      component: event_details,
+      meta: {
+        isShareEvent: true
+      }
     },
     {
       path: '/:realTokenId/:code',

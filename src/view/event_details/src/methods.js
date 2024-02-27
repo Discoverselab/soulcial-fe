@@ -5,6 +5,15 @@ import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
 export default {
+  back() {
+    // 获取路由元信息
+    const isShareEvent = this.$route.meta.isShareEvent
+    if (isShareEvent) {
+      this.$router.push('/')
+    } else {
+      this.$router.go(-1)
+    }
+  },
   walletClose() {
     this.walletShow = false
   },
@@ -105,7 +114,7 @@ export default {
   // 转发
   forward() {
     const inviteCode = window.sessionStorage.getItem('inviteCode')
-    const clipboard = new Clipboard('.label', {
+    const clipboard = new Clipboard('.labelEvent', {
       text: () => `${website}/#/e/${inviteCode}/${this.eventId}`
     })
     clipboard.on('success', e => {
