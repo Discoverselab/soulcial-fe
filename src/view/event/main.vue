@@ -16,7 +16,7 @@
         <div class="detail">
           <h1 class="title">{{ eventList[0].eventName }}</h1>
           <p class="time fw500">{{ eventList[0].eventDate }}</p>
-          <p class="desc fw500">{{ eventList[0].eventAddress }}</p>
+          <p class="desc fw500">{{ eventList[0].eventCity }}</p>
         </div>
       </div>
 
