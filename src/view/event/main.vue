@@ -30,7 +30,7 @@
           <template #default>
             <div class="title">{{ item.eventName }}</div>
             <div class="time fw500">{{ item.eventDate }}</div>
-            <div class="desc fw500">{{ item.eventAddress }}</div>
+            <div class="eventCity fw500">{{ item.eventCity }}</div>
           </template>
         </van-cell>
       </van-list>

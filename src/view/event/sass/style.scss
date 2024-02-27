@@ -116,6 +116,18 @@
           font-family: Inter;
           font-weight: 700;
           font-size: 15px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          /* 最多显示两行 */
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .eventCity {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
     }

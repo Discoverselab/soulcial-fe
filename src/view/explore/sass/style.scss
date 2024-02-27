@@ -201,6 +201,8 @@
         height: 44px;
       }
       .nftImg {
+        object-fit: cover; /* 图片尺寸自适应容器并保持比例，超出部分裁剪 */
+        object-position: center; /* 图片在容器中水平和垂直居中显示 */
         border: 1px solid #dfdfce;
       }
       .userImg {

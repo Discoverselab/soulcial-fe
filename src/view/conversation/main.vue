@@ -4,7 +4,7 @@
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="info">
         <div @click="goPersonDetail(chatDetailDto)" class="left">
-          <img @error="$handleErrorImg" :src="chatDetailDto.avatar" alt />
+          <img @error="$handleErrorImg" :src="chatDetailDto.avatar || eventBanner" alt />
         </div>
         <div class="right">
           <div class="name" v-if="chatDetailDto.type == 1">
@@ -95,7 +95,8 @@ export default {
       chatBoxOldHeight: 0,
       isSubmiting: false,
       isGettingMessage: false,
-      userId: this.$loginData.userId
+      userId: this.$loginData.userId,
+      eventBanner: null, // 活动海报
     }
   },
   watch: watch,
@@ -130,7 +131,7 @@ export default {
   mounted: async function () {
     console.log('this：', this)
     console.log('$route：', this.$route)
-
+    this.eventBanner = this.$route.query.eventBanner
     let chatBox = document.querySelector('.chatBox')
     chatBox.addEventListener('scroll', e => {
       if (chatBox.scrollTop < 1) {
@@ -228,6 +229,7 @@ export default {
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       }
 

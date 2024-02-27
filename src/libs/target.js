@@ -87,6 +87,6 @@ export const earnType = {
     "5": "Invite Pump",
     "6": "Referral Pump",
     "7": "Pump Epoch Reward",
-    "8": "vsoul",
+    "8": "Events Reward",
     "9": "Campaign Reward"
 }

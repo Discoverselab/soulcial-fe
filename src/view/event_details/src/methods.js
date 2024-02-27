@@ -44,8 +44,8 @@ export default {
       this.overlayshow = false
     }
   },
-  jumpToChat() {
-    this.$router.push('/chat')
+  jumpToChat(detail) {
+    this.$router.push(`conversation?id=${detail.chatOverviewId}&&eventBanner=${detail.eventBanner}`)
   },
   getUserPos() {
     var _this = this
@@ -221,6 +221,6 @@ export default {
   },
   // 跳往外部链接
   jumpToOutside() {
-    window.open(`https://${this.eventDetail.link}`, '_blank')
+    window.open(this.eventDetail.link, '_blank')
   }
 }

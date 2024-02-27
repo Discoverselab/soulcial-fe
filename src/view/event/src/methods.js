@@ -3,7 +3,9 @@ import { get } from '@/http/http.js'
 export default {
   // 获取活动列表
   getEventList() {
-    this.overlayshow = true
+    if (this.currentPage < 2) {
+      this.overlayshow = true
+    }
     let url =
       this.$api.infor.getEventList +
       `?current=${this.currentPage}&size=${this.pageSize}&type=${this.type}`
@@ -34,6 +36,7 @@ export default {
     this.TabActive = item.id
     this.eventList = []
     this.currentPage = 1
+    this.eventFinished = false
     if (item.name === 'All') {
       this.type = 0
     } else if (item.name === 'Star') {
@@ -49,5 +52,6 @@ export default {
   eventOnLoad() {
     if (this.overlayshow) return
     this.currentPage++ // 更新页数
+    this.getEventList()
   }
 }

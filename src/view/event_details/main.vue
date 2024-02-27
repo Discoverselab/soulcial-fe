@@ -49,6 +49,7 @@
             </div>
         </div>
         <template v-if="showCheck">
+            <!-- suspension类使按钮悬浮 -->
             <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="!eventDetail.isCheckIn">
                 <div class="btn" @click="check">
                     <div class="earn_diamond">
@@ -58,11 +59,12 @@
                 </div>
             </div>
             <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-else>
-                <div class="btn" @click="$router.push('/earn')">
+                <div class="btn" @click="jumpToChat(eventDetail)">
                     <div class="earn_diamond">
                         <img src="@/assets/diamond.png" alt />
                         <span>Earn</span>
-                    </div>Check in & earn vsoul
+                    </div>
+                    GO TO CHAT and Connect
                 </div>
             </div>
         </template>
@@ -81,7 +83,7 @@
                     <img class="vsImg" src="@/assets/successCheck.png" alt />
                 </div>
                 <div class="setBut">
-                    <button @click="jumpToChat">GO TO CHAT and Connect</button>
+                    <button @click="jumpToChat(eventDetail)">GO TO CHAT and Connect</button>
                     <button class="backBtn" @click="successCheckShow = false">back</button>
                 </div>
             </div>
@@ -154,6 +156,7 @@ export default {
         this.initMap()
     },
     mounted() {
+        this.$refs.tabbar.BarActive = "/event"
         this.getUserPos()
     },
     components: {
