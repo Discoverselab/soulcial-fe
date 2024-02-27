@@ -10,6 +10,8 @@ export default {
     get(url)
       .then(res => {
         const { code, data } = res
+        // 没有活动时展示默认图片
+        if (code === 200 && data.total === 0) this.showNoEvent = true
         if (code === 200 && data.records && data.records.length > 0) {
           this.eventList = this.eventList.concat(data.records)
           this.eventLoading = false
@@ -28,6 +30,7 @@ export default {
       })
   },
   changeTab(item) {
+    this.showNoEvent = false
     this.TabActive = item.id
     this.eventList = []
     this.currentPage = 1

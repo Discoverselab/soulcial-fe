@@ -22,7 +22,7 @@
 
       <!-- 活动列表 -->
       <van-list v-model="eventLoading" offset="200" :finished="eventFinished" loading-text="Loading" finished-text
-        :immediate-check="true" @load="eventOnLoad">
+        :immediate-check="true" @load="eventOnLoad" v-if="eventList.length > 0">
         <van-cell :center="true" v-for="item in eventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
           <template #title>
             <img class="img" :src="item.eventBannerUrl" alt />
@@ -34,6 +34,10 @@
           </template>
         </van-cell>
       </van-list>
+      <div v-if="showNoEvent" class="Save">
+        <img src="@/assets/noDist.png" alt />
+        <p class="SaveText">No data to display</p>
+      </div>
     </div>
     <Sift class="siftShow" :SiftShow="SiftShow" @close="SiftShow = false"></Sift>
     <Overlay :overlayshow="overlayshow"></Overlay>
@@ -57,6 +61,7 @@ export default {
       pageSize: 20,
       type: 0, // 0 All， 1 Star， 2 Joined
       eventList: [],
+      showNoEvent: false,
       TabList: [
         {
           name: 'All',
