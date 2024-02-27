@@ -33,7 +33,7 @@ export default {
       this.values.push(item.energy)
       this.values.push(item.extroversion)
     } else {
-      this.$router.push('/welcome')
+      // this.$router.push('/welcome')
     }
   },
   captureAndSave() {

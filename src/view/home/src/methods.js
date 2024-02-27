@@ -140,8 +140,8 @@ export default {
             setTimeout(() => {
               this.$refs.radar.init()
             }, 0)
-            localStorage.setItem('userInfo', JSON.stringify(res.data))
           }
+          localStorage.setItem('userInfo', JSON.stringify(res.data))
           // else {
           //   this.$router.push("/welcome");
           // }
