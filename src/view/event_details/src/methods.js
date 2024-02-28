@@ -47,35 +47,41 @@ export default {
   jumpToChat(detail) {
     this.$router.push(`conversation?id=${detail.chatOverviewId}&&eventBanner=${detail.eventBanner}`)
   },
+  // 获取地理位置并更新数据
   getUserPos() {
-    var _this = this
-    if (navigator.geolocation) {
-      navigator.permissions.query({ name: 'geolocation' }).then(function (permissionStatus) {
-        if (permissionStatus.state === 'granted') {
-          // 用户已授权，可以获取地理位置信息
-          navigator.geolocation.getCurrentPosition(function (position) {
-            _this.userLon = position.coords.longitude
-            _this.userLat = position.coords.latitude
-          })
-        } else if (permissionStatus.state === 'prompt') {
-          // 用户尚未做出决定，您可以在此处触发权限请求
-          navigator.geolocation.getCurrentPosition(
-            function (position) {
+    return new Promise((resolve, reject) => {
+      var _this = this
+      if (navigator.geolocation) {
+        navigator.permissions.query({ name: 'geolocation' }).then(function (permissionStatus) {
+          if (permissionStatus.state === 'granted') {
+            navigator.geolocation.getCurrentPosition(function (position) {
               _this.userLon = position.coords.longitude
               _this.userLat = position.coords.latitude
-            },
-            function (error) {
-              console.log(error, 'error')
-              _this.failLocationShow = true
-            }
-          )
-        } else {
-          _this.failLocationShow = true        }
-      })
-    } else {
-      // 浏览器不支持Geolocation API
-      alert('Your browser does not support geolocation functionality.')
-    }
+              resolve() // 成功获取地理位置，执行resolve
+            })
+          } else if (permissionStatus.state === 'prompt') {
+            navigator.geolocation.getCurrentPosition(
+              function (position) {
+                _this.userLon = position.coords.longitude
+                _this.userLat = position.coords.latitude
+                resolve() // 成功获取地理位置，执行resolve
+              },
+              function (error) {
+                console.log(error, 'error')
+                _this.failLocationShow = true
+                reject() // 获取地理位置失败，执行reject
+              }
+            )
+          } else {
+            _this.failLocationShow = true
+            reject() // 获取地理位置失败，执行reject
+          }
+        })
+      } else {
+        alert('Your browser does not support geolocation functionality.')
+        reject() // 获取地理位置失败，执行reject
+      }
+    })
   },
   // 是否是活动时间
   isEventTime() {
@@ -218,6 +224,28 @@ export default {
     if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
       return (this.walletShow = true)
     }
+
+    // 检查本地存储中的授权状态
+    const permissionStatus = localStorage.getItem('geolocationPermissionStatus')
+    if (permissionStatus === 'granted') {
+      // 如果已授权，则直接使用用户授权的地理位置信息进行签到操作
+      this.handleCheckIn()
+    } else {
+      // 如果未授权或者尚未做出决定，则调用 getUserPos() 获取地理位置
+      this.getUserPos().then(() => {
+        if (!this.failLocationShow) {
+          // 如果获取地理位置成功，则保存授权状态到本地存储
+          localStorage.setItem('geolocationPermissionStatus', 'granted')
+          this.handleCheckIn() // 获取地理位置成功后进行签到操作
+        } else {
+          console.log('未获取到地理位置')
+          // 如果获取地理位置失败，则可以根据具体情况处理，例如弹出提示或者不执行后续代码
+        }
+      })
+    }
+  },
+  // 处理签到操作
+  handleCheckIn() {
     let url =
       this.$api.infor.getCheck +
       `?eventId=${this.eventId}&latitude=${Number(this.userLat)}&longitude=${Number(this.userLon)}`

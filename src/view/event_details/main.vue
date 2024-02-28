@@ -183,7 +183,6 @@ export default {
     },
     mounted() {
         this.$refs.tabbar.BarActive = "/event"
-        this.getUserPos()
     },
     components: {
         TabBar,
