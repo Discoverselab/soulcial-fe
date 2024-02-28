@@ -93,6 +93,7 @@
             </div>
         </van-dialog>
         <!-- 失败弹窗 -->
+        <!-- 签到失败 -->
         <van-dialog v-model="failCheckShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
             :show-cancel-button="false" :show-confirm-button="false">
             <div class="introduce">
@@ -110,6 +111,25 @@
                 </div>
                 <div class="setBut">
                     <button class="backBtn" @click="failCheckShow = false">back</button>
+                </div>
+            </div>
+        </van-dialog>
+        <!-- 获取地理位置失败 -->
+        <van-dialog v-model="failLocationShow" :close-on-click-overlay="true" :z-index="99999999999999999999"
+            :show-cancel-button="false" :show-confirm-button="false">
+            <div class="introduce">
+                <p class="title">
+                    Oops...
+                </p>
+                <p class="detail">
+                    Unable to access your precise location.Please turn on the browser location access insystem settings,
+                    refresh the page and allowSoulcial to use your current location.
+                </p>
+                <div>
+                    <img class="vsImg" src="@/assets/sorry.png" alt />
+                </div>
+                <div class="setBut">
+                    <button class="backBtn" @click="failLocationShow = false">back</button>
                 </div>
             </div>
         </van-dialog>
@@ -139,6 +159,7 @@ export default {
             googleMapsKey: null,
             loader: null,
             walletShow: false,
+            failLocationShow: false
         }
     },
     methods: methods,

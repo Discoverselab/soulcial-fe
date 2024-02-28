@@ -65,15 +65,12 @@ export default {
               _this.userLat = position.coords.latitude
             },
             function (error) {
-              alert(error.message)
+              console.log(error, 'error')
+              _this.failLocationShow = true
             }
           )
         } else {
-          // 用户拒绝了地理位置权限
-          alert(
-            'You have denied geographical location permission. Please allow the app to access geographical location information in the settings.'
-          )
-        }
+          _this.failLocationShow = true        }
       })
     } else {
       // 浏览器不支持Geolocation API
