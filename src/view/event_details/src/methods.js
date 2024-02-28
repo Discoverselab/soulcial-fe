@@ -50,19 +50,35 @@ export default {
   getUserPos() {
     var _this = this
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        //locationSuccess 获取成功的话
-        function (position) {
-          _this.userLon = position.coords.longitude
-          _this.userLat = position.coords.latitude
-        },
-        //locationError  获取失败的话
-        function (error) {
-          alert(error)
+      navigator.permissions.query({ name: 'geolocation' }).then(function (permissionStatus) {
+        if (permissionStatus.state === 'granted') {
+          // 用户已授权，可以获取地理位置信息
+          navigator.geolocation.getCurrentPosition(function (position) {
+            _this.userLon = position.coords.longitude
+            _this.userLat = position.coords.latitude
+          })
+        } else if (permissionStatus.state === 'prompt') {
+          // 用户尚未做出决定，您可以在此处触发权限请求
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              _this.userLon = position.coords.longitude
+              _this.userLat = position.coords.latitude
+            },
+            function (error) {
+              alert(error.message)
+            }
+          )
+        } else {
+          // 用户拒绝了地理位置权限
+          alert(
+            'You have denied geographical location permission. Please allow the app to access geographical location information in the settings.'
+          )
         }
-      )
+      })
+    } else {
+      // 浏览器不支持Geolocation API
+      alert('Your browser does not support geolocation functionality.')
     }
-    console.log('获取用户当前位置')
   },
   // 是否是活动时间
   isEventTime() {
