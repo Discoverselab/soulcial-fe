@@ -219,6 +219,7 @@ export default {
         .then(res => {
           if (res.code === 200) {
             this.getUserInfo()
+            this.getMintedNFTPage()
             const loginInfo = {
               usedInviteCode: res.data.usedInviteCode,
               whiteUser: res.data.whiteUser
@@ -266,6 +267,7 @@ export default {
           // 存储邀请码
           const str = res.data.superInviteCode
           window.sessionStorage.setItem("inviteCode", str.substring(str.length - 6));
+          localStorage.setItem('userInfo', JSON.stringify(res.data))
         }
 
         this.overlayshow = false
@@ -273,6 +275,25 @@ export default {
         this.overlayshow = false
         console.log(error)
       }
+    },
+    getMintedNFTPage() {
+      this.overlayshow = true
+      let data = {
+        current: 1,
+        size: 99,
+      }
+      let url = this.$api.infor.getMintedNFTPage
+      get(url, data)
+        .then(res => {
+          if (res.code === 200) {
+            const NftList = res.data.records
+            localStorage.setItem('mintedNFTPage', JSON.stringify(NftList))
+          }
+          this.overlayshow = false
+        })
+        .catch(error => {
+          this.overlayshow = false
+        })
     },
     metamaskChack() {
       let me = this

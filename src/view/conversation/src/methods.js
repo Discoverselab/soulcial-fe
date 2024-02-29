@@ -10,7 +10,41 @@ import { ImagePreview } from 'vant'
 import Clipboard from 'clipboard'
 import { sendMessage } from '../../../socket/socket'
 import { getTimeDiffText } from '@/utils/convertTime.js'
+import html2canvas from 'html2canvas'
 export default {
+  captureAndSave() {
+    this.overlayshow = true
+    this.$nextTick(() => {
+      setTimeout(() => {
+        // 使用HTML2Canvas捕捉元素
+        html2canvas(document.querySelector('#elementToCapture'), {
+          backgroundColor: '#ffffff',
+          allowTaint: true,
+          useCORS: true,
+          scale: 4
+        }).then(canvas => {
+          var base64ToBlob = function (code) {
+            let parts = code.split(';base64,')
+            let contentType = parts[0].split(':')[1]
+            let raw = window.atob(parts[1])
+            let rawLength = raw.length
+            let uInt8Array = new Uint8Array(rawLength)
+            for (let i = 0; i < rawLength; ++i) {
+              uInt8Array[i] = raw.charCodeAt(i)
+            }
+            return new Blob([uInt8Array], {
+              type: contentType
+            })
+          }
+          const res = canvas.toDataURL('image/png')
+          let blob = base64ToBlob(res)
+          this.afterRead({ file: blob })
+          this.overlayshow = false
+        })
+      }, 50)
+    })
+  },
+
   onPreview(file) {
     ImagePreview({ images: [file], showIndex: false })
   },

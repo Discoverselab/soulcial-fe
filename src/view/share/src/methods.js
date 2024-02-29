@@ -4,7 +4,6 @@ import QRCode from 'qrcodejs2'
 import Clipboard from 'clipboard'
 import { Toast } from 'vant'
 import { website } from '@/http/api.js'
-import { chracterInfo } from '@/libs/target.js'
 export default {
   goBack() {
     let path = this.$route.query.path || ''
@@ -12,28 +11,6 @@ export default {
       this.$router.push('/')
     } else {
       this.$router.go(-1)
-    }
-  },
-  substring(address) {
-    return address.substring(0, 6) + '...' + address.substring(address.length - 5, address.length)
-  },
-  getUserInfo() {
-    const data = JSON.parse(localStorage.getItem('userInfo'))
-    this.UserInfo = data
-    let userTags = data.userTags
-    this.TagsList = userTags ? userTags.split(',') : []
-    this.code = data.superInviteCode.split('-')[1]
-    let item = data
-    this.soulInfo = chracterInfo[this.UserInfo.chracter]
-    if (item.levelScore) {
-      this.values.push(item.charisma)
-      this.values.push(item.courage)
-      this.values.push(item.art)
-      this.values.push(item.wisdom)
-      this.values.push(item.energy)
-      this.values.push(item.extroversion)
-    } else {
-      // this.$router.push('/welcome')
     }
   },
   captureAndSave() {
@@ -84,16 +61,6 @@ export default {
       encodeURIComponent(hashtags)
     window.open(intentUrl, '_blank', 'width=550,height=420')
   },
-  creatQrCode() {
-    new QRCode(this.$refs.qrCodeUrl, {
-      text: `${website}/#/t/${this.code}`, // 需要转换为二维码的内容
-      width: 100,
-      height: 100,
-      colorDark: '#000000',
-      colorLight: 'transparent',
-      correctLevel: QRCode.CorrectLevel.H
-    })
-  },
   copy() {
     const clipboard = new Clipboard('.copy', {
       text: () => `${website}/#/t/${this.code}`
@@ -104,24 +71,5 @@ export default {
     clipboard.on('error', e => {
       Toast('No content')
     })
-  },
-  getMintedNFTPage() {
-    this.overlayshow = true
-    this.NftList = JSON.parse(localStorage.getItem('mintedNFTPage'))
-    if (this.NftList && this.NftList.length !== 0) {
-      this.showNftPicture = this.NftList[0].pictureUrl
-    }
-    this.overlayshow = false
-  },
-  // 动态设置小雷达图的外边距
-  getSmallRadarMarginTop() {
-    const rootElement = document.documentElement
-    const computedStyle = window.getComputedStyle(rootElement)
-    const fontSize = computedStyle.fontSize
-    const fontSizeValue = parseFloat(fontSize)
-    const bio = this.$refs.bio
-    const smallRadar = this.$refs.smallRadar
-    if (!smallRadar) return
-    smallRadar.style.marginTop = bio?.clientHeight / fontSizeValue + 'rem'
   }
 }

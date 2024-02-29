@@ -1,5 +1,11 @@
 <template>
   <div class="conversation">
+    <!-- 分享的名片开始 -->
+    <div class="p24 hidden">
+      <ShareWebSoul />
+    </div>
+    <!-- 分享的名片结束 -->
+    <!-- 测试 -->
     <div class="navigate">
       <img @click="$router.go(-1)" class="back" src="../../assets/back.png" alt />
       <div class="info">
@@ -59,6 +65,7 @@
         </template>
       </div>
     </div>
+    <div class="shareMySoul" @click="captureAndSave">Share my Web3 Soul </div>
     <div class="footer">
       <van-search v-model="inputContent" placeholder="Tap a message..." :disabled="chatDetailDto.status != 1"
         background="transparent" :clearable="false" shape="round" left-icon>
@@ -76,6 +83,7 @@
         </template>
       </van-search>
     </div>
+    <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
 <script>
@@ -84,6 +92,7 @@ import methods from './src/methods'
 import { linkOpen } from '@/libs/common.js'
 import { closeWebsocket, sendMessage, changeMessageCallback } from '@/socket/socket.js'
 import { formatTimeToDateMinuteSecond } from '@/utils/format.js'
+import ShareWebSoul from "@/components/ShareWebSoul.vue"
 import AOS from 'aos'
 export default {
   name: 'conversation',
@@ -97,6 +106,7 @@ export default {
       isGettingMessage: false,
       userId: this.$loginData.userId,
       eventBanner: null, // 活动海报
+      overlayshow: false
     }
   },
   watch: watch,
@@ -106,7 +116,7 @@ export default {
       return (type, has) => linkOpen(type, has)
     }
   },
-  components: {},
+  components: { ShareWebSoul },
   async created() {
     changeMessageCallback(this.onWsMessage)
     document.onkeydown = e => {
@@ -195,7 +205,19 @@ export default {
   height: 44px;
 }
 
+
 .conversation {
+
+  .p24 {
+    padding: 0 24px;
+  }
+
+  .hidden {
+    position: absolute;
+    top: 10000px;
+  }
+
+  // 发送名片结束
   .navigate {
     display: flex;
     align-items: center;
@@ -336,6 +358,15 @@ export default {
         overflow-wrap: break-word;
       }
     }
+  }
+
+  .shareMySoul {
+    position: fixed;
+    bottom: 120px;
+    left: 0;
+    right: 0;
+    text-decoration: underline;
+    text-align: center;
   }
 
   .footer {
