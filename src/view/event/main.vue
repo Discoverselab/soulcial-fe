@@ -80,8 +80,14 @@ export default {
     }
   },
   methods: methods,
-  created() {
-    this.getEventList()
+  activated() {
+    if (this.$route.meta.from !== 'event_details' || this.eventList.length === 0) {
+      this.changeTab({
+        name: 'All',
+        id: 1
+      })
+    }
+    this.$refs.tabbar.BarActive = this.$route.path
   },
   components: {
     Sift,

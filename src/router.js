@@ -53,7 +53,11 @@ const router = new Router({
     {
       path: '/event',
       name: 'event',
-      component: event
+      component: event,
+      meta: {
+        keepAlive: true,
+        from: ''
+      }
     },
     {
       path: '/earn',
@@ -280,8 +284,7 @@ Router.prototype.push = function push(location) {
 router.beforeEach(async (to, from, next) => {
   if (from.name === 'explore_details' && to.name === 'Explore') {
     to.meta.from = 'explore_details'
-  }
-  if (from.name === 'event_details_id' && to.name === 'welcome') {
+  } else if (from.name === 'event_details_id' && to.name === 'welcome') {
     // 如果是从 event_details_id 页面跳转到 welcome 页面，则设置特殊标志位或参数
     // 将从 event_details_id 页面获取的参数传递到 welcome 页面
     const code = from.params.code
@@ -289,6 +292,10 @@ router.beforeEach(async (to, from, next) => {
     to.params.code = code // 将 code 参数传递到 welcome 页面
     to.params.id = id // 将 id 参数传递到 welcome 页面
     to.meta.specialFlag = true
+  } else if (from.name === 'event_details' && to.name === 'event') {
+    to.meta.from = 'event_details'
+  } else if (from.name === 'event_details' && to.name === 'Explore') {
+    to.meta.from = 'explore_details'
   } else {
     to.meta.from = ''
   }
