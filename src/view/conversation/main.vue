@@ -213,8 +213,8 @@ export default {
   }
 
   .hidden {
-    position: absolute;
-    top: 10000px;
+    position: fixed;
+    top: -9999px;
   }
 
   // 发送名片结束

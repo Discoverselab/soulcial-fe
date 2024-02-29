@@ -38,6 +38,11 @@ export default {
           }
           const res = canvas.toDataURL('image/png')
           let blob = base64ToBlob(res)
+          // let a = document.createElement('a')
+          // let event = new MouseEvent('click')
+          // a.download = 'soulcial.png'
+          // a.href = URL.createObjectURL(blob)
+          // a.dispatchEvent(event)
           this.afterRead({ file: blob })
           this.overlayshow = false
         })
