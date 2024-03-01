@@ -57,7 +57,8 @@
           <svg-icon v-for="(item, index) in TagsList" :key="index" :className="`svgName${item}`"
             :iconClass="`tag${item}`"></svg-icon>
         </div>
-        <!-- <img class="edit" src="../../assets/user_chat.png" alt="" /> -->
+        <img class="edit" v-if="UserInfo.connectStatus === 1 || UserInfo.connectStatus === 2"
+          src="../../assets/user_chat.png" alt="" />
       </div>
       <!-- Calculate points -->
       <div class="Calculate">

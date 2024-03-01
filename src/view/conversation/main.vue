@@ -37,8 +37,12 @@
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
         <div class="timeTip" v-if="item.type == 99">
           {{ `${item.userName} ${item.content}` }}
-          <div class="shareMySoul" v-if="item.userId == $loginData.user_id" @click="captureAndSave">Share my Web3 Soul
-          </div>
+          <template v-if="item.userId == $loginData.user_id">
+            <div class="shareMySoul" v-if="levelScore" @click="captureAndSave">Share my Web3 Soul
+            </div>
+            <div class="shareMySoul" v-else @click="revealMySoul">Reveal my Web3 Soul</div>
+          </template>
+
         </div>
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
@@ -111,7 +115,8 @@ export default {
       isGettingMessage: false,
       userId: this.$loginData.userId,
       eventBanner: null, // 活动海报
-      overlayshow: false
+      overlayshow: false,
+      levelScore: null,
     }
   },
   watch: watch,
@@ -123,6 +128,7 @@ export default {
   },
   components: { ShareWebSoul },
   async created() {
+    this.getLevelScore()
     changeMessageCallback(this.onWsMessage)
     document.onkeydown = e => {
       let _key = window.event.keyCode
@@ -212,13 +218,14 @@ export default {
 
 
 .conversation {
+  position: relative;
 
   .p24 {
     padding: 0 24px;
   }
 
   .hidden {
-    position: fixed;
+    position: absolute;
     top: -9999px;
   }
 
@@ -373,6 +380,7 @@ export default {
     // bottom: 120px;
     // left: 0;
     // right: 0;
+    cursor: pointer;
     text-decoration: underline;
     text-align: center;
   }

@@ -12,6 +12,14 @@ import { sendMessage } from '../../../socket/socket'
 import { getTimeDiffText } from '@/utils/convertTime.js'
 import html2canvas from 'html2canvas'
 export default {
+  // 用户是否算过分
+  getLevelScore() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    this.levelScore = userInfo.levelScore
+  },
+  revealMySoul() {
+    this.$router.push('/twitterAuth')
+  },
   captureAndSave() {
     this.overlayshow = true
     this.$nextTick(() => {

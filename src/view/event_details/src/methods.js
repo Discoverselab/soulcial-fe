@@ -229,6 +229,7 @@ export default {
   },
   // 签到
   check() {
+    this.overlayshow = true
     if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
       return (this.walletShow = true)
     }
@@ -250,9 +251,11 @@ export default {
           } else {
             this.failCheckShow = true
           }
+          this.overlayshow = false
         })
         .catch(error => {
           Toast('something wrong')
+          this.overlayshow = false
         })
     })
   },
