@@ -42,11 +42,12 @@
       <!-- Calculate points -->
       <div class="Calculate">
         <!-- 未走算分流程从活动进入时 -->
-        <div class="noRadar" v-if="!UserInfo.levelScore"></div>
-        <div class="noScore" v-if="!UserInfo.levelScore">
-          <p class="role">What's Your Web3 SOUL?</p>
-          <button class="reveal" @click="$router.push('/twitterAuth')">reveal my SOUl</button>
-        </div>
+        <template v-if="noScore">
+          <div class="noScore">
+            <p class="role">What's Your Web3 SOUL?</p>
+            <button class="reveal" @click="$router.push('/twitterAuth')">reveal my SOUl</button>
+          </div>
+        </template>
         <!-- 走完算分流程 -->
         <div class="soul" @click="$router.push('/share')">
           <span :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)">{{
@@ -209,6 +210,7 @@ export default {
       TabActive: 1,
       launchShow: false, // 是否展示launch弹窗
       bindTwitterShow: false, // 去绑定twitter弹窗
+      noScore: false, // 没有算分
       TabList: [
         {
           name: 'Launched',

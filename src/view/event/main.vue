@@ -23,14 +23,16 @@
       <!-- 活动列表 -->
       <van-list v-model="eventLoading" offset="200" :finished="eventFinished" loading-text="Loading" finished-text
         :immediate-check="true" @load="eventOnLoad" v-if="eventList.length > 0">
-        <van-cell v-for="item in eventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
+        <van-cell v-for="item in filteredEventList" :key="item.eventId" @click="jumpToEventDetail(item.eventId)">
           <template #title>
             <img class="img" :src="item.eventBannerUrl" alt />
           </template>
           <template #default>
             <div class="title">{{ item.eventName }}</div>
-            <div class="time fw500">{{ item.eventDate }}</div>
-            <div class="eventCity fw500">{{ item.eventCity }}</div>
+            <div>
+              <div class="time fw500">{{ item.eventDate }}</div>
+              <div class="eventCity fw500">{{ item.eventCity }}</div>
+            </div>
           </template>
         </van-cell>
       </van-list>
@@ -80,6 +82,17 @@ export default {
     }
   },
   methods: methods,
+  computed: {
+    filteredEventList() {
+      if (this.TabActive === 1) {
+        // 如果是'all'标签，则隐藏第一条数据
+        return this.eventList.slice(1);
+      } else {
+        // 其他标签展示所有数据
+        return this.eventList;
+      }
+    }
+  },
   activated() {
     if (this.$route.meta.from !== 'event_details' || this.eventList.length === 0) {
       this.changeTab({

@@ -45,10 +45,6 @@
         <!-- 按钮 -->
         <div class="footerBtn" :class="{ suspension: _isPhoneMobile() }" v-if="checkIn">
             <div class="btn" @click="jumpToChat(eventDetail)">
-                <div class="earn_diamond">
-                    <img src="@/assets/diamond.png" alt />
-                    <span>Earn</span>
-                </div>
                 GO TO CHAT and Connect
             </div>
         </div>
@@ -88,7 +84,7 @@
                 </div>
                 <div class="setBut">
                     <button @click="jumpToChat(eventDetail)">GO TO CHAT and Connect</button>
-                    <button class="backBtn" @click="successCheckShow = false">back</button>
+                    <button class="backBtn" @click="reload">back</button>
                 </div>
             </div>
         </van-dialog>
@@ -175,11 +171,7 @@ export default {
             const inviteCode = lastPart.split("/")[0];
             window.sessionStorage.setItem("inviteCode", inviteCode);
         }
-        await this.getGoogleMapsKey()
-        await this.getEventDetail()
-        this.createLoader()
-        this.isEventTime()
-        this.initMap()
+        await this.init()
     },
     mounted() {
         this.$refs.tabbar.BarActive = "/event"

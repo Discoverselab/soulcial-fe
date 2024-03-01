@@ -5,6 +5,13 @@ import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
 export default {
+  async init() {
+    await this.getGoogleMapsKey()
+    await this.getEventDetail()
+    this.createLoader()
+    this.isEventTime()
+    this.initMap()
+  },
   back() {
     // 获取路由元信息
     const isShareEvent = this.$route.meta.isShareEvent
@@ -167,20 +174,20 @@ export default {
       let url = this.$api.infor.getCollect + `?eventId=${this.eventId}`
       get(url)
         .then(res => {
-          Toast('collect successfully')
+          // Toast('collect successfully')
         })
         .catch(error => {
-          Toast('something wrong')
+          // Toast('something wrong')
         })
     } else {
       // 取消收藏
       let url = this.$api.infor.getUnCollect + `?eventId=${this.eventId}`
       get(url)
         .then(res => {
-          Toast('unCollect successfully')
+          // Toast('unCollect successfully')
         })
         .catch(error => {
-          Toast('something wrong')
+          // Toast('something wrong')
         })
     }
   },
@@ -248,6 +255,11 @@ export default {
           Toast('something wrong')
         })
     })
+  },
+  // 签到成功回退重新获取活动信息
+  async reload() {
+    this.successCheckShow = false
+    await this.init()
   },
   // 跳往外部链接
   jumpToOutside() {

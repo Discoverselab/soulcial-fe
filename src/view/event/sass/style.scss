@@ -78,16 +78,18 @@
 
     .time {
       margin-top: 7px;
+      font-size: 11px;
     }
 
     .desc {
-      margin-top: 7px;
+      font-size: 11px;
+      // margin-top: 7px;
     }
   }
 
   //   all列表
   .van-list {
-    margin-top: 10px;
+    margin-top: 20px;
 
     .van-cell {
       background-color: transparent;
@@ -115,6 +117,10 @@
         margin-left: 10px;
         text-align: left;
         color: #000;
+        line-height: normal;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         .title {
           font-family: Inter;
@@ -127,12 +133,18 @@
           overflow: hidden;
         }
 
+
+
         .eventCity {
           display: -webkit-box;
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
+
+
+
+
       }
     }
   }

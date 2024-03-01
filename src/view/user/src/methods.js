@@ -144,7 +144,17 @@ export default {
         this.TagsList = userTags ? userTags.split(',') : []
         this.userId = res.data.id
         let item = res.data
-        if (item.levelScore) {
+        if (!item.levelScore) {
+          // 没有分数默认雷达图
+          this.noScore = true
+          this.values.push(86)
+          this.values.push(25)
+          this.values.push(88)
+          this.values.push(54)
+          this.values.push(34)
+          this.values.push(65)
+          this.UserInfo = { ...this.UserInfo, level: 5, personality: 'Modest', chracter: 'ninja' }
+        } else {
           this.values.push(item.charisma)
           this.values.push(item.courage)
           this.values.push(item.art)

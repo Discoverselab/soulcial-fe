@@ -35,7 +35,11 @@
       </div>
       <div class="item" v-for="(item, index) in messageList" :key="item.messageId">
         <div v-if="handleShowTime(item.time, index)" class="timeTip">{{ handleShowTime(item.time, index) }}</div>
-        <div class="timeTip" v-if="item.type == 99">{{ `${item.userName} ${item.content}` }}</div>
+        <div class="timeTip" v-if="item.type == 99">
+          {{ `${item.userName} ${item.content}` }}
+          <div class="shareMySoul" v-if="item.userId == $loginData.user_id" @click="captureAndSave">Share my Web3 Soul
+          </div>
+        </div>
         <template v-else>
           <div v-if="item.userId != $loginData.user_id" class="other">
             <div @click="goPersonDetail(item)" class="othersImg">
@@ -63,9 +67,10 @@
             </div>
           </div>
         </template>
+
       </div>
     </div>
-    <div class="shareMySoul" @click="captureAndSave">Share my Web3 Soul </div>
+
     <div class="footer">
       <van-search v-model="inputContent" placeholder="Tap a message..." :disabled="chatDetailDto.status != 1"
         background="transparent" :clearable="false" shape="round" left-icon>
@@ -257,17 +262,20 @@ export default {
 
       .right {
         .name {
-          font-size: 16px;
-          color: #000;
-          font-weight: 600;
-          margin-bottom: 3px;
-          max-width: 220px;
-          white-space: nowrap;
-          /* 让文本在一行中显示 */
-          overflow: hidden;
-          /* 隐藏超出容器的内容 */
-          text-overflow: ellipsis;
-          /* 当文本溢出时显示省略号 */
+          p {
+            font-size: 16px;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 3px;
+            max-width: 220px;
+            white-space: nowrap;
+            /* 让文本在一行中显示 */
+            overflow: hidden;
+            /* 隐藏超出容器的内容 */
+            text-overflow: ellipsis;
+            /* 当文本溢出时显示省略号 */
+          }
+
         }
 
         .address {
@@ -361,10 +369,10 @@ export default {
   }
 
   .shareMySoul {
-    position: fixed;
-    bottom: 120px;
-    left: 0;
-    right: 0;
+    // position: fixed;
+    // bottom: 120px;
+    // left: 0;
+    // right: 0;
     text-decoration: underline;
     text-align: center;
   }

@@ -115,7 +115,7 @@
             <img class="nftImg" :src="item.tokenImg || item.eventBannerUrl" alt />
           </div>
           <div class="right" :style="item.type === 2 || item.type === 3 ? { justifyContent: 'center' } : {}">
-            <div class="order" :class="{ gray: item.pickStatus === 0 }">
+            <div class="order ellipsis" :class="{ gray: item.pickStatus === 0 }">
               {{ item.username || item.userAddress.substring(0, 6) }}
               {{ activityMap[`${item.type}`] }}
               <span v-if="item.type === 1">{{ `${item.tokenUserName}'s` }}</span>
@@ -124,9 +124,10 @@
                 "listing" : "" }}
               <span style="color:#000">{{ item.type === 3 ? "🎉" : "" }}</span>
             </div>
-            <div class="price" v-if="item.type === 0 || item.type === 1">{{ item.price | formatNumber }} {{ $network }}
+            <div class="price ellipsis" v-if="item.type === 0 || item.type === 1">{{ item.price | formatNumber }} {{
+              $network }}
             </div>
-            <div class="price" v-if="item.type === 4">{{ item.eventName }}</div>
+            <div class="price ellipsis" v-if="item.type === 4">{{ item.eventName }}</div>
             <div class="time">{{ getLastTimeStr(convertToTargetTimeZone(item.updateTime)) }}</div>
           </div>
         </div>

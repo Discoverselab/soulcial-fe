@@ -19,6 +19,7 @@
       align-items: center;
       flex: 1;
       justify-content: space-between;
+
       .Tab_list {
         font-family: 'DINCond-Bold';
         font-weight: 500;
@@ -28,9 +29,11 @@
         color: rgba($color: #000000, $alpha: 0.2);
         line-height: 30px;
         cursor: pointer;
+
         &:nth-child(1) {
           letter-spacing: -1.2px;
         }
+
         &:nth-child(2),
         &:nth-child(3) {
           letter-spacing: -0.96px;
@@ -47,10 +50,12 @@
       margin-left: 39px;
       width: 52px;
       display: flex;
+
       img {
         cursor: pointer;
         display: inline-block;
         width: 20px;
+
         &.searchImg {
           margin-left: 12px;
         }
@@ -146,6 +151,7 @@
               font-size: 14px;
               text-transform: uppercase;
               color: #000000;
+
               span {
                 font-family: 'DINCond-Bold';
                 font-weight: 500;
@@ -167,17 +173,20 @@
             }
           }
         }
+
         // pump进度
         .schedule {
           display: flex;
           position: absolute;
           right: 5px;
           bottom: 8px;
+
           .love {
             width: 14px;
             height: 14px;
             margin-right: 5px;
           }
+
           .num {
             color: #000;
             font-family: DINCond-Bold;
@@ -190,26 +199,33 @@
       }
     }
   }
+
   .activity_list {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
     cursor: pointer;
+
     .left {
       img {
         width: 44px;
         height: 44px;
       }
+
       .nftImg {
-        object-fit: cover; /* 图片尺寸自适应容器并保持比例，超出部分裁剪 */
-        object-position: center; /* 图片在容器中水平和垂直居中显示 */
+        object-fit: cover;
+        /* 图片尺寸自适应容器并保持比例，超出部分裁剪 */
+        object-position: center;
+        /* 图片在容器中水平和垂直居中显示 */
         border: 1px solid #dfdfce;
       }
+
       .userImg {
         border: 1px solid #000;
         border-radius: 50%;
       }
     }
+
     .right {
       display: flex;
       flex-direction: column;
@@ -218,16 +234,29 @@
       font-family: Inter;
       color: #000;
       font-size: 14px;
+
       .gray {
         color: rgba(0, 0, 0, 0.6);
       }
+
+      .ellipsis {
+        white-space: nowrap;
+        /* 强制文本单行显示 */
+        overflow: hidden;
+        /* 隐藏溢出的文本 */
+        text-overflow: ellipsis;
+        /* 在溢出时显示省略号 */
+      }
+
       .order {
         font-weight: 600;
       }
+
       .price {
         color: #5cd685;
         font-weight: 700;
       }
+
       .time {
         font-size: 10px;
         font-weight: 500;
@@ -239,7 +268,10 @@
 
 .background {
   background-image: url('../../assets/nft_background.png');
-  background-size: 100% auto; /* 100% 宽度，高度自适应 */
-  background-position: center bottom; /* 图片水平居中，垂直底部对齐 */
-  background-repeat: no-repeat; /* 不重复平铺背景图片 */
+  background-size: 100% auto;
+  /* 100% 宽度，高度自适应 */
+  background-position: center bottom;
+  /* 图片水平居中，垂直底部对齐 */
+  background-repeat: no-repeat;
+  /* 不重复平铺背景图片 */
 }

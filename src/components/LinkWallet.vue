@@ -267,6 +267,8 @@ export default {
           // 存储邀请码
           const str = res.data.superInviteCode
           window.sessionStorage.setItem("inviteCode", str.substring(str.length - 6));
+          console.log("开始存储")
+          // 存储分享名片信息
           localStorage.setItem('userInfo', JSON.stringify(res.data))
         }
 

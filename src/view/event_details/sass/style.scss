@@ -93,6 +93,7 @@
 
 
         .time {
+            font-size: 11px;
             white-space: pre-line;
             margin-top: 7px;
         }
@@ -121,7 +122,7 @@
         .mapHeader {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
 
             .desc {
                 width: 270px;

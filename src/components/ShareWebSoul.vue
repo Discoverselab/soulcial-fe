@@ -116,18 +116,28 @@ export default {
         getUserInfo() {
             const data = JSON.parse(localStorage.getItem('userInfo'))
             this.UserInfo = data
-            console.log('this.UserInfo', this.UserInfo)
             let userTags = data.userTags
             this.TagsList = userTags ? userTags.split(',') : []
             this.code = data.superInviteCode.split('-')[1]
             let item = data
-            this.soulInfo = chracterInfo[this.UserInfo.chracter]
-            this.values.push(item.charisma)
-            this.values.push(item.courage)
-            this.values.push(item.art)
-            this.values.push(item.wisdom)
-            this.values.push(item.energy)
-            this.values.push(item.extroversion)
+            console.log(item, 'item')
+            if (!item.levelScore) {
+                this.values.push(86)
+                this.values.push(25)
+                this.values.push(88)
+                this.values.push(54)
+                this.values.push(34)
+                this.values.push(65)
+                this.UserInfo = { ...this.UserInfo, level: 5, personality: 'Modest', chracter: 'ninja' }
+            } else {
+                this.soulInfo = chracterInfo[this.UserInfo.chracter]
+                this.values.push(item.charisma)
+                this.values.push(item.courage)
+                this.values.push(item.art)
+                this.values.push(item.wisdom)
+                this.values.push(item.energy)
+                this.values.push(item.extroversion)
+            }
             this.getMintedNFTPage()
         },
         getMintedNFTPage() {
@@ -602,15 +612,6 @@ $imgK: 0.7;
                 overflow-wrap: break-word;
             }
         }
-    }
-
-    .shareMySoul {
-        position: fixed;
-        bottom: 120px;
-        left: 0;
-        right: 0;
-        text-decoration: underline;
-        text-align: center;
     }
 
     .footer {
