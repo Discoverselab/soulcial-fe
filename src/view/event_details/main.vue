@@ -9,7 +9,8 @@
                 <p class="name">Event Details</p>
             </div>
             <div class="operate">
-                <img v-if="collectSuccess" class="collect" src="@/assets/collectActive.png" @click="collectToggle" alt="">
+                <img v-if="collectSuccess" class="collect" src="@/assets/collectActive.png" @click="collectToggle"
+                    alt="">
                 <img v-else class="collect" src="@/assets/collect.png" @click="collectToggle" alt />
                 <img class="labelEvent" src="@/assets/label.png" @click="forward" alt />
             </div>
@@ -60,7 +61,7 @@
                     <div class="btn" @click="check">
                         <div class="earn_diamond">
                             <img src="@/assets/diamond.png" alt />
-                            <span>Earn</span>
+                            <span>{{ eventDetail.reward | removeDecimal }} vSOUL</span>
                         </div>Check in and claim airdrop
                     </div>
                 </div>
@@ -134,6 +135,7 @@
         <Wallet :path="pathEx" @close="walletClose()" :walletShow="walletShow"></Wallet>
     </div>
 </template>
+
 <script>
 import TabBar from '@/components/TabBar.vue'
 import methods from './src/methods'
@@ -176,13 +178,20 @@ export default {
     mounted() {
         this.$refs.tabbar.BarActive = "/event"
     },
+    filters: {
+        // 小数点后位0，去掉小数点后的部分
+        removeDecimal(value) {
+            return value.replace(/\.0+$/, '');
+        }
+    },
     components: {
         TabBar,
         Overlay,
         Wallet
-    }
+    },
 }
 </script>
+
 <style lang="scss">
 @import './sass/style.scss';
 </style>
