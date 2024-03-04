@@ -238,10 +238,10 @@ export default {
   },
   // 签到
   check() {
-    this.overlayshow = true
     if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
       return (this.walletShow = true)
     }
+    this.overlayshow = true
     this.handleCheckIn()
   },
   // 处理签到操作
