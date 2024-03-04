@@ -4,6 +4,7 @@ import Clipboard from 'clipboard'
 import { website } from '@/http/api.js'
 import { Toast } from 'vant'
 import dayjs from 'dayjs'
+import { officialInviteCode } from '@/libs/common.js'
 export default {
   async init() {
     await this.getGoogleMapsKey()
@@ -106,7 +107,12 @@ export default {
   },
   // 转发
   forward() {
-    const inviteCode = window.sessionStorage.getItem('inviteCode')
+    let inviteCode = null
+    if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
+      inviteCode = officialInviteCode
+    } else {
+      inviteCode = window.sessionStorage.getItem('inviteCode')
+    }
     const clipboard = new Clipboard('.labelEvent', {
       text: () => `${website}/#/e/${inviteCode}/${this.eventId}`
     })
@@ -168,6 +174,9 @@ export default {
   },
   // 收藏
   collectToggle() {
+    if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
+      return (this.walletShow = true)
+    }
     this.collectSuccess = !this.collectSuccess
     if (this.collectSuccess) {
       // 收藏活动

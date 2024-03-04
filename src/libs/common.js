@@ -43,7 +43,7 @@ export const chainList = isPROD
 export const linkOpen = (type, has) => {
   window.open(`${browser}${has}`)
 }
-
+export const  officialInviteCode = isPROD ? "befb9e" : "c011d1"
 // addChain_Params
 const _10to16 = num => '0x' + Number(num).toString(16)
 const _16to10 = num => parseInt(num, 10)

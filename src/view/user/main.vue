@@ -57,19 +57,19 @@
           <svg-icon v-for="(item, index) in TagsList" :key="index" :className="`svgName${item}`"
             :iconClass="`tag${item}`"></svg-icon>
         </div>
-        <img class="edit" v-if="UserInfo.connectStatus === 1 || UserInfo.connectStatus === 2"
+        <img class="edit" v-if="UserInfo.connectStatus === 1 || UserInfo.connectStatus === 2" @click="goTOChat"
           src="../../assets/user_chat.png" alt="" />
       </div>
       <!-- Calculate points -->
       <div class="Calculate">
         <!-- 未走算分流程从活动进入时 -->
-        <div class="noScore" v-if="!UserInfo.levelScore">
+        <div class="noScore" v-if="noScore">
           <p class="role">Not revealed</p>
         </div>
         <!-- 走完算分流程 -->
         <div class="soul">
           <span :style="getSoulSbtiStyle(`${UserInfo.personality} ${UserInfo.chracter}`)">{{ `${UserInfo.personality}
-                      ${UserInfo.chracter}` || '-' }}</span>
+            ${UserInfo.chracter}` || '-' }}</span>
 
           <img src="@/assets/sbti.png" alt />
         </div>
@@ -115,8 +115,8 @@
     <!-- Tab -->
     <div class="TabCont">
       <div class="Tab_list" :class="{
-        Tab_list_Active: TabActive == item.id,
-      }" @click="TabClick(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
+          Tab_list_Active: TabActive == item.id,
+        }" @click="TabClick(item.id)" v-for="(item, index) in TabList" :key="index">{{ item.name }}</div>
     </div>
     <!-- NFT list -->
     <div class="nft_cont" v-if="NftList.length">
@@ -173,6 +173,7 @@
     <Wallet @close="walletShow = false" @init="init" :walletShow="walletShow"></Wallet>
   </div>
 </template>
+
 <script>
 import watch from "./src/watch";
 import methods from "./src/methods";
@@ -202,6 +203,7 @@ export default {
       UserInfo: {},
       values: [],
       TabActive: 1,
+      noScore: false,
       walletShow: false,
       isOwn: true, // 用来判断分享的页面是否是自己登录的账户
       TabList: [

@@ -15,10 +15,10 @@
         <div class="right">
           <div class="name" v-if="chatDetailDto.type == 1">
             <p v-if="!chatDetailDto.tokenId">{{ `${chatDetailDto.title} Group
-                          (${chatDetailDto.memberNumber})` }}</p>
+              (${chatDetailDto.memberNumber})` }}</p>
             <p v-else>
               {{ `SoulCast #${chatDetailDto.tokenId} Group
-                            (${chatDetailDto.memberNumber})` }}
+              (${chatDetailDto.memberNumber})` }}
             </p>
 
           </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="msg othersMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover"
                 :src="`${item.content}?x-oss-process=image-resize,w_180`">
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
@@ -62,7 +62,7 @@
           <div v-else class="me">
             <div class="msg meMsg">
               <span v-if="item.type == 0">{{ item.content }}</span>
-              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover" height="180"
+              <van-image v-else @click="onPreview(item.content)" width="180" fit="cover"
                 :src="`${item.content}?x-oss-process=image-resize,w_180`">
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />

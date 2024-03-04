@@ -47,6 +47,14 @@ export default {
       }
     }
   },
+  // 和好友聊天
+  goTOChat() {
+    const chatId = this.UserInfo.singleChatId
+    if (chatId) {
+      this.$router.push(`/conversation?id=${chatId}`)
+    }
+  },
+
   // 获取好友请求列表
   getConnectList() {
     this.overlayshow = true
