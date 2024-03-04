@@ -53,7 +53,9 @@ export default {
     }
   },
   jumpToChat(detail) {
-    this.$router.push(`conversation?id=${detail.chatOverviewId}&&eventBanner=${detail.eventBanner}`)
+    this.$router.push(
+      `/conversation?id=${detail.chatOverviewId}&&eventBanner=${detail.eventBanner}`
+    )
   },
 
   // 是否是活动时间
