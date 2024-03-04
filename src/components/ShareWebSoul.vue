@@ -27,7 +27,8 @@
             <div class="user_infor_nft" v-if="showNftPicture">
                 <div class="userinfo">
                     <div class="baseInfo">
-                        <img class="portrait" :src="`${UserInfo.avatar}`" alt />
+                        <img class="portrait" :src="`${UserInfo.avatar}?t=${new Date().getTime()}`" alt
+                            crossorigin="anonymous" />
                         <div class="nameAddres" v-if="UserInfo.userName">
                             <p class="name">{{ UserInfo.userName }}</p>
                             <!-- <p class="address">{{ substring(UserInfo.address) }}</p> -->
@@ -58,7 +59,8 @@
             <div class="user_infor_NoNft" v-else>
                 <div class="userinfo">
                     <div class="baseInfo">
-                        <img class="portrait" :src="`${UserInfo.avatar}`" alt />
+                        <img class="portrait" :src="`${UserInfo.avatar}?t=${new Date().getTime()}`" alt
+                            crossorigin="anonymous" />
                         <div class="nameAddres" v-if="UserInfo.userName">
                             <p class="name">{{ UserInfo.userName }}</p>
                             <p class="address">{{ substring($loginData.Auth_Token) }}</p>
