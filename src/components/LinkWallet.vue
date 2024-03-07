@@ -108,6 +108,7 @@
     <Overlay :overlayshow="overlayshow"></Overlay>
   </div>
 </template>
+
 <script>
 import { post, get } from '../http/http'
 import Overlay from '../components/Overlay.vue'
@@ -307,6 +308,7 @@ export default {
           localStorage.removeItem('userInfo')
           localStorage.removeItem('mintedNFTPage')
           localStorage.removeItem('NFT')
+          localStorage.removeItem('lastCalledDate')
           me.$router.push('/')
           window.localStorage.setItem('Sift', '4down')
           closeWebsocket()
@@ -432,6 +434,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 .wallet {
   @media screen and (min-width: 750px) {
@@ -677,4 +680,3 @@ export default {
   }
 }
 </style>
-  

@@ -89,6 +89,7 @@ export default {
     localStorage.removeItem('mintedNFTPage')
     localStorage.removeItem('isUseInviteCode')
     localStorage.removeItem('NFT')
+    localStorage.removeItem('lastCalledDate')
     closeWebsocket()
     this.$router.replace({
       path: '/'

@@ -55,8 +55,38 @@ export default {
     } else {
       window.localStorage.setItem('isPWA', false)
     }
+    // 记录日活用户
+    // 获取当前日期
+    const today = new Date().toISOString().slice(0, 10);
+    // 从 localStorage 中获取存储的日期
+    const lastCalledDate = localStorage.getItem('lastCalledDate');
+
+    // 判断是否今天已经调用过接口
+    if (lastCalledDate !== today) {
+      // 如果今天没有调用过接口，则调用一次接口
+      this.recordDailyActiveUsers();
+
+      // 更新 localStorage 中的日期为今天
+      localStorage.setItem('lastCalledDate', today);
+    } else {
+      // 如果今天已经调用过接口，则跳过
+      console.log('已经记录过该用户的日活信息。');
+    }
+
   },
   methods: {
+    recordDailyActiveUsers() {
+      let url = this.$api.infor.recordDailyActiveUsers
+      get(url)
+        .then(res => {
+          if (res.code === 200) {
+            console.log("记录日活用户成功")
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     getChatData() {
       let url = this.$api.chat.getChatList
       get(url)
@@ -81,6 +111,7 @@ export default {
         localStorage.removeItem('userInfo')
         localStorage.removeItem('mintedNFTPage')
         localStorage.removeItem('NFT')
+        localStorage.removeItem('lastCalledDate')
         this.$router.push('/')
         window.localStorage.setItem('Sift', '4down')
         closeWebsocket()
@@ -138,7 +169,7 @@ a:focus {
   display: none !important;
 }
 
-#app > div {
+#app>div {
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -213,7 +244,7 @@ body {
       box-sizing: border-box;
     }
 
-    #app > div {
+    #app>div {
       box-shadow: 0.5px 5px 5px 0px #888888;
     }
   }
