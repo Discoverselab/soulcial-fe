@@ -113,7 +113,7 @@ export default {
     if (!this.$loginData.Auth_Token || (this.$loginData.loginType == 1 && !window?.web3?.eth)) {
       inviteCode = officialInviteCode
     } else {
-      inviteCode = window.sessionStorage.getItem('inviteCode')
+      inviteCode = window.localStorage.getItem('inviteCode')
     }
     const clipboard = new Clipboard('.labelEvent', {
       text: () => `${website}/#/e/${inviteCode}/${this.eventId}`
